@@ -27,21 +27,21 @@ public class ConnectionFactory {
 
             if (URL == null || URL.isEmpty()) {
                 throw new ConfigurationException(
-                        "A variávl de ambiente URL não está configurada." +
+                        "A variável de ambiente URL não está configurada." +
                                 "No arquivo .env, configure as credenciais do banco corretamente."
                 );
             }
 
             if (USER == null || USER.isEmpty()) {
                 throw new ConfigurationException(
-                        "A variávl de ambiente USER não está configurada." +
+                        "A variável de ambiente USER não está configurada." +
                                 "No arquivo .env, configure as credenciais do banco corretamente."
                 );
             }
 
             if (PASSWORD == null) {
                 throw new ConfigurationException(
-                        "A variávl de ambiente PASSWORD não está configurada." +
+                        "A variável de ambiente PASSWORD não está configurada." +
                                 "No arquivo .env, configure as credenciais do banco corretamente."
                 );
             }
