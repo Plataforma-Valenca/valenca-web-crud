@@ -20,13 +20,7 @@
         <input type="text" placeholder="Digite o seu nome completo" name="nome" class="login-input">
         <input type="text" placeholder="senha" name="senha" class="login-input">
 
-        <a class="esqueceu-senha" href="${pageContext.request.contextPath}/recuperar-senha">Esqueci minha senha</a>
-
-        <% if (request.getAttribute("erroLogin") != null) { %>
-        <div class="error">
-            <%= request.getAttribute("erroLogin") %>
-        </div>
-        <%} %>
+        <a class="esqueceu-senha" href="${pageContext.request.contextPath}/">Esqueci minha senha</a>
 
         <button type="submit" class="login-button">Entrar</button>
     </form>
