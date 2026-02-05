@@ -18,12 +18,11 @@
 
     <form class="login-form" method="post" action="${pageContext.request.contextPath}">
         <input type="text" placeholder="Digite o seu nome completo" name="nome" class="login-input">
+        <input type="number" placeholder="Número de sua matrícula" name="matricula" class="login-input">
+        <input type="text" placeholder="Digite o seu email" name="email" class="login-input">
+        <input type="password" placeholder="Senha" name="senha" class="login-input">
 
-        <% if (request.getAttribute("erroLogin") != null) { %>
-        <div class="error">
-            <%= request.getAttribute("erroLogin") %>
-        </div>
-        <%} %>
+        <a class="esqueceu-senha" href="${pageContext.request.contextPath}/">Esqueci minha senha</a>
 
         <button type="submit" class="login-button">Entrar</button>
     </form>
