@@ -2,15 +2,17 @@ package org.example.projetodiogo.model;
 
 public class Usuario {
     private int id;
-    private String login;
+    private String nome;
+    private String email;
     private String senha;
     private String tipoUsuario;
 
     // Método construtor
 
-    public Usuario(int id, String login, String senha, String tipoUsuario) {
+    public Usuario(int id, String nome, String email, String senha, String tipoUsuario) {
         this.id = id;
-        this.login = login;
+        this.nome = nome;
+        this.email = email;
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
     }
@@ -21,8 +23,12 @@ public class Usuario {
         return id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getNome() {
+        return nome;
+    }
+
+    public String getemail() {
+        return email;
     }
 
     public String getSenha() {
@@ -39,8 +45,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setemail(String email) {
+        this.email = email;
     }
 
     public void setSenha(String senha) {
@@ -57,7 +67,7 @@ public class Usuario {
     public String toString() {
         return "Usuario{" +
                 "id = " + id +
-                ", login = '" + login + '\'' +
+                ", email = '" + email + '\'' +
                 ", senha = '" + senha + '\'' +
                 ", tipoUsuario = '" + tipoUsuario + '\'' +
                 '}';

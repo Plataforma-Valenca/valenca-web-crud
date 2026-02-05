@@ -3,18 +3,16 @@ package org.example.projetodiogo.model;
 public class Aluno {
 
     private int id;
-    private String nome;
-    private String sobrenome;
+    private String nomeCompleto;
     private int matricula;
-    private int idPermissao;
+    private int idUsuario;
 
     // Método Construtor;
-    public Aluno(int id, String nome, String sobrenome, int matricula, int idPermissao) {
+    public Aluno(int id, String nomeCompleto, int matricula, int idUsuario) {
         this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
+        this.nomeCompleto = nomeCompleto;
         this.matricula = matricula;
-        this.idPermissao = idPermissao;
+        this.idUsuario = idUsuario;
     }
 
     // Métodos getters;
@@ -23,20 +21,16 @@ public class Aluno {
         return id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
+    public String getnomeCompleto() {
+        return nomeCompleto;
     }
 
     public int getMatricula() {
         return matricula;
     }
 
-    public int getIdPermissao() {
-        return idPermissao;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
     // Métodos setters;
@@ -45,20 +39,16 @@ public class Aluno {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setnomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
 
-    public void setIdPermissao(int idPermissao) {
-        this.idPermissao = idPermissao;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     // Método toString;
@@ -67,10 +57,9 @@ public class Aluno {
     public String toString() {
         return "Aluno{" +
                 "id = " + id +
-                ", nome = '" + nome + '\'' +
-                ", sobrenome = '" + sobrenome + '\'' +
+                ", nomeCompleto = '" + nomeCompleto + '\'' +
                 ", matricula = " + matricula + '\'' +
-                ", idPermissao = " + idPermissao +
+                ", idUsuario = " + idUsuario +
                 '}';
     }
 }

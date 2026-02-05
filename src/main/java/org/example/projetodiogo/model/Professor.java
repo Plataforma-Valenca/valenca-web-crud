@@ -3,15 +3,14 @@ package org.example.projetodiogo.model;
 public class Professor {
     private int id;
     private String nome;
-    private String sobrenome;
-    private int idPermissao;
+    private int idUsuario;
 
     // Método Construtor
 
-    public Professor(int id, String nome, String sobrenome, int idPermissao) {
+    public Professor(int id, String nome, String sobrenome, int idUsuario) {
         this.id = id;
         this.nome = nome;
-        this.sobrenome = sobrenome;
+        this.idUsuario = idUsuario;
     }
 
     // Métodos getters
@@ -23,12 +22,8 @@ public class Professor {
         return nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public int getIdPermissao() {
-        return idPermissao;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
     // Método setters
@@ -41,12 +36,8 @@ public class Professor {
         this.nome = nome;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public void setIdPermissao(int idPermissao) {
-        this.idPermissao = idPermissao;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     // Método toString
@@ -54,9 +45,9 @@ public class Professor {
     @Override
     public String toString() {
         return "Professor{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
+                "id = " + id +
+                ", nome = '" + nome + '\'' +
+                ", idUsuario = '" + idUsuario + '\'' +
                 '}';
     }
 }
