@@ -62,16 +62,25 @@ h1 {
     box-shadow: 0 0 0 3px rgba(36, 199, 178, 0.2);
 }
 
-.esqueceu-senha {
-    color: #c62828;
-    font-size: 0.6rem;
-    font-weight: 350;
-    margin-top: 5px;
-    margin-right: 200px;
-    text-decoration: none;
+.links {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 125px;
 }
 
-.error {
+.esqueceu-senha,
+.primeiro-acesso {
+    color: #c62828;
+    font-size: 0.9rem;
+    font-weight: 350;
+    text-decoration: underline;
+}
+
+#primeiro-acesso {
+    color: darkblue;
+}
+
+.error{
     background-color: #ffebee;
     color: #c62828;
     padding: 12px 20px;
