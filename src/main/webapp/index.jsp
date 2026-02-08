@@ -14,7 +14,14 @@
         <h1>Bem-vindo(a)!</h1>
 
         <form class="login-form" method="post" action="${pageContext.request.contextPath}/loginIdentificacao">
-            <input type="text" placeholder="Digite o seu nome completo" name="nome" class="login-input">
+            <input type="text" placeholder="Digite o seu e-mail ou nome de usuário" name="loginUsuario" class="login-input">
+            <input type="text" placeholder="senha" name="senhaUsuario" class="login-input">
+
+            <div class="links">
+                <a class="esqueceu-senha" href="${pageContext.request.contextPath}/">Esqueci minha senha</a>
+
+                <a class="primeiro-acesso" id="primeiro-acesso" href="${pageContext.request.contextPath}/">Primeiro acesso</a>
+            </div>
 
             <% if (request.getAttribute("erroLogin") != null) { %>
             <div class="error">
