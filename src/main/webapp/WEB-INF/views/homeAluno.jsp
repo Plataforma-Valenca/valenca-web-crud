@@ -11,6 +11,9 @@
     <title>Área de Alunos - Colégio Barão</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/componentes/sidebar.jsp">
+    <jsp:param name="activePage" value="homeAluno"/>
+</jsp:include>
 <div class="main-content">
     <img src="assets/img/logoCB.svg">
 
@@ -18,7 +21,7 @@
 
     <form class="login-form" method="post" action="${pageContext.request.contextPath}">
         <input type="text" placeholder="Digite o seu nome completo" name="nome" class="login-input">
-        <input type="number" placeholder="Número de sua matrícula" name="matricula" class="login-input">
+        <input type="number" placeholder="Número de matrícula" name="matricula" class="login-input">
         <input type="text" placeholder="Digite o seu email" name="email" class="login-input">
         <input type="password" placeholder="Senha" name="senha" class="login-input">
 
