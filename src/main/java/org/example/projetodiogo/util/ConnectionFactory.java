@@ -1,5 +1,7 @@
 package org.example.projetodiogo.util;
 
+import org.example.projetodiogo.exceptions.DatabaseConnectionException;
+
 import javax.naming.ConfigurationException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,10 +60,10 @@ public class ConnectionFactory {
 
             if (conn == null) {
                 System.err.println("A conexão retornou null");
-//                throw new DatabaseConnectionException(
-//                        "Conexão retornou null",
-//                        new SQLException("Connection is null")
-//                );
+                throw new DatabaseConnectionException(
+                        "Conexão retornou null",
+                        new SQLException("Connection is null")
+                );
             }
 
             return conn;
