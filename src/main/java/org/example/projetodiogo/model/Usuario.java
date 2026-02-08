@@ -6,15 +6,18 @@ public class Usuario {
     private String email;
     private String senha;
     private String tipoUsuario;
+    private String cpf;
 
     // Método construtor
+    public Usuario() {}
 
-    public Usuario(int id, String nome, String email, String senha, String tipoUsuario) {
+    public Usuario(int id, String nome, String email, String senha, String tipoUsuario, String cpf) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
+        this.cpf = cpf;
     }
 
     // Métodos getters
@@ -27,7 +30,7 @@ public class Usuario {
         return nome;
     }
 
-    public String getemail() {
+    public String getEmail() {
         return email;
     }
 
@@ -37,6 +40,10 @@ public class Usuario {
 
     public String getTipoUsuario() {
         return tipoUsuario;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     // Métodos setters
@@ -59,6 +66,10 @@ public class Usuario {
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     // Método toString
