@@ -1,16 +1,19 @@
 package org.example.projetodiogo.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Observacao {
+
     private int id;
     private String descricao;
-    private Date dataEnvio;
+    private Timestamp dataEnvio;
     private int idAluno;
     private int idProfessor;
 
-    // Método Construtor
-    public Observacao(int id, String descricao, Date dataEnvio, int idAluno, int idProfessor) {
+    public Observacao() {
+    }
+
+    public Observacao(int id, String descricao, Timestamp dataEnvio, int idAluno, int idProfessor) {
         this.id = id;
         this.descricao = descricao;
         this.dataEnvio = dataEnvio;
@@ -18,7 +21,12 @@ public class Observacao {
         this.idProfessor = idProfessor;
     }
 
-    // Métodos getters
+    public Observacao(String descricao, int idAluno, int idProfessor) {
+        this.descricao = descricao;
+        this.idAluno = idAluno;
+        this.idProfessor = idProfessor;
+    }
+
     public int getId() {
         return id;
     }
@@ -27,7 +35,7 @@ public class Observacao {
         return descricao;
     }
 
-    public Date getDataEnvio() {
+    public Timestamp getDataEnvio() {
         return dataEnvio;
     }
 
@@ -39,7 +47,6 @@ public class Observacao {
         return idProfessor;
     }
 
-    // Métodos setters
     public void setId(int id) {
         this.id = id;
     }
@@ -48,7 +55,7 @@ public class Observacao {
         this.descricao = descricao;
     }
 
-    public void setDataEnvio(Date dataEnvio) {
+    public void setDataEnvio(Timestamp dataEnvio) {
         this.dataEnvio = dataEnvio;
     }
 
@@ -60,16 +67,14 @@ public class Observacao {
         this.idProfessor = idProfessor;
     }
 
-    // Método toString
-
     @Override
     public String toString() {
         return "Observacao{" +
-                "id = " + id +
-                ", descricao = '" + descricao + '\'' +
-                ", dataEnvio = " + dataEnvio +
-                ", idAluno = " + idAluno +
-                ", idProfessor = " + idProfessor +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", dataEnvio=" + dataEnvio +
+                ", idAluno=" + idAluno +
+                ", idProfessor=" + idProfessor +
                 '}';
     }
 }
