@@ -76,13 +76,16 @@ public class Usuario {
 
     // Método toString
 
+
     @Override
     public String toString() {
         return "Usuario{" +
                 "id = " + id +
+                ", nome = '" + nome + '\'' +
                 ", email = '" + email + '\'' +
                 ", senha = '" + senha + '\'' +
                 ", tipoUsuario = '" + tipoUsuario + '\'' +
+                ", cpf = '" + cpf + '\'' +
                 '}';
     }
 }
