@@ -5,6 +5,7 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.exceptions.DuplicateEmailException;
 import org.example.projetodiogo.exceptions.EntityNotFoundException;
 import org.example.projetodiogo.exceptions.InvalidCredentialsException;
+import org.example.projetodiogo.model.Observacao;
 import org.example.projetodiogo.model.Usuario;
 import org.example.projetodiogo.util.ConnectionFactory;
 import org.example.projetodiogo.util.HasherSenha;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 public class UsuarioDAO {
 
+    // CREATE
     public boolean inserirAluno(Usuario usuario) {
         String sql = "INSERT INTO usuario(id, nome, email, senha, tipo, cpf) VALUES(?, ?, ?, ?, ?, ?)";
 
@@ -56,6 +58,7 @@ public class UsuarioDAO {
         return resultado;
     }
 
+    // READ
     public Optional<Usuario> buscarPorEmailOuNomeUsuario(String emailOuNomeUsuario, String senha) {
         if (emailOuNomeUsuario.isEmpty() || senha.isEmpty()) {
             throw new InvalidCredentialsException();
@@ -102,6 +105,49 @@ public class UsuarioDAO {
             } catch (SQLException e) {
                 throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
             }
+        }
+    }
+
+    // UPDATE
+    public boolean atualizar(Usuario usuario) {
+
+        String sql = """
+                UPDATE usuarios
+                SET nome = ?, email = ?,  senha = ?
+                WHERE  id = ?
+                """;
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setInt(4, usuario.getId());
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar usuário: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // DELETE
+    public boolean deletar(int id_usuario) {
+
+        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id_usuario);
+
+            return stmt.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao deletar usuário: " + e.getMessage());
+            return false;
         }
     }
 }
