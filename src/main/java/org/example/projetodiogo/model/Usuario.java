@@ -9,7 +9,9 @@ public class Usuario {
     private String cpf;
 
     // Método construtor
-    public Usuario() {}
+    public Usuario() {
+
+    }
 
     public Usuario(int id, String nome, String email, String senha, String tipoUsuario, String cpf) {
         this.id = id;
