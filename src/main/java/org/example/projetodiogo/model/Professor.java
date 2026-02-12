@@ -2,24 +2,18 @@ package org.example.projetodiogo.model;
 
 public class Professor {
     private int id;
-    private String nome;
     private int idUsuario;
 
     // Método Construtor
 
-    public Professor(int id, String nome, String sobrenome, int idUsuario) {
+    public Professor(int id, int idUsuario) {
         this.id = id;
-        this.nome = nome;
         this.idUsuario = idUsuario;
     }
 
     // Métodos getters
     public int getId() {
         return id;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public int getIdUsuario() {
@@ -32,10 +26,6 @@ public class Professor {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -46,7 +36,6 @@ public class Professor {
     public String toString() {
         return "Professor{" +
                 "id = " + id +
-                ", nome = '" + nome + '\'' +
                 ", idUsuario = '" + idUsuario + '\'' +
                 '}';
     }
