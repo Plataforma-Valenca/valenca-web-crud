@@ -7,11 +7,12 @@ public class Avaliacao {
     private int idNota;
 
     // Método Construtor
-    public Avaliacao(int id, String descricao, Double valor, int idNota) {
+    public Avaliacao() {}
+
+    public Avaliacao(int id, String descricao, Double valor) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
-        this.idNota = idNota;
     }
 
     // Métodos getters
