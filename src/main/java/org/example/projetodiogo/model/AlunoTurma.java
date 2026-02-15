@@ -7,7 +7,14 @@ public class AlunoTurma {
     private int idTurma;
     private Timestamp dtEntrada;
 
+
+    // Método construtor
     public AlunoTurma() {}
+
+    public AlunoTurma(int idTurma, Timestamp dtEntrada) {
+        this.idTurma = idTurma;
+        this.dtEntrada = dtEntrada;
+    }
 
     // Métodos getters
     public int getId() {

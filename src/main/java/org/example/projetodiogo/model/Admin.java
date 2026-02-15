@@ -5,8 +5,9 @@ public class Admin {
     private int idUsuario;
 
     //Método Construtor
+    public Admin() {}
+
     public Admin(int id, int idUsuario) {
-        this.id = id;
         this.idUsuario = idUsuario;
     }
 

@@ -9,8 +9,7 @@ public class Avaliacao {
     // Método Construtor
     public Avaliacao() {}
 
-    public Avaliacao(int id, String descricao, Double valor) {
-        this.id = id;
+    public Avaliacao(String descricao, Double valor) {
         this.descricao = descricao;
         this.valor = valor;
     }

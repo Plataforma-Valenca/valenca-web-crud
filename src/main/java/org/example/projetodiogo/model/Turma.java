@@ -3,8 +3,11 @@ package org.example.projetodiogo.model;
 public class Turma {
     private int id;
     private String nome;
+    private int ano;
 
     // Método Construtor
+    public Turma() {}
+
     public Turma(int id, String nome) {
         this.id = id;
         this.nome = nome;

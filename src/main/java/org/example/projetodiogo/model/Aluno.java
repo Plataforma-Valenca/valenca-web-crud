@@ -1,16 +1,21 @@
 package org.example.projetodiogo.model;
 
+import java.sql.Timestamp;
+
 public class Aluno {
 
     private int id;
     private int matricula;
     private int idUsuario;
+    private Timestamp dtMatricula;
 
     // Método Construtor;
-    public Aluno(int id, int matricula, int idUsuario) {
-        this.id = id;
+    public Aluno() {}
+
+    public Aluno(int matricula, int idUsuario, Timestamp dtMatricula) {
         this.matricula = matricula;
         this.idUsuario = idUsuario;
+        this.dtMatricula = dtMatricula;
     }
 
     // Métodos getters;
@@ -27,6 +32,10 @@ public class Aluno {
         return idUsuario;
     }
 
+    public Timestamp getDtMatricula() {
+        return dtMatricula;
+    }
+
     // Métodos setters;
 
     public void setId(int id) {
@@ -41,6 +50,10 @@ public class Aluno {
         this.idUsuario = idUsuario;
     }
 
+    public void setDtMatricula(Timestamp dtMatricula) {
+        this.dtMatricula = dtMatricula;
+    }
+
     // Método toString;
 
     @Override
@@ -48,6 +61,7 @@ public class Aluno {
         return "Aluno{" +
                 "id = " + id +
                 ", matricula = " + matricula + '\'' +
+                ", data matricula = " + dtMatricula + '\'' +
                 ", idUsuario = " + idUsuario +
                 '}';
     }

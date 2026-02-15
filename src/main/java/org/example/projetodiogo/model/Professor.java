@@ -5,6 +5,7 @@ public class Professor {
     private int idUsuario;
 
     // Método Construtor
+    public Professor() {}
 
     public Professor(int id, int idUsuario) {
         this.id = id;

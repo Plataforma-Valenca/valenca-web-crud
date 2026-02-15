@@ -5,20 +5,20 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private String tipoUsuario;
     private String cpf;
+    private String tipoUsuario;
 
     // Método construtor
     public Usuario() {
 
     }
 
-    public Usuario(String nome, String email, String senha, String tipoUsuario, String cpf) {
+    public Usuario(String nome, String email, String senha, String cpf, String tipoUsuario) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.tipoUsuario = tipoUsuario;
         this.cpf = cpf;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Usuario(int id, String nome, String email, String senha) {
