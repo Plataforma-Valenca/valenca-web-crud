@@ -13,13 +13,19 @@ public class Usuario {
 
     }
 
-    public Usuario(int id, String nome, String email, String senha, String tipoUsuario, String cpf) {
-        this.id = id;
+    public Usuario(String nome, String email, String senha, String tipoUsuario, String cpf) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
         this.cpf = cpf;
+    }
+
+    public Usuario(int id, String nome, String email, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
     }
 
     // Métodos getters
