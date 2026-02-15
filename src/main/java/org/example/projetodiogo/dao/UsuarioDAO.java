@@ -21,7 +21,7 @@ public class UsuarioDAO {
 
     // CREATE
     public boolean inserirAluno(Usuario usuario) {
-        String sql = "INSERT INTO usuario(id, nome, email, senha, tipo, cpf) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios(id, nome, email, senha, tipo, cpf) VALUES(?, ?, ?, ?, ?, ?)";
 
         boolean resultado = false;
 
@@ -29,7 +29,7 @@ public class UsuarioDAO {
         Connection conn = null;
 
         try {
-            if (ValidadorDeCampoUsado.ehCampoEmUso("usuario", "email", usuario.getEmail())) throw new DuplicateEmailException(usuario.getEmail());
+            if (ValidadorDeCampoUsado.ehCampoEmUso("usuarios", "email", usuario.getEmail())) throw new DuplicateEmailException(usuario.getEmail());
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
