@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisciplinaDAO {
-    public List<Boletim> visualizarPorDisciplina(int idAluno) {
+    public List<Boletim> visualizarPorDisciplina(int idAluno, String nomeDisciplina) {
 
         List<Boletim> lista = new ArrayList<>();
 
@@ -24,19 +24,19 @@ public class DisciplinaDAO {
         
             COALESCE(
                     ((
-                        AVG(CASE WHEN av.semestre = 1 THEN av.valor END) +
-                        AVG(CASE WHEN av.semestre = 2 THEN av.valor END)
-                        ) / 2), 0
+                         AVG(CASE WHEN av.semestre = 1 THEN av.valor END) +
+                         AVG(CASE WHEN av.semestre = 2 THEN av.valor END)
+                         ) / 2), 0
             ) AS media_final
         
         FROM disciplinas d
                  JOIN notas n ON n.id_disciplina = d.id_disciplina
                  LEFT JOIN avaliacoes av ON av.id_nota = n.id_nota
         
-        WHERE n.id_aluno = ?
+        WHERE n.id_aluno = ? AND d.nome = ?
         
         GROUP BY d.nome
-        ORDER BY d.nome
+        ORDER BY d.nome;
     """;
 
         Connection conn = null;
@@ -47,6 +47,7 @@ public class DisciplinaDAO {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, idAluno);
+            pstmt.setString(2, nomeDisciplina);
 
             ResultSet rs = pstmt.executeQuery();
 
