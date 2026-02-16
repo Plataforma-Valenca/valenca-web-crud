@@ -124,12 +124,4 @@ public class ProfessorDAO {
             return false;
         }
     }
-
-    // VALIDAÇÃO USUÁRIO
-    public void isProfessor(Usuario usuario, Professor professor) {
-        if(usuario.getId() == professor.getIdUsuario()){
-
-        }
-    }
-
 }
