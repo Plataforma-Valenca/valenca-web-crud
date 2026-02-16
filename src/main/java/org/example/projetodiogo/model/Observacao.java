@@ -13,7 +13,8 @@ public class Observacao {
     public Observacao() {
     }
 
-    public Observacao(String descricao, Timestamp dataEnvio, int idAluno, int idProfessor) {
+    public Observacao(int id, String descricao, Timestamp dataEnvio, int idAluno, int idProfessor) {
+        this.id = id;
         this.descricao = descricao;
         this.dataEnvio = dataEnvio;
         this.idAluno = idAluno;
