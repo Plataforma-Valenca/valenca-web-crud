@@ -4,6 +4,7 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.exceptions.DuplicateEmailException;
 import org.example.projetodiogo.exceptions.EntityNotFoundException;
 import org.example.projetodiogo.exceptions.InvalidCredentialsException;
+import org.example.projetodiogo.model.AlunoConsultaDTO;
 import org.example.projetodiogo.model.Usuario;
 import org.example.projetodiogo.util.ConnectionFactory;
 import org.example.projetodiogo.util.HasherSenha;
@@ -105,7 +106,7 @@ public class UsuarioDAO {
         }
     }
 
-    public Optional<Usuario> buscarPorCpf(String cpf) {
+    public Optional<AlunoConsultaDTO> buscarPorCpf(String cpf) {
         if (cpf.isEmpty()) {
             throw new InvalidCredentialsException();
         }
@@ -135,14 +136,14 @@ public class UsuarioDAO {
             pstmt.setString(1, cpf);
 
             if (rs.next()) {
-                Usuario usuario = new Usuario(
+                AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getString("nome"),
                         rs.getString("matricula"),
                         rs.getString("cpf"),
                         rs.getString("turma")
                 );
 
-                return Optional.of(usuario);
+                return Optional.of(consultaDTO);
             } else {
                 throw new EntityNotFoundException("Usuario", cpf);
             }
