@@ -21,10 +21,16 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(int id, String nome, String email, String senha) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+    }
+
+    public Usuario(String nome, String matricula, String cpf, String nome1) {
+        this.nome = nome;
+
     }
 
     // Métodos getters
