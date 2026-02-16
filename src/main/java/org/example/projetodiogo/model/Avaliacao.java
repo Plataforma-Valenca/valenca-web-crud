@@ -5,13 +5,15 @@ public class Avaliacao {
     private String descricao;
     private Double valor;
     private int idNota;
+    private  int semestre;
 
     // Método Construtor
     public Avaliacao() {}
 
-    public Avaliacao(String descricao, Double valor) {
+    public Avaliacao(String descricao, Double valor, int semestre) {
         this.descricao = descricao;
         this.valor = valor;
+        this.semestre = semestre;
     }
 
     // Métodos getters
@@ -31,6 +33,8 @@ public class Avaliacao {
         return idNota;
     }
 
+    public int getSemestre() { return semestre; }
+
     // Métodos getters
     public void setId(int id) {
         this.id = id;
@@ -48,6 +52,8 @@ public class Avaliacao {
         this.idNota = idNota;
     }
 
+    public void setSemestre(int semestre) { this.semestre = semestre; }
+
     // toString
     @Override
     public String toString() {
@@ -55,6 +61,7 @@ public class Avaliacao {
                 "id = " + id +
                 ", descricao = '" + descricao + '\'' +
                 ", valor = " + valor +
+                ", semestre = " + semestre +
                 ", idNota = " + idNota +
                 '}';
     }
