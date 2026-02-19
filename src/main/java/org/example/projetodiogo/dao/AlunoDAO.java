@@ -126,6 +126,49 @@ public class AlunoDAO {
         }
     }
 
+    public Optional<Aluno> buscarPorIdUsuario(int idUsuario) {
+
+        String query = """
+                SELECT * FROM alunos
+                WHERE id_usuario = ?;
+                """;
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, idUsuario);
+
+            if (rs.next()) {
+                Aluno aluno = new Aluno(
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_usuario"),
+                        rs.getInt("matricula"),
+                        rs.getTimestamp("dt_matricula")
+                );
+
+                return Optional.of(aluno);
+            } else {
+                throw new EntityNotFoundException("Aluno", idUsuario);
+            }
+        } catch (SQLException e) {
+            System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + idUsuario);
+            e.printStackTrace(System.err);
+            throw new DataAccessException("Erro ao buscar aluno", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (ps != null) ps.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
+        }
+    }
+
     // UPDATE
     public boolean update(Aluno aluno) {
 
