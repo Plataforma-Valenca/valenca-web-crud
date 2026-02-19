@@ -60,19 +60,22 @@ public class AlunoDAO {
     public boolean insert(Aluno aluno) {
         String query = """
                 INSERT INTO alunos
-                (id_aluno, id_usuario, matricula, dt_matricula)
-                VALUES (?, ?, ?, ?)
+                (id_usuario, matricula)
+                VALUES (?, ?)
                 """;
 
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
 
-            ps.setInt(1, aluno.getId());
-            ps.setInt(2, aluno.getIdUsuario());
-            ps.setInt(3, aluno.getMatricula());
-            ps.setTimestamp(4, aluno.getDtMatricula());
+        try {
 
-            return ps.executeUpdate() > 0;
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, aluno.getIdUsuario());
+            pstmt.setInt(2, aluno.getMatricula());
+
+            return pstmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir aluno: " + e.getMessage());
