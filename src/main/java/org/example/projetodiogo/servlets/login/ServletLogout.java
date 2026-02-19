@@ -1,4 +1,4 @@
-package org.example.projetodiogo.servlets;
+package org.example.projetodiogo.servlets.login;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
