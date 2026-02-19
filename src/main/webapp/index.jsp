@@ -20,7 +20,7 @@
             <div class="links">
                 <a class="esqueceu-senha" href="${pageContext.request.contextPath}/">Esqueci minha senha</a>
 
-                <a class="primeiro-acesso" id="primeiro-acesso" href="${pageContext.request.contextPath}/">Primeiro acesso</a>
+                <a class="primeiro-acesso" id="primeiro-acesso" href="${pageContext.request.contextPath}/WEB-INF/aluno/validarPreCadastro.jsp">Primeiro acesso</a>
             </div>
 
             <% if (request.getAttribute("erroLogin") != null) { %>
