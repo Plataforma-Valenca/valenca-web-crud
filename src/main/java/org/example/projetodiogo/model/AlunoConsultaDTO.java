@@ -1,11 +1,13 @@
 package org.example.projetodiogo.model;
 
 public class AlunoConsultaDTO {
-
     private String nome;
     private String matricula;
     private String cpf;
     private String turma;
+
+    // Método construtor
+    public AlunoConsultaDTO() {}
 
     public AlunoConsultaDTO(String nome, String matricula, String cpf, String turma) {
         this.nome = nome;
@@ -14,6 +16,49 @@ public class AlunoConsultaDTO {
         this.turma = turma;
     }
 
-    // getters
-}
+    // Métodos getters
+    public String getNome() {
+        return nome;
+    }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getTurma() {
+        return turma;
+    }
+
+    // Métodos setters
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
+
+    // Método toString
+
+    @Override
+    public String toString() {
+        return "AlunoConsultaDTO{" +
+                "nome = '" + nome + '\'' +
+                ", matricula = '" + matricula + '\'' +
+                ", cpf = '" + cpf + '\'' +
+                ", turma = '" + turma + '\'' +
+                '}';
+    }
+}
