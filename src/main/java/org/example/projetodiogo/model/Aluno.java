@@ -12,10 +12,9 @@ public class Aluno {
     // Método Construtor;
     public Aluno() {}
 
-    public Aluno(int matricula, int idUsuario, Timestamp dtMatricula) {
-        this.matricula = matricula;
+    public Aluno(int idUsuario, int matricula) {
         this.idUsuario = idUsuario;
-        this.dtMatricula = dtMatricula;
+        this.matricula = matricula;
     }
 
     // Métodos getters;
