@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisciplinaDAO {
-    public List<Boletim> visualizarPorDisciplina(int idAluno, String nomeDisciplina) {
-
-        List<Boletim> lista = new ArrayList<>();
+    public Boletim visualizarPorDisciplina(int idAluno, String nomeDisciplina) {
 
         String sql = """
         SELECT
@@ -51,7 +49,7 @@ public class DisciplinaDAO {
 
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 Boletim boletim = new Boletim(
                         rs.getInt("id_disciplina"),
                         rs.getString("nome_disciplina"),
@@ -59,7 +57,7 @@ public class DisciplinaDAO {
                         rs.getDouble("media2"),
                         rs.getDouble("media_final")
                 );
-                lista.add(boletim);
+                return boletim;
             }
 
         } catch (SQLException e) {
@@ -72,7 +70,6 @@ public class DisciplinaDAO {
                 System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
             }
         }
-
-        return lista;
+        return null;
     }
 }
