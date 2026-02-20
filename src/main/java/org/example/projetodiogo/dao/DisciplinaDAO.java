@@ -11,27 +11,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DisciplinaDAO {
-    public Boletim visualizarPorDisciplina(int idAluno, String nomeDisciplina) {
+    public Boletim visualizarPorDisciplina(int idAluno, int idDisciplina) {
 
         String sql = """
         SELECT
             d.nome,
         
-            COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0) AS media1,
-            COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0) AS media2,
+            ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) AS media1,
+            ROUND(COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0), 2) AS media2,
         
-            COALESCE(
+            ROUND(
+        		COALESCE(
                     ((
-                         AVG(CASE WHEN av.semestre = 1 THEN av.valor END) +
-                         AVG(CASE WHEN av.semestre = 2 THEN av.valor END)
-                         ) / 2), 0
-            ) AS media_final
+                         ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) +
+                         ROUND(COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0), 2)
+        			 ) / 2), 0
+            )
+        	, 2) AS media_final\s
         
         FROM disciplinas d
                  JOIN notas n ON n.id_disciplina = d.id_disciplina
                  LEFT JOIN avaliacoes av ON av.id_nota = n.id_nota
         
-        WHERE n.id_aluno = ? AND d.nome = ?
+        WHERE n.id_aluno = ? AND d.id_disciplina = ?
         
         GROUP BY d.nome
         ORDER BY d.nome;
@@ -45,7 +47,7 @@ public class DisciplinaDAO {
             pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, idAluno);
-            pstmt.setString(2, nomeDisciplina);
+            pstmt.setInt(2, idDisciplina);
 
             ResultSet rs = pstmt.executeQuery();
 
