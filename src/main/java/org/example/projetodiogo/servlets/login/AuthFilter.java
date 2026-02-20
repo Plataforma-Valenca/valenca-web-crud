@@ -18,10 +18,8 @@ public class AuthFilter {
 
             String uri = req.getRequestURI();
 
-            if (uri.contains("login.jsp") ||
-                    uri.contains("LoginServlet") ||
-                    uri.contains("primeiroAcesso.jsp") ||
-                    uri.contains("PrimeiroAcessoServlet")) {
+            if (uri.contains("index.jsp") ||
+                    uri.contains("ServletLogin")) {
 
                 chain.doFilter(request, response);
                 return;
