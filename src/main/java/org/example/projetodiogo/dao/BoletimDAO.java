@@ -9,12 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BoletimDAO {
-    public List<Boletim> visualizarBoletim(int idAluno) {
+    public ArrayList<Boletim> visualizarBoletim(int idAluno) {
 
-        List<Boletim> lista = new ArrayList<>();
+        ArrayList<Boletim> lista = new ArrayList<>();
 
         String sql = """
         SELECT
