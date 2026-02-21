@@ -19,6 +19,8 @@ public class AuthFilter implements Filter {
             String uri = req.getRequestURI();
 
             if (uri.endsWith("index.jsp") ||
+                    uri.endsWith("validarPreCadastro") ||
+                    uri.endsWith("FinalizarCadastroAluno") ||
                     uri.endsWith("login") ||
                     uri.endsWith("logout") ||
                     uri.contains("/assets/")) {
