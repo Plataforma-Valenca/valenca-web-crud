@@ -142,6 +142,8 @@ public class AlunoDAO {
             ps = conn.prepareStatement(query);
             ps.setInt(1, idUsuario);
 
+            rs = ps.executeQuery();
+
             if (rs.next()) {
                 Aluno aluno = new Aluno(
                         rs.getInt("id_aluno"),
