@@ -95,8 +95,8 @@ public class UsuarioDAO {
     }
 
     // READ
-    public Optional<Usuario> validarLogin(String cpfMatriculaOuNomeUsuario, String senha) {
-        if (cpfMatriculaOuNomeUsuario.isEmpty() || senha.isEmpty()) {
+    public Optional<Usuario> validarLogin(String cpfMatriculaOuNomeUsuario) {
+        if (cpfMatriculaOuNomeUsuario.isEmpty()) {
             throw new InvalidCredentialsException();
         }
 
@@ -106,7 +106,6 @@ public class UsuarioDAO {
                 SELECT * FROM usuarios u
         LEFT JOIN alunos a ON u.id_usuario = a.id_usuario
         WHERE (u.username = ? OR u.cpf = ? OR a.matricula = ?)
-        AND u.senha = ?
         AND u.cadastro_completo = true
                 """;
 
@@ -127,7 +126,8 @@ public class UsuarioDAO {
             pstmt.setString(1, cpfMatriculaOuNomeUsuario);
             pstmt.setString(2, cpfMatriculaOuNomeUsuario);
             pstmt.setString(3, cpfMatriculaOuNomeUsuario);
-            pstmt.setString(4, senha);
+
+            rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 Usuario usuario = new Usuario(
@@ -142,9 +142,8 @@ public class UsuarioDAO {
                         );
 
                 return Optional.of(usuario);
-            } else {
-                throw new EntityNotFoundException("Usuario", cpfMatriculaOuNomeUsuario);
             }
+            return Optional.empty();
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar usuário por email ou nome de usuário: " + cpfMatriculaOuNomeUsuario);
             e.printStackTrace(System.err);
