@@ -6,6 +6,7 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.AlunoDAO;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @WebServlet("/gerarBoletim")
-public class GerarBoletimServlet {
+public class GerarBoletimServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String idUsuario = req.getParameter("idUsuario");
