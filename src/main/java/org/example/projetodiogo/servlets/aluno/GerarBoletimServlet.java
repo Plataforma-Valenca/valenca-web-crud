@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@WebServlet(value="/gerarBoletim")
+@WebServlet("/gerarBoletim")
 public class GerarBoletimServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

@@ -12,7 +12,7 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(value = "/validarPreCadastro")
+@WebServlet("/validarPreCadastro")
 public class ValidarPreCadastro {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String matriculaOuCpf = req.getParameter("inputValidacao");

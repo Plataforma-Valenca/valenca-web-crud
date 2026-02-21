@@ -10,7 +10,7 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(value = "FinalizarCadastroAluno")
+@WebServlet("/FinalizarCadastroAluno")
 public class FinalizarCadastroAluno {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String matricula = req.getParameter("matricula");

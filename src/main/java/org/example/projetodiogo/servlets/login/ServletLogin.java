@@ -12,7 +12,7 @@ import org.example.projetodiogo.util.HasherSenha;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet (value = "/login")
+@WebServlet ("/login")
 public class ServletLogin {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
