@@ -14,8 +14,8 @@
         <h1>Bem-vindo(a)!</h1>
 
         <form class="login-form" method="post" action="${pageContext.request.contextPath}/login">
-            <input type="text" placeholder="Digite o seu e-mail ou nome de usuário" name="loginUsuario" class="login-input">
-            <input type="text" placeholder="senha" name="senhaUsuario" class="login-input">
+            <input type="text" placeholder="Email ou usuário" name="loginUsuario" class="login-input">
+            <input type="text" placeholder="Senha" name="senhaUsuario" class="login-input">
 
             <div class="links">
                 <a class="esqueceu-senha" href="${pageContext.request.contextPath}/">Esqueci minha senha</a>
