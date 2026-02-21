@@ -20,6 +20,7 @@ public class AuthFilter implements Filter {
 
             if (uri.endsWith("index.jsp") ||
                     uri.contains("ServletLogin") ||
+                    uri.contains("ServletLogout") ||
                     uri.contains("/assets/")) {
 
                 chain.doFilter(request, response);
