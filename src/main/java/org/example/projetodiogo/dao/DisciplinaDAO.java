@@ -28,7 +28,7 @@ public class DisciplinaDAO {
                          ROUND(COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0), 2)
         			 ) / 2), 0
             )
-        	, 2) AS media_final\s
+        	, 2) AS media_final
         
         FROM disciplinas d
                  JOIN notas n ON n.id_disciplina = d.id_disciplina
