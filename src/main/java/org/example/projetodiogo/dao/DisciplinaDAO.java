@@ -112,4 +112,42 @@ public class DisciplinaDAO {
         }
         return disciplina;
     }
+
+    public ArrayList<Disciplina> visualizarDisciplinas() {
+
+        String sql = "SELECT * FROM disciplinas";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            ArrayList<Disciplina> disciplinasList = new ArrayList<>();
+
+            while (rs.next()) {
+                Disciplina disciplina = new Disciplina(
+                        rs.getInt("id_disciplina"),
+                        rs.getString("nome_disciplina"),
+                        rs.getInt("id_professor")
+                );
+
+                disciplinasList.add(disciplina);
+            }
+            return disciplinasList;
+        } catch (SQLException e) {
+            System.out.println("[DAO] Erro ao visualizar o boletim: " + e.getMessage());
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
+            }
+        }
+        return null;
+    }
 }
