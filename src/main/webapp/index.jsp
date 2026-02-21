@@ -20,12 +20,18 @@
             <div class="links">
                 <a class="esqueceu-senha" href="${pageContext.request.contextPath}/">Esqueci minha senha</a>
 
-                <a class="primeiro-acesso" id="primeiro-acesso" href="${pageContext.request.contextPath}/WEB-INF/aluno/validarPreCadastro.jsp">Primeiro acesso</a>
+                <a class="primeiro-acesso" id="primeiro-acesso" href="${pageContext.request.contextPath}/validarPreCadastro">Primeiro acesso</a>
             </div>
 
             <% if (request.getAttribute("erroLogin") != null) { %>
-            <div class="error">
+            <div class="mensagem" id="erroLogin">
                 <%= request.getAttribute("erroLogin") %>
+            </div>
+            <%} %>
+
+            <% if (request.getAttribute("mensagemSucesso") != null) { %>
+            <div class="mensagem" id="mensagemSucesso">
+                <%= request.getAttribute("mensagemSucesso") %>
             </div>
             <%} %>
 
