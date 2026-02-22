@@ -1,7 +1,9 @@
 package org.example.projetodiogo.servlets.login;
 
+import com.sun.net.httpserver.HttpsServer;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -13,7 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet (value = "/login")
-public class ServletLogin {
+public class ServletLogin extends HttpServlet {
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

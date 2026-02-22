@@ -2,6 +2,7 @@ package org.example.projetodiogo.servlets.aluno;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.UsuarioDAO;
@@ -10,8 +11,8 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(value = "FinalizarCadastroAluno")
-public class FinalizarCadastroAluno {
+@WebServlet(value = "/FinalizarCadastroAluno")
+public class FinalizarCadastroAluno extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String matricula = req.getParameter("matricula");
         String nome = req.getParameter("nome");
