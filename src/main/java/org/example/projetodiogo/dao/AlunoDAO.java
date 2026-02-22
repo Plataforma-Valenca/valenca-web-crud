@@ -18,12 +18,24 @@ import org.example.projetodiogo.exceptions.EntityNotFoundException;
 public class AlunoDAO {
 
     // VINCULAR CADA ALUNO COM TODAS AS DISCIPLINAS
-    public void vincularAlunoADisciplinas(int idAluno) {
-        String sql = """
+    public void vincularAlunoADisciplinasTurma(int idAluno, int idTurma) throws SQLException {
+        String sqlAlunoTurma = """
+        INSERT INTO aluno_turma (id_aluno, id_turma, dt_entrada)
+        SELECT ?, ?, CURRENT_DATE
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM aluno_turma
+            WHERE id_aluno = ?
+            AND id_turma = ?
+        )
+    """;
+
+        String sqlNotas = """
         INSERT INTO notas (id_aluno, id_disciplina)
         SELECT ?, d.id_disciplina
         FROM disciplinas d
-        WHERE NOT EXISTS (
+        WHERE d.id_turma = ?
+        AND NOT EXISTS (
             SELECT 1
             FROM notas n
             WHERE n.id_aluno = ?
@@ -32,36 +44,46 @@ public class AlunoDAO {
     """;
 
         Connection conn = null;
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt1 = null;
+        PreparedStatement pstmt2 = null;
 
         try {
             conn = ConnectionFactory.conectar();
-            pstmt = conn.prepareStatement(sql);
+            if (conn != null) conn.setAutoCommit(false);
 
-            pstmt.setInt(1, idAluno);
-            pstmt.setInt(2, idAluno);
-            pstmt.executeUpdate();
+            pstmt1 = conn.prepareStatement(sqlAlunoTurma);
+            pstmt1.setInt(1, idAluno);
+            pstmt1.setInt(2, idTurma);
+            pstmt1.setInt(3, idAluno);
+            pstmt1.setInt(4, idTurma);
+            pstmt1.executeUpdate();
+
+            pstmt2 = conn.prepareStatement(sqlNotas);
+            pstmt2.setInt(1, idAluno);
+            pstmt2.setInt(2, idTurma);
+            pstmt2.setInt(3, idAluno);
+            pstmt2.executeUpdate();
+
+            conn.commit();
 
         } catch (SQLException e) {
             System.out.println("[DAO] Erro ao vincular aluno com as disciplinas: " + e.getMessage());
         } finally {
             try {
                 if (conn != null) ConnectionFactory.desconectar(conn);
-                if (pstmt != null) pstmt.close();
+                if (pstmt1 != null && pstmt2 != null) pstmt1.close(); pstmt2.close();
             } catch (SQLException e) {
                 System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
             }
         }
     }
 
-
-
     // INSERT
-    public boolean insert(Aluno aluno) {
+    public boolean inserir(int idUsuario) {
         String query = """
                 INSERT INTO alunos
                 (id_usuario, matricula)
-                VALUES (?, ?)
+                VALUES (?, nextval('matricula')::varchar)
                 """;
 
         Connection conn = null;
@@ -72,8 +94,7 @@ public class AlunoDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, aluno.getIdUsuario());
-            pstmt.setInt(2, aluno.getMatricula());
+            pstmt.setInt(1, idUsuario);
 
             return pstmt.executeUpdate() > 0;
 
@@ -84,11 +105,10 @@ public class AlunoDAO {
     }
 
     // READ
-    public Optional<Aluno> select(int id_aluno) {
+    public Optional<Aluno> buscarAlunos() throws SQLException {
 
         String query = """
                 SELECT * FROM alunos
-                WHERE id_aluno = ?;
                 """;
 
         Connection conn = null;
@@ -98,7 +118,8 @@ public class AlunoDAO {
         try {
             conn = ConnectionFactory.conectar();
             ps = conn.prepareStatement(query);
-            ps.setInt(1, id_aluno);
+
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 Aluno aluno = new Aluno();
@@ -109,10 +130,10 @@ public class AlunoDAO {
 
                 return Optional.of(aluno);
             } else {
-                throw new EntityNotFoundException("Aluno", id_aluno);
+                throw new EntityNotFoundException("Aluno", rs.getInt("id_aluno"));
             }
         } catch (SQLException e) {
-            System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + id_aluno);
+            System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + rs.getInt("id_aluno"));
             e.printStackTrace(System.err);
             throw new DataAccessException("Erro ao buscar aluno", e);
         } finally {
