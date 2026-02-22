@@ -39,17 +39,16 @@ public class AuthFilter implements Filter {
             String tipo = usuario.getTipoUsuario();
 
             if (uri.contains("/admin/") && !tipo.equalsIgnoreCase("ADMIN")) {
-                resp.sendRedirect("acessoNegado.jsp");
+                resp.sendRedirect("index.jsp");
                 return;
             }
 
             if (uri.contains("/professor/") && !tipo.equalsIgnoreCase("PROFESSOR")) {
-                resp.sendRedirect("acessoNegado.jsp");
-                return;
+                resp.sendRedirect("index.jsp");
             }
 
             if (uri.contains("/aluno/") && !tipo.equalsIgnoreCase("ALUNO")) {
-                resp.sendRedirect("acessoNegado.jsp");
+                resp.sendRedirect("index.jsp");
                 return;
             }
 
