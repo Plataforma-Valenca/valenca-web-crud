@@ -95,8 +95,8 @@ public class UsuarioDAO {
     }
 
     // READ
-    public Optional<Usuario> validarLogin(String cpfMatriculaOuNomeUsuario, String senha) {
-        if (cpfMatriculaOuNomeUsuario.isEmpty() || senha.isEmpty()) {
+    public Optional<Usuario> validarLogin(String cpfMatriculaOuNomeUsuario) {
+        if (cpfMatriculaOuNomeUsuario.isEmpty()) {
             throw new InvalidCredentialsException();
         }
 
@@ -106,7 +106,6 @@ public class UsuarioDAO {
                 SELECT * FROM usuarios u
         LEFT JOIN alunos a ON u.id_usuario = a.id_usuario
         WHERE (u.username = ? OR u.cpf = ? OR a.matricula = ?)
-        AND u.senha = ?
         AND u.cadastro_completo = true
                 """;
 
@@ -117,17 +116,12 @@ public class UsuarioDAO {
         try {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
-
-            int matricula = -1;
-            try {
-                matricula = Integer.parseInt(cpfMatriculaOuNomeUsuario);
-            } catch (NumberFormatException e) {
-            }
             
             pstmt.setString(1, cpfMatriculaOuNomeUsuario);
             pstmt.setString(2, cpfMatriculaOuNomeUsuario);
             pstmt.setString(3, cpfMatriculaOuNomeUsuario);
-            pstmt.setString(4, senha);
+
+            rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 Usuario usuario = new Usuario(
@@ -142,9 +136,8 @@ public class UsuarioDAO {
                         );
 
                 return Optional.of(usuario);
-            } else {
-                throw new EntityNotFoundException("Usuario", cpfMatriculaOuNomeUsuario);
             }
+            return Optional.empty();
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar usuário por email ou nome de usuário: " + cpfMatriculaOuNomeUsuario);
             e.printStackTrace(System.err);
@@ -160,12 +153,10 @@ public class UsuarioDAO {
         }
     }
 
-    public Optional<Usuario> finalizarCadastro(String cpfOuMatricula) {
+    public Optional<Usuario> buscarPorCpfOuMatricula(String cpfOuMatricula) {
         if (cpfOuMatricula.isEmpty()) {
             throw new InvalidCredentialsException();
         }
-
-
 
         String sql = """
                 SELECT * FROM usuarios u
@@ -181,14 +172,11 @@ public class UsuarioDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
-            int matricula = -1;
-            try {
-                matricula = Integer.parseInt(cpfOuMatricula);
-            } catch (NumberFormatException e) {
-            }
 
             pstmt.setString(1, cpfOuMatricula);
-            pstmt.setInt(2, matricula);
+            pstmt.setString(2, cpfOuMatricula);
+
+            rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 Usuario usuario = new Usuario(
@@ -365,27 +353,18 @@ public class UsuarioDAO {
         ResultSet rs = null;
 
         try {
-            if (ValidadorDeCampoUsado.ehCampoEmUso("alunos", "matricula", cpfOuMatricula)) throw new DuplicateEmailException(cpfOuMatricula);
-
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
-            int matricula = 0;
-            try {
-                matricula = Integer.parseInt(cpfOuMatricula);
-            } catch (NumberFormatException e) {
-                matricula = -1;
-            }
-
-            pstmt.setInt(1, matricula);
+            pstmt.setString(1, cpfOuMatricula);
             pstmt.setString(2, cpfOuMatricula);
 
             rs = pstmt.executeQuery();
 
             if (rs.next()) {
-
                 Usuario usuario = new Usuario(
-                        HasherSenha.hashSenha("123456"),
+                        rs.getInt("id_usuario"),
+                        HasherSenha.hashSenha("senha"),
                         rs.getString("cpf"),
                         rs.getString("tipo"),
                         rs.getBoolean("cadastro_completo")

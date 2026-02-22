@@ -102,7 +102,7 @@ public class AlunoDAO {
 
             if (rs.next()) {
                 Aluno aluno = new Aluno();
-                aluno.setId(rs.getInt("id"));
+                aluno.setId(rs.getInt("id_aluno"));
                 aluno.setIdUsuario(rs.getInt("id_usuario"));
                 aluno.setMatricula(rs.getInt("matricula"));
                 aluno.setDtMatricula(rs.getTimestamp("dt_matricula"));
@@ -141,6 +141,8 @@ public class AlunoDAO {
             conn = ConnectionFactory.conectar();
             ps = conn.prepareStatement(query);
             ps.setInt(1, idUsuario);
+
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 Aluno aluno = new Aluno(

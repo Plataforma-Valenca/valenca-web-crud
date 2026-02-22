@@ -8,7 +8,8 @@ public class Disciplina {
     // Método Construtor
     public Disciplina() {}
 
-    public Disciplina(String nome, int idProfessor) {
+    public Disciplina(int id, String nome, int idProfessor) {
+        this.id = id;
         this.nome = nome;
         this.idProfessor = idProfessor;
     }

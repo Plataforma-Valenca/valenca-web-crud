@@ -26,6 +26,16 @@ public class Usuario {
         this.cadastroCompleto = cadastroCompleto;
     }
 
+    public Usuario(int id, String nome, String email, String senha, String cpf, String tipoUsuario, boolean cadastroCompleto) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.tipoUsuario = tipoUsuario;
+        this.cadastroCompleto = cadastroCompleto;
+    }
+
     public Usuario(String nome, String email, String username, String senha, String cpf, String tipoUsuario, boolean cadastroCompleto) {
         this.nome = nome;
         this.email = email;

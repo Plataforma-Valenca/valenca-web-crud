@@ -10,7 +10,7 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 
 @WebFilter("/*")
-public class AuthFilter {
+public class AuthFilter implements Filter {
         public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
             HttpServletRequest req = (HttpServletRequest) request;
@@ -18,10 +18,12 @@ public class AuthFilter {
 
             String uri = req.getRequestURI();
 
-            if (uri.contains("login.jsp") ||
-                    uri.contains("LoginServlet") ||
-                    uri.contains("primeiroAcesso.jsp") ||
-                    uri.contains("PrimeiroAcessoServlet")) {
+            if (uri.endsWith("index.jsp") ||
+                    uri.endsWith("validarPreCadastro") ||
+                    uri.endsWith("FinalizarCadastroAluno") ||
+                    uri.endsWith("login") ||
+                    uri.endsWith("logout") ||
+                    uri.contains("/assets/")) {
 
                 chain.doFilter(request, response);
                 return;
@@ -30,7 +32,7 @@ public class AuthFilter {
             Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 
             if (usuario == null) {
-                resp.sendRedirect("login.jsp");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
                 return;
             }
 
