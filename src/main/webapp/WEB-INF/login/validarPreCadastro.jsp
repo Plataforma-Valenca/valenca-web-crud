@@ -26,10 +26,10 @@
         </div>
     <% } %>
 
-    <form action="validarPreCadastro" method="post" class="login-form">
+    <form action="${pageContext.request.contextPath}/validarPreCadastro" method="post" class="login-form">
         
         <input type="text" 
-               name="cpfMatricula" 
+               name="inputValidacao"
                class="login-input"
                placeholder="Digite seu CPF ou Matrícula"
                required>
