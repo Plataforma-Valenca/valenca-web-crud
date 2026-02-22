@@ -53,8 +53,8 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    public int inserirNovoAluo(Usuario usuario) {
-        String sql = "INSERT INTO usuarios(senha, cpf, tipo) VALUES(?, ?, ?)";
+    public int inserirNovoAluno(Usuario usuario) {
+        String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, ?, false)";
         int idGeradoUsuario = 0;
 
         PreparedStatement pstmt = null;
@@ -196,62 +196,6 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar usuário por cpf ou matrícula: " + cpfOuMatricula);
-            e.printStackTrace(System.err);
-            throw new DataAccessException("Erro ao buscar usuário", e);
-        } finally {
-            try {
-                if (conn != null) ConnectionFactory.desconectar(conn);
-                if (pstmt != null) pstmt.close();
-                if (rs != null) rs.close();
-            } catch (SQLException e) {
-                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
-            }
-        }
-    }
-
-    public Optional<AlunoConsultaDTO> buscarPorCpf(String cpf) {
-        if (cpf.isEmpty()) {
-            throw new InvalidCredentialsException();
-        }
-
-        String sql = """
-                SELECT
-                    u.nome,
-                    a.matricula,
-                    u.cpf,
-                    t.nome AS turma
-                
-                FROM usuarios u
-                         JOIN alunos a ON a.id_usuario = u.id_usuario
-                         JOIN aluno_turma at ON at.id_aluno = a.id_aluno
-                         JOIN turmas t ON t.id_turma = at.id_turma
-                
-                WHERE u.cpf = ?;
-                """;
-
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = ConnectionFactory.conectar();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, cpf);
-
-            if (rs.next()) {
-                AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
-                        rs.getString("nome"),
-                        rs.getString("matricula"),
-                        rs.getString("cpf"),
-                        rs.getString("turma")
-                );
-
-                return Optional.of(consultaDTO);
-            } else {
-                throw new EntityNotFoundException("Usuario", cpf);
-            }
-        } catch (SQLException e) {
-            System.err.println("[DAO ERROR] Erro ao buscar usuário por cpf: " + cpf);
             e.printStackTrace(System.err);
             throw new DataAccessException("Erro ao buscar usuário", e);
         } finally {
