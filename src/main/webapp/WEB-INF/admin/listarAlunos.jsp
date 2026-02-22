@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Aluno" %>
+<%@ page import="org.example.projetodiogo.model.AlunoConsultaDTO" %>
 
 <html>
 <head>
@@ -18,14 +18,14 @@
     <h1>Buscar Aluno(a)</h1>
 
     <!-- FORM DE BUSCA -->
-    <form method="get" action="${pageContext.request.contextPath}/alunos">
-        <input type="text" name="cpf" placeholder="CPF do aluno">
+    <form method="get" action="${pageContext.request.contextPath}/admin/VerAlunos">
+        <input type="text" name="busca" placeholder="Matrícula do aluno">
         <button type="submit">Buscar</button>
     </form>
 
     <br><br>
 
-    <a href="${pageContext.request.contextPath}/alunos?acao=cadastrar">
+    <a href="${pageContext.request.contextPath}/admin/cadastrarAluno">
         <button>+ Cadastrar</button>
     </a>
 
@@ -41,10 +41,10 @@
         </tr>
 
         <%
-            List<Aluno> lista = (List<Aluno>) request.getAttribute("listaAlunos");
+            List<AlunoConsultaDTO> lista = (List<AlunoConsultaDTO>) request.getAttribute("alunosList");
 
             if(lista != null){
-                for(Aluno a : lista){
+                for(AlunoConsultaDTO a : lista){
         %>
         <tr>
             <td><%= a.getNome() %></td>
