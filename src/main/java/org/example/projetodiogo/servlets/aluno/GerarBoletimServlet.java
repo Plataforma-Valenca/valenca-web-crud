@@ -16,6 +16,7 @@ import org.example.projetodiogo.model.Boletim;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/gerarBoletim")
@@ -30,7 +31,7 @@ public class GerarBoletimServlet extends HttpServlet {
         resp.setContentType("application/pdf");
         resp.setHeader("Content-Disposition", "attachment; filename=boletim.pdf");
 
-        ArrayList<Boletim> boletimList = boletimDAO.visualizarBoletim(aluno.get().getId());
+        List<Boletim> boletimList = boletimDAO.visualizarBoletim(aluno.get().getId());
 
         Document document = new Document();
         try {
