@@ -94,7 +94,6 @@
         }
 
         .error {
-            background-color: #ffdddd;
             color: #c0392b;
             padding: 10px;
             border-radius: 8px;
@@ -102,6 +101,10 @@
             width: 100%;
             text-align: center;
             font-size: 13px;
+        }
+
+        #mensagemSucesso {
+            color: green;
         }
     </style>
 </head>
@@ -140,9 +143,16 @@
 
         <% if (request.getAttribute("erroLogin") != null) { %>
         <div class="error">
-            <%= request.getAttribute("erroLogin") %>
-        </div>
-        <% } %>
+            <div class="mensagem" id="erroLogin">
+                <%= request.getAttribute("erroLogin") %>
+            </div>
+                <%} %>
+
+                <% if (request.getAttribute("mensagemSucesso") != null) { %>
+            <div class="mensagem" id="mensagemSucesso">
+                <%= request.getAttribute("mensagemSucesso") %>
+            </div>
+                <%} %>
 
         <button type="submit" class="login-button">
             Entrar
