@@ -15,7 +15,7 @@
 <div class="main-content">
 
     <!-- Logo -->
-     <img src="assets/img/logoCB.svg">
+    <img src="imagens/logo.png" alt="Colégio Barão">
 
     <h1>Primeiro acesso</h1>
 
