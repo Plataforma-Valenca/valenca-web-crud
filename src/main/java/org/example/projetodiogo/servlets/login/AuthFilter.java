@@ -11,47 +11,59 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class AuthFilter implements Filter {
-        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpServletResponse resp = (HttpServletResponse) response;
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
-            String uri = req.getRequestURI();
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
 
-            if (uri.endsWith("index.jsp") ||
-                    uri.endsWith("validarPreCadastro") ||
-                    uri.endsWith("FinalizarCadastroAluno") ||
-                    uri.endsWith("login") ||
-                    uri.endsWith("logout") ||
-                    uri.contains("/assets/")) {
+        String uri = req.getRequestURI();
 
-                chain.doFilter(request, response);
-                return;
-            }
+        boolean rotaPublica =
+                uri.endsWith("index.jsp") ||
+                        uri.endsWith("validarPreCadastro") ||
+                        uri.endsWith("FinalizarCadastroAluno") ||
+                        uri.endsWith("login") ||
+                        uri.endsWith("logout") ||
+                        uri.contains("/assets/");
 
-            Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-
-            if (usuario == null) {
-                resp.sendRedirect(req.getContextPath() + "/index.jsp");
-                return;
-            }
-
-            String tipo = usuario.getTipoUsuario();
-
-            if (uri.contains("/admin/") && !tipo.equalsIgnoreCase("ADMIN")) {
-                resp.sendRedirect("index.jsp");
-                return;
-            }
-
-            if (uri.contains("/professor/") && !tipo.equalsIgnoreCase("PROFESSOR")) {
-                resp.sendRedirect("index.jsp");
-            }
-
-            if (uri.contains("/aluno/") && !tipo.equalsIgnoreCase("ALUNO")) {
-                resp.sendRedirect("index.jsp");
-                return;
-            }
-
+        if (rotaPublica) {
             chain.doFilter(request, response);
+            return;
         }
+
+        HttpSession session = req.getSession(false);
+
+        if (session == null) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+        if (usuario == null) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
+        String tipo = usuario.getTipoUsuario();
+
+        if (uri.contains("/admin/") && !tipo.equalsIgnoreCase("ADMINISTRADOR")) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
+        if (uri.contains("/professor/") && !tipo.equalsIgnoreCase("PROFESSOR")) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
+        if (uri.contains("/aluno/") && !tipo.equalsIgnoreCase("ALUNO")) {
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            return;
+        }
+
+        chain.doFilter(request, response);
+    }
 }
