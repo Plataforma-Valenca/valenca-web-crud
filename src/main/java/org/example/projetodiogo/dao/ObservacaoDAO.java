@@ -35,18 +35,20 @@ public class ObservacaoDAO {
     }
 
     // BUSCAR POR ID
-    public Optional<Observacao> buscarPorId(int id) {
+    public List<Observacao> buscarPorIdAluno(int idAluno) {
 
-        String sql = "SELECT * FROM observacoes WHERE id_observacao = ?";
+        String sql = "SELECT * FROM observacoes WHERE id_aluno = ?";
+
+        List<Observacao> lista = new ArrayList<>();
 
         try (Connection conn = ConnectionFactory.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, idAluno);
+
             ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-
+            while (rs.next()) {
                 Observacao obs = new Observacao(
                         rs.getInt("id_observacao"),
                         rs.getString("descricao"),
@@ -55,18 +57,17 @@ public class ObservacaoDAO {
                         rs.getInt("id_professor")
                 );
 
-                return Optional.of(obs);
+                return lista;
             }
 
         } catch (SQLException e) {
             System.out.println("Erro ao buscar observação: " + e.getMessage());
         }
-
-        return Optional.empty();
+        return lista;
     }
 
     // LISTAR POR ALUNO
-    public List<Observacao> listarPorAluno(int idAluno) {
+    public List<Observacao> listarPorIdAluno(int idAluno) {
 
         String sql = "SELECT * FROM observacoes WHERE id_aluno = ?";
 
@@ -79,20 +80,18 @@ public class ObservacaoDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-
                 lista.add(new Observacao(
                         rs.getInt("id_observacao"),
-                        rs.getString("descricao"),
-                        rs.getTimestamp("data_envio"),
                         rs.getInt("id_aluno"),
-                        rs.getInt("id_professor")
+                        rs.getInt("id_professor"),
+                        rs.getString("descricao"),
+                        rs.getTimestamp("dt_envio")
                 ));
             }
-
+            return lista;
         } catch (SQLException e) {
             System.out.println("Erro ao listar observações: " + e.getMessage());
         }
-
         return lista;
     }
 
