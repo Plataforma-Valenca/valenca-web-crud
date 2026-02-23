@@ -13,13 +13,13 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.Boletim;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/VerBoletim")
 public class VerBoletimServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        ArrayList<Boletim> boletimList;
+        List<Boletim> boletimList;
         BoletimDAO boletimDAO = new BoletimDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
         int idUsuario = (int) session.getAttribute("usuarioId");
