@@ -1,0 +1,53 @@
+package org.example.projetodiogo.servlets.professor;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.example.projetodiogo.dao.*;
+import org.example.projetodiogo.exceptions.DataAccessException;
+import org.example.projetodiogo.model.*;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+@WebServlet("/professor/verPerfilAluno")
+public class VerPerfilAluno extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        AlunoDAO alunoDAO = new AlunoDAO();
+        BoletimDAO boletimDAO = new BoletimDAO();
+        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+        ProfessorDAO professorDAO = new ProfessorDAO();
+        TurmasDAO turmasDAO = new TurmasDAO();
+        ObservacaoDAO observacaoDAO = new ObservacaoDAO();
+        Boletim boletim;
+        Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdUsuario(usuario.getId());
+
+        try {
+            int idAluno = alunoOpt.get().getId();
+            int idProfessor = professorDAO.buscarProfessorPorIdUsuario(usuario.getId()).get().getId();
+            int idDisciplina = disciplinaDAO.buscarPorId(idProfessor).getIdProfessor();
+
+            boletim = boletimDAO.visualizarNotasPorDisciplina(idAluno, idDisciplina);
+
+            List<Observacao> obsList = observacaoDAO.buscarPorIdAluno(idAluno);
+
+            req.setAttribute("boletim", boletim);
+            req.setAttribute("usuarioNome", usuario.getNome());
+            req.setAttribute("matricula", alunoOpt.get().getMatricula());
+            req.setAttribute("turma", turmasDAO.buscarNomePorIdAluno(idAluno));
+            req.setAttribute("obsList", obsList);
+
+            req.getRequestDispatcher("/WEB-INF/professor/perfilAluno.jsp")
+                    .forward(req, resp);
+        } catch (DataAccessException e) {
+            throw new DataAccessException("Erro ao acessar o banco de dados", e);
+        }
+    }
+}
