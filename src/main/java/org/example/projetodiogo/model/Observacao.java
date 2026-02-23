@@ -27,6 +27,14 @@ public class Observacao {
         this.idProfessor = idProfessor;
     }
 
+    public Observacao(int idObservacao, int idAluno, int idProfessor, String descricao, Timestamp dtEnvio) {
+        this.id = idObservacao;
+        this.idAluno = idAluno;
+        this.idProfessor = idProfessor;
+        this.descricao = descricao;
+        this.dataEnvio = dtEnvio;
+    }
+
     public int getId() {
         return id;
     }
