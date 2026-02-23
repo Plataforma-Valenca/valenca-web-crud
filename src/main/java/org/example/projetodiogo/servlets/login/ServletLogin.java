@@ -49,10 +49,6 @@ public class ServletLogin extends HttpServlet {
             case "professor":
                 HttpSession session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                session.setAttribute("usuarioId", usuario.get().getId());
-                session.setAttribute("usuarioNome", usuario.get().getNome());
-                session.setAttribute("usuarioEmail", usuario.get().getEmail());
-                session.setAttribute("username", usuario.get().getUsername());
                 req.getRequestDispatcher("/WEB-INF/professor/homeProfessor.jsp")
                         .forward(req, resp);
                 break;
@@ -60,9 +56,6 @@ public class ServletLogin extends HttpServlet {
             case "aluno":
                 session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                session.setAttribute("usuarioId", usuario.get().getId());
-                session.setAttribute("usuarioNome", usuario.get().getNome());
-                session.setAttribute("usuarioEmail", usuario.get().getEmail());
                 req.getRequestDispatcher("/WEB-INF/aluno/homeAluno.jsp")
                         .forward(req, resp);
                 break;
