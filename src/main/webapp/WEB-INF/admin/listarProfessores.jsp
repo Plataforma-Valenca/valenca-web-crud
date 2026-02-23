@@ -23,7 +23,7 @@
     <form method="get" action="${pageContext.request.contextPath}/professores">
         <input type="text" name="busca" placeholder="Buscar por nome ou email"
                value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">
-        <button type="submit">Buscar</button>
+        <button type="submit">Digite o email do professor</button>
     </form>
 
     <br>

@@ -2,6 +2,7 @@ package org.example.projetodiogo.model;
 
 public class Boletim {
 
+    private int idBoletim;
     private String nomeDisciplina;
     private Double media1;
     private Double media2;
@@ -17,6 +18,10 @@ public class Boletim {
         this.media1 = media1;
         this.media2 = media2;
         this.mediaFinal = mediaFinal;
+    }
+
+    public Boletim(int idBoletim, int idAluno, int idDisciplina, double nota) {
+
     }
 
     // métodos getters
