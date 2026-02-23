@@ -13,12 +13,14 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.Boletim;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/CardDisciplinaServlet")
 public class CardDisciplinaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Boletim boletim = new Boletim();
+        List<Boletim> boletim = new ArrayList<>();
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
         int idUsuario = (int) session.getAttribute("usuarioId");
@@ -28,11 +30,7 @@ public class CardDisciplinaServlet extends HttpServlet {
         try {
             boletim = disciplinaDAO.visualizarPorDisciplina(idAluno, idDisciplina);
 
-            req.setAttribute("boletimObj", boletim);
-            req.setAttribute("nomeDisciplina", boletim.getNomeDisciplina());
-            req.setAttribute("media1", boletim.getMedia1());
-            req.setAttribute("media2", boletim.getMedia2());
-            req.setAttribute("mediaFinal", boletim.getMediaFinal());
+            req.setAttribute("boletimList", boletim);
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/aluno/.jsp");
             dispatcher.forward(req, resp);
