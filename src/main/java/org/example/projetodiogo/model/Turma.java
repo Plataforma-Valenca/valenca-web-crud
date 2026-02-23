@@ -13,6 +13,10 @@ public class Turma {
         this.nome = nome;
     }
 
+    public Turma(String nome) {
+        this.nome = nome;
+    }
+
     // Métodos getters
     public int getId() {
         return id;
