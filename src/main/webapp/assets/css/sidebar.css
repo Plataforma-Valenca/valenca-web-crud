@@ -1,24 +1,41 @@
 .sidebar {
-    width: 240px;
+    width: 280px;
     height: 100vh;
-    background-color: #2F5D62;
+    background: linear-gradient(180deg, #5EA79F, #4C9088);
     position: fixed;
     left: 0;
     top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
+    padding: 40px 20px;
 }
 
+/* LOGO */
 .logo-area {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 .logo-area img {
-    width: 120px;
+    width: 140px;
 }
 
+/* PERFIL */
+.perfil {
+    text-align: center;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.perfil img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* MENU */
 .menu {
     list-style: none;
     padding: 0;
@@ -26,31 +43,38 @@
 }
 
 .menu li {
-    width: 100%;
+    margin-bottom: 18px;
 }
 
+/* BOTÕES */
 .menu li a {
     display: flex;
     align-items: center;
-    padding: 15px 25px;
+    padding: 18px 25px;
     text-decoration: none;
-    color: white;
-    transition: 0.3s;
+    background: white;
+    border-radius: 40px;
+    color: #6f6f6f;
+    font-weight: 500;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
 }
 
 .menu li a:hover {
-    background-color: #3A7A80;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
-.menu li.active {
-    background-color: #3A7A80;
-}
-
+/* ITEM ATIVO */
 .menu li.active a {
-    font-weight: bold;
+    background: #8BC3B8;
+    color: #2f5d59;
+    font-weight: 600;
 }
 
+/* ÍCONES */
 .icon {
-    width: 20px;
-    margin-right: 12px;
+    width: 22px;
+    margin-right: 15px;
+    opacity: 0.7;
 }

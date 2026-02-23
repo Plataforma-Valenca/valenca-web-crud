@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebar.css">
 
 <%
     String activePage = request.getParameter("activePage");
@@ -14,33 +15,29 @@
     <!-- MENU -->
     <ul class="menu">
 
-        <li class="<%= "homeAluno".equals(activePage) ? "active" : "" %>">
-            <a href="${pageContext.request.contextPath}/home">
-                <img src="${pageContext.request.contextPath}/assets/icons/home.svg" class="icon">
-                <span>Home</span>
-            </a>
-        </li>
 
         <li class="<%= "listarAluno".equals(activePage) ? "active" : "" %>">
-            <a href="${pageContext.request.contextPath}/alunos">
-                <img src="${pageContext.request.contextPath}/assets/icons/aluno.svg" class="icon">
+            <a href="${pageContext.request.contextPath}/admin/verAlunos">
+                <img src="${pageContext.request.contextPath}/assets/img/aluno.png" class="icon">
                 <span>Alunos</span>
             </a>
         </li>
 
-        <li class="<%= "configuracoes".equals(activePage) ? "active" : "" %>">
-            <a href="${pageContext.request.contextPath}/config">
-                <img src="${pageContext.request.contextPath}/assets/icons/config.svg" class="icon">
-                <span>Configurações</span>
+        <li class="<%= "listarProfessores".equals(activePage) ? "active" : "" %>">
+            <a href="${pageContext.request.contextPath}/admin/verProfessores">
+                <img src="${pageContext.request.contextPath}/assets/img/professor.svg" class="icon">
+                <span>Professores</span>
             </a>
         </li>
 
-        <li>
-            <a href="${pageContext.request.contextPath}/logout">
-                <img src="${pageContext.request.contextPath}/assets/icons/logout.svg" class="icon">
-                <span>Sair</span>
+        <li class="<%= "listarDisciplinas".equals(activePage) ? "active" : "" %>">
+            <a href="${pageContext.request.contextPath}/admin/verDisciplinas">
+                <img src="${pageContext.request.contextPath}/assets/img/disciplinas.png" class="icon">
+                <span>Disciplinas</span>
             </a>
         </li>
+
+    
 
     </ul>
 

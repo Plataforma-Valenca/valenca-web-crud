@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.DisciplinaResumo" %>
+<%@ page import="org.example.projetodiogo.model.Disciplina" %>
 
 <html>
 <head>
-    <title>Listar Disciplinas</title>
+    <title>Visualizar Disciplinas</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 
@@ -18,52 +18,39 @@
 
     <h1>Disciplinas</h1>
 
-    <!-- FORM DE BUSCA -->
-    <form method="get" action="${pageContext.request.contextPath}/disciplinas">
-        <input type="text" name="busca" placeholder="Buscar por disciplina ou professor"
-               value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">
-        <button type="submit">Buscar</button>
-    </form>
+    <!-- FORM (GET porque o servlet só tem doGet) -->
+    <form method="get" action="${pageContext.request.contextPath}/VerDisciplinas">
 
-    <br>
-
-    <!-- FORM PARA A TABELA -->
-    <form method="post" action="${pageContext.request.contextPath}/disciplinas/acao">
         <table class="tabela-listagem">
             <thead>
-                <tr>
-                    <th>Selecionar</th>
-                    <th>Disciplina</th>
-                    <th>Professor</th>
-                    <th>Qtd. Turmas</th>
-                    <th>Média Geral</th>
-                </tr>
+            <tr>
+                <th>Selecionar</th>
+                <th>Disciplina</th>
+                <th>Professor</th>
+            </tr>
             </thead>
+
             <tbody>
             <%
-                List<DisciplinaResumo> lista = (List<DisciplinaResumo>) request.getAttribute("listaDisciplinas");
+                List<Disciplina> lista =
+                        (List<Disciplina>) request.getAttribute("disciplinasList");
 
                 if (lista != null && !lista.isEmpty()) {
-                    for (DisciplinaResumo d : lista) {
+                    for (Disciplina d : lista) {
             %>
             <tr>
                 <td>
-                    <!-- input para enviar o ID da disciplina se quiser fazer ação -->
                     <input type="checkbox" name="disciplinaId" value="<%= d.getId() %>">
                 </td>
                 <td><%= d.getNome() %></td>
-                <td><%= d.getProfessor() %></td>
-                <td><%= d.getQuantidadeTurmas() %></td>
-                <td style="<%= d.getMediaGeral() < 6 ? "color:red;" : "color:green;" %>">
-                    <%= d.getMediaGeral() %>
-                </td>
+                <td><%= d.getProfessor() != null ? d.getProfessor().getNome() : "-" %></td>
             </tr>
             <%
-                    }
-                } else {
+                }
+            } else {
             %>
             <tr>
-                <td colspan="5" style="text-align:center;">
+                <td colspan="3" style="text-align:center;">
                     Nenhuma disciplina encontrada.
                 </td>
             </tr>
@@ -74,8 +61,8 @@
         </table>
 
         <br>
-        <button type="submit" name="acao" value="excluir">Excluir selecionadas</button>
-        <button type="submit" name="acao" value="editar">Editar selecionadas</button>
+        <button type="submit">Atualizar Lista</button>
+
     </form>
 
 </div>

@@ -135,4 +135,37 @@ public class DisciplinaDAO {
         }
         return null;
     }
+    public List<Boletim> visualizarPorDisciplina(int idAluno, int idDisciplina) {
+        String sql = """
+        SELECT * FROM boletim
+        WHERE id_aluno = ? AND id_disciplina = ?
+    """;
+
+        List<Boletim> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idAluno);
+            ps.setInt(2, idDisciplina);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Boletim boletim = new Boletim(
+                        rs.getInt("id_boletim"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_disciplina"),
+                        rs.getDouble("nota")
+                );
+
+                lista.add(boletim);
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar boletim", e);
+        }
+
+        return lista;
+    }
 }
