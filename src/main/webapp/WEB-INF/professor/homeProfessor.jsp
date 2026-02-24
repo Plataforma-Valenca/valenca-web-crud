@@ -11,9 +11,9 @@
     <title>Área de Professores - Colégio Barão</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/componentes/sidebar.jsp">
-    <jsp:param name="activePage" value="homeProfessor"/>
-</jsp:include>
+<%--<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">--%>
+<%--    <jsp:param name="activePage" value="homeProfessor"/>--%>
+<%--</jsp:include>--%>
 <div class="main-content">
     <img src="assets/img/logoCB.svg">
 
