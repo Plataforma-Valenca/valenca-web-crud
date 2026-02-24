@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+    <jsp:param name="activePage" value="homeAdmin"/>
+</jsp:include>
 
 </body>
 </html>
