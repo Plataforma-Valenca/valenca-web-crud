@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AlunoConsultaDtoDAO {
-    public List<AlunoConsultaDTO> buscarPorMatricula(String matricula) {
+    public AlunoConsultaDTO buscarPorMatricula(String matricula) {
         if (matricula.isEmpty()) {
             throw new InvalidCredentialsException();
         }
@@ -40,8 +40,6 @@ public class AlunoConsultaDtoDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        List<AlunoConsultaDTO> alunosList = new ArrayList<>();
-
         try {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
@@ -58,8 +56,7 @@ public class AlunoConsultaDtoDAO {
                         rs.getString("matricula"),
                         rs.getString("turma")
                 );
-                alunosList.add(consultaDTO);
-                return alunosList;
+                return consultaDTO;
             } else {
                 throw new EntityNotFoundException("Usuario", matricula);
             }
