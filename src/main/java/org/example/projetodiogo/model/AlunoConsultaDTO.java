@@ -4,14 +4,14 @@ public class AlunoConsultaDTO {
     private int idAluno;
     private int idUsuario;
     private String nome;
-    private int matricula;
+    private String matricula;
     private String cpf;
     private String turma;
 
     // Método construtor
     public AlunoConsultaDTO() {}
 
-    public AlunoConsultaDTO(int idAluno, int idUsuario, String nome, int matricula, String cpf, String turma) {
+    public AlunoConsultaDTO(int idAluno, int idUsuario, String nome, String matricula, String cpf, String turma) {
         this.idAluno = idAluno;
         this.idUsuario = idUsuario;
         this.nome = nome;
@@ -20,7 +20,7 @@ public class AlunoConsultaDTO {
         this.turma = turma;
     }
 
-    public AlunoConsultaDTO(int idAluno, String nome, int matricula, String cpf, String turma) {
+    public AlunoConsultaDTO(int idAluno, String nome, String matricula, String cpf, String turma) {
         this.idAluno = idAluno;
         this.nome = nome;
         this.matricula = matricula;
@@ -28,7 +28,7 @@ public class AlunoConsultaDTO {
         this.turma = turma;
     }
 
-    public AlunoConsultaDTO(String nome, int matricula, String cpf, String turma) {
+    public AlunoConsultaDTO(String nome, String matricula, String cpf, String turma) {
         this.nome = nome;
         this.matricula = matricula;
         this.cpf = cpf;
@@ -40,7 +40,7 @@ public class AlunoConsultaDTO {
         return nome;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
@@ -57,7 +57,7 @@ public class AlunoConsultaDTO {
         this.nome = nome;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
