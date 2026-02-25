@@ -12,6 +12,7 @@ import org.example.projetodiogo.model.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/professor/verPerfilAluno")
 public class VerPerfilAluno extends HttpServlet {
@@ -25,21 +26,25 @@ public class VerPerfilAluno extends HttpServlet {
         ProfessorDAO professorDAO = new ProfessorDAO();
         TurmasDAO turmasDAO = new TurmasDAO();
         ObservacaoDAO observacaoDAO = new ObservacaoDAO();
+        AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
         Boletim boletim;
-        int idAlunoParam = Integer.parseInt(req.getParameter("id"));
+        int idAlunoParam = Integer.parseInt(req.getParameter("idAluno"));
 
 
         try {
             int idProfessor = professorDAO.buscarProfessorPorIdUsuario(idUsuario).get().getId();
             int idDisciplina = disciplinaDAO.buscarPorId(idProfessor).getIdProfessor();
 
+            Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdAluno(idAlunoParam);
+
+            AlunoConsultaDTO alunoConsultaDTO = alunoConsultaDAO.buscarPorMatricula(alunoOpt.get().getMatricula());
+
             boletim = boletimDAO.visualizarNotasPorDisciplina(idAlunoParam, idDisciplina);
 
             List<Observacao> obsList = observacaoDAO.buscarPorIdAluno(idAlunoParam);
 
             req.setAttribute("boletim", boletim);
-            req.setAttribute("usuarioNome", usuario.getNome());
-            req.setAttribute("matricula", alunoDAO.buscarPorIdAluno(idAlunoParam).get().getMatricula());
+            req.setAttribute("alunoConsulta", alunoConsultaDTO);
             req.setAttribute("turma", turmasDAO.buscarNomePorIdAluno(idAlunoParam));
             req.setAttribute("obsList", obsList);
 
