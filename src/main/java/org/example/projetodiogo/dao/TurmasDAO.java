@@ -9,11 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class TurmasDAO {
     public String buscarNomePorIdAluno(int idAluno) throws DataAccessException {
-
         String query = """
                 SELECT t.nome FROM aluno_turma at
                 JOIN turma t ON at.turma_id = t.id
@@ -38,7 +36,48 @@ public class TurmasDAO {
 
                 return turma.getNome();
             } else {
-                    throw new EntityNotFoundException("Turma, idAluno: ", idAluno);
+                throw new EntityNotFoundException("Turma, idAluno: ", idAluno);
+            }
+        } catch (SQLException e) {
+            System.out.println("[DAO] Erro ao buscar turma: " + e.getMessage());
+            e.printStackTrace(System.err);
+            throw new DataAccessException("Erro ao buscar turma", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (ps != null) ps.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
+        }
+    }
+
+    public int buscarPorNome(String nomeTurma) throws DataAccessException {
+        String query = """
+                SELECT nome FROM turma
+                WHERE nome = ?
+                """;
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, nomeTurma);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Turma turma = new Turma(
+                        rs.getString("nome")
+                );
+
+                return turma.getId();
+            } else {
+                throw new EntityNotFoundException("Turma: ", nomeTurma);
             }
         } catch (SQLException e) {
             System.out.println("[DAO] Erro ao buscar turma: " + e.getMessage());
