@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class AlunoConsultaDtoDAO {
-    public AlunoConsultaDTO buscarPorMatricula(int matricula) {
-        if (matricula < 1) {
+    public AlunoConsultaDTO buscarPorMatricula(String matricula) {
+        if (matricula.isEmpty()) {
             throw new InvalidCredentialsException();
         }
 
@@ -44,7 +44,7 @@ public class AlunoConsultaDtoDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setInt(1, matricula);
+            pstmt.setString(1, matricula);
 
             rs = pstmt.executeQuery();
 
@@ -52,7 +52,7 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getInt("matricula"),
+                        rs.getString("matricula"),
                         rs.getString("matricula"),
                         rs.getString("turma")
                 );
