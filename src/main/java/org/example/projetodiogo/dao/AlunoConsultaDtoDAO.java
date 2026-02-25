@@ -22,6 +22,7 @@ public class AlunoConsultaDtoDAO {
 
         String sql = """
                 SELECT
+                    a.id_aluno,
                     u.nome,
                     u.cpf,
                     a.matricula,
@@ -51,6 +52,7 @@ public class AlunoConsultaDtoDAO {
 
             if (rs.next()) {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
+                        rs.getInt("id_aluno"),
                         rs.getString("nome"),
                         rs.getString("matricula"),
                         rs.getString("matricula"),
