@@ -1,6 +1,8 @@
 package org.example.projetodiogo.model;
 
 public class AlunoConsultaDTO {
+    private int idAluno;
+    private int idUsuario;
     private String nome;
     private String matricula;
     private String cpf;
@@ -8,6 +10,23 @@ public class AlunoConsultaDTO {
 
     // Método construtor
     public AlunoConsultaDTO() {}
+
+    public AlunoConsultaDTO(int idAluno, int idUsuario, String nome, String matricula, String cpf, String turma) {
+        this.idAluno = idAluno;
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.matricula = matricula;
+        this.cpf = cpf;
+        this.turma = turma;
+    }
+
+    public AlunoConsultaDTO(int idAluno, String nome, String matricula, String cpf, String turma) {
+        this.idAluno = idAluno;
+        this.nome = nome;
+        this.matricula = matricula;
+        this.cpf = cpf;
+        this.turma = turma;
+    }
 
     public AlunoConsultaDTO(String nome, String matricula, String cpf, String turma) {
         this.nome = nome;
