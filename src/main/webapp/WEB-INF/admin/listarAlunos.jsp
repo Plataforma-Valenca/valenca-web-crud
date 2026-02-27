@@ -9,29 +9,39 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp" />
+<%--<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp" />--%>
 
 <div class="main-content">
 
-    <h1>Listar Alunos</h1>
+<%--    <h1>Listar Alunos</h1>--%>
 
-    <!-- FORM DE BUSCA -->
-    <form method="get"
-          action="${pageContext.request.contextPath}/admin/verAlunos"
-          class="form-busca">
+<%--    <!-- FORM DE BUSCA -->--%>
+<%--    <form action="${pageContext.request.contextPath}/admin/verAlunos"--%>
+<%--          method="get"--%>
+<%--          class="form-busca">--%>
 
-        <input type="text"
-               name="busca"
-               placeholder="Matrícula do aluno"
-               value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">
+<%--        <input type="text"--%>
+<%--               name="busca"--%>
+<%--               placeholder="Matrícula do aluno"--%>
+<%--               value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">--%>
 
-        <button type="submit" class="btn btn-primary">Buscar</button>
-    </form>
+<%--        <button type="submit" class="btn btn-primary">Buscar</button>--%>
+<%--    </form>--%>
 
+    <!-- Substitua o h1 + form-busca por isso: -->
+    <h1>Buscar Aluno(a)</h1>
+
+    <div class="top-bar">
+        <form action="${pageContext.request.contextPath}/admin/verAlunos" method="get" class="form-busca">
+            <input type="text" name="busca" placeholder="Matrícula do aluno">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <a href="/admin/cadastrarAluno" class="btn btn-cadastrar">+ Cadastrar</a>
+    </div>
 
     <!-- FORM PARA AÇÕES NA TABELA -->
-    <form method="post"
-          action="${pageContext.request.contextPath}/admin/alunos/acao">
+    <form method="get"
+          action="${pageContext.request.contextPath}/admin/verAlunos">
 
         <table class="tabela-listagem">
 
@@ -57,12 +67,13 @@
                 <td>
                     <input type="checkbox"
                            name="alunoId"
-                           value="<%= aluno.getId() %>">
+                           value="<%= aluno.getMatricula() %>">
                 </td>
                 <td><%= aluno.getNome() %></td>
                 <td><%= aluno.getCpf() %></td>
                 <td><%= aluno.getMatricula() %></td>
                 <td><%= aluno.getTurma() %></td>
+                <td><a><img src="${pageContext.request.contextPath}/assets/img/editBtn.svg"></a></td>
             </tr>
             <%
                 }
@@ -82,19 +93,24 @@
 
         <br>
 
-        <button type="submit"
-                name="acao"
-                value="excluir"
-                class="btn btn-danger">
-            Excluir selecionados
-        </button>
+<%--        <button type="submit"--%>
+<%--                name="acao"--%>
+<%--                value="excluir"--%>
+<%--                class="btn btn-danger">--%>
+<%--            Excluir selecionados--%>
+<%--        </button>--%>
 
-        <button type="submit"
-                name="acao"
-                value="editar"
-                class="btn btn-primary">
-            Editar selecionados
-        </button>
+<%--        <button type="submit"--%>
+<%--                name="acao"--%>
+<%--                value="editar"--%>
+<%--                class="btn btn-primary">--%>
+<%--            Editar selecionados--%>
+<%--        </button>--%>
+
+        <div class="acoes-tabela">
+            <button class="btn btn-danger">Excluir selecionados</button>
+            <button class="btn btn-primary">Editar selecionados</button>
+        </div>
 
     </form>
 
