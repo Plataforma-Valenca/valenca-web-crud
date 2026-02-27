@@ -1,6 +1,5 @@
 package org.example.projetodiogo.servlets.admin;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,19 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.AlunoDAO;
 import org.example.projetodiogo.dao.TurmasDAO;
 import org.example.projetodiogo.dao.UsuarioDAO;
-import org.example.projetodiogo.exceptions.DataAccessException;
-import org.example.projetodiogo.exceptions.DuplicateEmailException;
 import org.example.projetodiogo.model.Usuario;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 @WebServlet("/admin/inserirAluno")
 public class InserirAlunoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/admin/inserirAluno.jsp")
+        req.getRequestDispatcher("/WEB-INF/admin/cadastrarAluno.jsp")
                 .forward(req, resp);;
     }
 
@@ -40,7 +35,7 @@ public class InserirAlunoServlet extends HttpServlet {
             usuario.setCpf(cpf);
 
             int idAluno = usuarioDAO.inserirNovoAluno(usuario);
-            int idTurma = turmasDAO.buscarPorNome(turma);
+            int idTurma = turmasDAO.buscarPorIdAluno(idAluno).getId();
             alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
 
             req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
