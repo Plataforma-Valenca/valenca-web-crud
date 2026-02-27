@@ -20,13 +20,17 @@ import java.util.Optional;
 public class VerAlunosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
-        List<AlunoConsultaDTO> alunosList;
+        List<AlunoConsultaDTO> alunosList = new ArrayList<>();
+        AlunoConsultaDTO aluno;
 
         String busca = req.getParameter("busca");
 
         try {
             if (busca != null && !busca.isEmpty()) {
-                alunosList = alunoConsultaDao.buscarPorMatricula(busca);
+                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+                if (aluno != null) {
+                    req.setAttribute("alunosBusca", aluno);
+                }
             } else {
                 alunosList = alunoConsultaDao.buscarAlunos();
             }

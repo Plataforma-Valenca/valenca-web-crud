@@ -11,19 +11,26 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.AlunoConsultaDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/admin/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
-        List<AlunoConsultaDTO> alunosList;
+        List<AlunoConsultaDTO> alunosList = new ArrayList<>();
+        AlunoConsultaDTO aluno;
 
         String busca = req.getParameter("busca");
 
         try {
             if (busca != null && !busca.isEmpty()) {
-                alunosList = alunoConsultaDao.buscarPorMatricula(busca);
+                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+                if (aluno != null) {
+                    alunosList.add(aluno);
+                }
             } else {
                 alunosList = alunoConsultaDao.buscarAlunos();
             }
