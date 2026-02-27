@@ -21,7 +21,8 @@ public class ServletLogin extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("loginUsuario");
         String senha = req.getParameter("senhaUsuario");
-        Optional<Usuario> usuario = Optional.empty();
+        Optional<Usuario> usuarioOpt = Optional.empty();
+        Usuario usuario = new Usuario();
 
         if (login == null || login.trim().isEmpty() ||
                 senha == null || senha.trim().isEmpty()) {
@@ -29,27 +30,30 @@ public class ServletLogin extends HttpServlet {
             req.setAttribute("erroLogin", "Login e senha são obrigatórios");
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
         } else {
-            usuario = usuarioDAO.validarLogin(login);
+            usuarioOpt = usuarioDAO.validarLogin(login);
         }
 
 
-        if (usuario.isEmpty()) {
+        if (usuarioOpt.isEmpty()) {
+            req.setAttribute("erroLogin", "Email ou senha inválidos");
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            return;
+        } else {
+            usuario = usuarioOpt.get();
+            req.getSession().setAttribute("usuario", usuario);
+        }
+
+        if (!HasherSenha.verificaSenha(senha, usuario.getSenha())) {
             req.setAttribute("erroLogin", "Email ou senha inválidos");
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
             return;
         }
 
-        if (!HasherSenha.verificaSenha(senha, usuario.get().getSenha())) {
-            req.setAttribute("erroLogin", "Email ou senha inválidos");
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
-            return;
-        }
-
-        switch (usuario.get().getTipoUsuario().toLowerCase()) {
+        switch (usuario.getTipoUsuario().toLowerCase()) {
             case "professor":
                 HttpSession session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                req.getRequestDispatcher("/WEB-INF/professor/homeProfessor.jsp")
+                req.getRequestDispatcher("/WEB-INF/professor/.jsp")
                         .forward(req, resp);
                 break;
 
@@ -60,14 +64,10 @@ public class ServletLogin extends HttpServlet {
                         .forward(req, resp);
                 break;
 
-            case "administrador":
+            case "admin":
                 session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                session.setAttribute("usuarioId", usuario.get().getId());
-                session.setAttribute("usuarioNome", usuario.get().getNome());
-                session.setAttribute("usuarioEmail", usuario.get().getEmail());
-                req.getRequestDispatcher("/WEB-INF/admin/homeAdmin.jsp")
-                        .forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/admin/verAlunos");
                 break;
         }
     }
