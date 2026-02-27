@@ -18,11 +18,18 @@
     <h1>Cadastrar Aluno</h1>
 
     <form method="post"
-          action="${pageContext.request.contextPath}/cadastrarAluno">
+          action="${pageContext.request.contextPath}/admin/inserirAluno">
         <label>CPF:</label>
         <input type="text" name="cpf" required>
         <br><br>
 
+        <select name="idTurma">
+            <c:forEach var="t" items="${turmas}">
+                <option value="${t.idTurma}">
+                        ${t.nome}
+                </option>
+            </c:forEach>
+        </select>
         <button type="submit">Salvar</button>
 
     </form>
