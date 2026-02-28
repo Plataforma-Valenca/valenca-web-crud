@@ -9,7 +9,7 @@
 
     <!-- LOGO -->
     <div class="logo-area">
-        <img src="${pageContext.request.contextPath}/assets/img/logoCB.svg" alt="Logo">
+        <img src="${pageContext.request.contextPath}/assets/img/Logos%20-%202026%202.svg" alt="Logo">
     </div>
 
     <!-- MENU -->
