@@ -95,8 +95,8 @@ public class UsuarioDAO {
     }
 
     // READ
-    public Optional<Usuario> validarLogin(String cpfMatriculaOuNomeUsuario) {
-        if (cpfMatriculaOuNomeUsuario.isEmpty()) {
+    public Optional<Usuario> validarLogin(String matriculaOuNomeUsuario) {
+        if (matriculaOuNomeUsuario.isEmpty()) {
             throw new InvalidCredentialsException();
         }
 
@@ -105,7 +105,7 @@ public class UsuarioDAO {
         String sql = """
                 SELECT * FROM usuarios u
         LEFT JOIN alunos a ON u.id_usuario = a.id_usuario
-        WHERE (u.username = ? OR u.cpf = ? OR a.matricula = ?)
+        WHERE (u.username = ? OR a.matricula = ?)
         AND u.cadastro_completo = true
                 """;
 
@@ -117,9 +117,8 @@ public class UsuarioDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
             
-            pstmt.setString(1, cpfMatriculaOuNomeUsuario);
-            pstmt.setString(2, cpfMatriculaOuNomeUsuario);
-            pstmt.setString(3, cpfMatriculaOuNomeUsuario);
+            pstmt.setString(1, matriculaOuNomeUsuario);
+            pstmt.setString(2, matriculaOuNomeUsuario);
 
             rs = pstmt.executeQuery();
 
@@ -139,7 +138,7 @@ public class UsuarioDAO {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            System.err.println("[DAO ERROR] Erro ao buscar usuário por email ou nome de usuário: " + cpfMatriculaOuNomeUsuario);
+            System.err.println("[DAO ERROR] Erro ao buscar usuário por matrícula ou nome de usuário: " + matriculaOuNomeUsuario);
             e.printStackTrace(System.err);
             throw new DataAccessException("Erro ao buscar usuário", e);
         } finally {
