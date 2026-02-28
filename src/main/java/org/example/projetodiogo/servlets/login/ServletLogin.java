@@ -35,7 +35,7 @@ public class ServletLogin extends HttpServlet {
 
 
         if (usuarioOpt.isEmpty()) {
-            req.setAttribute("erroLogin", "Email ou senha inválidos");
+            req.setAttribute("erroLogin", "Login ou senha inválidos");
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
             return;
         } else {
@@ -53,15 +53,13 @@ public class ServletLogin extends HttpServlet {
             case "professor":
                 HttpSession session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                req.getRequestDispatcher("/WEB-INF/professor/.jsp")
-                        .forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/professor/verAlunos");
                 break;
 
             case "aluno":
                 session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                req.getRequestDispatcher("/WEB-INF/aluno/homeAluno.jsp")
-                        .forward(req, resp);
+                resp.sendRedirect(req.getContextPath() + "/aluno/CardDisciplinaServlet");
                 break;
 
             case "admin":
