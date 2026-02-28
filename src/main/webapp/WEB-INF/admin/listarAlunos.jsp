@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<%--<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp" />--%>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp" />
 
 <div class="main-content">
 
