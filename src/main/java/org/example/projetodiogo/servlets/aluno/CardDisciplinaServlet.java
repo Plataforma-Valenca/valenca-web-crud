@@ -11,28 +11,25 @@ import org.example.projetodiogo.dao.AlunoDAO;
 import org.example.projetodiogo.dao.DisciplinaDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.Boletim;
+import org.example.projetodiogo.model.Disciplina;
+import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/CardDisciplinaServlet")
+@WebServlet("/aluno/CardDisciplinaServlet")
 public class CardDisciplinaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        List<Boletim> boletim = new ArrayList<>();
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-        AlunoDAO alunoDAO = new AlunoDAO();
-        int idUsuario = (int) session.getAttribute("usuarioId");
-        int idAluno = alunoDAO.buscarPorIdUsuario(idUsuario).get().getId();
-        int idDisciplina = Integer.parseInt(req.getParameter("idDisciplina"));
+        ArrayList<Disciplina> disciplinaList = new ArrayList<>();
 
         try {
-            boletim = disciplinaDAO.visualizarPorDisciplina(idAluno, idDisciplina);
+            disciplinaList = disciplinaDAO.visualizarDisciplinas();
 
-            req.setAttribute("boletimList", boletim);
+            req.setAttribute("disciplinaList", disciplinaList);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/aluno/.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/aluno/cardsDisciplina.jsp");
             dispatcher.forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
