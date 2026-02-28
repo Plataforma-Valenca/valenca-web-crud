@@ -116,7 +116,7 @@ public class DisciplinaDAO {
             while (rs.next()) {
                 Disciplina disciplina = new Disciplina(
                         rs.getInt("id_disciplina"),
-                        rs.getString("nome_disciplina"),
+                        rs.getString("nome"),
                         rs.getInt("id_professor")
                 );
 
