@@ -122,7 +122,7 @@ body {
 .main-content {
     flex: 1;
     padding: 48px 48px;
-    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .main-content h1 {
@@ -218,10 +218,10 @@ body {
 
 /* ===== TABLE ===== */
 .tabela-listagem {
-    width: 100%;
+    width: 80%;
     border-collapse: separate;
     border-spacing: 0 10px;
-    margin-bottom: 24px;
+    margin: 48px 24px;
 }
 
 .tabela-listagem thead tr th {
