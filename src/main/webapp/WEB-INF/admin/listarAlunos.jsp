@@ -93,19 +93,19 @@
 
         <br>
 
-<%--        <button type="submit"--%>
-<%--                name="acao"--%>
-<%--                value="excluir"--%>
-<%--                class="btn btn-danger">--%>
-<%--            Excluir selecionados--%>
-<%--        </button>--%>
+        <button type="submit"
+                name="acao"
+                value="excluir"
+                class="btn btn-danger">
+            Excluir selecionados
+        </button>
 
-<%--        <button type="submit"--%>
-<%--                name="acao"--%>
-<%--                value="editar"--%>
-<%--                class="btn btn-primary">--%>
-<%--            Editar selecionados--%>
-<%--        </button>--%>
+        <button type="submit"
+                name="acao"
+                value="editar"
+                class="btn btn-primary">
+            Editar selecionados
+        </button>
 
         <div class="acoes-tabela">
             <button class="btn btn-danger">Excluir selecionados</button>
