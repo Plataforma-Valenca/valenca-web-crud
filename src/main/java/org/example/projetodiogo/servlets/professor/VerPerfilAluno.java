@@ -11,6 +11,7 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class VerPerfilAluno extends HttpServlet {
         TurmasDAO turmasDAO = new TurmasDAO();
         ObservacaoDAO observacaoDAO = new ObservacaoDAO();
         AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
-        Boletim boletim;
+        ArrayList<Boletim> boletimList = new ArrayList<>();
         int idAlunoParam = Integer.parseInt(req.getParameter("idAluno"));
 
 
@@ -39,11 +40,11 @@ public class VerPerfilAluno extends HttpServlet {
 
             AlunoConsultaDTO alunoConsultaDTO = alunoConsultaDAO.buscarPorMatricula(alunoOpt.get().getMatricula());
 
-            boletim = boletimDAO.visualizarNotasPorDisciplina(idAlunoParam, idDisciplina);
+            boletimList = boletimDAO.visualizarNotasPorDisciplina(idAlunoParam, idDisciplina);
 
             List<Observacao> obsList = observacaoDAO.buscarPorIdAluno(idAlunoParam);
 
-            req.setAttribute("boletim", boletim);
+            req.setAttribute("boletimList", boletimList);
             req.setAttribute("alunoConsulta", alunoConsultaDTO);
             req.setAttribute("turma", turmasDAO.buscarNomePorIdAluno(idAlunoParam));
             req.setAttribute("obsList", obsList);
