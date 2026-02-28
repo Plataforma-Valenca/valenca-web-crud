@@ -52,7 +52,7 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("matricula"),
                         rs.getString("turma")
                 );
@@ -78,6 +78,7 @@ public class AlunoConsultaDtoDAO {
     public List<AlunoConsultaDTO> buscarAlunos() {
         String sql = """
                 SELECT
+                    a.id_aluno,
                     u.nome,
                     u.cpf,
                     a.matricula,
@@ -103,8 +104,9 @@ public class AlunoConsultaDtoDAO {
 
             while (rs.next()) {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
+                        rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("matricula"),
                         rs.getString("turma")
                 );
