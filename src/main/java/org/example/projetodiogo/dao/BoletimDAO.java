@@ -13,7 +13,7 @@ import java.util.List;
 public class BoletimDAO {
     public List<Boletim> visualizarBoletim(int idAluno) {
 
-        List<Boletim> lista = new ArrayList<>();
+        List<Boletim> boletimList = new ArrayList<>();
 
         String sql = """
         SELECT
@@ -66,12 +66,12 @@ public class BoletimDAO {
             while (rs.next()) {
                 Boletim boletim = new Boletim(
                         rs.getInt("id_disciplina"),
-                        rs.getString("nome_disciplina"),
+                        rs.getString("nome_"),
                         rs.getDouble("media1"),
                         rs.getDouble("media2"),
                         rs.getDouble("media_final")
                 );
-                lista.add(boletim);
+                boletimList.add(boletim);
             }
 
         } catch (SQLException e) {
@@ -85,13 +85,14 @@ public class BoletimDAO {
             }
         }
 
-        return lista;
+        return boletimList;
     }
 
-    public Boletim visualizarNotasPorDisciplina(int idAluno, int idDisciplina) {
+    public ArrayList<Boletim> visualizarNotasPorDisciplina(int idAluno, int idDisciplina) {
 
         String sql = """
         SELECT
+            d.id_disciplina,
             d.nome,
         
             ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) AS media1,
@@ -112,9 +113,11 @@ public class BoletimDAO {
         
         WHERE n.id_aluno = ? AND d.id_disciplina = ?
         
-        GROUP BY d.nome
+        GROUP BY d.nome, d.id_disciplina
         ORDER BY d.nome;
     """;
+
+        ArrayList<Boletim> boletimList = new ArrayList<>();
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -128,15 +131,15 @@ public class BoletimDAO {
 
             ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Boletim boletim = new Boletim(
                         rs.getInt("id_disciplina"),
-                        rs.getString("nome_disciplina"),
+                        rs.getString("nome"),
                         rs.getDouble("media1"),
                         rs.getDouble("media2"),
                         rs.getDouble("media_final")
                 );
-                return boletim;
+                boletimList.add(boletim);
             }
 
         } catch (SQLException e) {
@@ -149,6 +152,6 @@ public class BoletimDAO {
                 System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
             }
         }
-        return null;
+        return boletimList;
     }
 }
