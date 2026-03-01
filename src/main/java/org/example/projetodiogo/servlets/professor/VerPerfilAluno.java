@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.projetodiogo.dao.*;
+import org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.*;
+import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;

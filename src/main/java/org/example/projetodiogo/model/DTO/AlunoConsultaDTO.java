@@ -1,4 +1,4 @@
-package org.example.projetodiogo.model;
+package org.example.projetodiogo.model.DTO;
 
 public class AlunoConsultaDTO {
     private int idAluno;

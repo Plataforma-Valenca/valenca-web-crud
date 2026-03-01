@@ -1,20 +1,17 @@
 package org.example.projetodiogo.servlets.professor;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.projetodiogo.dao.AlunoConsultaDtoDAO;
+import org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
-import org.example.projetodiogo.model.AlunoConsultaDTO;
+import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 
 import java.io.IOException;
-import java.lang.management.OperatingSystemMXBean;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet("/professor/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
