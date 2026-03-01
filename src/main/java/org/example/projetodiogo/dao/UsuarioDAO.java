@@ -91,7 +91,7 @@ public class UsuarioDAO {
     }
 
     public int inserirNovoAluno(Usuario usuario) {
-        String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, ?, false)";
+        String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, 'aluno', false)";
         int idGeradoUsuario = 0;
 
         PreparedStatement pstmt = null;
@@ -107,7 +107,6 @@ public class UsuarioDAO {
 
             pstmt.setString(1, senhaHash);
             pstmt.setString(2, usuario.getCpf());
-            pstmt.setString(3, "ALUNO");
 
             pstmt.executeUpdate();
 
