@@ -20,7 +20,7 @@ public class DisciplinaDAO {
     public Disciplina buscarPorId(int idDisciplina) {
 
         String sql = """
-                SELECT nome FROM disciplinas
+                SELECT nome, id_professor FROM disciplinas
                 WHERE id_disciplina = ?
     """;
 
@@ -38,6 +38,7 @@ public class DisciplinaDAO {
 
             if (rs.next()) {
                 disciplina.setNome(rs.getString("nome"));
+                disciplina.setIdProfessor(rs.getInt("id_professor"));
                 return disciplina;
             }
 
