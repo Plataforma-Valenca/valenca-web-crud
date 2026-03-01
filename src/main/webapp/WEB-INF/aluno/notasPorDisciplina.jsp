@@ -131,12 +131,12 @@
     <div class="header-info">
         <div class="disciplina-nome"><%= request.getAttribute("nomeDisciplina") %></div>
         <%
+            int idDisciplina = (int) request.getAttribute("idDisciplina");
             List<Boletim> boletimList = (List<Boletim>) request.getAttribute("boletimList");
             String nomeProfessor = "";
-//            if (boletimList != null && !boletimList.isEmpty()) {
-//                nomeProfessor = boletimList.get(0).getNomeProfessor() != null
-//                        ? boletimList.get(0).getNomeProfessor() : "";
-//            }
+            if (request.getAttribute("nomeProfessor") != null) {
+                nomeProfessor = (String) request.getAttribute("nomeProfessor");
+            }
         %>
         <div class="professor-nome">Prof. <%= nomeProfessor %></div>
     </div>
@@ -145,7 +145,7 @@
 <!-- SEÇÕES -->
 <div class="secoes">
     <span class="secao-titulo">Avaliações</span>
-    <span class="secao-titulo inativo">Observações</span>
+    <a class="secao-titulo inativo" href="${pageContext.request.contextPath}/aluno/verObservacoes?idDisciplina=<%= idDisciplina %>">Observações</a>
 </div>
 
 <!-- TABELA -->
@@ -165,15 +165,14 @@
             if (boletimList != null && !boletimList.isEmpty()) {
                 for (Boletim b : boletimList) {
                     // Notas avaliações
-                    String nomeDisciplina = (String) request.getAttribute("nomeDisciplina") != null ? String.valueOf(b.getMedia1()) : "--";
                     String n1 = b.getMedia1() != null ? String.valueOf(b.getMedia1()) : "--";
                     String n2 = b.getMedia2() != null ? String.valueOf(b.getMedia2()) : "--";
                     String mf = b.getMediaFinal() != null ? String.valueOf(b.getMediaFinal()) : "--";
         %>
         <tr>
-            <td class=""><%= nomeDisciplina %></td>
+            <td class=""><%= request.getAttribute("nomeDisciplina")%></td>
             <td class="<%= !n2.equals("--") ? "nota-vermelho" : "nota-vazia" %>"><%= n1 %></td>
-            <td class="<%= !mf.equals("--") ? "nota-media" : "nota-vazia" %>"><%= n2 %></td>
+            <td class="<%= !n1.equals("--") ? "nota-media" : "nota-vazia" %>"><%= n2 %></td>
             <td class="<%= !mf.equals("--") ? "nota-azul" : "nota-vazia" %>"><%= mf %></td>
         </tr>
         <%
