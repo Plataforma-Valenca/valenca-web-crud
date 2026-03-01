@@ -13,8 +13,7 @@ public class Boletim {
     // Método construtor
     public Boletim() {}
 
-    public Boletim(int idDisciplina, String nomeDisciplina, Double media1, Double media2, Double mediaFinal, String situacao) {
-        this.idDisciplina = idDisciplina;
+    public Boletim(String nomeDisciplina, Double media1, Double media2, Double mediaFinal, String situacao) {
         this.nomeDisciplina = nomeDisciplina;
         this.media1 = media1;
         this.media2 = media2;
@@ -55,6 +54,10 @@ public class Boletim {
         return mediaFinal;
     }
 
+    public String getSituacao() {
+        return situacao;
+    }
+
     // Métodos setters
     public void setIdDisciplina(int idDisciplina) {
         this.idDisciplina = idDisciplina;
@@ -76,7 +79,8 @@ public class Boletim {
         this.mediaFinal = mediaFinal;
     }
 
-
-
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
 }
 
