@@ -79,7 +79,7 @@ public class AlunoDAO {
     }
 
     // INSERT
-    public boolean inserir(int idUsuario) {
+    public void inserir(int idUsuario) {
         String query = """
                 INSERT INTO alunos
                 (id_usuario, matricula)
@@ -96,11 +96,10 @@ public class AlunoDAO {
 
             pstmt.setInt(1, idUsuario);
 
-            return pstmt.executeUpdate() > 0;
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir aluno: " + e.getMessage());
-            return false;
         }
     }
 
