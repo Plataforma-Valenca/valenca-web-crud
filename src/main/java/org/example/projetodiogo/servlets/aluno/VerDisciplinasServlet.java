@@ -6,30 +6,26 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.example.projetodiogo.dao.DisciplinaDAO;
-import org.example.projetodiogo.dao.ProfessorDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.Disciplina;
-import org.example.projetodiogo.model.Professor;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("/VerDisciplinas")
+@WebServlet(urlPatterns = {"/aluno/VerDisciplinas", "/aluno/CardDisciplinaServlet"})
 public class VerDisciplinasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProfessorDAO professorDAO = new ProfessorDAO();
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-        ArrayList<Disciplina> disciplinasList;
+        ArrayList<Disciplina> disciplinaList;
 
         try {
-            disciplinasList = disciplinaDAO.visualizarDisciplinas();
+            disciplinaList = disciplinaDAO.visualizarDisciplinas();
 
-            req.setAttribute("disciplinasList", disciplinasList);
+            req.setAttribute("disciplinaList", disciplinaList);
 
-           RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/aluno/listarDisciplinas.jsp");
-dispatcher.forward(req, resp);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/aluno/cardsDisciplina.jsp");
+            dispatcher.forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
         }
