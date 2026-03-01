@@ -83,7 +83,7 @@ public class AlunoDAO {
         String query = """
                 INSERT INTO alunos
                 (id_usuario, matricula)
-                VALUES (?, nextval('matricula')::varchar)
+                VALUES (?, nextval('seq_matricula')::varchar)
                 """;
 
         Connection conn = null;
