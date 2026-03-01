@@ -4,7 +4,6 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.exceptions.DuplicateEmailException;
 import org.example.projetodiogo.exceptions.EntityNotFoundException;
 import org.example.projetodiogo.exceptions.InvalidCredentialsException;
-import org.example.projetodiogo.model.AlunoConsultaDTO;
 import org.example.projetodiogo.model.Usuario;
 import org.example.projetodiogo.util.ConnectionFactory;
 import org.example.projetodiogo.util.HasherSenha;
