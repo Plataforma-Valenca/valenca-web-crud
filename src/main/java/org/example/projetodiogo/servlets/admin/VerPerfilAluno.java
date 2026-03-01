@@ -19,7 +19,6 @@ public class VerPerfilAluno extends HttpServlet {
         AlunoDAO alunoDAO = new AlunoDAO();
         BoletimDAO boletimDAO = new BoletimDAO();
         TurmasDAO turmasDAO = new TurmasDAO();
-        ObservacaoDAO observacaoDAO = new ObservacaoDAO();
         AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
 
         List<Boletim> boletimList;
