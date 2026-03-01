@@ -28,13 +28,14 @@ public class InserirAlunoServlet extends HttpServlet {
 
         String senha = req.getParameter("senha");
         String cpf = req.getParameter("cpf");
-        String turma = req.getParameter("turma");
 
         try {
             usuario.setSenha(senha);
             usuario.setCpf(cpf);
 
-            int idAluno = usuarioDAO.inserirNovoAluno(usuario);
+            int idUsuarioCriado = usuarioDAO.inserirNovoAluno(usuario);
+            alunoDAO.inserir(idUsuarioCriado);
+            int idAluno = alunoDAO.buscarPorIdUsuario(idUsuarioCriado).get().getId();
             int idTurma = turmasDAO.buscarPorIdAluno(idAluno).getId();
             alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
 
