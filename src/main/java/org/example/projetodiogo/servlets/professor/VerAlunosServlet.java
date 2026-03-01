@@ -19,27 +19,27 @@ import java.util.Optional;
 @WebServlet("/professor/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
-            List<AlunoConsultaDTO> alunosList = new ArrayList<>();
-            AlunoConsultaDTO aluno;
+        AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
+        List<AlunoConsultaDTO> alunosList = new ArrayList<>();
+        AlunoConsultaDTO aluno;
 
-            String busca = req.getParameter("busca");
+        String busca = req.getParameter("busca");
 
-            try {
-                if (busca != null && !busca.isEmpty()) {
-                    aluno = alunoConsultaDao.buscarPorMatricula(busca);
-                    req.setAttribute("busca", busca);
-                    if (aluno != null) {
-                        alunosList.add(aluno);
-                    }
-                } else {
-                    alunosList = alunoConsultaDao.buscarAlunos();
+        try {
+            if (busca != null && !busca.isEmpty()) {
+                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+                if (aluno != null) {
+                    alunosList.add(aluno);
                 }
+            } else {
+                alunosList = alunoConsultaDao.buscarAlunos();
+            }
 
-                req.setAttribute("alunosList", alunosList);
+            req.setAttribute("alunosList", alunosList);
+            req.setAttribute("busca", busca);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp");
-                dispatcher.forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp")
+                .forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
         }
