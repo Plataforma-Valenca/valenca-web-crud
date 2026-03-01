@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoletimDAO {
-    public List<Boletim> visualizarBoletim(int idAluno) {
+    public ArrayList<Boletim> visualizarBoletim(int idAluno) {
 
-        List<Boletim> boletimList = new ArrayList<>();
+        ArrayList<Boletim> boletimList = new ArrayList<>();
 
         String sql = """
         SELECT
-            nome,
+            sub.nome,
             media1,
             media2,
             media_final,
@@ -49,7 +49,7 @@ public class BoletimDAO {
         
                  GROUP BY d.nome
              ) sub
-        ORDER BY nome;
+        ORDER BY sub.nome;
     """;
 
         Connection conn = null;
@@ -65,11 +65,11 @@ public class BoletimDAO {
 
             while (rs.next()) {
                 Boletim boletim = new Boletim(
-                        rs.getInt("id_disciplina"),
-                        rs.getString("nome_"),
+                        rs.getString("nome"),
                         rs.getDouble("media1"),
                         rs.getDouble("media2"),
-                        rs.getDouble("media_final")
+                        rs.getDouble("media_final"),
+                        rs.getString("situacao")
                 );
                 boletimList.add(boletim);
             }
