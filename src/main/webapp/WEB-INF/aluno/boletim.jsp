@@ -144,7 +144,7 @@
 
 <div class="container">
 
-    <p><strong>Disciplina:</strong> <%= disciplinasList.get(0).getNome() %></p>
+    <p><strong>Disciplina:</strong> <%= disciplinasList.get(0).getNomeFormatado() %></p>
     <p><strong>Professor:</strong></p>
 
     <table>

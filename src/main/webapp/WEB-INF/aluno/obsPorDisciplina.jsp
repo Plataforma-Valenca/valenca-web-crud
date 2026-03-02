@@ -21,10 +21,10 @@
             background-color: #f0f2f2;
             min-height: 100vh;
             padding: 32px 40px;
+            margin-left: 22vw;
             color: #3a3a3a;
         }
 
-        /* ===== HEADER ===== */
         .header {
             display: flex;
             align-items: flex-start;
@@ -58,7 +58,6 @@
             margin-top: 2px;
         }
 
-        /* ===== ABAS ===== */
         .secoes {
             display: flex;
             justify-content: center;
@@ -83,7 +82,6 @@
             color: #3a9088;
         }
 
-        /* ===== TABELA ===== */
         .tabela-wrapper {
             background: white;
             border-radius: 10px;
@@ -124,9 +122,35 @@
             text-align: center;
             padding: 32px;
         }
+
+        @media (max-width: 992px) {
+            body {
+                margin-left: 0;
+            }
+
+            .secoes {
+                gap: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .header {
+                margin-bottom: 32px;
+            }
+
+            .tabela-wrapper {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
 
 <%
     ArrayList<Observacao> obsList = (ArrayList<Observacao>) request.getAttribute("obsList");
