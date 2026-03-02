@@ -13,7 +13,7 @@ import org.example.projetodiogo.model.Disciplina;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = {"/aluno/VerDisciplinas", "/aluno/CardDisciplinaServlet"})
+@WebServlet("/aluno/VerDisciplinas")
 public class VerDisciplinasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
