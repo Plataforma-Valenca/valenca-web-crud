@@ -1,14 +1,55 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.projetodiogo.model.Boletim" %>
 <%@ page import="org.example.projetodiogo.model.Disciplina" %>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Aluno</title>
+    <title>Disciplinas</title>
+</head>
+
+<body>
+
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
+
+<h1>Disciplinas cadastradas</h1>
+
+<div class="cards-grid">
+    <%
+        List<Disciplina> disciplinasList =
+                (List<Disciplina>) request.getAttribute("disciplinasList");
+
+        if (disciplinasList != null && !disciplinasList.isEmpty()) {
+            for (Disciplina d : disciplinasList) {
+    %>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="card-titulo">
+                <%= d.getNome() %>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <span class="icon-btn">&#9998;</span>
+        </div>
+    </div>
+
+    <%
+        }
+    } else {
+    %>
+
+    <div class="empty">Nenhuma disciplina encontrada.</div>
+
+    <%
+        }
+    %>
+</div>
+
+</body>
+</html>
     <style>
         * {
             margin: 0;
@@ -21,7 +62,6 @@
             background-color: #f0f2f2;
             min-height: 100vh;
 
-            /* 🔥 AGORA A MAIN RESPEITA A SIDEBAR */
             margin-left: 22vw;
             width: 78vw;
 
@@ -74,13 +114,6 @@
             font-weight: 700;
             color: #3a3a3a;
             margin-bottom: 6px;
-            line-height: 1.4;
-        }
-
-        .card-subtitulo {
-            font-size: 0.8rem;
-            color: #5a5a5a;
-            line-height: 1.4;
         }
 
         .card-footer {
@@ -89,7 +122,7 @@
             margin-top: 20px;
         }
 
-        .card-footer .icon-btn {
+        .icon-btn {
             width: 30px;
             height: 30px;
             border: 1.5px solid #7aada7;
@@ -100,10 +133,9 @@
             color: #4a8c87;
             font-size: 1rem;
             text-decoration: none;
-            transition: background 0.2s;
         }
 
-        .card-footer .icon-btn:hover {
+        .icon-btn:hover {
             background-color: #b0d0cc;
         }
 
@@ -115,11 +147,7 @@
             padding: 40px;
         }
 
-        /* RESPONSIVO */
-
         @media (max-width: 992px) {
-
-            /* Quando a sidebar deixa de ser fixed */
             body {
                 margin-left: 0;
                 width: 100%;
@@ -131,44 +159,8 @@
         }
 
         @media (max-width: 480px) {
-
             .cards-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
-</head>
-<body>
-
-<jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
-
-<h1>Olá, Aluno, o que você procura?</h1>
-
-<div class="cards-grid">
-    <%
-        List<Disciplina> disciplinaList = (List<Disciplina>) request.getAttribute("disciplinaList");
-
-        if (disciplinaList != null && !disciplinaList.isEmpty()) {
-            for (Disciplina d : disciplinaList ) {
-    %>
-    <a class="card" href="${pageContext.request.contextPath}/aluno/notasPorDisciplina?idDisciplina=<%= d.getId() %>">
-        <div class="card-body">
-            <div class="card-titulo"><%= d.getNomeFormatado() %></div>
-<%--            <div class="card-subtitulo"><%= b.getDescricao() %></div>--%>
-        </div>
-        <div class="card-footer">
-            <span class="icon-btn">&#x2192;</span>
-        </div>
-    </a>
-    <%
-        }
-    } else {
-    %>
-    <div class="empty">Nenhuma disciplina encontrada.</div>
-    <%
-    }
-    %>
-</div>
-
-</body>
-</html>

@@ -1,6 +1,5 @@
 package org.example.projetodiogo.servlets.admin;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,13 +11,12 @@ import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/admin/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
-        List<AlunoConsultaDTO> alunosList = new ArrayList<>();
+        ArrayList<AlunoConsultaDTO> alunosList = new ArrayList<>();
         AlunoConsultaDTO aluno;
 
         String busca = req.getParameter("busca");
@@ -36,8 +34,8 @@ public class VerAlunosServlet extends HttpServlet {
             req.setAttribute("alunosList", alunosList);
             req.setAttribute("busca", busca);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp");
-            dispatcher.forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
+                .forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
         }

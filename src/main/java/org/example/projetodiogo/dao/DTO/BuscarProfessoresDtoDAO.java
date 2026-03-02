@@ -1,9 +1,7 @@
 package org.example.projetodiogo.dao.DTO;
 
 import org.example.projetodiogo.exceptions.DataAccessException;
-import org.example.projetodiogo.exceptions.EntityNotFoundException;
 import org.example.projetodiogo.model.DTO.ProfessorConsultaDTO;
-import org.example.projetodiogo.model.Usuario;
 import org.example.projetodiogo.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -11,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class BuscarProfessoresDtoDAO {
     public ArrayList<ProfessorConsultaDTO> buscarProfessores() {

@@ -14,27 +14,67 @@
     <title>Boletim</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 40px;
+
+            margin-left: 22vw;
+            width: 78vw;
+
+            min-height: 100vh;
+            padding: 60px 40px;
+        }
+
+        /* ===== TOPO ===== */
+
+        .topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         h1 {
             font-size: 28px;
-            margin-bottom: 20px;
         }
+
+        /* ===== BOTÃO ===== */
+
+        .btn {
+            background-color: #1f6f5c;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* ===== CONTAINER ===== */
 
         .container {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
         }
+
+        /* ===== TABELA ===== */
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         th {
@@ -42,11 +82,19 @@
             padding: 12px;
             border-bottom: 1px solid #ddd;
             color: #555;
+            font-size: 14px;
         }
 
         td {
             padding: 12px;
+            font-size: 14px;
         }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* ===== CORES ===== */
 
         .azul {
             color: #2563eb;
@@ -58,40 +106,36 @@
             font-weight: bold;
         }
 
-        .aprovado {
-            color: #16a34a;
-            font-weight: bold;
+        /* ===== RESPONSIVO ===== */
+
+        @media (max-width: 992px) {
+
+            body {
+                margin-left: 0;
+                width: 100%;
+                padding: 40px 20px;
+            }
         }
 
-        .reprovado {
-            color: #dc2626;
-            font-weight: bold;
-        }
+        @media (max-width: 600px) {
 
-        .btn {
-            float: right;
-            background-color: #1f6f5c;
-            color: white;
-            padding: 8px 18px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+            .topo {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
 
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .topo {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            table {
+                font-size: 13px;
+            }
         }
 
     </style>
 </head>
 
 <body>
+
+<jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
 
 <div class="topo">
     <h1>Boletim</h1>
@@ -100,7 +144,7 @@
 
 <div class="container">
 
-    <p><strong>Disciplina:</strong> <%= disciplinasList.get(0).getNome() %></p>
+    <p><strong>Disciplina:</strong> <%= disciplinasList.get(0).getNomeFormatado() %></p>
     <p><strong>Professor:</strong></p>
 
     <table>

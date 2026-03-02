@@ -5,18 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO;
 import org.example.projetodiogo.dao.DTO.BuscarProfessoresDtoDAO;
-import org.example.projetodiogo.dao.UsuarioDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
-import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 import org.example.projetodiogo.model.DTO.ProfessorConsultaDTO;
-import org.example.projetodiogo.model.Professor;
-import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/admin/verProfessores")
 public class VerProfessoresServlet extends HttpServlet {

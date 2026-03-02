@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+:root {
+    --primary-green: #519A91;
+    --secondary-green: #D6EAE8;
+    --terciary-green: #346A63;
+
+    --primary-grey: #F2F2F2;
+    --secondary-grey: #535353;
+
+    --primary-white: #FFFFFF;
+}
+
+/* ===== SIDEBAR ===== */
+
+#aside {
+    background: linear-gradient(130deg, rgba(81, 154, 145, 1) 0%, rgba(81, 154, 145, 1) 42%, rgba(53, 104, 107, 1) 84%);
+    width: 22vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.aside-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem;
+    gap: 5vh;
+}
+
+.box-info-2 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.user-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.user-info-names {
+    display: flex;
+    flex-direction: column;
+}
+
+#user-name {
+    font-size: 16px;
+    color: var(--primary-white);
+}
+
+#user-description {
+    font-size: 12px;
+    color: var(--primary-white);
+}
+
+/* ===== MENU ===== */
+
+.box-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.menu-tabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    height: 80%;
+}
+
+.menu-tabs li {
+    list-style: none;
+    width: 80%;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+/* LINK DENTRO DO LI */
+.menu-tabs li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
+    width: 100%;
+    text-decoration: none;
+    background-color: var(--primary-white);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--secondary-grey);
+    transition: 0.2s;
+}
+
+/* Remove azul de link visitado */
+.menu-tabs li a:visited {
+    color: var(--secondary-grey);
+}
+
+/* Hover */
+.menu-tabs li a:hover {
+    background-color: var(--secondary-green);
+    color: var(--terciary-green);
+}
+
+/* Active */
+.menu-tabs li.active {
+    background-color: var(--secondary-green);
+    border-radius: 10px;
+}
+
+.menu-tabs li.active a {
+    background-color: transparent;
+    color: var(--terciary-green);
+    font-weight: 600;
+}
+
+/* ===== RESPONSIVO SIDEBAR ===== */
+
+@media (max-width: 992px) {
+
+    #aside {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .menu-tabs li {
+        width: 90%;
+    }
+
+    .menu-tabs li a {
+        font-size: 13px;
+    }
+
+    #user-name {
+        font-size: 14px;
+    }
+
+    #user-description {
+        font-size: 11px;
+    }
+}

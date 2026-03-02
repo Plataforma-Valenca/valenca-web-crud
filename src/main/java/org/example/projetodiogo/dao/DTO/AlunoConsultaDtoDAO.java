@@ -74,7 +74,7 @@ public class AlunoConsultaDtoDAO {
         }
     }
 
-    public List<AlunoConsultaDTO> buscarAlunos() {
+    public ArrayList<AlunoConsultaDTO> buscarAlunos() {
         String sql = """
                 SELECT
                     a.id_aluno,
@@ -93,7 +93,7 @@ public class AlunoConsultaDtoDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        List<AlunoConsultaDTO> consultaDTOArrayList = new ArrayList<>();
+        ArrayList<AlunoConsultaDTO> consultaDTOArrayList = new ArrayList<>();
 
         try {
             conn = ConnectionFactory.conectar();

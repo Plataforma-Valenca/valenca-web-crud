@@ -20,10 +20,10 @@
             background-color: #f0f2f2;
             min-height: 100vh;
             padding: 32px 40px;
+            margin-left: 22vw;
             color: #3a3a3a;
         }
 
-        /* ===== VOLTAR + TÍTULO ===== */
         .header {
             display: flex;
             align-items: flex-start;
@@ -57,7 +57,6 @@
             margin-top: 2px;
         }
 
-        /* ===== SEÇÕES ===== */
         .secoes {
             display: flex;
             justify-content: center;
@@ -80,7 +79,6 @@
             text-underline-offset: 4px;
         }
 
-        /* ===== TABELA ===== */
         .tabela-wrapper {
             background: white;
             border-radius: 10px;
@@ -116,14 +114,53 @@
             border-bottom: none;
         }
 
-        /* Cores das notas */
-        .nota-azul  { color: #3a9dd4; font-weight: 600; }
-        .nota-vermelho { color: #e05c5c; font-weight: 600; }
-        .nota-media { color: #3a9088; font-weight: 600; }
-        .nota-vazia { color: #aaa; }
+        .nota-azul {
+            color: #3a9dd4;
+            font-weight: 600;
+        }
+
+        .nota-vermelho {
+            color: #e05c5c;
+            font-weight: 600;
+        }
+
+        .nota-media {
+            color: #3a9088;
+            font-weight: 600;
+        }
+
+        .nota-vazia {
+            color: #aaa;
+        }
+
+        @media (max-width: 992px) {
+            body {
+                margin-left: 0;
+            }
+
+            .secoes {
+                gap: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .header {
+                margin-bottom: 32px;
+            }
+
+            .tabela-wrapper {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
 
 <!-- HEADER -->
 <div class="header">

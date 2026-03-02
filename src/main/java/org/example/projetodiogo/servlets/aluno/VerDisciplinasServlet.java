@@ -24,6 +24,8 @@ public class VerDisciplinasServlet extends HttpServlet {
 
             req.setAttribute("disciplinaList", disciplinaList);
 
+            req.setAttribute("activePage", "disciplinas");
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/aluno/cardsDisciplina.jsp");
             dispatcher.forward(req, resp);
         } catch (DataAccessException e) {
