@@ -28,6 +28,11 @@ public class Disciplina {
         return idProfessor;
     }
 
+    public String getNomeFormatado() {
+        if (nome == null || nome.isEmpty()) return nome;
+        return nome.substring(0,1).toUpperCase() + nome.substring(1).toLowerCase();
+    }
+
     // Métodos setters
     public void setId(int id) {
         this.id = id;

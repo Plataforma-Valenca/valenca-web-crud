@@ -20,6 +20,11 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f0f2f2;
             min-height: 100vh;
+
+            /* 🔥 AGORA A MAIN RESPEITA A SIDEBAR */
+            margin-left: 22vw;
+            width: 78vw;
+
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,7 +44,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
             width: 100%;
-            max-width: 860px;
+            max-width: 900px;
         }
 
         .card {
@@ -110,13 +115,23 @@
             padding: 40px;
         }
 
-        @media (max-width: 700px) {
+        /* RESPONSIVO */
+
+        @media (max-width: 992px) {
+
+            /* Quando a sidebar deixa de ser fixed */
+            body {
+                margin-left: 0;
+                width: 100%;
+            }
+
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 480px) {
+
             .cards-grid {
                 grid-template-columns: 1fr;
             }
@@ -124,6 +139,8 @@
     </style>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
 
 <h1>Olá, Aluno, o que você procura?</h1>
 
@@ -136,7 +153,7 @@
     %>
     <a class="card" href="${pageContext.request.contextPath}/aluno/notasPorDisciplina?idDisciplina=<%= d.getId() %>">
         <div class="card-body">
-            <div class="card-titulo"><%= d.getNome() %></div>
+            <div class="card-titulo"><%= d.getNomeFormatado() %></div>
 <%--            <div class="card-subtitulo"><%= b.getDescricao() %></div>--%>
         </div>
         <div class="card-footer">
