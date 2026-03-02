@@ -169,4 +169,35 @@ public class DisciplinaDAO {
 
         return lista;
     }
+    public List<Disciplina> buscarPorNome(String nome) {
+
+        String sql = """
+        SELECT * FROM disciplinas
+        WHERE LOWER(nome) LIKE ?
+    """;
+
+        List<Disciplina> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nome.toLowerCase() + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Disciplina d = new Disciplina(
+                        rs.getInt("id_disciplina"),
+                        rs.getString("nome"),
+                        rs.getInt("id_professor")
+                );
+                lista.add(d);
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar disciplina por nome", e);
+        }
+
+        return lista;
+    }
 }

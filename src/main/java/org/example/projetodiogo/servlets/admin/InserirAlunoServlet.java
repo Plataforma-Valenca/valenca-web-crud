@@ -8,18 +8,42 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.AlunoDAO;
 import org.example.projetodiogo.dao.TurmasDAO;
 import org.example.projetodiogo.dao.UsuarioDAO;
+import org.example.projetodiogo.model.Turma;
 import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/admin/inserirAluno")
 public class InserirAlunoServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/admin/cadastrarAluno.jsp")
-                .forward(req, resp);;
-    }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        try {
+            TurmasDAO turmaDAO = new TurmasDAO();
+
+            // Busca todas as turmas
+            List<Turma> turmas = turmaDAO.buscarTurmas();
+
+            // Envia para a JSP
+            request.setAttribute("turmas", turmas);
+
+            // Redireciona para a página
+            request.getRequestDispatcher("/admin/listarAlunos.jsp").forward(request, response);
+            System.out.println("===== LISTA DE TURMAS =====");
+
+            for (Turma t : turmas) {
+                System.out.println("ID: " + t.getId() + " | Nome: " + t.getNome());
+            }
+            System.out.println("fim");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("erro.jsp");
+        }
+    }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Usuario usuario = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
