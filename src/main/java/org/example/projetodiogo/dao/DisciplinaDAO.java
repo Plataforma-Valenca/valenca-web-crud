@@ -58,7 +58,7 @@ public class DisciplinaDAO {
     public Optional<Disciplina> buscarPorIdProfessor(int idProfessor) {
 
         String query = """
-                SELECT nome FROM disciplinas
+                SELECT d.nome FROM disciplinas d
                 WHERE id_professor = ?
                 """;
 
@@ -101,7 +101,7 @@ public class DisciplinaDAO {
 
     public ArrayList<Disciplina> visualizarDisciplinas() {
 
-        String sql = "SELECT * FROM disciplinas";
+        String sql = "SELECT * FROM disciplinas ORDER BY id_disciplina;";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
