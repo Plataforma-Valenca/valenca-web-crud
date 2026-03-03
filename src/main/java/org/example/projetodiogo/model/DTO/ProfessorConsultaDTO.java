@@ -23,6 +23,10 @@ public class ProfessorConsultaDTO {
         return idUsuario;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public String getNome() {
         return nome;
     }
