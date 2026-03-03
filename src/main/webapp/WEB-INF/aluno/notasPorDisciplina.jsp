@@ -15,13 +15,14 @@
 <jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
 
 <div class="header">
-    <a href="javascript:history.back()" class="btn-voltar">
+    <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas" class="btn-voltar">
         <img src="${pageContext.request.contextPath}/assets/img/icon-logout-subject.svg" alt="Sair da disciplina">
     </a>
     <div class="header-info">
         <div class="disciplina-nome"><%= request.getAttribute("nomeDisciplina") %></div>
         <%
             int idDisciplina = (int) request.getAttribute("idDisciplina");
+            String nomeDisciplina = (String) request.getAttribute("nomeDisciplina");
             List<Boletim> boletimList = (List<Boletim>) request.getAttribute("boletimList");
             String nomeProfessor = "";
             if (request.getAttribute("nomeProfessor") != null) {
@@ -60,7 +61,7 @@
                     String mf = b.getMediaFinal() != null ? String.valueOf(b.getMediaFinal()) : "--";
         %>
         <tr>
-            <td><%= request.getAttribute("nomeDisciplina") %></td>
+            <td><%= nomeDisciplina.substring(0, 1).toUpperCase() + nomeDisciplina.substring(1).toLowerCase() %></td>
             <td class="<%= !n2.equals("--") ? "nota-vermelho" : "nota-vazia" %>"><%= n1 %></td>
             <td class="<%= !n1.equals("--") ? "nota-media" : "nota-vazia" %>"><%= n2 %></td>
             <td class="<%= !mf.equals("--") ? "nota-azul" : "nota-vazia" %>"><%= mf %></td>
