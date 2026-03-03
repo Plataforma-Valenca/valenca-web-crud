@@ -6,8 +6,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.projetodiogo.dao.DTO.DisciplinasResumoDtoDAO;
 import org.example.projetodiogo.dao.DisciplinaDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
+import org.example.projetodiogo.model.DTO.DisciplinasResumoDTO;
 import org.example.projetodiogo.model.Disciplina;
 
 import java.io.IOException;
@@ -16,11 +18,11 @@ import java.util.ArrayList;
 @WebServlet("/aluno/VerDisciplinas")
 public class VerDisciplinasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-        ArrayList<Disciplina> disciplinaList;
+        DisciplinasResumoDtoDAO disciplinaDAO = new DisciplinasResumoDtoDAO();
+        ArrayList<DisciplinasResumoDTO> disciplinaList;
 
         try {
-            disciplinaList = disciplinaDAO.visualizarDisciplinas();
+            disciplinaList = disciplinaDAO.visualizarDisciplinasResumo();
 
             req.setAttribute("disciplinaList", disciplinaList);
 
