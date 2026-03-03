@@ -1,14 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="org.example.projetodiogo.model.Observacao" %>
+<%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.example.projetodiogo.model.Observacao" %>
+<%@ page import="org.example.projetodiogo.model.Boletim" %>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Observações</title>
+    <title>Observações - <%= request.getAttribute("nomeDisciplina") %></title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/aluno.css">
 </head>
 <body>
@@ -19,13 +21,17 @@
     ArrayList<Observacao> obsList = (ArrayList<Observacao>) request.getAttribute("obsList");
     String nomeDisciplina = request.getAttribute("nomeDisciplina") != null
             ? (String) request.getAttribute("nomeDisciplina") : "";
-    String nomeProfessor = (String) request.getAttribute("nomeProfessor");
+    String nomeProfessor = request.getAttribute("nomeProfessor") != null
+            ? (String) request.getAttribute("nomeProfessor") : "";
     int idDisciplina = request.getAttribute("idDisciplina") != null
             ? (int) request.getAttribute("idDisciplina") : 0;
 %>
 
 <div class="header">
-    <a href="javascript:history.back()" class="btn-voltar">&#x2BA8;</a>
+    <a href="javascript:history.back()" class="btn-voltar">
+        <img src="${pageContext.request.contextPath}/assets/img/icon-logout-subject.svg" alt="Voltar">
+    </a>
+
     <div class="header-info">
         <div class="disciplina-nome"><%= nomeDisciplina %></div>
         <div class="professor-nome">Prof. <%= nomeProfessor %></div>
@@ -34,7 +40,9 @@
 
 <div class="secoes">
     <a href="${pageContext.request.contextPath}/aluno/notasPorDisciplina?idDisciplina=<%= idDisciplina %>"
-       class="secao-link inativo">Avaliações</a>
+       class="secao-link inativo">
+        Avaliações
+    </a>
     <span class="secao-link ativo">Observações</span>
 </div>
 
@@ -49,10 +57,11 @@
         <tbody>
         <%
             if (obsList != null && !obsList.isEmpty()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 for (Observacao obs : obsList) {
         %>
         <tr>
-            <td><%= new SimpleDateFormat("dd/MM/yyyy").format(obs.getDataEnvio()) %></td>
+            <td><%= sdf.format(obs.getDataEnvio()) %></td>
             <td><%= obs.getDescricao() %></td>
         </tr>
         <%
@@ -60,7 +69,9 @@
         } else {
         %>
         <tr>
-            <td colspan="2" class="nota-vazia">Nenhuma observação encontrada.</td>
+            <td colspan="2" class="nota-vazia">
+                Nenhuma observação encontrada.
+            </td>
         </tr>
         <%
             }
