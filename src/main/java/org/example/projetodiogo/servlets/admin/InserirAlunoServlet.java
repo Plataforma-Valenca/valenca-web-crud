@@ -18,30 +18,16 @@ import java.util.List;
 @WebServlet("/admin/inserirAluno")
 public class InserirAlunoServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         try {
-            TurmasDAO turmaDAO = new TurmasDAO();
-
-            // Busca todas as turmas
-            List<Turma> turmas = turmaDAO.buscarTurmas();
-
-            // Envia para a JSP
-            request.setAttribute("turmas", turmas);
-
             // Redireciona para a página
-            request.getRequestDispatcher("/admin/listarAlunos.jsp").forward(request, response);
-            System.out.println("===== LISTA DE TURMAS =====");
-
-            for (Turma t : turmas) {
-                System.out.println("ID: " + t.getId() + " | Nome: " + t.getNome());
-            }
-            System.out.println("fim");
-
+            req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
+                    .forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("erro.jsp");
+            resp.sendRedirect("erro.jsp");
         }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +36,7 @@ public class InserirAlunoServlet extends HttpServlet {
         TurmasDAO turmasDAO = new TurmasDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
 
-        String senha = req.getParameter("senha");
+        String senha = req.getParameter("senhaProvisoria");
         String cpf = req.getParameter("cpf");
 
         try {
@@ -60,7 +46,7 @@ public class InserirAlunoServlet extends HttpServlet {
             int idUsuarioCriado = usuarioDAO.inserirNovoAluno(usuario);
             alunoDAO.inserir(idUsuarioCriado);
             int idAluno = alunoDAO.buscarPorIdUsuario(idUsuarioCriado).get().getId();
-            int idTurma = turmasDAO.buscarPorIdAluno(idAluno).getId();
+            int idTurma = Integer.parseInt(req.getParameter("idTurma"));
             alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
 
             req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
