@@ -23,10 +23,7 @@ public class VerProfessoresServlet extends HttpServlet {
 
         try {
             if (busca != null && !busca.isEmpty()) {
-                professor = buscarProfessoresDtoDAO.buscarProfessoresFiltro(busca);
-                if (professor != null) {
-                    professoresList.add(professor);
-                }
+                professoresList = buscarProfessoresDtoDAO.buscarProfessoresFiltro(busca);
             } else {
                 professoresList = buscarProfessoresDtoDAO.buscarProfessores();
             }
