@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --primary-green: #519A91;
+    --secondary-green: #D6EAE8;
+    --terciary-green: #346A63;
+
+    --primary-grey: #F2F2F2;
+    --secondary-grey: #535353;
+
+    --primary-white: #FFFFFF;
+}
+
+/* BOLETIM PAGE */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+.btn {
+    background-color: #1f6f5c;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+    font-size: 14px;
+}
+
+td {
+    padding: 12px;
+    font-size: 14px;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.azul {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.vermelho {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+@media (max-width: 992px) {
+    body {
+        margin-left: 0;
+        width: 100%;
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .topo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+}
