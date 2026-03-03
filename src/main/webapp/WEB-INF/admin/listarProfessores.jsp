@@ -1,9 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.Usuario" %>
+<%@ page import="org.example.projetodiogo.model.DTO.ProfessorConsultaDTO" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
-    List<Usuario> lista = (List<Usuario>) request.getAttribute("listaProfessores");
+    ArrayList<ProfessorConsultaDTO> professoresList = (ArrayList<ProfessorConsultaDTO>) request.getAttribute("professoresList");
 
     String busca = request.getAttribute("busca") != null
             ? request.getAttribute("busca").toString()
@@ -55,22 +57,30 @@
             cursor:pointer;
         }
 
-        .table-header {
-            display:grid;
-            grid-template-columns: 2fr 2fr 1fr;
-            padding:10px;
-            color:#777;
-            font-size:13px;
+        .tabela {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
 
-        .table-row {
-            display:grid;
-            grid-template-columns: 2fr 2fr 1fr;
-            background:white;
-            padding:18px;
-            border-radius:10px;
-            margin-bottom:12px;
-            box-shadow:0 3px 10px rgba(0,0,0,0.05);
+        .tabela th {
+            text-align: left;
+            padding: 14px;
+            font-size: 13px;
+            color: #777;
+            background: #f8f8f8;
+        }
+
+        .tabela td {
+            padding: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .tabela tr:hover {
+            background: #fafafa;
         }
 
         .empty {
@@ -131,29 +141,38 @@
     <button class="btn">Buscar</button>
 </form>
 
-<div class="table-header">
-    <span>Nome</span>
-    <span>Email</span>
-    <span>CPF</span>
-</div>
-
-<%
-    if (lista != null && !lista.isEmpty()) {
-        for (Usuario p : lista) {
-%>
-<div class="table-row">
-    <span><%= p.getNome() %></span>
-    <span><%= p.getEmail() %></span>
-    <span><%= p.getCpf() %></span>
-</div>
-<%
-    }
-} else {
-%>
-<div class="empty">Nenhum professor encontrado.</div>
-<%
-    }
-%>
+<table class="tabela">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Disciplina</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%
+        if (professoresList != null && !professoresList.isEmpty()) {
+            for (ProfessorConsultaDTO p : professoresList) {
+    %>
+    <tr>
+        <td><%= p.getNome() %></td>
+        <td><%= p.getEmail() %></td>
+        <td><%= p.getCpf() %></td>
+        <td><%= p.getDisciplina() %></td>
+    </tr>
+    <%
+        }
+    } else {
+    %>
+    <tr>
+        <td colspan="4" class="empty">Nenhum professor encontrado.</td>
+    </tr>
+    <%
+        }
+    %>
+    </tbody>
+</table>
 
 <!-- Modal de Cadastro -->
 <div id="modalCadastro">
