@@ -25,8 +25,8 @@ body {
     padding: 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     color: #3a3a3a;
+    width: calc(100vw - 22vw);
 }
 
 h1 {
@@ -36,7 +36,12 @@ h1 {
     margin-bottom: 48px;
     text-align: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 900px;
+}
+
+#home-title{
+    text-align: center;
+    align-self: center;
 }
 
 .btn {
@@ -71,7 +76,7 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -119,8 +124,6 @@ h1 {
     align-items: flex-start;
     gap: 14px;
     margin-bottom: 52px;
-    width: 80%;
-    align-self: flex-start;
 }
 
 .header-info .disciplina-nome {
@@ -139,15 +142,14 @@ h1 {
     justify-content: center;
     gap: 120px;
     margin-bottom: 20px;
-    width: 80%;
 }
 
 .secao-titulo,
 .secao-link {
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+    text-underline-offset: 1px;
 }
 
 .secao-titulo {
@@ -170,10 +172,9 @@ h1 {
 .tabela-wrapper {
     background: var(--primary-white);
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    padding: 0;
 }
 
 table {
@@ -226,6 +227,28 @@ tbody tr:hover {
     text-align: center;
 }
 
+/*BOLETIM*/
+#boletim-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 10vh;
+}
+#boletim-topo {
+    display: flex;
+    flex-direction: column;
+}
+#boletim-title {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    font-weight: bold;
+}
+#boletim-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
 @media (max-width: 992px) {
     body {
         margin-left: 0;
@@ -238,12 +261,6 @@ tbody tr:hover {
 
     .secoes {
         gap: 60px;
-        width: 95%;
-    }
-
-    .tabela-wrapper,
-    .header {
-        width: 95%;
     }
 }
 
@@ -258,11 +275,5 @@ tbody tr:hover {
 
     .header {
         margin-bottom: 32px;
-        width: 100%;
-    }
-
-    .tabela-wrapper,
-    .secoes {
-        width: 100%;
     }
 }

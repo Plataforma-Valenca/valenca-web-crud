@@ -19,63 +19,67 @@
 
 <jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp"/>
 
-<div class="topo">
-    <h1>Boletim</h1>
-    <a class="btn" href="${pageContext.request.contextPath}/aluno/gerarBoletim">Gerar boletim</a>
-</div>
+<div id="boletim-body">
+    <div class="boletim-topo">
 
-<div class="container">
+            <h1 id="boletim-title">Boletim</h1>
 
-    <p><strong>Disciplina:</strong> <%= disciplinasList.get(0).getNomeFormatado() %></p>
-    <p><strong>Professor:</strong></p>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Disciplina</th>
-            <th>N1</th>
-            <th>N2</th>
-            <th>Média Final</th>
-            <th>Situação</th>
-        </tr>
-        </thead>
-        <tbody>
+        <div id="boletim-btn">
+            <a class="btn" href="${pageContext.request.contextPath}/aluno/gerarBoletim">Gerar boletim</a>
+        </div>
+    </div>
 
-        <%
-            if (boletimList != null) {
-                for (int i = 0; i < boletimList.size(); i++) {
-                    Boletim b = boletimList.get(i);
-                    String nomeDisciplina = disciplinasList.get(i).getNome();
+    <div class="boletim-container">
 
-                    double mediaFinal = b.getMediaFinal();
-                    boolean aprovado = mediaFinal >= 7;
-        %>
+        <table class="tabela-wrapper">
+            <thead>
+            <tr>
+                <th>Disciplina</th>
+                <th>N1</th>
+                <th>N2</th>
+                <th>Média Final</th>
+                <th>Situação</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <tr>
-            <td><%= nomeDisciplina %></td>
+            <%
+                if (boletimList != null) {
+                    for (int i = 0; i < boletimList.size(); i++) {
+                        Boletim b = boletimList.get(i);
+                        String nomeDisciplina = disciplinasList.get(i).getNome();
 
-            <td class="azul"><%= b.getMedia1() %></td>
+                        double mediaFinal = b.getMediaFinal();
+                        boolean aprovado = mediaFinal >= 7;
+            %>
 
-            <td class="vermelho"><%= b.getMedia2() %></td>
+            <tr>
+                <td><%= nomeDisciplina %></td>
 
-            <td class="<%= aprovado ? "azul" : "vermelho" %>">
-                <%= mediaFinal %>
-            </td>
+                <td class="azul"><%= b.getMedia1() %></td>
 
-            <td class="<%= aprovado ? "azul" : "vermelho" %>">
-                <%= b.getSituacao() %>
-            </td>
-        </tr>
+                <td class="vermelho"><%= b.getMedia2() %></td>
 
-        <%
+                <td class="<%= aprovado ? "azul" : "vermelho" %>">
+                    <%= mediaFinal %>
+                </td>
+
+                <td class="<%= aprovado ? "azul" : "vermelho" %>">
+                    <%= b.getSituacao() %>
+                </td>
+            </tr>
+
+            <%
+                    }
                 }
-            }
-        %>
+            %>
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+
+    </div>
 
 </div>
-
 </body>
 </html>
