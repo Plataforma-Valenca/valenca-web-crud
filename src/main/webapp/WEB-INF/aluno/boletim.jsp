@@ -65,7 +65,10 @@
                     <%= mediaFinal %>
                 </td>
 
-                <td class="<%= aprovado ? "azul" : "vermelho" %>">
+                <td class="<%=
+                b.getSituacao().equals("APROVADO") ? "azul" :
+                b.getSituacao().equals("RECUPERAÇÃO") ? "amarelo" :
+                "vermelho" %>">
                     <%= b.getSituacao() %>
                 </td>
             </tr>
