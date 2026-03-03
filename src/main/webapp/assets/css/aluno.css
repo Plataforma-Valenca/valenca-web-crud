@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --primary-green: #519A91;
+    --secondary-green: #D6EAE8;
+    --terciary-green: #346A63;
+
+    --primary-grey: #F2F2F2;
+    --secondary-grey: #535353;
+
+    --primary-white: #FFFFFF;
+}
+
+body {
+    background-color: var(--primary-grey);
+    min-height: 100vh;
+    margin-left: 22vw;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    color: #3a3a3a;
+    width: calc(100vw - 22vw);
+}
+
+h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #2e2e2e;
+    margin-bottom: 48px;
+    text-align: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+#home-title{
+    text-align: center;
+    align-self: center;
+}
+
+.btn {
+    background-color: var(--terciary-green);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-voltar {
+    text-decoration: none;
+    color: var(--primary-green);
+    font-size: 1.3rem;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.btn-voltar:hover {
+    color: var(--terciary-green);
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: var(--secondary-green);
+    border-radius: 16px;
+    padding: 28px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 170px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-titulo {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #3a3a3a;
+    line-height: 1.4;
+}
+card-subtitulo {
+    font-size: 0.50rem;
+    color: #3a3a3a;
+    line-height: 1.4;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #888;
+    font-size: 0.95rem;
+    padding: 40px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 52px;
+}
+
+.header-info .disciplina-nome {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.header-info .professor-nome {
+    font-size: 0.82rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.secoes {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin-bottom: 20px;
+}
+
+.secao-titulo,
+.secao-link {
+    font-size: 18px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 1px;
+}
+
+.secao-titulo {
+    font-weight: 600;
+    color: var(--terciary-green);
+}
+
+.secao-titulo.inativo,
+.secao-link.inativo {
+    font-weight: 400;
+    color: #aaa;
+}
+
+.secao-link.ativo {
+    font-weight: 700;
+    color: #3a9088;
+}
+
+.container,
+.tabela-wrapper {
+    background: var(--primary-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    width: 100%;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    padding: 14px 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #555;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+tbody td {
+    padding: 14px 20px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.azul,
+.nota-azul {
+    color: #3a9dd4;
+    font-weight: 600;
+}
+
+.vermelho,
+.nota-vermelho {
+    color: #e05c5c;
+    font-weight: 600;
+}
+
+.nota-media {
+    color: #3a9088;
+    font-weight: 600;
+}
+
+.nota-vazia {
+    color: #aaa;
+    text-align: center;
+}
+
+/*BOLETIM*/
+#boletim-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 10vh;
+}
+#boletim-topo {
+    display: flex;
+    flex-direction: column;
+}
+#boletim-title {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0;
+    font-weight: bold;
+}
+#boletim-btn {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (max-width: 992px) {
+    body {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .secoes {
+        gap: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        margin-bottom: 32px;
+    }
+}
