@@ -39,6 +39,11 @@ public class DisciplinasResumoDTO {
         return mediaGeral;
     }
 
+    public String getNomeFormatado() {
+        if (nomeDisciplina == null || nomeDisciplina.isEmpty()) return nomeDisciplina;
+        return nomeDisciplina.substring(0,1).toUpperCase() + nomeDisciplina.substring(1).toLowerCase();
+    }
+
     // setters
     public void setIdDisciplina(int idDisciplina) {
         this.idDisciplina = idDisciplina;
