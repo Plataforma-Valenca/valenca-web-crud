@@ -223,6 +223,11 @@ tbody tr:hover {
     font-weight: 600;
 }
 
+.amarelo {
+    color: #f6bf63;
+    font-weight: 600;
+}
+
 .nota-media {
     color: #3a9088;
     font-weight: 600;
