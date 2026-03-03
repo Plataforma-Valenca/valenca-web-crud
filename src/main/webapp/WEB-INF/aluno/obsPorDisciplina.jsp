@@ -28,7 +28,7 @@
 %>
 
 <div class="header">
-    <a href="javascript:history.back()" class="btn-voltar">
+    <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas" class="btn-voltar">
         <img src="${pageContext.request.contextPath}/assets/img/icon-logout-subject.svg" alt="Voltar">
     </a>
 
