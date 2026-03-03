@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div id="btn-logout">
-                <img src="${pageContext.request.contextPath}/assets/img/btn_logout.png" height="40">
+                <img src="${pageContext.request.contextPath}/assets/img/btn-logout.svg" height="40">
             </div>
 
         </div>
