@@ -16,7 +16,6 @@
     --primary-white: #FFFFFF;
 }
 
-/* ===== SIDEBAR ===== */
 
 #aside {
     background: linear-gradient(130deg, rgba(81, 154, 145, 1) 0%, rgba(81, 154, 145, 1) 42%, rgba(53, 104, 107, 1) 84%);
@@ -25,14 +24,16 @@
     position: fixed;
     left: 0;
     top: 0;
+
     display: flex;
     flex-direction: column;
 }
 
 .aside-content {
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    height: 80%;
 }
 
 .box-info {
@@ -70,13 +71,12 @@
     color: var(--primary-white);
 }
 
-/* ===== MENU ===== */
-
 .box-tabs {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1;
 }
 
 .menu-tabs {
@@ -95,7 +95,6 @@
     transition: 0.2s;
 }
 
-/* LINK DENTRO DO LI */
 .menu-tabs li a {
     display: flex;
     align-items: center;
@@ -110,21 +109,17 @@
     transition: 0.2s;
 }
 
-/* Remove azul de link visitado */
 .menu-tabs li a:visited {
     color: var(--secondary-grey);
 }
 
-/* Hover */
 .menu-tabs li a:hover {
     background-color: var(--secondary-green);
     color: var(--terciary-green);
 }
 
-/* Active */
 .menu-tabs li.active {
     background-color: var(--secondary-green);
-    border-radius: 10px;
 }
 
 .menu-tabs li.active a {
@@ -133,7 +128,19 @@
     font-weight: 600;
 }
 
-/* ===== RESPONSIVO SIDEBAR ===== */
+#btn-logout {
+    height: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+#btn-logout img {
+    height: 50px;
+    cursor: pointer;
+}
 
 @media (max-width: 992px) {
 

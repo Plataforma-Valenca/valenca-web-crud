@@ -1,5 +1,6 @@
 <%@ page import="org.example.projetodiogo.model.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebarAluno.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -12,6 +13,8 @@
 
 <div id="page">
     <aside id="aside">
+
+        <!-- LOGO -->
         <div class="aside-content">
 
             <div class="box-info">
@@ -27,17 +30,17 @@
 
                         <div class="user-info-names">
                             <span id="user-name">
-                                <b> <%=nomeUsuario%> </b>
+                                <b><%= nomeUsuario %></b>
                             </span>
                             <span id="user-description">
-                             <%=tipoUsuario%>
+                                <%= tipoUsuario %>
                             </span>
                         </div>
                     </div>
                 </div>
-
             </div>
 
+            <!-- MENU -->
             <div class="box-tabs">
                 <ul class="menu-tabs">
                     <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %>">
@@ -54,11 +57,13 @@
                         </a>
                     </li>
                 </ul>
+
+                <div id="btn-logout">
+                    <img src="${pageContext.request.contextPath}/assets/img/btn_logout.png" height="40">
+                </div>
             </div>
 
         </div>
+
     </aside>
 </div>
-
-</body>
-</html>
