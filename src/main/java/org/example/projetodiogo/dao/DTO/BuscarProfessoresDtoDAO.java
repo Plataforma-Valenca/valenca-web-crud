@@ -15,11 +15,11 @@ public class BuscarProfessoresDtoDAO {
 
         String sql = """
                 SELECT
-                    u.id_usuario
-                    u.nome,
+                    u.id_usuario,
+                    u.nome AS nome_professor,
                     u.email,
                     u.cpf,
-                    d.nome
+                    d.nome AS nome_disciplina
                 FROM usuarios u
                 JOIN professores p ON p.id_usuario = u.id_usuario
                 JOIN disciplinas d ON d.id_professor = p.id_professor
@@ -40,10 +40,10 @@ public class BuscarProfessoresDtoDAO {
             while (rs.next()) {
                 ProfessorConsultaDTO professorConsultaDTO = new ProfessorConsultaDTO(
                         rs.getInt("id_usuario"),
-                        rs.getString("u.nome"),
+                        rs.getString("nome_professor"),
                         rs.getString("email"),
                         rs.getString("cpf"),
-                        rs.getString("d.nome")
+                        rs.getString("nome_disciplina")
                 );
 
                 professoresList.add(professorConsultaDTO);
@@ -64,43 +64,49 @@ public class BuscarProfessoresDtoDAO {
         return professoresList;
     }
 
-    public ProfessorConsultaDTO buscarProfessoresFiltro(String busca) {
+    public ArrayList<ProfessorConsultaDTO> buscarProfessoresFiltro(String busca) {
 
         String sql = """
-                SELECT
-                    u.id_usuario
-                    u.nome,
+        SELECT
+                    u.id_usuario,
+                    u.nome AS nome_professor,
                     u.email,
                     u.cpf,
-                    d.nome
+                    d.nome AS nome_disciplina
                 FROM usuarios u
                 JOIN professores p ON p.id_usuario = u.id_usuario
                 JOIN disciplinas d ON d.id_professor = p.id_professor
-                WHERE u.nome = ? OR email = ? OR cpf = ? OR d.nome = ?
+                WHERE u.nome LIKE ? OR email LIKE ? OR cpf LIKE ? OR d.nome LIKE ?
                 ORDER BY u.nome;
         """;
 
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        ProfessorConsultaDTO professorConsultaDTO = new ProfessorConsultaDTO();
+        ArrayList<ProfessorConsultaDTO> professoresList = new ArrayList<>();
 
         try {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
+            String filtro = "%" + busca + "%";
+
+            pstmt.setString(1, filtro);
+            pstmt.setString(2, filtro);
+            pstmt.setString(3, filtro);
+            pstmt.setString(4, filtro);
+
             rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                professorConsultaDTO = new ProfessorConsultaDTO(
-                        rs.getInt("id_usuario"),
-                        rs.getString("u.nome"),
-                        rs.getString("email"),
-                        rs.getString("cpf"),
-                        rs.getString("d.nome")
-                );
-
-                return professorConsultaDTO;
+                while (rs.next()) {
+                    ProfessorConsultaDTO professorConsultaDTO = new ProfessorConsultaDTO(
+                            rs.getInt("id_usuario"),
+                            rs.getString("nome_professor"),
+                            rs.getString("email"),
+                            rs.getString("cpf"),
+                            rs.getString("nome_disciplina")
+                    );
+                professoresList.add(professorConsultaDTO);
             }
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar usuário por id do professor: ");
@@ -115,6 +121,6 @@ public class BuscarProfessoresDtoDAO {
                 throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
             }
         }
-        return professorConsultaDTO;
+        return professoresList;
     }
 }
