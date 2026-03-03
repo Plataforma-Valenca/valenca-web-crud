@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.projetodiogo.model.Boletim" %>
-<%@ page import="org.example.projetodiogo.model.Disciplina" %>
+<%@ page import="org.example.projetodiogo.model.DTO.DisciplinasResumoDTO" %>
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -146,15 +147,15 @@
 
 <div class="cards-grid">
     <%
-        List<Disciplina> disciplinaList = (List<Disciplina>) request.getAttribute("disciplinaList");
+        ArrayList<DisciplinasResumoDTO> disciplinaList = (ArrayList<DisciplinasResumoDTO>) request.getAttribute("disciplinaList");
 
         if (disciplinaList != null && !disciplinaList.isEmpty()) {
-            for (Disciplina d : disciplinaList ) {
+            for (DisciplinasResumoDTO d : disciplinaList ) {
     %>
-    <a class="card" href="${pageContext.request.contextPath}/aluno/notasPorDisciplina?idDisciplina=<%= d.getId() %>">
+    <a class="card" href="${pageContext.request.contextPath}/aluno/notasPorDisciplina?idDisciplina=<%= d.getIdDisciplina() %>">
         <div class="card-body">
-            <div class="card-titulo"><%= d.getNomeFormatado() %></div>
-<%--            <div class="card-subtitulo"><%= b.getDescricao() %></div>--%>
+            <div class="card-titulo"><%= d.getNomeDisciplina().substring(0, 1).toUpperCase() + d.getNomeDisciplina().substring(1) %></div>
+            <div class="card-subtitulo"><%= d.getNomeProfessor() %></div>
         </div>
         <div class="card-footer">
             <span class="icon-btn">&#x2192;</span>

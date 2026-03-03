@@ -143,10 +143,6 @@
 </div>
 
 <div class="container">
-
-    <p><strong>Disciplina:</strong> <%= disciplinasList.get(0).getNomeFormatado() %></p>
-    <p><strong>Professor:</strong></p>
-
     <table>
         <thead>
         <tr>
@@ -163,7 +159,7 @@
             if (boletimList != null) {
                 for (int i = 0; i < boletimList.size(); i++) {
                     Boletim b = boletimList.get(i);
-                    String nomeDisciplina = disciplinasList.get(i).getNome();
+                    String nomeDisciplina = disciplinasList.get(i).getNome().substring(0, 1).toUpperCase() + disciplinasList.get(i).getNome().substring(1);
 
                     double mediaFinal = b.getMediaFinal();
                     boolean aprovado = mediaFinal >= 7;
