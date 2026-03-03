@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="org.example.projetodiogo.model.AlunoConsultaDTO" %>
-<%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.projetodiogo.model.Turma" %>
+<%@ page import="java.util.List" %>
 
 <%
     ArrayList<AlunoConsultaDTO> alunosList =
-            (ArrayList<AlunoConsultaDTO>) <AlunoConsultaDTO>) request.getAttribute("alunosList");
+            (ArrayList<AlunoConsultaDTO>) request.getAttribute("alunosList");
+
+    List<Turma> turmasList = (List<Turma>) request.getAttribute("turmasList");
 
     String busca = request.getAttribute("busca") != null
             ? request.getAttribute("busca").toString()
@@ -171,14 +174,14 @@
     <div class="modal-conteudo">
         <h2>Cadastrar Aluno</h2>
         <form method="post" action="${pageContext.request.contextPath}/admin/inserirAluno">
-            <input type="text" name="nome" placeholder="Nome" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="senha" placeholder="Senha" required>
-            <select name="turma" required>
-                <option value="">Selecione uma turma</option>
-                <c:forEach var="t" items="${turmas}">
-                    <option value="${t.id}">${t.nome}</option>
-                </c:forEach>
+            <input type="text" name="cpf" placeholder="CPF" required>
+            <input type="password" name="senhaProvisoria" placeholder="Senha Provisória" required>
+            <select name="idTurma" required>
+                <% for(Turma t : turmasList) { %>
+                <option value="<%= t.getId() %>">
+                    <%= t.getNome().substring(0, 1).toUpperCase() %>
+                </option>
+                <% } %>
             </select>
             <div class="modal-actions">
                 <button type="button" onclick="fecharModal()">Cancelar</button>
