@@ -1,33 +1,37 @@
 package org.example.projetodiogo.servlets.admin;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.AlunoConsultaDtoDAO;
-import org.example.projetodiogo.exceptions.DataAccessException;
+import org.example.projetodiogo.dao.TurmasDAO;
 import org.example.projetodiogo.model.AlunoConsultaDTO;
+import org.example.projetodiogo.model.Turma;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet("/admin/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
+        TurmasDAO turmaDAO = new TurmasDAO();
+
         List<AlunoConsultaDTO> alunosList = new ArrayList<>();
-        AlunoConsultaDTO aluno;
+        List<Turma> turmas = new ArrayList<>();
 
         String busca = req.getParameter("busca");
 
         try {
             if (busca != null && !busca.isEmpty()) {
-                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+                AlunoConsultaDTO aluno = alunoConsultaDao.buscarPorMatricula(busca);
                 if (aluno != null) {
                     alunosList.add(aluno);
                 }
@@ -35,13 +39,14 @@ public class VerAlunosServlet extends HttpServlet {
                 alunosList = alunoConsultaDao.buscarAlunos();
             }
 
-            req.setAttribute("alunosList", alunosList);
-            req.setAttribute("busca", busca);
+            turmas = turmaDAO.buscarTurmas();
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp");
-            dispatcher.forward(req, resp);
-        } catch (DataAccessException e) {
-            throw new DataAccessException("Erro ao acessar o banco de dados", e);
+            req.setAttribute("alunosList", alunosList);
+            req.setAttribute("turmas", turmas);
+            req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp").forward(req, resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect("erro.jsp");
         }
     }
 }
