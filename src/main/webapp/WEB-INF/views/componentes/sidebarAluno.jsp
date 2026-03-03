@@ -41,26 +41,27 @@
             </div>
 
             <!-- MENU -->
-            <div class="box-tabs">
-                <ul class="menu-tabs">
-                    <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %>">
-                        <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas">
-                            <i class="fa-solid fa-book"></i>
-                            <span>Disciplinas</span>
-                        </a>
-                    </li>
+            <div class="box-medium">
+                <div class="box-tabs">
+                    <ul class="menu-tabs">
+                        <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %>">
+                            <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas">
+                                <i class="fa-solid fa-book"></i>
+                                <span>Disciplinas</span>
+                            </a>
+                        </li>
 
-                    <li class="<%= "boletim".equals(activePage) ? "active" : "" %>">
-                        <a href="${pageContext.request.contextPath}/aluno/VerBoletim">
-                            <i class="fa-solid fa-newspaper"></i>
-                            <span>Boletim</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div id="btn-logout">
-                    <img src="${pageContext.request.contextPath}/assets/img/btn_logout.png" height="40">
+                        <li class="<%= "boletim".equals(activePage) ? "active" : "" %>">
+                            <a href="${pageContext.request.contextPath}/aluno/VerBoletim">
+                                <i class="fa-solid fa-newspaper"></i>
+                                <span>Boletim</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            <div id="btn-logout">
+                <img src="${pageContext.request.contextPath}/assets/img/btn_logout.png" height="40">
             </div>
 
         </div>
