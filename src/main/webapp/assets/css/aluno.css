@@ -23,7 +23,6 @@ body {
     min-height: 100vh;
     margin-left: 22vw;
     padding: 40px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +36,7 @@ h1 {
     margin-bottom: 48px;
     text-align: center;
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
 }
 
 .btn {
@@ -72,7 +71,7 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -120,6 +119,8 @@ h1 {
     align-items: flex-start;
     gap: 14px;
     margin-bottom: 52px;
+    width: 80%;
+    align-self: flex-start;
 }
 
 .header-info .disciplina-nome {
@@ -138,12 +139,14 @@ h1 {
     justify-content: center;
     gap: 120px;
     margin-bottom: 20px;
+    width: 80%;
 }
 
 .secao-titulo,
 .secao-link {
-    font-size: 1rem;
+    font-size: 20px;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 4px;
 }
 
@@ -169,8 +172,7 @@ h1 {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    width: 100%;
-    max-width: 900px;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -236,6 +238,12 @@ tbody tr:hover {
 
     .secoes {
         gap: 60px;
+        width: 95%;
+    }
+
+    .tabela-wrapper,
+    .header {
+        width: 95%;
     }
 }
 
@@ -250,5 +258,11 @@ tbody tr:hover {
 
     .header {
         margin-bottom: 32px;
+        width: 100%;
+    }
+
+    .tabela-wrapper,
+    .secoes {
+        width: 100%;
     }
 }
