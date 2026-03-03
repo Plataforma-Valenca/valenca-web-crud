@@ -50,7 +50,7 @@ public class DisciplinasResumoDtoDAO {
                     d.nome,
                     u.nome,
                     media_disciplina.media_geral
-                ORDER BY d.id_disciplina;
+                ORDER BY d.nome;
                 """;
 
         Connection conn = null;
