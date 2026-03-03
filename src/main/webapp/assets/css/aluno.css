@@ -18,13 +18,15 @@
     --primary-white: #FFFFFF;
 }
 
-/* ================= BASE LAYOUT ================= */
-
 body {
     background-color: var(--primary-grey);
     min-height: 100vh;
     margin-left: 22vw;
     padding: 40px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: #3a3a3a;
 }
 
@@ -34,9 +36,9 @@ h1 {
     color: #2e2e2e;
     margin-bottom: 48px;
     text-align: center;
+    width: 100%;
+    max-width: 900px;
 }
-
-/* ================= BUTTONS ================= */
 
 .btn {
     background-color: var(--terciary-green);
@@ -65,14 +67,13 @@ h1 {
     color: var(--terciary-green);
 }
 
-/* ================= CARDS (HOME) ================= */
-
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     width: 100%;
     max-width: 900px;
+    margin: 0 auto;
 }
 
 .card {
@@ -114,8 +115,6 @@ h1 {
     padding: 40px;
 }
 
-/* ================= HEADER (NOTAS / OBS) ================= */
-
 .header {
     display: flex;
     align-items: flex-start;
@@ -133,8 +132,6 @@ h1 {
     color: #888;
     margin-top: 2px;
 }
-
-/* ================= SECTIONS / TABS ================= */
 
 .secoes {
     display: flex;
@@ -165,8 +162,6 @@ h1 {
     font-weight: 700;
     color: #3a9088;
 }
-
-/* ================= TABLE BASE ================= */
 
 .container,
 .tabela-wrapper {
@@ -207,8 +202,6 @@ tbody tr:hover {
     background-color: #f9f9f9;
 }
 
-/* ================= NOTES COLORS ================= */
-
 .azul,
 .nota-azul {
     color: #3a9dd4;
@@ -230,8 +223,6 @@ tbody tr:hover {
     color: #aaa;
     text-align: center;
 }
-
-/* ================= RESPONSIVE ================= */
 
 @media (max-width: 992px) {
     body {
