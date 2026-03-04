@@ -82,5 +82,7 @@ public class Boletim {
     public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
+
+
 }
 

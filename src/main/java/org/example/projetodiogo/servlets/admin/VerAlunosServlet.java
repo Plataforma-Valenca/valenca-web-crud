@@ -43,7 +43,7 @@ public class VerAlunosServlet extends HttpServlet {
 
             req.setAttribute("alunosList", alunosList);
             req.setAttribute("turmas", turmas);
-            req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/admin/verAlunos.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
             resp.sendRedirect("erro.jsp");

@@ -31,7 +31,7 @@ public class InserirAlunoServlet extends HttpServlet {
             request.setAttribute("turmas", turmas);
 
             // Redireciona para a página
-            request.getRequestDispatcher("/admin/listarAlunos.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/verAlunos.jsp").forward(request, response);
             System.out.println("===== LISTA DE TURMAS =====");
 
             for (Turma t : turmas) {

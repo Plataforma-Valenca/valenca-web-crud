@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/aluno/completarCadastroAluno.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/aluno" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/professor/perfilAluno.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/professor" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>

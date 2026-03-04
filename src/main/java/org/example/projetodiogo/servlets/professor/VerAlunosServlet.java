@@ -38,7 +38,7 @@ public class VerAlunosServlet extends HttpServlet {
 
                 req.setAttribute("alunosList", alunosList);
 
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/professor/verAlunos.jsp");
                 dispatcher.forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
