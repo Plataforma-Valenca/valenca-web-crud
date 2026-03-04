@@ -52,6 +52,8 @@ public class AlunoConsultaDTO {
         return turma;
     }
 
+    public int getIdAluno() {return idAluno;}
+
     // Métodos setters
     public void setNome(String nome) {
         this.nome = nome;
@@ -80,4 +82,6 @@ public class AlunoConsultaDTO {
                 ", turma = '" + turma + '\'' +
                 '}';
     }
+
+
 }
