@@ -295,6 +295,57 @@ public class UsuarioDAO {
         }
     }
 
+    public Optional<Usuario> buscarPorEmail(String email) {
+
+        String sql = """
+                SELECT * FROM usuarios u
+                WHERE email = ?;
+        """;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+
+            pstmt.setString(1, email);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getInt("id_usuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("tipo"),
+                        rs.getBoolean("cadastro_completo")
+                );
+
+                return Optional.of(usuario);
+            } else {
+                throw new EntityNotFoundException("Email, ", email);
+            }
+        } catch (SQLException e) {
+            System.err.println("[DAO ERROR] Erro ao buscar usuário por email: " + email);
+            e.printStackTrace(System.err);
+            throw new DataAccessException("Erro ao buscar usuário", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
+        }
+    }
+
     // UPDATE
     public boolean atualizar(Usuario usuario) {
 
@@ -319,6 +370,44 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar usuário: " + e.getMessage());
             return false;
+        }
+    }
+
+    public void atualizarSenha(int idUsuario, String senhaNova) {
+
+        String sql = """
+        UPDATE usuarios
+        SET senha = ?
+        WHERE id_usuario = ?
+    """;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+            String senhaHash = HasherSenha.hashSenha(senhaNova);
+
+            pstmt.setString(1, senhaNova);
+            pstmt.setInt(2, idUsuario);
+
+            int linhasAfetadas = pstmt.executeUpdate();
+
+            if (linhasAfetadas == 0) {
+                throw new RuntimeException("Nenhum usuário encontrado para atualizar senha.");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar senha", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
         }
     }
 
