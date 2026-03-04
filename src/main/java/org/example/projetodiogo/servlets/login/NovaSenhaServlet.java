@@ -51,6 +51,6 @@ public class NovaSenhaServlet extends HttpServlet {
 
         dao.marcarComoUsado(token);
 
-        resp.sendRedirect("login.jsp");
+        resp.sendRedirect(req.getContextPath() + "/index.jsp");
     }
 }
