@@ -67,7 +67,7 @@ public class AvaliacaoDAO {
 
         String sql = """
                 UPDATE avaliacoes
-                SET descricao = ?, valor = ?
+                SET descricao = ?, valor = ?, semestre = ?
                 WHERE  id_avaliacao = ?
                 """;
 
