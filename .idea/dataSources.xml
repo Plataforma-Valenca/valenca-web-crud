@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="defaultdb@pg-241f154f-plataformavalenca.b.aivencloud.com" uuid="9297a8d0-d39a-4577-b6ce-e30da7729604">
+    <data-source source="LOCAL" name="defaultdb@pg-241f154f-plataformavalenca.b.aivencloud.com" uuid="5ea5955c-e84b-4fb9-834f-b649280b5b0c">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
