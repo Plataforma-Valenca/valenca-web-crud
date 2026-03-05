@@ -390,7 +390,7 @@ public class UsuarioDAO {
 
             String senhaHash = HasherSenha.hashSenha(senhaNova);
 
-            pstmt.setString(1, senhaNova);
+            pstmt.setString(1, senhaHash);
             pstmt.setInt(2, idUsuario);
 
             int linhasAfetadas = pstmt.executeUpdate();
