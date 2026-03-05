@@ -267,11 +267,9 @@
     <!-- OBSERVAÇÕES -->
     <div class="section-header">
         <h3 class="section-title">Observações</h3>
-        <a href="<%= request.getContextPath() %>/professor/adicionarObservacao?idAluno=<%= aluno.getIdAluno() %>">
-            <button class="action-button">
-                + Adicionar
-            </button>
-        </a>
+        <button class="action-button" onclick="abrirModalObs()">
+            + Adicionar
+        </button>
     </div>
 
     <div class="data-table-container">
@@ -311,6 +309,22 @@
     </div>
 
 </div>
+
+<jsp:include page="/WEB-INF/professor/inserirObservacaoProfessor.jsp">
+    <jsp:param name="idAluno" value="<%= aluno.getIdAluno() %>"/>
+</jsp:include>
+
+<script>
+
+    function abrirModalObs(){
+        document.getElementById("modal-obs-bg").style.display = "flex";
+    }
+
+    function fecharModalObs(){
+        document.getElementById("modal-obs-bg").style.display = "none";
+    }
+
+</script>
 
 </body>
 </html>

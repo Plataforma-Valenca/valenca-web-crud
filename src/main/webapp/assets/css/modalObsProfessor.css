@@ -1,0 +1,106 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+#add-obs-modal{
+    background:#e9e9e9;
+    width:600px;
+    padding:40px;
+    border-radius:30px;
+}
+
+#add-obs-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+#add-obs-title h2{
+    font-size:36px;
+    color:#5a5a5a;
+    font-weight:700;
+    padding-bottom:10px;
+    border-bottom:3px solid #6fa5a3;
+}
+
+#inside-forms{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+#inside-forms input{
+    padding:16px;
+    border-radius:12px;
+    border:2px solid #7b7b7b;
+    font-size:16px;
+    background:#f4f4f4;
+}
+
+#form-descricao{
+    height:150px;
+    resize:none;
+    padding:16px;
+    border-radius:12px;
+    border:2px solid #7b7b7b;
+    font-size:16px;
+    background:#f4f4f4;
+}
+
+#inside-buttons{
+    display:flex;
+    justify-content:center;
+    margin-top:25px;
+}
+
+#inside-buttons button{
+    background:#c9dada;
+    border:none;
+    padding:14px 30px;
+    font-size:18px;
+    border-radius:12px;
+    cursor:pointer;
+    color:#3c5f5d;
+    font-weight:600;
+    transition:0.2s;
+}
+
+#inside-buttons button:hover{
+    background:#b6cfcf;
+}
+#modal-obs-bg{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.6);
+
+    align-items:center;
+    justify-content:center;
+}
+#add-obs-modal{
+    background:#e9e9e9;
+    width:600px;
+    padding:40px;
+    border-radius:30px;
+    position:relative; /* importante */
+}
+
+#exit-btn{
+    position:absolute;
+    top:20px;
+    right:25px;
+    cursor:pointer;
+    font-size:20px;
+    color:#5a5a5a;
+}
+
+#exit-btn:hover{
+    color:#000;
+}
