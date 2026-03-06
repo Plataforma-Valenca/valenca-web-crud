@@ -34,7 +34,6 @@ public class AlunoDAO {
         INSERT INTO notas (id_aluno, id_disciplina)
         SELECT ?, d.id_disciplina
         FROM disciplinas d
-        WHERE d.id_turma = ?
         AND NOT EXISTS (
             SELECT 1
             FROM notas n
