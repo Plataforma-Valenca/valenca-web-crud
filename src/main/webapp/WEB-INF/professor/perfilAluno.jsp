@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.*" %>
+<%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
 
 <%
     AlunoConsultaDTO aluno = (AlunoConsultaDTO) request.getAttribute("alunoConsulta");

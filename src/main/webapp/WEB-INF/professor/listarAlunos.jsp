@@ -9,26 +9,9 @@
 </head>
 <body>
 
-<%--<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp" />--%>
+<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp" />
 
 <div class="main-content">
-
-<%--    <h1>Listar Alunos</h1>--%>
-
-<%--    <!-- FORM DE BUSCA -->--%>
-<%--    <form action="${pageContext.request.contextPath}/admin/verAlunos"--%>
-<%--          method="get"--%>
-<%--          class="form-busca">--%>
-
-<%--        <input type="text"--%>
-<%--               name="busca"--%>
-<%--               placeholder="Matrícula do aluno"--%>
-<%--               value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">--%>
-
-<%--        <button type="submit" class="btn btn-primary">Buscar</button>--%>
-<%--    </form>--%>
-
-    <!-- Substitua o h1 + form-busca por isso: -->
     <h1>Buscar Aluno(a)</h1>
 
     <div class="top-bar">

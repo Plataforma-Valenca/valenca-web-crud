@@ -79,6 +79,9 @@
 
                 </ul>
             </div>
+            <div id="btn-logout">
+                <a href="${pageContext.request.contextPath}/logout"><img src="${pageContext.request.contextPath}/assets/img/btn-logout.svg" height="40"></a>
+            </div>
 
         </div>
     </aside>

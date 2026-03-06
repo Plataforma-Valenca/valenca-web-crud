@@ -119,6 +119,20 @@
     font-weight: 600;
 }
 
+#btn-logout {
+    height: 120px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+#btn-logout img {
+    height: 50px;
+    cursor: pointer;
+}
+
 /* RESPONSIVO */
 @media (max-width: 992px) {
     #aside {
