@@ -23,7 +23,7 @@ public class InserirAlunoServlet extends HttpServlet {
 
         try {
             // Redireciona para a página
-            req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/listarProfessores.jsp")
                     .forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
