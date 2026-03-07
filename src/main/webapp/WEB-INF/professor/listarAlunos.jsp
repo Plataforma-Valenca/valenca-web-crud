@@ -4,12 +4,16 @@
 
 <html>
 <head>
-    <title>Listar Alunos - Admin</title>
+    <title>Colégio Valença</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="icon" type="image/x-icon"
+          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp" />
+<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+    <jsp:param name="activePage" value="alunos" />
+</jsp:include>
 
 <div class="main-content">
     <h1>Buscar Aluno(a)</h1>

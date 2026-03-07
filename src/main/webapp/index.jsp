@@ -19,7 +19,7 @@
             <div class="login-left-box-content">
 
                 <div class="login-valenca-logo">
-                    <img src="assets/img/icone-colegio-valenca.svg">
+                    <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
                     <h1>Colégio Valença</h1>
                 </div>
 
