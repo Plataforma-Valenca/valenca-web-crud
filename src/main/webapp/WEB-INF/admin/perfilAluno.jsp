@@ -206,7 +206,7 @@
           href="<%= request.getContextPath() %>/css/style.css">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp"/>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
 
 <div class="main-content">
 
