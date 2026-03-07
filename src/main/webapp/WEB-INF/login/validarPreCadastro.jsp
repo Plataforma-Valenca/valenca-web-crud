@@ -1,70 +1,89 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Primeiro Acesso - Colégio Valença</title>
-    <link rel="icon" type="image/x-icon" href="src/main/webapp/assets/img/icone-colegio-valenca.svg">
-    <link rel="stylesheet" href="src/main/webapp/assets/css/login.css">
+
+    <link rel="icon" type="image/x-icon"
+          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/login.css">
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 
 <body>
 
-<div class="login-content">
+<div class="login-page">
 
-    <% String erro = (String) request.getAttribute("erro");
-        if (erro != null) { %>
-    <div class="error">
-        <%= erro %>
-    </div>
-    <% } %>
+    <div class="login-left-box">
+        <div class="login-left-box-content">
 
-    <div id="login-left-box">
-        <div id="login-left-box-content">
-            <div id="login-logo-valenca">
-                <img src="src/main/webapp/assets/img/icone-colegio-valenca.svg">
+            <div class="login-valenca-logo">
+                <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
                 <h1>Colégio Valença</h1>
             </div>
 
-            <div id="login-welcome-text">
-                <h1>Primeiro acesso</h1>
-                <p>Insira seus dados abaixo para validar seu cadastro na plataforma.</p>
+            <div class="login-left-box-content-form">
+
+                <div class="login-left-box-content-title">
+                    <h2>Primeiro acesso</h2>
+                    <p>Insira seus dados abaixo para validar seu cadastro na plataforma.</p>
+                </div>
+
+                <form method="post"
+                      action="${pageContext.request.contextPath}/validarPreCadastro"
+                      class="form-group">
+
+                    <div class="form-group-inputs">
+                        <div class="form-group-inputs-box">
+
+                            <div class="form-control input-primary">
+                                <h5>CPF ou Matrícula</h5>
+                                <input type="text"
+                                       placeholder="Digite seu CPF ou Matrícula"
+                                       name="inputValidacao"
+                                       required>
+                            </div>
+
+                        </div>
+
+                        <% if (request.getAttribute("erro") != null) { %>
+                        <div class="error">
+                            <div class="mensagem" id="erro">
+                                <%= request.getAttribute("erro") %>
+                            </div>
+                        </div>
+                        <% } %>
+
+                    </div>
+
+                    <div class="form-group-enter">
+                        <button type="submit" class="login-button btn-primary">
+                            Continuar
+                        </button>
+
+                        <div class="login-first-access">
+                            <p>Já possui uma conta?</p>
+                            <a href="${pageContext.request.contextPath}/login.jsp"
+                               class="login-first-access-link">
+                                Voltar para login
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
 
-            <form action="${pageContext.request.contextPath}/validarPreCadastro" method="post" class="login-form">
-
-                <div id="login-form-details">
-                    <div id="login-form-identificacao">
-                        <h5>CPF ou Matrícula</h5>
-                        <input type="text"
-                               name="inputValidacao"
-                               class="login-input"
-                               placeholder="Digite seu CPF ou Matrícula"
-                               required>
-                    </div>
-                </div>
-
-                <div class="login-acesso">
-                    <button type="submit" class="login-button">
-                        Continuar
-                    </button>
-
-                    <div>
-                        <p>Já possui uma conta?</p>
-                        <a href="login.jsp"
-                           class="primeiro-acesso"
-                           id="voltar-login">
-                            Voltar para o login
-                        </a>
-                    </div>
-                </div>
-
-            </form>
         </div>
     </div>
 
-    <div id="login-right-box">
-        <img src="src/main/webapp/assets/img/login-image.png">
+    <div class="login-right-box">
+        <img src="${pageContext.request.contextPath}/assets/img/login-main-image.svg">
     </div>
 
 </div>
