@@ -6,21 +6,26 @@ public class DisciplinasResumoDTO {
     private String nomeProfessor;
     private int quantidadeTurmas;
     private Double mediaGeral;
+    private int idProfessor;
 
     // construtor
     public DisciplinasResumoDTO() {}
 
-    public DisciplinasResumoDTO(int idDisciplina, String nomeDisciplina, String nomeProfessor, int quantidadeTurmas, Double mediaGeral) {
+    public DisciplinasResumoDTO(int idDisciplina, String nomeDisciplina, String nomeProfessor, int quantidadeTurmas, Double mediaGeral, int idProfessor) {
         this.idDisciplina = idDisciplina;
         this.nomeDisciplina = nomeDisciplina;
         this.nomeProfessor = nomeProfessor;
         this.quantidadeTurmas = quantidadeTurmas;
         this.mediaGeral = mediaGeral;
+        this.idProfessor=idProfessor;
     }
 
     // getters
     public int getIdDisciplina() {
         return idDisciplina;
+    }
+    public int getIdProfessor() {
+        return idProfessor;
     }
 
     public String getNomeDisciplina() {

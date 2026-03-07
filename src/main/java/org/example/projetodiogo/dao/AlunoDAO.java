@@ -218,7 +218,8 @@ public class AlunoDAO {
 
                 return Optional.of(aluno);
             } else {
-                throw new EntityNotFoundException("Aluno", idAluno);
+
+                    return Optional.empty();
             }
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + idAluno);
@@ -281,4 +282,5 @@ public class AlunoDAO {
             return false;
         }
     }
+
 }

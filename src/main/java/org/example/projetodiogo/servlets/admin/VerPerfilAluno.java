@@ -14,34 +14,47 @@ import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
 @WebServlet("/admin/verPerfilAluno")
 public class VerPerfilAluno extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AlunoDAO alunoDAO = new AlunoDAO();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
         BoletimDAO boletimDAO = new BoletimDAO();
         TurmasDAO turmasDAO = new TurmasDAO();
-        AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
-
-        List<Boletim> boletimList;
-        int idAlunoParam = Integer.parseInt(req.getParameter("idAluno"));
-
 
         try {
-            Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdAluno(idAlunoParam);
 
-            AlunoConsultaDTO alunoConsultaDTO = alunoConsultaDAO.buscarPorMatricula(alunoOpt.get().getMatricula());
+            String cpf = req.getParameter("cpf");
 
-            boletimList = boletimDAO.visualizarBoletim(idAlunoParam);
+            AlunoConsultaDTO alunoConsulta =
+                    alunoConsultaDAO.buscarPorMatricula(cpf);
+
+            int idAluno = alunoConsulta.getIdAluno();
+
+            List<Boletim> boletimList =
+                    boletimDAO.visualizarBoletim(idAluno);
+
+            String turma =
+                    turmasDAO.buscarNomePorIdAluno(idAluno);
 
             req.setAttribute("boletimList", boletimList);
-            req.setAttribute("alunoConsulta", alunoConsultaDTO);
-            req.setAttribute("turma", turmasDAO.buscarNomePorIdAluno(idAlunoParam));
+            req.setAttribute("alunoConsulta", alunoConsulta);
+            req.setAttribute("turma", turma);
+            System.out.println(turma);
+            System.out.println(alunoConsulta);
+            System.out.println(boletimList);
 
-            req.getRequestDispatcher("/WEB-INF/professor/perfilAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/perfilAluno.jsp")
                     .forward(req, resp);
-        } catch (DataAccessException e) {
-            throw new DataAccessException("Erro ao acessar o banco de dados", e);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            resp.sendRedirect(req.getContextPath() + "/admin/verTurmas");
+
         }
     }
 }

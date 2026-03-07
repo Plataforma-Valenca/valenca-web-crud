@@ -31,6 +31,7 @@ public class VerDisciplinasServlet extends HttpServlet {
             resumoList = disciplinasResumoDtoDAO.visualizarDisciplinasResumo();
 
             req.setAttribute("resumoList", resumoList);
+            System.out.println(resumoList.size());
 
             req.getRequestDispatcher("/WEB-INF/admin/listarDisciplinas.jsp")
                     .forward(req, resp);
