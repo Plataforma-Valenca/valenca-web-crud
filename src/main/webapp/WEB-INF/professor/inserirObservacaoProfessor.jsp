@@ -14,17 +14,17 @@
         </div>
 
         <form method="post"
-              action="<%= request.getContextPath() %>/professor/inserirObservacao">
+              action="<%= request.getContextPath() %>/professor/cadastrarObservacao">
 
             <input type="hidden" name="idAluno" value="${param.idAluno}">
 
             <div id="inside-forms">
 
-                <input type="date" name="data">
-
                 <textarea name="descricao"
                           id="form-descricao"
-                          placeholder="Descrição"></textarea>
+                          placeholder="Descrição">
+
+                </textarea>
 
             </div>
 
