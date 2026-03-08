@@ -53,7 +53,7 @@ public class ServletLogin extends HttpServlet {
             case "professor":
                 HttpSession session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
-                resp.sendRedirect(req.getContextPath() + "/professor/verAlunos");
+                resp.sendRedirect(req.getContextPath() + "/professor/home");
                 break;
 
             case "aluno":

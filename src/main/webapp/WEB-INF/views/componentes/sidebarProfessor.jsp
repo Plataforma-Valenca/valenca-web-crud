@@ -27,8 +27,8 @@
 
     <div class="sidebar-top-box">
         <ul class="sidebar-tabs-menu">
-            <li class="<%= "verAlunos".equals(activePage) ? "active" : "" %> menu-items-tab">
-                <a href="${pageContext.request.contextPath}/professor/homeProfessor">
+            <li class="<%= "home".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/professor/home">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-home.svg">
                     Home
                 </a>
