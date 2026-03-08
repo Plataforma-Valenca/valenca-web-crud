@@ -34,9 +34,10 @@
                 if (turmasList != null && !turmasList.isEmpty()) {
                     for (Turma turma : turmasList) {
             %>
-            <div class="card-items">
-                <span class="card-title"><%= turma.getNome() %></span>
-            </div>
+            <a class="card-items"
+               href="${pageContext.request.contextPath}/professor/verAlunos?idTurma=<%= turma.getId() %>&nomeTurma=<%= turma.getNome() %>">
+                <%= turma.getNome() %>
+            </a>
             <%
                 }
             } else {
