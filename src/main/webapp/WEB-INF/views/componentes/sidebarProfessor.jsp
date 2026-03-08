@@ -42,7 +42,7 @@
             </li>
 
             <li class="<%= "dashboards".equals(activePage) ? "active" : "" %> menu-items-tab">
-                <a href="${pageContext.request.contextPath}/professor/dashboards">
+                <a href="${pageContext.request.contextPath}/professor/dashboard">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-dashboards.svg">
                     Dashboards
                 </a>
