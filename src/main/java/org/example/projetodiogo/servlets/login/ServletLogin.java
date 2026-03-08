@@ -66,6 +66,7 @@ public class ServletLogin extends HttpServlet {
                 session = req.getSession();
                 session.setAttribute("usuarioLogado", usuario);
                 resp.sendRedirect(req.getContextPath() + "/admin/homeAdmin");
+//                resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
                 break;
         }
     }
