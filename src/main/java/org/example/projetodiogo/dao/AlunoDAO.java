@@ -143,7 +143,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno();
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setIdUsuario(rs.getInt("id_usuario"));
-                aluno.setMatricula(rs.getString("matricula"));
+                aluno.setMatricula(rs.getLong("matricula"));
                 aluno.setDtMatricula(rs.getTimestamp("dt_matricula"));
 
                 return Optional.of(aluno);
@@ -187,7 +187,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno(
                         rs.getInt("id_aluno"),
                         rs.getInt("id_usuario"),
-                        rs.getString("matricula"),
+                        rs.getLong("matricula"),
                         rs.getTimestamp("dt_matricula")
                 );
 
@@ -232,7 +232,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno(
                         rs.getInt("id_aluno"),
                         rs.getInt("id_usuario"),
-                        rs.getString("matricula"),
+                        rs.getLong("matricula"),
                         rs.getTimestamp("dt_matricula")
                 );
 
@@ -270,7 +270,7 @@ public class AlunoDAO {
 
             ps.setInt(1, aluno.getId());
             ps.setInt(2, aluno.getIdUsuario());
-            ps.setString(3, aluno.getMatricula());
+            ps.setLong(3, aluno.getMatricula());
             ps.setTimestamp(4, aluno.getDtMatricula());
             ps.setInt(5, aluno.getId());
 

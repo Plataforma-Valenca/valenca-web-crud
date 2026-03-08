@@ -28,10 +28,15 @@ public class VerAlunosServlet extends HttpServlet {
 
         try {
             if (busca != null && !busca.isEmpty()) {
-                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+
+                Long matricula = Long.parseLong(busca);
+
+                aluno = alunoConsultaDao.buscarPorMatricula(matricula);
+
                 if (aluno != null) {
                     alunosList.add(aluno);
                 }
+
             } else {
                 alunosList = alunoConsultaDao.buscarAlunos();
             }
@@ -39,7 +44,6 @@ public class VerAlunosServlet extends HttpServlet {
             List<Turma> turmas = turmaDAO.buscarTurmas();
 
             req.setAttribute("alunosList", alunosList);
-            // Envia para a JSP
             req.setAttribute("turmasList", turmas);
             req.setAttribute("busca", busca);
 

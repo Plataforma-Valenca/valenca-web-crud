@@ -32,7 +32,7 @@
                 </a>
             </li>
 
-            <li class="<%= "listarTurmas".equals(activePage) ? "active" : "" %> menu-items-tab">
+            <li class="<%= "turmas".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/admin/verTurmas">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-aluno.svg">
 

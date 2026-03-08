@@ -4,11 +4,12 @@
 
 <html>
 <head>
-    <title>Colégio Valença - Administração</title>
+    <title>Colégio Valença</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
@@ -24,7 +25,7 @@
     <header class="page-grid-header">
         <h1 class="page-grid-header-title">Gerenciar Turmas</h1>
         <button class="btn-primary" onclick="abrirModalCadastro()">
-            <i class="fa-solid fa-plus"></i> Cadastrar Turma
+            + Cadastrar
         </button>
     </header>
 
@@ -36,18 +37,16 @@
                 if (turmas != null && !turmas.isEmpty()) {
                     for (Turma t : turmas) {
             %>
-            <div class="card-items">
-                <span><%= t.getNome() %></span>
+            <a class="card-items" href="${pageContext.request.contextPath}/admin/verAlunos?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
+                <span class="card-title">
+                    <%= t.getNome() %>
+                </span>
 
                 <div class="card-actions">
-                    <a href="${pageContext.request.contextPath}/admin/verAlunosTurma?idTurma=<%= t.getId() %>">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <a href="javascript:void(0)" onclick="abrirModalExcluir(<%= t.getId() %>)">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
+                    <i class="fa-solid fa-pencil"></i>
+                    <i class="fa-solid fa-trash"></i>
                 </div>
-            </div>
+            </a>
             <%
                 }
             } else {

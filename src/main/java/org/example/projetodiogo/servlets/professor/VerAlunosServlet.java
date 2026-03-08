@@ -15,7 +15,10 @@ import java.util.List;
 
 @WebServlet("/professor/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
         List<AlunoConsultaDTO> alunosList = new ArrayList<>();
 
@@ -23,16 +26,26 @@ public class VerAlunosServlet extends HttpServlet {
         String idTurmaStr = req.getParameter("idTurma");
 
         try {
+
             if (busca != null && !busca.isEmpty()) {
-                AlunoConsultaDTO aluno = alunoConsultaDao.buscarPorMatricula(busca);
+
+                Long matricula = Long.parseLong(busca);
+
+                AlunoConsultaDTO aluno = alunoConsultaDao.buscarPorMatricula(matricula);
+
                 if (aluno != null) {
                     alunosList.add(aluno);
                 }
+
             } else if (idTurmaStr != null && !idTurmaStr.isEmpty()) {
+
                 int idTurma = Integer.parseInt(idTurmaStr);
                 alunosList = alunoConsultaDao.buscarAlunosPorTurma(idTurma);
+
             } else {
+
                 alunosList = alunoConsultaDao.buscarAlunos();
+
             }
 
             req.setAttribute("alunosList", alunosList);
@@ -40,6 +53,7 @@ public class VerAlunosServlet extends HttpServlet {
 
             req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp")
                     .forward(req, resp);
+
         } catch (DataAccessException e) {
             throw new ServletException(e);
         }

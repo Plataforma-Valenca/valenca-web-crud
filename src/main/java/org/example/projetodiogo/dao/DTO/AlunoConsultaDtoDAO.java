@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoConsultaDtoDAO {
-    public AlunoConsultaDTO buscarPorMatricula(String matricula) {
-        if (matricula.isEmpty()) {
-            throw new InvalidCredentialsException();
-        }
+    public AlunoConsultaDTO buscarPorMatricula(Long matricula) {
 
         String sql = """
                 SELECT
@@ -43,7 +40,7 @@ public class AlunoConsultaDtoDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, matricula);
+            pstmt.setLong(1, matricula);
 
             rs = pstmt.executeQuery();
 
