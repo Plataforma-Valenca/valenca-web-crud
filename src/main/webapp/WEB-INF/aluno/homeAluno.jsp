@@ -1,21 +1,22 @@
 <%@ page import="org.example.projetodiogo.model.Usuario" %>
 <%@ page import="org.example.projetodiogo.model.Aluno" %>
+<%@ page import="org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO" %>
+<%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
     Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
-    String nomeUsuario = (usuario != null) ? usuario.getNome() : "Usuário";
     String tipoUsuario = (usuario != null) ?
             usuario.getTipoUsuario().substring(0,1).toUpperCase() + usuario.getTipoUsuario().substring(1).toLowerCase() : "--";
 
-    Aluno aluno = (Aluno) request.getAttribute("aluno");
+    AlunoConsultaDtoDAO alunoConsultaDtoDAO = new AlunoConsultaDtoDAO();
+    AlunoConsultaDTO alunoConsulta = alunoConsultaDtoDAO.buscarPorCpf(usuario.getCpf());
 %>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <title>Colégio Valença</title>
-
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
@@ -36,7 +37,7 @@
             <img src="${pageContext.request.contextPath}/assets/img/icon-profile.svg" height="300" >
 
             <div class="header-profile-infos">
-                <b><%= nomeUsuario %></b>
+                <b><%= alunoConsulta.getNome() %></b>
                 <p><%= tipoUsuario %></p>
             </div>
 
@@ -68,24 +69,24 @@
                 <div class="secondary-box">
                     <div class="details-infos-box">
                         <h4>Nome Completo</h4>
-                        <p><%= request.getAttribute("nomeAluno") != null ? request.getAttribute("nomeAluno") : "--" %></p>
+                        <p> <%= alunoConsulta.getNome() %> </p>
                     </div>
 
                     <div class="details-infos-box">
                         <h4>Turma Atual</h4>
-                        <p><%= request.getAttribute("nomeTurma") != null ? request.getAttribute("nomeTurma") : "--" %></p>
+                        <p><%= alunoConsulta.getTurma() != null ? alunoConsulta.getTurma() : "--" %></p>
                     </div>
                 </div>
 
                 <div class="terciary-box">
                     <div class="details-infos-box">
                         <h4>N° de matrícula</h4>
-                        <p><%= request.getAttribute("matricula") != null ? request.getAttribute("matricula") : "--" %></p>
+                        <p><%= alunoConsulta.getMatricula() != null ? alunoConsulta.getMatricula() : "--" %></p>
                     </div>
 
                     <div class="details-infos-box">
                         <h4>Email Acadêmico</h4>
-                        <p><%= request.getAttribute("email") != null ? request.getAttribute("email") : "--" %></p>
+                        <p><%= usuario.getEmail() != null ? usuario.getEmail() : "--" %></p>
                     </div>
                 </div>
 
