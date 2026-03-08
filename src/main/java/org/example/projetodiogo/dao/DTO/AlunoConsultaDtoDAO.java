@@ -51,8 +51,8 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("cpf"),
                         rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("turma")
                 );
                 return consultaDTO;
@@ -105,8 +105,8 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("cpf"),
                         rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("turma")
                 );
 
@@ -163,8 +163,8 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO aluno = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("cpf"),
                         rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("turma")
                 );
 
@@ -226,9 +226,9 @@ public class AlunoConsultaDtoDAO {
                     return new AlunoConsultaDTO(
                             rs.getInt("id_aluno"),
                             rs.getString("nome"),
-                            rs.getString("cpf"),
                             rs.getString("matricula"),
-                            turma
+                            rs.getString("cpf"),
+                            rs.getString("turma")
                     );
                 } else {
                     throw new EntityNotFoundException("Usuario", cpf);
