@@ -34,15 +34,15 @@
                 </a>
             </li>
 
-            <li class="<%= "alunos".equals(activePage) ? "active" : "" %> menu-items-tab" >
-                <a href="${pageContext.request.contextPath}/professor/verAlunos">
+            <li class="<%= "turmas".equals(activePage) ? "active" : "" %> menu-items-tab" >
+                <a href="${pageContext.request.contextPath}/professor/turmasProfessor">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-aluno.svg">
                     Turmas
                 </a>
             </li>
 
-            <li class="<%= "listarDisciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
-                <a href="${pageContext.request.contextPath}/admin/verDashboards">
+            <li class="<%= "dashboards".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/professor/dashboards">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-dashboards.svg">
                     Dashboards
                 </a>

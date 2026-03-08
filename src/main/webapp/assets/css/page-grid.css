@@ -1,0 +1,33 @@
+.page-content {
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20vw;
+}
+.page-grid-header-title {
+    font-weight: 600;
+}
+
+.page-grid-header, .page-grid-main {
+    width: 90%;
+}
+
+.page-grid-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 20vh;
+}
+
+.page-grid-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.page-grid-main-content {
+    width: 100%;
+}

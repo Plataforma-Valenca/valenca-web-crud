@@ -12,7 +12,7 @@
 <body>
 
 <jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
-    <jsp:param name="activePage" value="alunos" />
+    <jsp:param name="activePage" value="turmas" />
 </jsp:include>
 
 <div class="main-content">
