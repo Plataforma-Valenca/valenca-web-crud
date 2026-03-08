@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@WebServlet("/professor/verPerfilAluno")
-public class VerPerfilAluno extends HttpServlet {
+@WebServlet("/professor/detalhesAluno")
+public class DetalhesAlunoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -31,8 +31,12 @@ public class VerPerfilAluno extends HttpServlet {
         ObservacaoDAO observacaoDAO = new ObservacaoDAO();
         AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
         ArrayList<Boletim> boletimList = new ArrayList<>();
-        int idAlunoParam = Integer.parseInt(req.getParameter("idAluno"));
-
+        int idAlunoParam = Integer.parseInt(req.getParameter("idAluno").trim());
+        String nomeAlunoParam = req.getParameter("nomeAluno");
+        String turmaParam = req.getParameter("turma");
+        String matriculaParam = req.getParameter("matricula");
+        String idTurmaParam = req.getParameter("idTurma");
+        String nomeTurmaParam = req.getParameter("nomeTurma");
 
         try {
             int idProfessor = professorDAO.buscarProfessorPorIdUsuario(idUsuario).get().getId();
@@ -50,8 +54,15 @@ public class VerPerfilAluno extends HttpServlet {
             req.setAttribute("alunoConsulta", alunoConsultaDTO);
             req.setAttribute("turma", turmasDAO.buscarNomePorIdAluno(idAlunoParam));
             req.setAttribute("obsList", obsList);
+            req.setAttribute("nomeAluno", nomeAlunoParam);
+            req.setAttribute("matricula", matriculaParam);
+            req.setAttribute("turma", turmaParam);
+            req.setAttribute("idTurma", idTurmaParam);
+            req.setAttribute("nomeTurma", nomeTurmaParam);
 
-            req.getRequestDispatcher("/WEB-INF/professor/perfilAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/professor/detalhesAluno.jsp").forward(req, resp);
+
+            req.getRequestDispatcher("/WEB-INF/professor/detalhesAluno.jsp")
                     .forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
