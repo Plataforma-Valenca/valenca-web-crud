@@ -1,78 +1,163 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.ProfessorResumo" %>
+<%@ page import="org.example.projetodiogo.model.DTO.ProfessorConsultaDTO" %>
+<%@ page import="org.example.projetodiogo.model.Disciplina" %>
+<%@ page import="java.util.ArrayList" %>
 
+<%
+    ArrayList<ProfessorConsultaDTO> professoresList =
+            (ArrayList<ProfessorConsultaDTO>) request.getAttribute("professoresList");
+
+    ArrayList<Disciplina> disciplinas =
+            (ArrayList<Disciplina>) request.getAttribute("disciplinas");
+
+    String busca = request.getAttribute("busca") != null
+            ? request.getAttribute("busca").toString()
+            : "";
+%>
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Listar Professores - Colégio Barão</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
+    <title>Professores</title>
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/tabelaSistema.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<jsp:include page="/WEB-INF/views/componentes/sidebar.jsp">
-    <jsp:param name="activePage" value="listarProfessor"/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
 
-<div class="main-content">
-
+<div class="topo">
     <h1>Professores</h1>
+    <button class="btn" onclick="abrirModal()">+ Cadastrar</button>
+</div>
 
-    <!-- FORM DE BUSCA -->
-    <form method="get" action="${pageContext.request.contextPath}/professores">
-        <input type="text" name="busca" placeholder="Buscar por nome ou email"
-               value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">
-        <button type="submit">Digite o email do professor</button>
-    </form>
+<form method="get"
+      action="${pageContext.request.contextPath}/admin/verProfessores"
+      class="busca">
 
-    <br>
+    <input type="text"
+           name="busca"
+           placeholder="Buscar professor"
+           value="<%= busca %>">
 
-    <!-- FORM PARA AÇÃO NA TABELA -->
-    <form method="post" action="${pageContext.request.contextPath}/professores/acao">
-        <table class="tabela-listagem">
-            <thead>
-                <tr>
-                    <th>Selecionar</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                </tr>
-            </thead>
-            <tbody>
-            <%
-                List<ProfessorResumo> lista = (List<ProfessorResumo>) request.getAttribute("listaProfessores");
+    <button class="btn">Buscar</button>
 
-                if (lista != null && !lista.isEmpty()) {
-                    for (ProfessorResumo p : lista) {
-            %>
-            <tr>
-                <td>
-                    <input type="checkbox" name="professorId" value="<%= p.getId() %>">
-                </td>
-                <td><%= p.getNome() %></td>
-                <td><%= p.getEmail() %></td>
-                <td><%= p.getTelefone() %></td>
-            </tr>
-            <%
-                    }
-                } else {
-            %>
-            <tr>
-                <td colspan="4" style="text-align:center;">Nenhum professor encontrado.</td>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
-        </table>
+</form>
 
-        <br>
-        <button type="submit" name="acao" value="excluir">Excluir selecionados</button>
-        <button type="submit" name="acao" value="editar">Editar selecionados</button>
-    </form>
+<div class="tabela">
+
+    <div class="table-header">
+        <span>Nome</span>
+        <span>Email</span>
+        <span>CPF</span>
+        <span>Disciplina</span>
+    </div>
+
+    <%
+        if (professoresList != null && !professoresList.isEmpty()) {
+
+            for (ProfessorConsultaDTO p : professoresList) {
+    %>
+
+    <div class="table-row">
+
+        <span><%= p.getNome() %></span>
+
+        <span><%= p.getEmail() %></span>
+
+        <span><%= p.getCpf() %></span>
+
+        <span>
+    <%= p.getDisciplina() %>
+</span>
+
+    </div>
+
+    <%
+        }
+    } else {
+    %>
+
+    <div class="empty">Nenhum professor encontrado.</div>
+
+    <%
+        }
+    %>
 
 </div>
+
+
+<div id="modalCadastro" class="modal">
+
+    <div class="modal-conteudo">
+
+        <h2>Cadastrar Professor</h2>
+
+        <form method="post"
+              action="${pageContext.request.contextPath}/admin/cadastrarProfessor">
+
+            <input type="text"
+                   name="nome"
+                   placeholder="Nome">
+
+            <input type="email"
+                   name="email"
+                   placeholder="Email">
+
+            <input type="text"
+                   name="cpf"
+                   placeholder="CPF">
+
+            <select name="idDisciplina">
+
+                <option value="">Selecione a disciplina</option>
+
+                <%
+                    if(disciplinas != null){
+                        for(Disciplina d : disciplinas){
+                %>
+
+                <option value="<%= d.getId() %>">
+                    <%= d.getNome() %>
+                </option>
+
+                <%
+                        }
+                    }
+                %>
+
+            </select>
+
+            <button type="submit" class="btn">
+                Cadastrar
+            </button>
+
+        </form>
+
+        <button class="fechar" onclick="fecharModal()">×</button>
+
+    </div>
+
+</div>
+
+<script>
+
+    function abrirModal(){
+        document.getElementById("modalCadastro").style.display="flex";
+    }
+
+    function fecharModal(){
+        document.getElementById("modalCadastro").style.display="none";
+    }
+
+</script>
 
 </body>
 </html>

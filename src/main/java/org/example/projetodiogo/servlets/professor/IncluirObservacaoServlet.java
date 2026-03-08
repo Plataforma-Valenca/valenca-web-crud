@@ -34,7 +34,7 @@ public class IncluirObservacaoServlet extends HttpServlet {
         Optional<Professor> professorOpt = professorDAO.buscarProfessorPorIdUsuario(usuario.getId());
         AlunoDAO alunoDAO = new AlunoDAO();
         Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdUsuario(usuario.getId());
-        String descricaoObs = req.getParameter("descricaoObs");
+        String descricaoObs = req.getParameter("descricao");
 
 
         try {

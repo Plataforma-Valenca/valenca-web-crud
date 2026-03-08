@@ -4,7 +4,6 @@ import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.exceptions.DuplicateEmailException;
 import org.example.projetodiogo.exceptions.EntityNotFoundException;
 import org.example.projetodiogo.exceptions.InvalidCredentialsException;
-import org.example.projetodiogo.model.AlunoConsultaDTO;
 import org.example.projetodiogo.model.Usuario;
 import org.example.projetodiogo.util.ConnectionFactory;
 import org.example.projetodiogo.util.HasherSenha;
@@ -38,7 +37,7 @@ public class UsuarioDAO {
             pstmt.setString(4, usuario.getCpf());
             pstmt.setString(5, usuario.getTipoUsuario().toUpperCase());
 
-            return (pstmt.executeUpdate() > 0);
+            resultado = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("[DAO] Erro ao inserir usuario: " + e.getMessage());
         } finally {
@@ -53,8 +52,45 @@ public class UsuarioDAO {
         return resultado;
     }
 
+    public boolean inserirProfessor(Usuario usuario) {
+        String sql = "INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) VALUES(?, ?, ?, ?, 'professor', ?, true)";
+
+        boolean resultado = false;
+
+        PreparedStatement pstmt = null;
+        Connection conn = null;
+
+        try {
+            if (ValidadorDeCampoUsado.ehCampoEmUso("usuarios", "email", usuario.getEmail()))
+                throw new DuplicateEmailException(usuario.getEmail());
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+            // Método para hashear a senha e guardar no banco após a criptografia
+            String senhaHash = HasherSenha.hashSenha(usuario.getSenha());
+
+            pstmt.setString(1, usuario.getNome());
+            pstmt.setString(2, usuario.getEmail());
+            pstmt.setString(3, senhaHash);
+            pstmt.setString(4, usuario.getCpf());
+            pstmt.setString(5, usuario.getUsername());
+
+            resultado = pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("[DAO] Erro ao inserir usuario: " + e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) ConnectionFactory.desconectar(conn);
+            } catch (SQLException e) {
+                System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
+            }
+        }
+        return resultado;
+    }
+
     public int inserirNovoAluno(Usuario usuario) {
-        String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, ?, false)";
+        String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, 'aluno', false)";
         int idGeradoUsuario = 0;
 
         PreparedStatement pstmt = null;
@@ -70,7 +106,6 @@ public class UsuarioDAO {
 
             pstmt.setString(1, senhaHash);
             pstmt.setString(2, usuario.getCpf());
-            pstmt.setString(3, "ALUNO");
 
             pstmt.executeUpdate();
 
@@ -95,8 +130,8 @@ public class UsuarioDAO {
     }
 
     // READ
-    public Optional<Usuario> validarLogin(String cpfMatriculaOuNomeUsuario) {
-        if (cpfMatriculaOuNomeUsuario.isEmpty()) {
+    public Optional<Usuario> validarLogin(String matriculaOuNomeUsuario) {
+        if (matriculaOuNomeUsuario.isEmpty()) {
             throw new InvalidCredentialsException();
         }
 
@@ -105,7 +140,7 @@ public class UsuarioDAO {
         String sql = """
                 SELECT * FROM usuarios u
         LEFT JOIN alunos a ON u.id_usuario = a.id_usuario
-        WHERE (u.username = ? OR u.cpf = ? OR a.matricula = ?)
+        WHERE (u.username = ? OR a.matricula = ?)
         AND u.cadastro_completo = true
                 """;
 
@@ -117,9 +152,8 @@ public class UsuarioDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
             
-            pstmt.setString(1, cpfMatriculaOuNomeUsuario);
-            pstmt.setString(2, cpfMatriculaOuNomeUsuario);
-            pstmt.setString(3, cpfMatriculaOuNomeUsuario);
+            pstmt.setString(1, matriculaOuNomeUsuario);
+            pstmt.setString(2, matriculaOuNomeUsuario);
 
             rs = pstmt.executeQuery();
 
@@ -139,7 +173,7 @@ public class UsuarioDAO {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            System.err.println("[DAO ERROR] Erro ao buscar usuário por email ou nome de usuário: " + cpfMatriculaOuNomeUsuario);
+            System.err.println("[DAO ERROR] Erro ao buscar usuário por matrícula ou nome de usuário: " + matriculaOuNomeUsuario);
             e.printStackTrace(System.err);
             throw new DataAccessException("Erro ao buscar usuário", e);
         } finally {
@@ -209,6 +243,109 @@ public class UsuarioDAO {
         }
     }
 
+    public Optional<Usuario> buscarPorIdProfessor(int idProfessor) {
+
+        String sql = """
+                SELECT * FROM usuarios u
+                JOIN professores p ON p.id_usuario = u.id_usuario
+                WHERE p.id_professor = ?;
+        """;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+
+            pstmt.setInt(1, idProfessor);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getInt("id_usuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("tipo"),
+                        rs.getBoolean("cadastro_completo")
+                );
+
+                return Optional.of(usuario);
+            } else {
+                throw new EntityNotFoundException("Professor, ", idProfessor);
+            }
+        } catch (SQLException e) {
+            System.err.println("[DAO ERROR] Erro ao buscar usuário por id do professo: " + idProfessor);
+            e.printStackTrace(System.err);
+            throw new DataAccessException("Erro ao buscar usuário", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
+        }
+    }
+
+    public Optional<Usuario> buscarPorEmail(String email) {
+
+        String sql = """
+                SELECT * FROM usuarios u
+                WHERE email = ?;
+        """;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+
+            pstmt.setString(1, email);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getInt("id_usuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("tipo"),
+                        rs.getBoolean("cadastro_completo")
+                );
+
+                return Optional.of(usuario);
+            } else {
+                throw new EntityNotFoundException("Email, ", email);
+            }
+        } catch (SQLException e) {
+            System.err.println("[DAO ERROR] Erro ao buscar usuário por email: " + email);
+            e.printStackTrace(System.err);
+            throw new DataAccessException("Erro ao buscar usuário", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
+        }
+    }
+
     // UPDATE
     public boolean atualizar(Usuario usuario) {
 
@@ -233,6 +370,44 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar usuário: " + e.getMessage());
             return false;
+        }
+    }
+
+    public void atualizarSenha(int idUsuario, String senhaNova) {
+
+        String sql = """
+        UPDATE usuarios
+        SET senha = ?
+        WHERE id_usuario = ?
+    """;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+            String senhaHash = HasherSenha.hashSenha(senhaNova);
+
+            pstmt.setString(1, senhaHash);
+            pstmt.setInt(2, idUsuario);
+
+            int linhasAfetadas = pstmt.executeUpdate();
+
+            if (linhasAfetadas == 0) {
+                throw new RuntimeException("Nenhum usuário encontrado para atualizar senha.");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar senha", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
         }
     }
 

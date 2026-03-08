@@ -20,7 +20,7 @@ public class DisciplinaDAO {
     public Disciplina buscarPorId(int idDisciplina) {
 
         String sql = """
-                SELECT nome FROM disciplinas
+                SELECT nome, id_professor FROM disciplinas
                 WHERE id_disciplina = ?
     """;
 
@@ -38,6 +38,7 @@ public class DisciplinaDAO {
 
             if (rs.next()) {
                 disciplina.setNome(rs.getString("nome"));
+                disciplina.setIdProfessor(rs.getInt("id_professor"));
                 return disciplina;
             }
 
@@ -57,7 +58,7 @@ public class DisciplinaDAO {
     public Optional<Disciplina> buscarPorIdProfessor(int idProfessor) {
 
         String query = """
-                SELECT nome FROM disciplinas
+                SELECT d.nome FROM disciplinas d
                 WHERE id_professor = ?
                 """;
 
@@ -100,7 +101,7 @@ public class DisciplinaDAO {
 
     public ArrayList<Disciplina> visualizarDisciplinas() {
 
-        String sql = "SELECT * FROM disciplinas";
+        String sql = "SELECT * FROM disciplinas ORDER BY id_disciplina;";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -116,7 +117,7 @@ public class DisciplinaDAO {
             while (rs.next()) {
                 Disciplina disciplina = new Disciplina(
                         rs.getInt("id_disciplina"),
-                        rs.getString("nome_disciplina"),
+                        rs.getString("nome"),
                         rs.getInt("id_professor")
                 );
 
@@ -164,6 +165,37 @@ public class DisciplinaDAO {
 
         } catch (SQLException e) {
             throw new DataAccessException("Erro ao buscar boletim", e);
+        }
+
+        return lista;
+    }
+    public List<Disciplina> buscarPorNome(String nome) {
+
+        String sql = """
+        SELECT * FROM disciplinas
+        WHERE LOWER(nome) LIKE ?
+    """;
+
+        List<Disciplina> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nome.toLowerCase() + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Disciplina d = new Disciplina(
+                        rs.getInt("id_disciplina"),
+                        rs.getString("nome"),
+                        rs.getInt("id_professor")
+                );
+                lista.add(d);
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar disciplina por nome", e);
         }
 
         return lista;

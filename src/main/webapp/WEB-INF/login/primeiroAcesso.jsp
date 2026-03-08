@@ -1,46 +1,112 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Primeiro Acesso - Colégio Barão</title>
-    
-    <!-- Fonte Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colégio Valença</title>
+
+    <link rel="icon" type="image/x-icon"
+          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 </head>
 
 <body>
+<div class="login-page">
 
-<div class="main-content">
+    <div class="login-left-box">
+        <div class="login-left-box-content">
 
-    <!-- Logo -->
-    <img src="imagens/logo.png" alt="Colégio Barão">
+            <div class="login-valenca-logo">
+                <img src="assets/img/icone-colegio-valenca.svg">
+                <h1>Colégio Valença</h1>
+            </div>
 
-    <h1>Primeiro acesso</h1>
+            <div class="login-left-box-content-form">
+                <div class="login-left-box-content-title">
+                    <h2>Seja bem-vindo(a)!</h2>
+                    <p>Preencha as suas informações para acessar a plataforma.</p>
+                </div>
 
-    <% String erro = (String) request.getAttribute("erro"); 
-       if (erro != null) { %>
-        <div class="error">
-            <%= erro %>
+                <form method="post" action="${pageContext.request.contextPath}/login" class="form-group">
+
+                    <div class="form-group-inputs">
+                        <div class="form-group-inputs-box">
+                            <div class="form-control input-primary">
+                                <h5>Nome completo</h5>
+                                <input type="text"
+                                       placeholder="Digite o seu nome completo"
+                                       name="loginUsuario"
+                                       required>
+                            </div>
+
+                            <div class="form-control input-primary">
+                                <h5>E-mail</h5>
+                                <input type="text"
+                                       placeholder="Digite o seu e-mail"
+                                       name="loginUsuario"
+                                       required>
+                            </div>
+
+                            <div class="form-control input-primary">
+                                <h5>Senha</h5>
+                                <input type="password"
+                                       placeholder="Digite sua senha"
+                                       name="senhaUsuario"
+                                       required>
+                            </div>
+
+                            <div class="form-control input-primary">
+                                <h5>Confirmar senha</h5>
+                                <input type="password"
+                                       placeholder="Digite sua senh novamente"
+                                       name="senhaUsuario"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="links">
+                            <a href="${pageContext.request.contextPath}/">
+                                Esqueci a senha
+                            </a>
+                        </div>
+
+                            <% if (request.getAttribute("erroLogin") != null) { %>
+                        <div class="error">
+                            <div class="mensagem" id="erroLogin">
+                                <%= request.getAttribute("erroLogin") %>
+                            </div>
+                            <%} %>
+
+                            <% if (request.getAttribute("mensagemSucesso") != null) { %>
+                            <div class="mensagem" id="mensagemSucesso">
+                                <%= request.getAttribute("mensagemSucesso") %>
+                            </div>
+                            <%} %>
+                        </div>
+
+                        <div class="form-group-enter">
+                            <button type="submit" class="login-button btn-primary">
+                                Entrar
+                            </button>
+                            <div class="login-first-access">
+                                <p>Primeiro acesso?</p>
+                                <a href="${pageContext.request.contextPath}/validarPreCadastro" class="login-first-access-link">
+                                    Clique aqui
+                                </a>
+                            </div>
+                        </div>
+                </form>
+
+            </div>
+
         </div>
-    <% } %>
+    </div>
 
-    <form action="validarPreCadastro" method="post" class="login-form">
-        
-        <input type="text" 
-               name="cpfMatricula" 
-               class="login-input"
-               placeholder="Digite seu CPF ou Matrícula"
-               required>
-
-        <button type="submit" class="login-button">
-            Continuar
-        </button>
-
-    </form>
-
-    <a href="login.jsp" class="voltar">Voltar para login</a>
+    <div class="login-right-box">
+        <img src="assets/img/login-main-image.svg">
+    </div>
 
 </div>
 

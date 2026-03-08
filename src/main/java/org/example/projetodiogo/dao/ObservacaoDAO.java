@@ -34,19 +34,22 @@ public class ObservacaoDAO {
         }
     }
 
-    // BUSCAR POR ID
-    public List<Observacao> buscarPorIdAluno(int idAluno) {
+    // BUSCAR TDAS AS OBSERVAÇÕES
+    public ArrayList<Observacao> visualizarObservacoes() {
 
-        String sql = "SELECT * FROM observacoes WHERE id_aluno = ?";
+        String sql = "SELECT * FROM observacoes";
 
-        List<Observacao> lista = new ArrayList<>();
+        ArrayList<Observacao> obsList = new ArrayList<>();
 
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-            stmt.setInt(1, idAluno);
+        try {
+            conn = ConnectionFactory.conectar();
+            stmt = conn.prepareStatement(sql);
 
-            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Observacao obs = new Observacao(
@@ -56,43 +59,87 @@ public class ObservacaoDAO {
                         rs.getInt("id_aluno"),
                         rs.getInt("id_professor")
                 );
-
-                return lista;
+                obsList.add(obs);
             }
 
         } catch (SQLException e) {
             System.out.println("Erro ao buscar observação: " + e.getMessage());
         }
-        return lista;
+        return obsList;
     }
 
-    // LISTAR POR ALUNO
-    public List<Observacao> listarPorIdAluno(int idAluno) {
+
+    // LISTAR POR ID ALUNO
+    public ArrayList<Observacao> buscarPorIdAluno(int idAluno) {
 
         String sql = "SELECT * FROM observacoes WHERE id_aluno = ?";
 
-        List<Observacao> lista = new ArrayList<>();
+        ArrayList<Observacao> obsList = new ArrayList<>();
 
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            stmt = conn.prepareStatement(sql);
 
             stmt.setInt(1, idAluno);
-            ResultSet rs = stmt.executeQuery();
+
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
-                lista.add(new Observacao(
+                Observacao obs = new Observacao(
                         rs.getInt("id_observacao"),
-                        rs.getInt("id_aluno"),
-                        rs.getInt("id_professor"),
                         rs.getString("descricao"),
-                        rs.getTimestamp("dt_envio")
-                ));
+                        rs.getTimestamp("data_envio"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_professor")
+                );
+                obsList.add(obs);
             }
-            return lista;
+
         } catch (SQLException e) {
-            System.out.println("Erro ao listar observações: " + e.getMessage());
+            System.out.println("Erro ao buscar observação: " + e.getMessage());
         }
-        return lista;
+        return obsList;
+    }
+
+    // LISTAR POR ID ALUNO E PROFESSOR
+    public ArrayList<Observacao> buscarPorIdAlunoIdProfessor(int idAluno, int idProfessor) {
+
+        String sql = "SELECT * FROM observacoes WHERE id_aluno = ? AND id_professor = ?";
+
+        ArrayList<Observacao> obsList = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, idAluno);
+            stmt.setInt(2, idProfessor);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Observacao obs = new Observacao(
+                        rs.getInt("id_observacao"),
+                        rs.getString("descricao"),
+                        rs.getTimestamp("dt_envio"),
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_professor")
+                );
+                obsList.add(obs);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar observação: " + e.getMessage());
+        }
+        return obsList;
     }
 
     // UPDATE

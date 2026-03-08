@@ -1,44 +1,65 @@
+<%@ page import="org.example.projetodiogo.model.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebar.css">
 
 <%
     String activePage = request.getParameter("activePage");
+
+    Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+    String nomeUsuario = usuario != null ? usuario.getNome() : "Usuário";
+
 %>
 
-<div class="sidebar">
+<aside class="sidebar">
+    <div class="sidebar-valenca-logo">
+        <div class="sidebar-valenca-logo-content">
+            <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg" height="30">
+            <h3>Colégio Valença</h3>
+        </div>
 
-    <!-- LOGO -->
-    <div class="logo-area">
-        <img src="${pageContext.request.contextPath}/assets/img/logoCB.svg" alt="Logo">
     </div>
 
-    <!-- MENU -->
-    <ul class="menu">
+    <div class="sidebar-top-box">
+        <ul class="sidebar-tabs-menu">
+            <li class="<%= "homeAdmin".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/homeAdmin">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-home.svg">
+                    Home
+                </a>
+            </li>
+
+            <li class="<%= "listarTurmas".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/verTurmas">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-aluno.svg">
+
+                    Turmas
+                </a>
+            </li>
 
 
-        <li class="<%= "listarAluno".equals(activePage) ? "active" : "" %>">
-            <a href="${pageContext.request.contextPath}/admin/verAlunos">
-                <img src="${pageContext.request.contextPath}/assets/img/aluno.png" class="icon">
-                <span>Alunos</span>
-            </a>
-        </li>
+            <li class="<%= "listarProfessor".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/verProfessores">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-professor.svg">
 
-        <li class="<%= "listarProfessores".equals(activePage) ? "active" : "" %>">
-            <a href="${pageContext.request.contextPath}/admin/verProfessores">
-                <img src="${pageContext.request.contextPath}/assets/img/professor.svg" class="icon">
-                <span>Professores</span>
-            </a>
-        </li>
+                    Professores
+                </a>
+            </li>
 
-        <li class="<%= "listarDisciplinas".equals(activePage) ? "active" : "" %>">
-            <a href="${pageContext.request.contextPath}/admin/verDisciplinas">
-                <img src="${pageContext.request.contextPath}/assets/img/disciplinas.png" class="icon">
-                <span>Disciplinas</span>
-            </a>
-        </li>
+            <li class="<%= "listarDisciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/verDisciplinasResumo">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-disciplinas.svg">
 
-    
+                    Disciplinas
+                </a>
+            </li>
+        </ul>
+    </div>
 
-    </ul>
+    <div class="sidebar-bottom-box">
+        <img src="${pageContext.request.contextPath}/assets/img/sidebar-main-image.svg">
+    </div>
 
-</div>
+</aside>

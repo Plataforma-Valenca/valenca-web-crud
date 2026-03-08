@@ -17,7 +17,7 @@ import org.example.projetodiogo.exceptions.EntityNotFoundException;
 
 public class AlunoDAO {
 
-    // VINCULAR CADA ALUNO COM TODAS AS DISCIPLINAS
+    // VINCULAR CADA ALUNO COM TODAS AS DISCIPLINAS E ALGUMA TURMA
     public void vincularAlunoADisciplinasTurma(int idAluno, int idTurma) throws SQLException {
         String sqlAlunoTurma = """
         INSERT INTO aluno_turma (id_aluno, id_turma, dt_entrada)
@@ -34,7 +34,6 @@ public class AlunoDAO {
         INSERT INTO notas (id_aluno, id_disciplina)
         SELECT ?, d.id_disciplina
         FROM disciplinas d
-        WHERE d.id_turma = ?
         AND NOT EXISTS (
             SELECT 1
             FROM notas n
@@ -79,11 +78,11 @@ public class AlunoDAO {
     }
 
     // INSERT
-    public boolean inserir(int idUsuario) {
+    public void inserir(int idUsuario) {
         String query = """
                 INSERT INTO alunos
                 (id_usuario, matricula)
-                VALUES (?, nextval('matricula')::varchar)
+                VALUES (?, nextval('seq_matricula')::varchar)
                 """;
 
         Connection conn = null;
@@ -96,11 +95,10 @@ public class AlunoDAO {
 
             pstmt.setInt(1, idUsuario);
 
-            return pstmt.executeUpdate() > 0;
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Erro ao inserir aluno: " + e.getMessage());
-            return false;
         }
     }
 
@@ -125,7 +123,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno();
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setIdUsuario(rs.getInt("id_usuario"));
-                aluno.setMatricula(rs.getInt("matricula"));
+                aluno.setMatricula(rs.getString("matricula"));
                 aluno.setDtMatricula(rs.getTimestamp("dt_matricula"));
 
                 return Optional.of(aluno);
@@ -169,7 +167,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno(
                         rs.getInt("id_aluno"),
                         rs.getInt("id_usuario"),
-                        rs.getInt("matricula"),
+                        rs.getString("matricula"),
                         rs.getTimestamp("dt_matricula")
                 );
 
@@ -179,6 +177,52 @@ public class AlunoDAO {
             }
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + idUsuario);
+            e.printStackTrace(System.err);
+            throw new DataAccessException("Erro ao buscar aluno", e);
+        } finally {
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (ps != null) ps.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
+            }
+        }
+    }
+
+    public Optional<Aluno> buscarPorIdAluno(int idAluno) {
+
+        String query = """
+                SELECT * FROM alunos
+                WHERE id_aluno = ?;
+                """;
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.conectar();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, idAluno);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Aluno aluno = new Aluno(
+                        rs.getInt("id_aluno"),
+                        rs.getInt("id_usuario"),
+                        rs.getString("matricula"),
+                        rs.getTimestamp("dt_matricula")
+                );
+
+                return Optional.of(aluno);
+            } else {
+
+                    return Optional.empty();
+            }
+        } catch (SQLException e) {
+            System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + idAluno);
             e.printStackTrace(System.err);
             throw new DataAccessException("Erro ao buscar aluno", e);
         } finally {
@@ -206,7 +250,7 @@ public class AlunoDAO {
 
             ps.setInt(1, aluno.getId());
             ps.setInt(2, aluno.getIdUsuario());
-            ps.setInt(3, aluno.getMatricula());
+            ps.setString(3, aluno.getMatricula());
             ps.setTimestamp(4, aluno.getDtMatricula());
             ps.setInt(5, aluno.getId());
 
@@ -238,4 +282,5 @@ public class AlunoDAO {
             return false;
         }
     }
+
 }

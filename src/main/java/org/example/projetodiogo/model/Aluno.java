@@ -5,14 +5,14 @@ import java.sql.Timestamp;
 public class Aluno {
 
     private int id;
-    private int matricula;
+    private String matricula;
     private int idUsuario;
     private Timestamp dtMatricula;
 
     // Método Construtor;
     public Aluno() {}
 
-    public Aluno(int id, int idUsuario, int matricula, Timestamp dtMatricula) {
+    public Aluno(int id, int idUsuario, String matricula, Timestamp dtMatricula) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.matricula = matricula;
@@ -25,7 +25,7 @@ public class Aluno {
         return id;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
@@ -43,7 +43,7 @@ public class Aluno {
         this.id = id;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 

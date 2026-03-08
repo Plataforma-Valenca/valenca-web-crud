@@ -1,32 +1,33 @@
 package org.example.projetodiogo.servlets.professor;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.projetodiogo.dao.AlunoConsultaDtoDAO;
+import org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
-import org.example.projetodiogo.model.AlunoConsultaDTO;
+import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 
 import java.io.IOException;
-import java.lang.management.OperatingSystemMXBean;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet("/professor/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
-        List<AlunoConsultaDTO> alunosList;
+        List<AlunoConsultaDTO> alunosList = new ArrayList<>();
+        AlunoConsultaDTO aluno;
 
         String busca = req.getParameter("busca");
 
         try {
             if (busca != null && !busca.isEmpty()) {
-                alunosList = alunoConsultaDao.buscarPorMatricula(busca);
+                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+                if (aluno != null) {
+                    alunosList.add(aluno);
+                }
             } else {
                 alunosList = alunoConsultaDao.buscarAlunos();
             }
@@ -34,8 +35,8 @@ public class VerAlunosServlet extends HttpServlet {
             req.setAttribute("alunosList", alunosList);
             req.setAttribute("busca", busca);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp");
-            dispatcher.forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp")
+                .forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
         }

@@ -9,31 +9,35 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.projetodiogo.dao.AlunoDAO;
 import org.example.projetodiogo.dao.BoletimDAO;
+import org.example.projetodiogo.dao.DisciplinaDAO;
+import org.example.projetodiogo.dao.UsuarioDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.Boletim;
+import org.example.projetodiogo.model.Disciplina;
+import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/VerBoletim")
+@WebServlet("/aluno/VerBoletim")
 public class VerBoletimServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        List<Boletim> boletimList;
-        BoletimDAO boletimDAO = new BoletimDAO();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
-        int idUsuario = (int) session.getAttribute("usuarioId");
-        int idAluno = alunoDAO.buscarPorIdUsuario(idUsuario).get().getId();
+        BoletimDAO boletimDAO = new BoletimDAO();
+        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        int idAluno = alunoDAO.buscarPorIdUsuario(usuario.getId()).get().getId();
+        ArrayList<Disciplina> disciplinasList = disciplinaDAO.visualizarDisciplinas();
 
-        try {
-            boletimList = boletimDAO.visualizarBoletim(idAluno);
+        ArrayList<Boletim> boletimList = boletimDAO.visualizarBoletim(idAluno);
 
-            req.setAttribute("boletimList", boletimList);
+        req.setAttribute("disciplinasList", disciplinasList);
+        req.setAttribute("boletimList", boletimList);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/aluno/boletim.jsp");
-            dispatcher.forward(req, resp);
-        } catch (DataAccessException e) {
-            throw new DataAccessException("Erro ao acessar o banco de dados", e);
-        }
+        req.getRequestDispatcher("/WEB-INF/aluno/boletim.jsp")
+                .forward(req, resp);
     }
 }

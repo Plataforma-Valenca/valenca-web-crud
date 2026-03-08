@@ -1,104 +1,155 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="org.example.projetodiogo.model.Turma" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.projetodiogo.model.AlunoConsultaDTO" %>
 
+<%
+    ArrayList<AlunoConsultaDTO> alunosList =
+            (ArrayList<AlunoConsultaDTO>) request.getAttribute("alunosList");
+
+    List<Turma> turmasList = (List<Turma>) request.getAttribute("turmasList");
+
+    String busca = request.getAttribute("busca") != null
+            ? request.getAttribute("busca").toString()
+            : "";
+%>
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Listar Alunos - Admin</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+
+    <title>Alunos</title>
+
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/assets/css/tabelaSistema.css">
+
 </head>
+
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp" />
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
 
-<div class="main-content">
+<div class="topo">
+    <h1>Alunos</h1>
+    <button class="btn" onclick="abrirModal()">+ Cadastrar</button>
+</div>
 
-    <h1>Listar Alunos</h1>
+<form method="get"
+      action="${pageContext.request.contextPath}/admin/verAlunos"
+      class="busca">
 
-    <!-- FORM DE BUSCA -->
-    <form method="get"
-          action="${pageContext.request.contextPath}/admin/verAlunos"
-          class="form-busca">
+    <input type="text"
+           name="busca"
+           placeholder="Buscar por cpf"
+           value="<%= busca %>">
 
-        <input type="text"
-               name="busca"
-               placeholder="Matrícula do aluno"
-               value="<%= request.getAttribute("busca") != null ? request.getAttribute("busca") : "" %>">
+    <button class="btn">Buscar</button>
 
-        <button type="submit" class="btn btn-primary">Buscar</button>
-    </form>
+</form>
 
+<div class="tabela">
 
-    <!-- FORM PARA AÇÕES NA TABELA -->
-    <form method="post"
-          action="${pageContext.request.contextPath}/admin/alunos/acao">
+    <div class="table-header">
+        <span>Nome</span>
+        <span>Matrícula</span>
+        <span>CPF</span>
+        <span>Turma</span>
+    </div>
 
-        <table class="tabela-listagem">
+    <%
+        if (alunosList != null && !alunosList.isEmpty()) {
 
-            <thead>
-            <tr>
-                <th>Selecionar</th>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Matrícula</th>
-                <th>Turma</th>
-            </tr>
-            </thead>
+            for (AlunoConsultaDTO aluno : alunosList) {
+    %>
 
-            <tbody>
-            <%
-                List<AlunoConsultaDTO> alunosList =
-                        (List<AlunoConsultaDTO>) request.getAttribute("alunosList");
+    <div class="table-row">
 
-                if (alunosList != null && !alunosList.isEmpty()) {
-                    for (AlunoConsultaDTO aluno : alunosList) {
-            %>
-            <tr>
-                <td>
-                    <input type="checkbox"
-                           name="alunoId"
-                           value="<%= aluno.getId() %>">
-                </td>
-                <td><%= aluno.getNome() %></td>
-                <td><%= aluno.getCpf() %></td>
-                <td><%= aluno.getMatricula() %></td>
-                <td><%= aluno.getTurma() %></td>
-            </tr>
-            <%
-                }
-            } else {
-            %>
-            <tr>
-                <td colspan="5" style="text-align:center;">
-                    Nenhum aluno encontrado.
-                </td>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
+<span>
+<a href="${pageContext.request.contextPath}/admin/verPerfilAluno?matricula=<%= aluno.getMatricula() %>">
+<%= aluno.getNome() %>
+</a>
+</span>
 
-        </table>
+        <span><%= aluno.getMatricula() %></span>
+        <span><%= aluno.getCpf() %></span>
+        <span><%= aluno.getTurma() %></span>
 
-        <br>
+    </div>
 
-        <button type="submit"
-                name="acao"
-                value="excluir"
-                class="btn btn-danger">
-            Excluir selecionados
-        </button>
+    <%
+        }
+    } else {
+    %>
 
-        <button type="submit"
-                name="acao"
-                value="editar"
-                class="btn btn-primary">
-            Editar selecionados
-        </button>
+    <div class="empty">Nenhum aluno encontrado.</div>
 
-    </form>
+    <%
+        }
+    %>
 
 </div>
+
+
+<div id="modalCadastro" class="modal">
+
+    <div class="modal-conteudo">
+
+        <h2>Cadastrar Aluno</h2>
+
+        <form method="post"
+              action="${pageContext.request.contextPath}/admin/inserirAluno">
+
+            <input type="text" name="cpf" placeholder="CPF" required>
+
+            <input type="password"
+                   name="senhaProvisoria"
+                   placeholder="Senha Provisória"
+                   required>
+
+            <select name="idTurma" required>
+
+                <%
+                    for(Turma t : turmasList){
+                %>
+
+                <option value="<%= t.getId() %>">
+                    <%= t.getNome().substring(0,1).toUpperCase() %>
+                </option>
+
+                <%
+                    }
+                %>
+
+            </select>
+
+            <div class="modal-actions">
+
+                <button type="button" onclick="fecharModal()">Cancelar</button>
+
+                <button class="btn" type="submit">Cadastrar</button>
+
+            </div>
+
+        </form>
+
+        <button class="fechar" onclick="fecharModal()">×</button>
+
+    </div>
+
+</div>
+
+<script>
+
+    function abrirModal(){
+        document.getElementById("modalCadastro").style.display="flex";
+    }
+
+    function fecharModal(){
+        document.getElementById("modalCadastro").style.display="none";
+    }
+
+</script>
 
 </body>
 </html>
