@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
@@ -43,7 +43,7 @@
                 </span>
 
                 <div class="card-actions">
-                    <i class="fa-solid fa-pencil"></i>
+                    <i class="fa-solid fa-pen"></i>
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </a>

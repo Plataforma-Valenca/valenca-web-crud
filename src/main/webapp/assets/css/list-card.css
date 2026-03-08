@@ -75,3 +75,9 @@
     display: flex;
     gap: 10px;
 }
+.fa-pen:hover {
+    color: #1F8AA6;
+}
+.fa-trash:hover {
+    color: #F04770;
+}

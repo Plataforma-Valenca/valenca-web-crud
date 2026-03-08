@@ -4,12 +4,11 @@
 
 <html>
 <head>
-    <title>Colégio Valença - Administração</title>
+    <title>Colégio Valença</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
-    <%-- FontAwesome para ícones de edição e lixeira --%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link rel="icon" type="image/x-icon"
@@ -24,10 +23,12 @@
 
 <div class="page-content">
 
-    <header class="page-grid-header" style="display: flex; justify-content: space-between; align-items: center;">
-        <h1 class="page-grid-header-title">Disciplinas</h1>
-        <button class="btn-primary" style="width: 150px;">
-            <i class="fa-solid fa-plus"></i> Cadastrar
+    <header class="page-grid-header" style="flex-direction: row; justify-content: space-between; align-items: flex-end;">
+        <div>
+            <h1 class="page-grid-header-title">Disciplinas</h1>
+        </div>
+        <button class="btn-primary" style="width: 150px; margin-bottom: 5px;">
+           + Cadastrar
         </button>
     </header>
 
@@ -39,27 +40,32 @@
                 if (disciplinasList != null && !disciplinasList.isEmpty()) {
                     for (DisciplinasResumoDTO d : disciplinasList) {
             %>
-            <div class="card-items" style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="card-info">
-                    <strong style="display: block; font-size: 1.1rem;"><%= d.getNomeFormatado() %></strong>
-                    <p style="font-size: 0.85rem; color: #666; margin: 4px 0;">
-                        Prof. <%= d.getNomeProfessor() != null ? d.getNomeProfessor() : "Não atribuído" %>
-                    </p>
-                    <p style="font-size: 0.75rem; color: #999;">
-                        Turmas: <%= d.getQuantidadeTurmas() %>
+            <div class="card-items">
+                <div class="card-items-infos">
+                    <h4><%= d.getNomeFormatado() %></h4>
+                    <p style="font-weight: 400; color: #535353">
+                        <%= d.getNomeProfessor() != null ? "Prof. " + d.getNomeProfessor() : "Sem professor" %>
                     </p>
                 </div>
 
-                <div class="card-actions" style="display: flex; gap: 15px; color: #535353;">
-                    <a href="#" title="Editar" style="color: inherit;"><i class="fa-solid fa-pen"></i></a>
-                    <a href="#" title="Excluir" style="color: #E74C3C;"><i class="fa-solid fa-trash"></i></a>
+                <div class="card-actions">
+                    <a href="${pageContext.request.contextPath}/admin/editarDisciplina?id=<%= d.getIdDisciplina() %>"
+                       title="Editar" style="color: #535353; font-size: 1.1rem;">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/admin/excluirDisciplina?id=<%= d.getIdDisciplina() %>"
+                       title="Excluir" style="color: #E74C3C; font-size: 1.1rem;">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
                 </div>
             </div>
             <%
                 }
             } else {
             %>
-            <p class="no-data">Nenhuma disciplina cadastrada.</p>
+            <p class="no-data" style="grid-column: span 3; text-align: center; color: #999; margin-top: 20px;">
+                Nenhuma disciplina cadastrada.
+            </p>
             <%
                 }
             %>
