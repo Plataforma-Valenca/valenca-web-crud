@@ -15,35 +15,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
-
-    <style>
-
-        .popup-menu {
-            display: none;
-            position: absolute;
-            top: 110%;
-            right: 0;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 10px;
-            width: 170px;
-            z-index: 100;
-        }
-        .popup-menu a {
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        .popup-menu a:hover {
-            background: #f5f5f5;
-        }
-    </style>
 </head>
 
 <body>
@@ -55,7 +26,7 @@
     <header class="header-home">
         <div class="header-profile" onclick="togglePopup()" style="position: relative;">
 
-            <img src="${pageContext.request.contextPath}/assets/img/personagem.png" alt="Perfil">
+            <img src="${pageContext.request.contextPath}/assets/img/icon-profile.svg" height="300" >
 
             <div class="header-profile-infos">
                 <b><%= nomeUsuario %></b>

@@ -19,7 +19,7 @@
 </jsp:include>
 
 <div class="page-content">
-    <header class="page-grid-header">
+    <header class="page-grid-header" style="margin: 5vh">
         <div class="page-grid-header-state">
             <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas">Disciplinas</a>
             <p>></p>

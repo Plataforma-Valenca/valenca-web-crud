@@ -17,7 +17,7 @@
 <aside class="sidebar">
     <div class="sidebar-valenca-logo">
         <div class="sidebar-valenca-logo-content">
-            <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg" height="50">
+            <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg" height="30">
             <h3>Colégio Valença</h3>
         </div>
     </div>

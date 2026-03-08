@@ -57,7 +57,7 @@
     <header class="header-home">
         <div class="header-profile" onclick="togglePopup()" style="position: relative;">
 
-            <img src="${pageContext.request.contextPath}/assets/img/personagem.png" alt="Perfil">
+            <img src="${pageContext.request.contextPath}/assets/img/icon-profile.svg" height="300" >
 
             <div class="header-profile-infos">
                 <b><%= nomeUsuario %></b>
