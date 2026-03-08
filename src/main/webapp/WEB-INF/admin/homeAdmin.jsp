@@ -1,149 +1,99 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.example.projetodiogo.model.Usuario" %>
 
 <%
-  Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-  String nomeUsuario = usuario != null ? usuario.getNome() : "Usuário";
-  String cargoUsuario = usuario != null ? usuario.getTipoUsuario() : "";
+    // Lógica consolidada de usuário
+    Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+    String nomeUsuario = (usuario != null) ? usuario.getNome() : "Usuário";
+    String cargoUsuario = (usuario != null) ?
+            usuario.getTipoUsuario().substring(0, 1).toUpperCase() + usuario.getTipoUsuario().substring(1).toLowerCase() : "";
 %>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+    <meta charset="UTF-8">
+    <title>Colégio Valença</title>
 
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 
-  <style>
-
-    body{
-      font-family: Arial;
-      background:#f5f5f5;
-      margin:0;
-    }
-
-    .top-bar{
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      padding:20px 40px;
-    }
-
-    .usuario{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      cursor:pointer;
-      position:relative;
-    }
-
-    .usuario img{
-      width:45px;
-      height:45px;
-      border-radius:50%;
-    }
-
-    .nome{
-      font-weight:bold;
-      color:#2a2356;
-    }
-
-    .cargo{
-      font-size:13px;
-      color:#777;
-    }
-
-    /* POPUP */
-
-    .popup{
-      display:none;
-      position:absolute;
-      top:60px;
-      right:0;
-      background:white;
-      border-radius:10px;
-      box-shadow:0 2px 10px rgba(0,0,0,0.15);
-      padding:15px;
-      width:150px;
-    }
-
-    .popup a{
-      text-decoration:none;
-      color:#333;
-      display:block;
-      padding:8px;
-      border-radius:6px;
-    }
-
-    .popup a:hover{
-      background:#f0f0f0;
-    }
-
-    .titulo{
-      text-align:center;
-      margin-top:100px;
-      font-size:32px;
-      color:#2a2356;
-    }
-
-  </style>
-
+    <style>
+        /* Estilização do Popup Menu para garantir o funcionamento correto */
+        .popup-menu {
+            display: none;
+            position: absolute;
+            top: 110%; /* Posiciona logo abaixo do perfil */
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 10px;
+            width: 170px;
+            z-index: 100;
+        }
+        .popup-menu a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .popup-menu a:hover {
+            background: #f5f5f5;
+        }
+    </style>
 </head>
 
 <body>
 <jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
 
+<div class="page-content">
+    <header class="header-home">
+        <div class="header-profile" onclick="togglePopup()" style="position: relative;">
 
-<div class="top-bar">
+            <img src="${pageContext.request.contextPath}/assets/img/personagem.png" alt="Perfil">
 
-  <div class="usuario" onclick="togglePopup()">
+            <div class="header-profile-infos">
+                <b><%= nomeUsuario %></b>
+                <p><%= cargoUsuario %></p>
+            </div>
 
+            <div id="popupMenu" class="popup-menu">
+                <a href="${pageContext.request.contextPath}/logout">
+                    Sair da conta
+                    <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg" height="18">
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <img src="${pageContext.request.contextPath}/assets/img/personagem.png">
+    <main class="main-home">
+        <div class="main-home-title">
+            <h1>Olá, o que você procura?</h1>
+        </div>
 
-    <div>
-      <div class="nome"><%= nomeUsuario %></div>
-      <div class="cargo"><%= cargoUsuario %></div>
-    </div>
-
-    <div id="popupMenu" class="popup">
-
-      <a href="${pageContext.request.contextPath}/logout">
-        Sair
-      </a>
-
-    </div>
-
-  </div>
-
+    </main>
 </div>
 
-<h1 class="titulo">
-  Olá, o que você procura?
-</h1>
-
 <script>
-
-  function togglePopup(){
-
-    let popup = document.getElementById("popupMenu");
-
-    if(popup.style.display === "block"){
-      popup.style.display = "none";
-    }else{
-      popup.style.display = "block";
+    function togglePopup() {
+        const popup = document.getElementById("popupMenu");
+        popup.style.display = (popup.style.display === "block") ? "none" : "block";
     }
 
-  }
-
-  window.onclick = function(event){
-
-    if(!event.target.closest(".usuario")){
-      document.getElementById("popupMenu").style.display = "none";
+    // Fecha o popup se clicar em qualquer lugar fora do perfil
+    window.onclick = function(event) {
+        if (!event.target.closest('.header-profile')) {
+            const popup = document.getElementById("popupMenu");
+            if (popup) popup.style.display = "none";
+        }
     }
-
-  }
-
 </script>
 
 </body>
