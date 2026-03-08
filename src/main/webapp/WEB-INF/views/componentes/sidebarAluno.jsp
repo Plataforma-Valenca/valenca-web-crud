@@ -25,6 +25,13 @@
     <div class="sidebar-top-box">
         <ul class="sidebar-tabs-menu">
 
+            <li class="<%= "home".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/aluno/home">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-home.svg">
+                    Home
+                </a>
+            </li>
+
             <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-disciplinas.svg">

@@ -37,12 +37,12 @@
 
     <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px;">
         <div class="aluno-details-infos">
-            <div class="aluno-details-infos-box">
+            <div class="details-infos-box">
                 <h4>Matrícula</h4>
                 <p><%= request.getAttribute("matricula") != null ? request.getAttribute("matricula") : "--" %></p>
             </div>
 
-            <div class="aluno-details-infos-box">
+            <div class="details-infos-box">
                 <h4>Turma</h4>
                 <p><%= request.getAttribute("nomeTurma") != null ? request.getAttribute("nomeTurma") : "--" %></p>
             </div>

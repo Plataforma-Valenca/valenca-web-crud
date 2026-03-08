@@ -30,12 +30,15 @@
     <div class="page-content">
         <header class="header-home">
             <div class="header-profile">
-                <img src="${pageContext.request.contextPath}/assets/img/icon-woman-profile.svg" height="50">
+                <img src="${pageContext.request.contextPath}/assets/img/icon-woman-profile.svg" height="60">
 
                 <div class="header-profile-infos">
                     <b><%= nomeUsuario %></b>
                     <p><%= tipoUsuario %></p>
                 </div>
+
+                <a href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg"></a>
+
             </div>
         </header>
 
