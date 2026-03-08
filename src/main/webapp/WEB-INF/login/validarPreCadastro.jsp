@@ -45,7 +45,7 @@
                                 <h5>CPF ou Matrícula</h5>
                                 <input type="text"
                                        placeholder="Digite seu CPF ou Matrícula"
-                                       name="inputValidacao"
+                                       name="inputValidacao" min="11" max="11"
                                        required>
                             </div>
 
