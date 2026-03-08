@@ -1,166 +1,121 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.projetodiogo.model.Disciplina" %>
+<%@ page import="org.example.projetodiogo.model.DTO.DisciplinasResumoDTO" %>
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Disciplinas</title>
+    <title>Colégio Valença</title>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="icon" type="image/x-icon"
+          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+    <jsp:param name="activePage" value="disciplinas" />
+</jsp:include>
 
-<h1>Disciplinas cadastradas</h1>
+<div class="page-content">
 
-<div class="cards-grid">
-    <%
-        List<Disciplina> disciplinasList =
-                (List<Disciplina>) request.getAttribute("disciplinasList");
+    <header class="page-grid-header" style="flex-direction: row; justify-content: space-between; align-items: flex-end;">
+        <div>
+            <h1 class="page-grid-header-title">Disciplinas</h1>
+        </div>
+        <button class="btn-primary" style="width: 150px; margin-bottom: 5px;" onclick="abrirModal()">
+            + Cadastrar
+        </button>
+    </header>
 
-        if (disciplinasList != null && !disciplinasList.isEmpty()) {
-            for (Disciplina d : disciplinasList) {
-    %>
+    <main class="page-grid-main">
+        <div class="page-grid-main-content card-grid">
+            <%
+                List<DisciplinasResumoDTO> disciplinasList = (List<DisciplinasResumoDTO>) request.getAttribute("resumoList");
 
-    <div class="card">
-        <div class="card-body">
-            <div class="card-titulo">
-                <%= d.getNome() %>
+                if (disciplinasList != null && !disciplinasList.isEmpty()) {
+                    for (DisciplinasResumoDTO d : disciplinasList) {
+            %>
+            <div class="card-items">
+                <div class="card-items-infos">
+                    <h4><%= d.getNomeFormatado() %></h4>
+                    <p style="font-weight: 400; color: #535353">
+                        <%= d.getNomeProfessor() != null ? "Prof. " + d.getNomeProfessor() : "Sem professor" %>
+                    </p>
+                </div>
+
+                <div class="card-actions">
+                    <a href="${pageContext.request.contextPath}/admin/editarDisciplina?id=<%= d.getIdDisciplina() %>"
+                       title="Editar" style="color: #535353; font-size: 1.1rem;">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/admin/excluirDisciplina?id=<%= d.getIdDisciplina() %>"
+                       onclick="return confirm('Tem certeza que deseja excluir esta disciplina?')"
+                       title="Excluir" style="color: #E74C3C; font-size: 1.1rem;">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </div>
             </div>
+            <%
+                }
+            } else {
+            %>
+            <p class="no-data" style="grid-column: span 3; text-align: center; color: #999; margin-top: 20px;">
+                Nenhuma disciplina cadastrada.
+            </p>
+            <%
+                }
+            %>
         </div>
+    </main>
 
-        <div class="card-footer">
-            <span class="icon-btn">&#9998;</span>
-        </div>
-    </div>
-
-    <%
-        }
-    } else {
-    %>
-
-    <div class="empty">Nenhuma disciplina encontrada.</div>
-
-    <%
-        }
-    %>
 </div>
 
+<div id="modalCadastro" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 20px; color: var(--blue-primary);">Nova Disciplina</h2>
+
+        <form action="${pageContext.request.contextPath}/admin/cadastrarDisciplina" method="post">
+            <div class="form-control">
+                <label>Nome da Disciplina</label>
+                <input type="text" name="nome" placeholder="Ex: Matemática, História..." required
+                       style="padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px;">
+            </div>
+
+            <div class="modal-footer" style="display: flex; gap: 10px; margin-top: 10px;">
+                <button type="submit" class="btn-primary" style="flex: 1;">Salvar</button>
+                <button type="button" class="btn-secondary" onclick="fecharModal()"
+                        style="flex: 1; background: #eee; border: none; border-radius: 10px; cursor: pointer;">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirModal() {
+        const modal = document.getElementById("modalCadastro");
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function fecharModal() {
+        const modal = document.getElementById("modalCadastro");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById("modalCadastro");
+        if (event.target === modal) {
+            fecharModal();
+        }
+    }
+</script>
 </body>
 </html>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f0f2f2;
-            min-height: 100vh;
-
-            margin-left: 22vw;
-            width: 78vw;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 40px;
-        }
-
-        h1 {
-            font-size: 1.7rem;
-            font-weight: 600;
-            color: #2e2e2e;
-            margin-bottom: 48px;
-            text-align: center;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .card {
-            background-color: #d6e5e3;
-            border-radius: 16px;
-            padding: 28px 24px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 170px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-body {
-            flex: 1;
-        }
-
-        .card-titulo {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #3a3a3a;
-            margin-bottom: 6px;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-
-        .icon-btn {
-            width: 30px;
-            height: 30px;
-            border: 1.5px solid #7aada7;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4a8c87;
-            font-size: 1rem;
-            text-decoration: none;
-        }
-
-        .icon-btn:hover {
-            background-color: #b0d0cc;
-        }
-
-        .empty {
-            grid-column: 1 / -1;
-            text-align: center;
-            color: #888;
-            font-size: 0.95rem;
-            padding: 40px;
-        }
-
-        @media (max-width: 992px) {
-            body {
-                margin-left: 0;
-                width: 100%;
-            }
-
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>

@@ -9,33 +9,72 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completar Cadastro - Alunos</title>
-    <link rel="stylesheet" href="assets/css/login.css">
+    <title>Colégio Valença</title>
+    <link rel="icon" type="image/x-icon" href="src/main/webapp/assets/img/icone-colegio-valenca.svg">
+
+    <link rel="stylesheet" href="src/main/webapp/assets/css/login.css">
 </head>
 <body>
-<div class="main-content">
-    <img src="assets/img/logoCB.svg">
 
-    <h1>Bem-vindo(a)!</h1>
+<div class="finalizar-cadastro-content">
 
-    <form class="login-form" method="post" action="${pageContext.request.contextPath}/FinalizarCadastroAluno">
-        <input type="text" name="nome" placeholder="Digite o seu nome completo" class="login-input" required>
+    <% String erro = (String) request.getAttribute("erro");
+        if (erro != null) { %>
+    <div class="error">
+        <%= erro %>
+    </div>
+    <% } %>
 
-        <input type="email" name="email" placeholder="Digite seu e-mail" class="login-input" required>
+    <div id="finalizar-cadastro-left-box">
+        <div id="finalizar-cadastro-left-box-content">
+            <div class="login-logo-valenca">
+                <img src="src/main/webapp/assets/img/icone-colegio-valenca.svg">
+                <h1>Colégio Valença</h1>
+            </div>
 
-        <input type="password" name="senha" placeholder="Senha" class="login-input" required>
+            <div id="finalizar-cadastro-welcome-text">
+                <h1>Seja bem-vindo(a)</h1>
+                <p>Preencha as suas informações para acessar a plataforma.</p>
+            </div>
 
-        <input type="password" name="confirmarSenha" placeholder="Confirmar senha" class="login-input" required>
+            <form class="finalizar-cadastro-form" method="post" action="${pageContext.request.contextPath}/FinalizarCadastroAluno">
 
-        <% if (request.getAttribute("erroLogin") != null) { %>
-        <div class="error">
-            <%= request.getAttribute("erroLogin") %>
+                <div id="finalizar-cadastro-form-nome">
+                    <h5>Nome completo</h5>
+                    <input type="text" name="nome" placeholder="Digite o seu nome completo" class="login-input" required>
+                </div>
+
+                <div id="finalizar-cadastro-form-email">
+                    <h5>E-mail / Nome de usuário</h5>
+                    <input type="email" name="email" placeholder="Digite seu e-mail" class="login-input" required>
+                </div>
+
+                <div id="finalizar-cadastro-form-senha">
+                    <h5>Senha</h5>
+                    <input type="password" name="senha" placeholder="Senha" class="login-input" required>
+                </div>
+
+
+                <div id="finalizar-cadastro-form-confirmar-senha">
+                    <h5>Confirmar senha</h5>
+                    <input type="password" name="confirmarSenha" placeholder="Confirmar senha" class="login-input" required>
+                </div>
+
+                <% if (request.getAttribute("erroLogin") != null) { %>
+                <div class="error">
+                    <%= request.getAttribute("erroLogin") %>
+                </div>
+                <%} %>
+
+                <button type="submit" class="login-button">Finalizar</button>
+            </form>
+
         </div>
-        <%} %>
+    </div>
 
-        <button type="submit" class="login-button">Finalizar</button>
-    </form>
+    <div id="finalizar-cadastro-right-box">
+        <img href="src/main/webapp/assets/img/login-image.png">
+    </div>
 </div>
 </body>
 </html>

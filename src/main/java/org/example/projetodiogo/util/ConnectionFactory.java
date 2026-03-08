@@ -23,9 +23,11 @@ public class ConnectionFactory {
 
     public static Connection conectar() {
         try {
-            final String URL = System.getenv("URL");
-            final String USER = System.getenv("USER");
-            final String PASSWORD = System.getenv("PASSWORD");
+            final String URL = System.getenv("DB_URL");
+            final String USER = System.getenv("DB_USER");
+            final String PASSWORD = System.getenv("DB_PASSWORD");
+
+
 
             if (URL == null || URL.isEmpty()) {
                 throw new ConfigurationException(

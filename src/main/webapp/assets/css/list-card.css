@@ -1,0 +1,83 @@
+.card-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin-top: 30px;
+    align-content: start;
+    height: fit-content;
+}
+
+.card-items {
+    background-color: #FAFAFA;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 85px;
+    padding: 0 25px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.card-items:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.card-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+}
+
+.btn-icon img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.btn-icon:hover img {
+    opacity: 1;
+}
+.card-items-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.card-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+.fa-pen:hover {
+    color: #1F8AA6;
+}
+.fa-trash:hover {
+    color: #F04770;
+}

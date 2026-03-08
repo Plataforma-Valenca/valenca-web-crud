@@ -1,8 +1,9 @@
 <%@ page import="org.example.projetodiogo.model.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebarAdm.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
 <%
     String activePage = request.getParameter("activePage");
@@ -11,78 +12,55 @@
 
     String nomeUsuario = usuario != null ? usuario.getNome() : "Usuário";
 
-    String tipoUsuario = "";
-    if (usuario != null && usuario.getTipoUsuario() != null) {
-        tipoUsuario = usuario.getTipoUsuario().substring(0,1).toUpperCase()
-                + usuario.getTipoUsuario().substring(1);
-    }
 %>
 
-<div id="page">
-    <aside id="aside">
-        <div class="aside-content">
-
-            <!-- LOGO -->
-            <div class="box-info">
-
-                <div id="logo-colegio">
-                    <!-- 🔥 COLOQUE SUA LOGO AQUI -->
-                    <img src="${pageContext.request.contextPath}/assets/img/logoCB.svg" height="70">
-                </div>
-
-                <!-- USUÁRIO -->
-                <div class="box-info-2">
-                    <div class="user-info">
-
-                        <div class="user-photo">
-                            <!-- 🔥 COLOQUE O AVATAR AQUI -->
-                            <img src="${pageContext.request.contextPath}/assets/img/icon-avatar.jpg" height="40">
-                        </div>
-
-                        <div class="user-info-names">
-                            <span id="user-name">
-                                <b><%= nomeUsuario %></b>
-                            </span>
-                            <span id="user-description">
-                                <%= tipoUsuario %>
-                            </span>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- MENU -->
-            <div class="box-tabs">
-                <ul class="menu-tabs">
-
-                    <li class="<%= "listarAluno".equals(activePage) ? "active" : "" %>">
-                        <a href="${pageContext.request.contextPath}/admin/verAlunos">
-                            <i class="fa-solid fa-user-graduate"></i> <!-- pode trocar -->
-                            <span>Alunos</span>
-                        </a>
-                    </li>
-
-                    <li class="<%= "listarProfessor".equals(activePage) ? "active" : "" %>">
-                        <a href="${pageContext.request.contextPath}/admin/verProfessores">
-                            <i class="fa-solid fa-chalkboard-user"></i>
-                            <span>Professores</span>
-                        </a>
-                    </li>
-                    <li class="<%= "listarDisciplina".equals(activePage) ? "active" : "" %>">
-                        <a href="${pageContext.request.contextPath}/admin/verDisciplinas">
-                            <i class="fa-solid fa-book"></i>
-                            <span>Disciplinas</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-            <div id="btn-logout">
-                <a href="${pageContext.request.contextPath}/logout"><img src="${pageContext.request.contextPath}/assets/img/btn-logout.svg" height="40"></a>
-            </div>
-
+<aside class="sidebar">
+    <div class="sidebar-valenca-logo">
+        <div class="sidebar-valenca-logo-content">
+            <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg" height="30">
+            <h3>Colégio Valença</h3>
         </div>
-    </aside>
-</div>
+
+    </div>
+
+    <div class="sidebar-top-box">
+        <ul class="sidebar-tabs-menu">
+            <li class="<%= "home".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/dashboard">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-home.svg">
+                    Home
+                </a>
+            </li>
+
+            <li class="<%= "turmas".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/verTurmas">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-aluno.svg">
+
+                    Turmas
+                </a>
+            </li>
+
+
+            <li class="<%= "listarProfessor".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/verProfessores">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-professor.svg">
+
+                    Professores
+                </a>
+            </li>
+
+            <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
+                <a href="${pageContext.request.contextPath}/admin/verDisciplinasResumo">
+                    <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-disciplinas.svg">
+
+                    Disciplinas
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="sidebar-bottom-box">
+        <img src="${pageContext.request.contextPath}/assets/img/sidebar-main-image.svg">
+    </div>
+
+</aside>

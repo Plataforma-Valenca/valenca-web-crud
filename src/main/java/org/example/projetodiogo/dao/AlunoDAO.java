@@ -1,11 +1,11 @@
 package org.example.projetodiogo.dao;
 
 import org.example.projetodiogo.model.Aluno;
-import java.sql.Connection;
+
+import java.sql.*;
+
 import org.example.projetodiogo.util.ConnectionFactory;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.Optional;
 import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.exceptions.EntityNotFoundException;
@@ -32,14 +32,18 @@ public class AlunoDAO {
 
         String sqlNotas = """
         INSERT INTO notas (id_aluno, id_disciplina)
-        SELECT ?, d.id_disciplina
-        FROM disciplinas d
-        AND NOT EXISTS (
+        SELECT a.id_aluno, d.id_disciplina
+        FROM alunos a
+                 JOIN aluno_turma at ON at.id_aluno = a.id_aluno
+                 JOIN turmas t ON t.id_turma = at.id_turma
+                 JOIN disciplinas d ON at.id_turma = t.id_turma
+        WHERE a.id_aluno = ?
+          AND NOT EXISTS (
             SELECT 1
             FROM notas n
-            WHERE n.id_aluno = ?
-            AND n.id_disciplina = d.id_disciplina
-        )
+            WHERE n.id_aluno = a.id_aluno
+              AND n.id_disciplina = d.id_disciplina
+        );
     """;
 
         Connection conn = null;
@@ -59,8 +63,6 @@ public class AlunoDAO {
 
             pstmt2 = conn.prepareStatement(sqlNotas);
             pstmt2.setInt(1, idAluno);
-            pstmt2.setInt(2, idTurma);
-            pstmt2.setInt(3, idAluno);
             pstmt2.executeUpdate();
 
             conn.commit();
@@ -78,27 +80,45 @@ public class AlunoDAO {
     }
 
     // INSERT
-    public void inserir(int idUsuario) {
+    public int inserir(int idUsuario) {
         String query = """
                 INSERT INTO alunos
-                (id_usuario, matricula)
-                VALUES (?, nextval('seq_matricula')::varchar)
+                (id_usuario)
+                VALUES (?)
                 """;
+        int idGeradoUsuario = 0;
 
         Connection conn = null;
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
 
         try {
 
             conn = ConnectionFactory.conectar();
-            pstmt = conn.prepareStatement(query);
+            pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setInt(1, idUsuario);
 
             pstmt.executeUpdate();
 
+            rs = pstmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                idGeradoUsuario = rs.getInt(1);
+                return idGeradoUsuario;
+            }
+
         } catch (SQLException e) {
             System.out.println("Erro ao inserir aluno: " + e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
+            }
+            return idGeradoUsuario;
         }
     }
 
@@ -123,7 +143,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno();
                 aluno.setId(rs.getInt("id_aluno"));
                 aluno.setIdUsuario(rs.getInt("id_usuario"));
-                aluno.setMatricula(rs.getString("matricula"));
+                aluno.setMatricula(rs.getLong("matricula"));
                 aluno.setDtMatricula(rs.getTimestamp("dt_matricula"));
 
                 return Optional.of(aluno);
@@ -167,7 +187,7 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno(
                         rs.getInt("id_aluno"),
                         rs.getInt("id_usuario"),
-                        rs.getString("matricula"),
+                        rs.getLong("matricula"),
                         rs.getTimestamp("dt_matricula")
                 );
 
@@ -212,13 +232,14 @@ public class AlunoDAO {
                 Aluno aluno = new Aluno(
                         rs.getInt("id_aluno"),
                         rs.getInt("id_usuario"),
-                        rs.getString("matricula"),
+                        rs.getLong("matricula"),
                         rs.getTimestamp("dt_matricula")
                 );
 
                 return Optional.of(aluno);
             } else {
-                throw new EntityNotFoundException("Aluno", idAluno);
+
+                    return Optional.empty();
             }
         } catch (SQLException e) {
             System.err.println("[DAO ERROR] Erro ao buscar aluno pelo id: " + idAluno);
@@ -249,7 +270,7 @@ public class AlunoDAO {
 
             ps.setInt(1, aluno.getId());
             ps.setInt(2, aluno.getIdUsuario());
-            ps.setString(3, aluno.getMatricula());
+            ps.setLong(3, aluno.getMatricula());
             ps.setTimestamp(4, aluno.getDtMatricula());
             ps.setInt(5, aluno.getId());
 
@@ -281,4 +302,5 @@ public class AlunoDAO {
             return false;
         }
     }
+
 }

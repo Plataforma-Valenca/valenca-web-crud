@@ -1,206 +1,83 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="org.example.projetodiogo.model.Turma" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
 
-<%
-    ArrayList<AlunoConsultaDTO> alunosList =
-            (ArrayList<AlunoConsultaDTO>) request.getAttribute("alunosList");
-
-    List<Turma> turmasList = (List<Turma>) request.getAttribute("turmasList");
-
-    String busca = request.getAttribute("busca") != null
-            ? request.getAttribute("busca").toString()
-            : "";
-%>
-
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Alunos</title>
-
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-
-        body {
-            font-family: 'Segoe UI', Arial;
-            background:#f1f1f1;
-            margin-left:22vw;
-            width:78vw;
-            padding:60px 40px;
-        }
-
-        .topo {
-            display:flex;
-            justify-content:space-between;
-            margin-bottom:20px;
-        }
-
-        h1 { font-size:26px; }
-
-        .busca {
-            display:flex;
-            gap:10px;
-            margin-bottom:25px;
-        }
-
-        .busca input {
-            padding:8px;
-            border-radius:6px;
-            border:1px solid #ccc;
-        }
-
-        .btn {
-            background:#3d6f66;
-            color:white;
-            border:none;
-            padding:8px 14px;
-            border-radius:6px;
-            cursor:pointer;
-        }
-
-        .table-header {
-            display:grid;
-            grid-template-columns: 2fr 1fr 1fr 2fr;
-            padding:10px;
-            color:#777;
-            font-size:13px;
-        }
-
-        .table-row {
-            display:grid;
-            grid-template-columns: 2fr 1fr 1fr 2fr;
-            background:white;
-            padding:18px;
-            border-radius:10px;
-            margin-bottom:12px;
-            box-shadow:0 3px 10px rgba(0,0,0,0.05);
-        }
-
-        .empty {
-            text-align:center;
-            margin-top:30px;
-            color:#888;
-        }
-
-        /* Estilo do modal */
-        #modalCadastro {
-            display:none;
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background: rgba(0,0,0,0.5);
-            justify-content:center;
-            align-items:center;
-        }
-
-        #modalCadastro .modal-conteudo {
-            background:white;
-            padding:20px;
-            border-radius:10px;
-            width:400px;
-            position:relative;
-        }
-
-        #modalCadastro .modal-conteudo input,
-        #modalCadastro .modal-conteudo select {
-            width:100%;
-            margin-bottom:10px;
-            padding:8px;
-        }
-
-        #modalCadastro .fechar {
-            position:absolute;
-            top:10px;
-            right:10px;
-            background:none;
-            border:none;
-            font-size:18px;
-            cursor:pointer;
-        }
-
-        #modalCadastro .modal-actions {
-            display:flex;
-            justify-content:space-between;
-            margin-top:10px;
-        }
-    </style>
+    <title>Colégio Valença</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
-
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
-<div class="topo">
-    <h1>Alunos</h1>
-    <button class="btn" onclick="abrirModal()">+ Cadastrar</button>
-</div>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+    <jsp:param name="activePage" value="turmas" />
+</jsp:include>
 
-<form method="get" action="${pageContext.request.contextPath}/admin/verAlunos" class="busca">
-    <input type="text" name="busca" placeholder="Buscar por cpf" value="<%= busca %>">
-    <button class="btn">Buscar</button>
-</form>
+<div class="page-content">
+    <header class="page-grid-header">
+        <div class="page-grid-header-state">
+            <a href="${pageContext.request.contextPath}/admin/verTurmas">Turmas</a>
+            <p>></p>
+            <b>Alunos</b>
+        </div>
 
-<div class="table-header">
-    <span>Nome</span>
-    <span>Matrícula</span>
-    <span>CPF</span>
-    <span>Turma</span>
-</div>
+        <h1 class="page-grid-header-title">
+            <%= request.getParameter("nomeTurma") != null ? request.getParameter("nomeTurma") : "--" %>
+        </h1>
+    </header>
 
-<%
-    if (alunosList != null && !alunosList.isEmpty()) {
-        for (AlunoConsultaDTO aluno : alunosList) {
-%>
-<div class="table-row">
-    <span><%= aluno.getNome() %></span>
-    <span><%= aluno.getMatricula() %></span>
-    <span><%= aluno.getCpf() %></span>
-    <span><%= aluno.getTurma() %></span>
-</div>
-<%
-    }
-} else {
-%>
-<div class="empty">Nenhum aluno encontrado.</div>
-<%
-    }
-%>
+    <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px;">
+        <div class="top-box-page-grid-main">
+            <form action="${pageContext.request.contextPath}/admin/verAlunos" method="get" class="form-busca">
 
-<!-- Modal de Cadastro -->
-<div id="modalCadastro">
-    <div class="modal-conteudo">
-        <h2>Cadastrar Aluno</h2>
-        <form method="post" action="${pageContext.request.contextPath}/admin/inserirAluno">
-            <input type="text" name="cpf" placeholder="CPF" required>
-            <input type="password" name="senhaProvisoria" placeholder="Senha Provisória" required>
-            <select name="idTurma" required>
-                <% for(Turma t : turmasList) { %>
-                <option value="<%= t.getId() %>">
-                    <%= t.getNome().substring(0, 1).toUpperCase() %>
-                </option>
-                <% } %>
-            </select>
-            <div class="modal-actions">
-                <button type="button" onclick="fecharModal()">Cancelar</button>
-                <button class="btn" type="submit">Cadastrar</button>
+                <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
+                <input type="hidden" name="nomeTurma" value="<%= request.getParameter("nomeTurma") %>">
+
+                <div class="form-control">
+                    <h5>Buscar por matrícula</h5>
+                    <div class="form-control-action input-primary">
+                        <input type="text" name="busca" placeholder="0000000">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="bottom-box-page-grid-main">
+            <div class="page-grid-main-content">
+                <div class="table-list-row">
+                    <div class="header-table-list-row" style="display: flex">
+                        <h4 style="flex: 1;">Nome do aluno</h4>
+                        <h4 style="flex: 1;">Matrícula</h4>
+                    </div>
+
+                    <div class="body-table-list-row">
+                        <%
+                            List<AlunoConsultaDTO> alunosList = (List<AlunoConsultaDTO>) request.getAttribute("alunosList");
+                            if (alunosList != null && !alunosList.isEmpty()) {
+                                for (AlunoConsultaDTO aluno : alunosList) {
+                        %>
+                        <a href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= aluno.getNome() %>&matricula=<%= aluno.getMatricula() %>&nomeTurma=<%= aluno.getTurma() %>"
+                           class="itens-per-table">
+                            <div style="flex: 1;"><%= aluno.getNome() %></div>
+                            <div style="flex: 1;"><%= aluno.getMatricula() %></div>
+                        </a>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <div style="text-align:center; padding: 20px; color: #999;">
+                            Nenhum aluno encontrado.
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
             </div>
-        </form>
-        <button class="fechar" onclick="fecharModal()">&times;</button>
-    </div>
+        </div>
+    </main>
 </div>
-
-<script>
-    function abrirModal() {
-        document.getElementById("modalCadastro").style.display = "flex";
-    }
-
-    function fecharModal() {
-        document.getElementById("modalCadastro").style.display = "none";
-    }
-</script>
-
 </body>
 </html>

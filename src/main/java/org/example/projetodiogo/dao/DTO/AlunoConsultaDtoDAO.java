@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoConsultaDtoDAO {
-    public AlunoConsultaDTO buscarPorMatricula(String matricula) {
-        if (matricula.isEmpty()) {
-            throw new InvalidCredentialsException();
-        }
+    public AlunoConsultaDTO buscarPorMatricula(Long matricula) {
 
         String sql = """
                 SELECT
@@ -28,9 +25,9 @@ public class AlunoConsultaDtoDAO {
                     t.nome AS turma
                 
                 FROM usuarios u
-                         JOIN alunos a ON a.id_usuario = u.id_usuario
-                         JOIN aluno_turma at ON at.id_aluno = a.id_aluno
-                         JOIN turmas t ON t.id_turma = at.id_turma
+                JOIN alunos a ON a.id_usuario = u.id_usuario
+                LEFT JOIN aluno_turma at ON at.id_aluno = a.id_aluno
+                LEFT JOIN turmas t ON t.id_turma = at.id_turma
                 
                 WHERE a.matricula = ?;
                 """;
@@ -43,7 +40,7 @@ public class AlunoConsultaDtoDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, matricula);
+            pstmt.setLong(1, matricula);
 
             rs = pstmt.executeQuery();
 
@@ -51,8 +48,8 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("cpf"),
                         rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("turma")
                 );
                 return consultaDTO;
@@ -105,8 +102,8 @@ public class AlunoConsultaDtoDAO {
                 AlunoConsultaDTO consultaDTO = new AlunoConsultaDTO(
                         rs.getInt("id_aluno"),
                         rs.getString("nome"),
-                        rs.getString("cpf"),
                         rs.getString("matricula"),
+                        rs.getString("cpf"),
                         rs.getString("turma")
                 );
 
@@ -125,6 +122,118 @@ public class AlunoConsultaDtoDAO {
             } catch (SQLException e) {
                 throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
             }
+        }
+    }
+    public List<AlunoConsultaDTO> buscarAlunosPorTurma(int idTurma) {
+
+        String sql = """
+        SELECT
+            a.id_aluno,
+            u.nome,
+            u.cpf,
+            a.matricula,
+            t.nome AS turma
+        FROM usuarios u
+        JOIN alunos a ON a.id_usuario = u.id_usuario
+        JOIN aluno_turma at ON at.id_aluno = a.id_aluno
+        JOIN turmas t ON t.id_turma = at.id_turma
+        WHERE t.id_turma = ?;
+    """;
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        List<AlunoConsultaDTO> alunos = new ArrayList<>();
+
+        try {
+
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, idTurma);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                AlunoConsultaDTO aluno = new AlunoConsultaDTO(
+                        rs.getInt("id_aluno"),
+                        rs.getString("nome"),
+                        rs.getString("matricula"),
+                        rs.getString("cpf"),
+                        rs.getString("turma")
+                );
+
+                alunos.add(aluno);
+            }
+
+            return alunos;
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar alunos da turma", e);
+
+        } finally {
+
+            try {
+                if (conn != null) ConnectionFactory.desconectar(conn);
+                if (pstmt != null) pstmt.close();
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                throw new DataAccessException("Erro ao fechar conexão", e);
+            }
+        }
+    }
+    public AlunoConsultaDTO buscarPorCpf(String cpf) {
+
+        if (cpf == null || cpf.isBlank()) {
+            throw new InvalidCredentialsException();
+        }
+
+        String sql = """
+        SELECT
+            a.id_aluno,
+            u.nome,
+            u.cpf,
+            a.matricula,
+            t.nome AS turma
+        FROM usuarios u
+        JOIN alunos a ON a.id_usuario = u.id_usuario
+        LEFT JOIN aluno_turma at ON at.id_aluno = a.id_aluno
+        LEFT JOIN turmas t ON t.id_turma = at.id_turma
+        WHERE u.cpf = ?;
+        """;
+
+        try (
+                Connection conn = ConnectionFactory.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+        ) {
+
+            pstmt.setString(1, cpf);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+
+                    String turma = rs.getString("turma");
+                    if (turma == null) {
+                        turma = "Sem turma";
+                    }
+
+                    return new AlunoConsultaDTO(
+                            rs.getInt("id_aluno"),
+                            rs.getString("nome"),
+                            rs.getString("matricula"),
+                            rs.getString("cpf"),
+                            rs.getString("turma")
+                    );
+                } else {
+                    throw new EntityNotFoundException("Usuario", cpf);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar usuário por CPF", e);
         }
     }
 }

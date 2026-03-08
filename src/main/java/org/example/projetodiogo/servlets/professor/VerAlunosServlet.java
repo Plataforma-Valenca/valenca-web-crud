@@ -15,30 +15,47 @@ import java.util.List;
 
 @WebServlet("/professor/verAlunos")
 public class VerAlunosServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
         List<AlunoConsultaDTO> alunosList = new ArrayList<>();
-        AlunoConsultaDTO aluno;
 
         String busca = req.getParameter("busca");
+        String idTurmaStr = req.getParameter("idTurma");
 
         try {
+
             if (busca != null && !busca.isEmpty()) {
-                aluno = alunoConsultaDao.buscarPorMatricula(busca);
+
+                Long matricula = Long.parseLong(busca);
+
+                AlunoConsultaDTO aluno = alunoConsultaDao.buscarPorMatricula(matricula);
+
                 if (aluno != null) {
                     alunosList.add(aluno);
                 }
+
+            } else if (idTurmaStr != null && !idTurmaStr.isEmpty()) {
+
+                int idTurma = Integer.parseInt(idTurmaStr);
+                alunosList = alunoConsultaDao.buscarAlunosPorTurma(idTurma);
+
             } else {
+
                 alunosList = alunoConsultaDao.buscarAlunos();
+
             }
 
             req.setAttribute("alunosList", alunosList);
             req.setAttribute("busca", busca);
 
             req.getRequestDispatcher("/WEB-INF/professor/listarAlunos.jsp")
-                .forward(req, resp);
+                    .forward(req, resp);
+
         } catch (DataAccessException e) {
-            throw new DataAccessException("Erro ao acessar o banco de dados", e);
+            throw new ServletException(e);
         }
     }
 }

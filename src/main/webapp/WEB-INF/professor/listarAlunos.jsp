@@ -4,99 +4,75 @@
 
 <html>
 <head>
-    <title>Listar Alunos - Admin</title>
+    <title>Colégio Valença</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp" />
+<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+    <jsp:param name="activePage" value="turmas" />
+</jsp:include>
 
-<div class="main-content">
-    <h1>Buscar Aluno(a)</h1>
-
-    <div class="top-bar">
-        <form action="${pageContext.request.contextPath}/professor/verAlunos" method="get" class="form-busca">
-            <input type="text" name="busca" placeholder="Matrícula do aluno">
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </form>
-    </div>
-
-    <!-- FORM PARA AÇÕES NA TABELA -->
-    <form method="get"
-          action="${pageContext.request.contextPath}/professor/verAlunos">
-
-        <table class="tabela-listagem">
-
-            <thead>
-            <tr>
-                <th>Selecionar</th>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Matrícula</th>
-                <th>Turma</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <%
-                List<AlunoConsultaDTO> alunosList =
-                        (List<AlunoConsultaDTO>) request.getAttribute("alunosList");
-
-                if (alunosList != null && !alunosList.isEmpty()) {
-                    for (AlunoConsultaDTO aluno : alunosList) {
-            %>
-            <tr>
-                <td>
-                    <input type="checkbox"
-                           name="alunoId"
-                           value="<%= aluno.getMatricula() %>">
-                </td>
-                <td><%= aluno.getNome() %></td>
-                <td><%= aluno.getMatricula() %></td>
-                <td><%= aluno.getCpf() %></td>
-                <td><%= aluno.getTurma() %></td>
-                <td><a><img src="${pageContext.request.contextPath}/assets/img/editBtn.svg"></a></td>
-            </tr>
-            <%
-                }
-            } else {
-            %>
-            <tr>
-                <td colspan="5" style="text-align:center;">
-                    Nenhum aluno encontrado.
-                </td>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
-
-        </table>
-
-        <br>
-
-        <button type="submit"
-                name="acao"
-                value="excluir"
-                class="btn btn-danger">
-            Excluir selecionados
-        </button>
-
-        <button type="submit"
-                name="acao"
-                value="editar"
-                class="btn btn-primary">
-            Editar selecionados
-        </button>
-
-        <div class="acoes-tabela">
-            <button class="btn btn-danger">Excluir selecionados</button>
-            <button class="btn btn-primary">Editar selecionados</button>
+<div class="page-content">
+    <header class="page-grid-header">
+        <div class="page-grid-header-state">
+            <a href="${pageContext.request.contextPath}/professor/turmasProfessor">Turmas</a>
+            <p>></p>
+            <b>Alunos</b>
         </div>
 
-    </form>
+        <h1 class="page-grid-header-title">
+            <%= request.getParameter("nomeTurma") != null ? request.getParameter("nomeTurma") : "--" %>
+        </h1>
+    </header>
 
+    <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px;">
+        <div class="top-box-page-grid-main">
+            <form action="${pageContext.request.contextPath}/professor/verAlunos" method="get" class="form-busca">
+                <div class="form-control">
+                    <h5>Buscar por matrícula</h5>
+                    <div class="form-control-action input-primary">
+                        <input type="text" name="busca" placeholder="0000000">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="bottom-box-page-grid-main">
+            <div class="page-grid-main-content">
+                <div class="table-list-row">
+                    <div class="header-table-list-row" style="display: flex">
+                        <h4 style="flex: 1;">Nome do aluno</h4>
+                        <h4 style="flex: 1;">Matrícula</h4>
+                    </div>
+
+                    <div class="body-table-list-row">
+                        <%
+                            List<AlunoConsultaDTO> alunosList = (List<AlunoConsultaDTO>) request.getAttribute("alunosList");
+                            if (alunosList != null && !alunosList.isEmpty()) {
+                                for (AlunoConsultaDTO aluno : alunosList) {
+                        %>
+                        <a href="${pageContext.request.contextPath}/professor/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= aluno.getNome() %>&matricula=<%= aluno.getMatricula() %>&nomeTurma=<%= aluno.getTurma() %>"
+                           class="itens-per-table">
+                            <div style="flex: 1;"><%= aluno.getNome() %></div>
+                            <div style="flex: 1;"><%= aluno.getMatricula() %></div>
+                        </a>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <div style="text-align:center; padding: 20px; color: #999;">
+                            Nenhum aluno encontrado.
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
-
 </body>
 </html>

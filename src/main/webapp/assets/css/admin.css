@@ -1,0 +1,10 @@
+.page-grid-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.page-grid-header button {
+    max-width: 120px;
+    max-height: 40px;
+}
