@@ -31,14 +31,14 @@
     <main class="page-grid-main">
         <div class="page-grid-main-content card-grid">
             <%
-                List<Disciplina> disciplinaList = (List<Disciplina>) request.getAttribute("disciplinaList");
+                List<DisciplinasResumoDTO> disciplinaList = (List<DisciplinasResumoDTO>) request.getAttribute("disciplinaList");
 
                 if (disciplinaList != null && !disciplinaList.isEmpty()) {
-                    for (Disciplina d: disciplinaList) {
+                    for (DisciplinasResumoDTO d: disciplinaList) {
             %>
             <a class="card-items"
-               href="${pageContext.request.contextPath}/aluno/VerDisciplinas?id=<%= d.getId() %>&nome=<%= d.getNome() %>">
-                <%= d.getNome() %>
+               href="${pageContext.request.contextPath}/aluno/VerDisciplinas?id=<%= d.getIdDisciplina() %>">
+                <%= d.getNomeFormatado() %>
                 <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg">
             </a>
             <%
