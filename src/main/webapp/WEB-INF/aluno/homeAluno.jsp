@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css"> <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 
     <style>
-       =
         .header-profile img {
             height: 50px;
             width: 50px;
