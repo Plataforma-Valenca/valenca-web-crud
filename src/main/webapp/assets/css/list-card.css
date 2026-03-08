@@ -18,7 +18,13 @@
     padding: 0 25px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    text-decoration: none;
+
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
+
 
 .card-items:hover {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
