@@ -39,43 +39,34 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Professor</title>
+    <title>Colégio Valença</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp"/>
+<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+    <jsp:param name="activePage" value="dashboards" />
+</jsp:include>
 
 <div class="page-content">
+    <header class="page-grid-header" style="margin-top: 10vh">
 
-    <header class="header-home">
-        <div class="header-profile" onclick="togglePopup()" style="position:relative;">
-            <img src="${pageContext.request.contextPath}/assets/img/personagem.png" alt="Perfil">
-            <div class="header-profile-infos">
-                <b><%= nomeUsuario %></b>
-                <p>Professor</p>
-            </div>
-            <div id="popupMenu" class="popup-menu">
-                <a href="${pageContext.request.contextPath}/logout">
-                    Sair da conta
-                    <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg" height="18">
-                </a>
-            </div>
+        <div class="page-grid-header-title">
+            <h1  style="color:#7b5cff;margin-bottom:6px;">Dashboard</h1>
+            <p style="color:#666;margin-bottom:20px;">Desempenho dos alunos na sua disciplina</p>
         </div>
+
     </header>
 
-    <main style="padding: 30px 40px;">
+    <main class="page-grid-main" >
 
         <% if (erro != null) { %>
             <div style="background:#fee2e2;color:#dc2626;padding:14px;border-radius:10px;margin-bottom:20px;">
                 <%= erro %>
             </div>
         <% } %>
-
-        <h1 style="color:#7b5cff;margin-bottom:6px;">Dashboard</h1>
-        <p style="color:#666;margin-bottom:20px;">Desempenho dos alunos nas suas disciplinas</p>
 
         <!-- TAGS DAS DISCIPLINAS -->
         <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;">

@@ -35,7 +35,7 @@
                     for (Turma turma : turmasList) {
             %>
             <a class="card-items"
-               href="${pageContext.request.contextPath}/professor/verAlunos?idTurma=<%= turma.getId() %>">
+               href="${pageContext.request.contextPath}/professor/verAlunos?idTurma=<%= turma.getId() %>&nomeTurma=<%= turma.getNome()%>">
                 <%= turma.getNome() %>
             </a>
             <%

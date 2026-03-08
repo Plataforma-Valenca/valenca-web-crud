@@ -59,8 +59,8 @@
                     <h5 style="flex: 1;">N1</h5>
                     <h5 style="flex: 1;">N2</h5>
                     <h5 style="flex: 1;">Média 1° SEM</h5>
-                    <h5 style="flex: 1;">N3</h5>
-                    <h5 style="flex: 1;">N4</h5>
+                    <h5 style="flex: 1;">N1</h5>
+                    <h5 style="flex: 1;">N2</h5>
                     <h5 style="flex: 1;">Média 2° SEM</h5>
                     <h5 style="flex: 1;">Média Final</h5>
                 </div>
