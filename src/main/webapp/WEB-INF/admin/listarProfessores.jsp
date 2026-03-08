@@ -12,10 +12,9 @@
 
 <html>
 <head>
-    <title>Colégio Valença - Professores</title>
+    <title>Colégio Valença</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
-    <%-- Reutilizando o CSS de modal se existir ou as classes globais --%>
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 <body>
@@ -27,7 +26,7 @@
 <div class="page-content">
     <header class="page-grid-header">
         <div class="page-grid-header-state">
-            <b>Professores</b>
+
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -64,11 +63,12 @@
                             if (professoresList != null && !professoresList.isEmpty()) {
                                 for (ProfessorConsultaDTO p : professoresList) {
                         %>
-                        <div class="itens-per-table">
+                        <div class="itens-per-table" style="display: flex; align-items: center">
                             <div style="flex: 2;"><%= p.getNome() %></div>
                             <div style="flex: 2;"><%= p.getEmail() %></div>
                             <div style="flex: 1.5;"><%= p.getCpf() %></div>
                             <div style="flex: 1.5;"><%= p.getDisciplina() %></div>
+                            <div><i class="fa-solid fa-trash" style="cursor: pointer"></i></div>
                         </div>
                         <%
                             }

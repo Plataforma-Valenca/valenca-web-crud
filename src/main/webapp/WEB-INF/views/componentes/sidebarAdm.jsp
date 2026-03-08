@@ -49,7 +49,7 @@
                 </a>
             </li>
 
-            <li class="<%= "listarDisciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
+            <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/admin/verDisciplinasResumo">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-disciplinas.svg">
 
