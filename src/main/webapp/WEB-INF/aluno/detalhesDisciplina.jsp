@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Colégio Valença - Detalhes</title>
+    <title>Colégio Valença</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/aluno.css">
@@ -14,13 +14,12 @@
 </head>
 <body>
 
-<%-- Sidebar do Aluno conforme solicitado --%>
 <jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp">
     <jsp:param name="activePage" value="disciplinas" />
 </jsp:include>
 
 <div class="page-content">
-    <header class="page-grid-header">
+    <header class="page-grid-header" style="margin: 5vh">
         <div class="page-grid-header-state">
             <a href="${pageContext.request.contextPath}/aluno/VerDisciplinas">Disciplinas</a>
             <p>></p>
@@ -28,16 +27,14 @@
         </div>
 
         <h1 class="page-grid-header-title">
-            <%= request.getAttribute("nomeDisciplina") != null ? request.getAttribute("nomeDisciplina") : "Disciplina" %>
+            <%= request.getAttribute("nomeDisciplina") != null ? request.getAttribute("nomeDisciplina") : "--" %>
         </h1>
         <p class="professor-subtitle" style="color: #535353; margin-top: -10px;">
-            Professor: <%= request.getAttribute("nomeProfessor") != null ? request.getAttribute("nomeProfessor") : "Fulano de tal" %>
+            Professor: <%= request.getAttribute("nomeProfessor") != null ? request.getAttribute("nomeProfessor") : "--" %>
         </p>
     </header>
 
     <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px; margin-top: 4vh;">
-
-        <%-- Seção de Notas --%>
         <div class="aluno-details-notas">
             <div class="aluno-details-notas-header">
                 <h4>Notas</h4>
@@ -58,14 +55,13 @@
                     List<Boletim> boletimList = (List<Boletim>) request.getAttribute("boletimList");
                     if (boletimList != null && !boletimList.isEmpty()) {
                         for (Boletim b : boletimList) {
-                            // Lógica de cores baseada na média (7.0)
                             String corN1 = (b.getMedia1() != null && b.getMedia1() >= 7) ? "#4A90E2" : "#E74C3C";
                             String corN2 = (b.getMedia2() != null && b.getMedia2() >= 7) ? "#4A90E2" : "#E74C3C";
                 %>
                 <div class="row-table-list-row" style="border-bottom: 1px solid #eee;">
                     <p style="flex: 1; color: <%= corN1 %>;"><%= b.getMedia1() != null ? b.getMedia1() : "--" %></p>
                     <p style="flex: 1; color: <%= corN2 %>;"><%= b.getMedia2() != null ? b.getMedia2() : "--" %></p>
-                    <p style="flex: 1.5; color: #4A90E2;">7,37</p>
+                    <p style="flex: 1.5; color: <%= corN2 %>;"><%= b.getMedia1() != null ? b.getMedia2() : "--" %></p>
                     <p style="flex: 1;">--</p>
                     <p style="flex: 1;">--</p>
                     <p style="flex: 1.5;">--</p>
@@ -80,7 +76,6 @@
             </div>
         </div>
 
-        <%-- Seção de Observações --%>
         <div class="aluno-details-notas" style="margin-top: 5vh;">
             <div class="aluno-details-notas-header">
                 <h4>Observações</h4>

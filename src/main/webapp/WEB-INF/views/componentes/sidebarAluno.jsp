@@ -17,7 +17,7 @@
 <aside class="sidebar">
     <div class="sidebar-valenca-logo">
         <div class="sidebar-valenca-logo-content">
-            <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg" height="50">
+            <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg" height="30">
             <h3>Colégio Valença</h3>
         </div>
     </div>
@@ -26,7 +26,7 @@
         <ul class="sidebar-tabs-menu">
 
             <li class="<%= "home".equals(activePage) ? "active" : "" %> menu-items-tab">
-                <a href="${pageContext.request.contextPath}/aluno/home">
+                <a href="${pageContext.request.contextPath}/aluno/homeAluno">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-home.svg">
                     Home
                 </a>

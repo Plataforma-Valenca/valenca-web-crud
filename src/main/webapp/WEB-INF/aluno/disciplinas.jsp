@@ -1,20 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.example.projetodiogo.model.Disciplina" %>
 <%@ page import="org.example.projetodiogo.model.DTO.DisciplinasResumoDTO" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <title>Colégio Valença</title>
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
-
-    <link rel="icon" type="image/x-icon"
-          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 <body>
 
@@ -34,11 +30,15 @@
                 List<DisciplinasResumoDTO> disciplinaList = (List<DisciplinasResumoDTO>) request.getAttribute("disciplinaList");
 
                 if (disciplinaList != null && !disciplinaList.isEmpty()) {
-                    for (DisciplinasResumoDTO d: disciplinaList) {
+                    for (DisciplinasResumoDTO d : disciplinaList) {
             %>
             <a class="card-items"
-               href="${pageContext.request.contextPath}/aluno/VerDisciplinas?id=<%= d.getIdDisciplina() %>">
-                <%= d.getNomeFormatado() %>
+               href="${pageContext.request.contextPath}/aluno/detalhesDisciplina?idDisciplina=<%= d.getIdDisciplina() %>">
+                <div class="card-items-infos">
+                    <h4><%= d.getNomeFormatado() %></h4>
+                    <p style="font-weight: 400; color: #535353"><%= d.getNomeProfessor() %></p>
+                </div>
+
                 <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg">
             </a>
             <%

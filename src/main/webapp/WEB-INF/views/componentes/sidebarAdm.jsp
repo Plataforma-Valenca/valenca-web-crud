@@ -25,7 +25,7 @@
 
     <div class="sidebar-top-box">
         <ul class="sidebar-tabs-menu">
-            <li class="<%= "homeAdmin".equals(activePage) ? "active" : "" %> menu-items-tab">
+            <li class="<%= "home".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/admin/homeAdmin">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-home.svg">
                     Home

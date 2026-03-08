@@ -60,8 +60,6 @@ public class DetalhesAlunoServlet extends HttpServlet {
             req.setAttribute("idTurma", idTurmaParam);
             req.setAttribute("nomeTurma", nomeTurmaParam);
 
-            req.getRequestDispatcher("/WEB-INF/professor/detalhesAluno.jsp").forward(req, resp);
-
             req.getRequestDispatcher("/WEB-INF/professor/detalhesAluno.jsp")
                     .forward(req, resp);
         } catch (DataAccessException e) {

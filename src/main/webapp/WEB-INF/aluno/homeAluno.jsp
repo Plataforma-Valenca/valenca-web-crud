@@ -19,71 +19,8 @@
     <title>Colégio Valença</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css"> <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
-
-    <style>
-        .header-profile img {
-            height: 50px;
-            width: 50px;
-            object-fit: cover;
-        }
-
-        .primary-box img {
-            height: 100px;
-            width: 100px;
-            border-radius: 50%;
-        }
-
-        .popup-menu {
-            display: none;
-            position: absolute;
-            top: 110%;
-            right: 0;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 10px;
-            width: 170px;
-            z-index: 100;
-        }
-
-        .popup-menu a {
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .main-information-profile {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .details-infos-box h4 {
-            font-size: 12px;
-            color: #999;
-            margin: 0;
-            text-transform: uppercase;
-        }
-
-        .details-infos-box p {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 5px 0 15px 0;
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/home.css">
+     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 
 <body>
@@ -97,7 +34,7 @@
     <header class="header-home">
         <div class="header-profile" onclick="togglePopup()" style="position: relative;">
 
-            <img src="${pageContext.request.contextPath}/assets/img/icon-woman-profile.svg" alt="Perfil">
+            <img src="${pageContext.request.contextPath}/assets/img/icon-profile.svg" height="300" >
 
             <div class="header-profile-infos">
                 <b><%= alunoConsulta.getNome() %></b>
@@ -105,9 +42,9 @@
             </div>
 
             <div id="popupMenu" class="popup-menu">
-                <a href="${pageontext.request.contextPath}/logout">
+                <a href="${pageContext.request.contextPath}/logout">
                     Sair da conta
-                    <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg" height="18">
+                    <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg" class="btn-logout">
                 </a>
             </div>
         </div>
@@ -126,7 +63,7 @@
             <div class="main-information-profile">
 
                 <div class="primary-box">
-                    <img src="${pageContext.request.contextPath}/assets/img/icon-woman-profile.svg" alt="Avatar Aluno">
+                    <img src="${pageContext.request.contextPath}/assets/img/icon-profile.svg" height="300" >
                 </div>
 
                 <div class="secondary-box">
