@@ -34,9 +34,9 @@
                         <div class="form-group-inputs">
                             <div class="form-group-inputs-box">
                                 <div class="form-control input-primary">
-                                    <h5>E-mail / Nome de usuário</h5>
+                                    <h5>E-mail / Matrícula</h5>
                                     <input type="text"
-                                           placeholder="Digite o seu e-mail ou nome de usuário"
+                                           placeholder="Digite o seu e-mail ou matrícula"
                                            name="loginUsuario"
                                            required>
                                 </div>

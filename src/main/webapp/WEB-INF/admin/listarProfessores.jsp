@@ -68,7 +68,12 @@
                             <div style="flex: 2;"><%= p.getEmail() %></div>
                             <div style="flex: 1.5;"><%= p.getCpf() %></div>
                             <div style="flex: 1.5;"><%= p.getDisciplina() %></div>
-                            <div><i class="fa-solid fa-trash" style="cursor: pointer"></i></div>
+                            <div>
+                                <i class="fa-solid fa-trash"
+                                   style="cursor: pointer; color: var(--color-error);"
+                                   onclick="confirmarExclusao('<%= p.getIdUsuario() %>')">
+                                </i>
+                            </div>
                         </div>
                         <%
                             }
@@ -96,12 +101,13 @@
                 <input type="email" name="email" placeholder="E-mail Acadêmico" required>
                 <input type="text" name="cpf" placeholder="CPF" required>
 
-                <select name="idDisciplina" class="input-primary" style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
-                    <option value="">Selecione a disciplina</option>
+                <select name="idDisciplina" class="input-primary" required style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 8px;">
+                    <option value="" disabled selected>Selecione a disciplina</option>
                     <% if(disciplinas != null) {
                         for(Disciplina d : disciplinas) { %>
                     <option value="<%= d.getId() %>"><%= d.getNome() %></option>
-                    <% } } %>
+                    <%  }
+                    } %>
                 </select>
             </div>
 
@@ -111,16 +117,26 @@
             </div>
         </form>
     </div>
+
+
 </div>
 
 <script>
     function abrirModal() {
+        document.getElementById("modalCadastro").classList.add("active");
         document.getElementById("modalCadastro").style.display = "flex";
     }
+
     function fecharModal() {
+        document.getElementById("modalCadastro").classList.remove("active");
         document.getElementById("modalCadastro").style.display = "none";
     }
-    // Fechar modal ao clicar fora dele
+
+    function confirmarExclusao(id) {
+        if (confirm("Tem certeza que deseja excluir este professor?")) {
+            window.location.href = "${pageContext.request.contextPath}/admin/deletarProfessor?id=" + id;
+        }
+    }
     window.onclick = function(event) {
         let modal = document.getElementById("modalCadastro");
         if (event.target == modal) {

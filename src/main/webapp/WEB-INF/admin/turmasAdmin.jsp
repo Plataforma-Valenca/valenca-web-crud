@@ -43,8 +43,14 @@
                 </span>
 
                 <div class="card-actions">
-                    <i class="fa-solid fa-pen"></i>
-                    <i class="fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-pen"
+                       onclick="event.stopPropagation(); event.preventDefault(); abrirModalEditar('<%= t.getId() %>')">
+                    </i>
+
+                    <i class="fa-solid fa-trash"
+                       style="color: var(--color-error);"
+                       onclick="event.stopPropagation(); event.preventDefault(); abrirModalExcluir('<%= t.getId() %>')">
+                    </i>
                 </div>
             </a>
             <%
@@ -88,16 +94,26 @@
     function abrirModalCadastro() {
         document.getElementById("modalCadastro").style.display = "flex";
     }
+
     function fecharModalCadastro() {
         document.getElementById("modalCadastro").style.display = "none";
     }
+
     function abrirModalExcluir(id) {
+        // O preventPropagation já foi chamado no HTML, aqui apenas executamos a lógica
         document.getElementById("modalExcluir").style.display = "flex";
         document.getElementById("btnConfirmarExcluir").href =
             "${pageContext.request.contextPath}/admin/deletarTurma?id=" + id;
     }
+
     function fecharModalExcluir() {
         document.getElementById("modalExcluir").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target.className === 'modal') {
+            event.target.style.display = "none";
+        }
     }
 </script>
 

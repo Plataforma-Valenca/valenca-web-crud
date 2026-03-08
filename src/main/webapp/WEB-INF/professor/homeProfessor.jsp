@@ -36,7 +36,7 @@
             <div id="popupMenu" class="popup-menu">
                 <a href="${pageContext.request.contextPath}/logout">
                     Sair da conta
-                    <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg" height="18">
+                    <img src="${pageContext.request.contextPath}/assets/img/icon-logout.svg" class="btn-logout">
                 </a>
             </div>
         </div>
