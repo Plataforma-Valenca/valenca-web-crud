@@ -60,3 +60,8 @@
 .btn-icon:hover img {
     opacity: 1;
 }
+.card-items-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
