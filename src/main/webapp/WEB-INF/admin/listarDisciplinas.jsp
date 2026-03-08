@@ -2,143 +2,69 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.DTO.DisciplinasResumoDTO" %>
 
-<%
-    List<DisciplinasResumoDTO> disciplinasList =
-            (List<DisciplinasResumoDTO>) request.getAttribute("resumoList");
-%>
-
-<!DOCTYPE html>
 <html>
-
 <head>
+    <title>Colégio Valença - Administração</title>
 
-    <title>Disciplinas</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
+    <%-- FontAwesome para ícones de edição e lixeira --%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-
-        body{
-            font-family: Arial;
-            background:#f5f5f5;
-        }
-
-        .container{
-            padding:40px;
-        }
-
-        .top-bar{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:30px;
-        }
-
-        .btn-cadastrar{
-            background:#2c8da7;
-            color:white;
-            border:none;
-            padding:10px 20px;
-            border-radius:8px;
-            cursor:pointer;
-        }
-
-        .grid{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:20px;
-        }
-
-        .card{
-            background:white;
-            padding:25px;
-            border-radius:15px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            box-shadow:0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .info{
-            display:flex;
-            flex-direction:column;
-        }
-
-        .professor{
-            font-size:14px;
-            color:#666;
-        }
-
-        .turmas{
-            font-size:13px;
-            color:#999;
-        }
-
-        .acoes i{
-            margin-left:10px;
-            cursor:pointer;
-        }
-
-    </style>
-
+    <link rel="icon" type="image/x-icon"
+          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+    <jsp:param name="activePage" value="disciplinas" />
+</jsp:include>
 
-<div class="container">
+<div class="page-content">
 
-    <div class="top-bar">
-
-        <h2>Disciplinas</h2>
-
-        <button class="btn-cadastrar">
+    <header class="page-grid-header" style="display: flex; justify-content: space-between; align-items: center;">
+        <h1 class="page-grid-header-title">Disciplinas</h1>
+        <button class="btn-primary" style="width: 150px;">
             <i class="fa-solid fa-plus"></i> Cadastrar
         </button>
+    </header>
 
-    </div>
+    <main class="page-grid-main">
+        <div class="page-grid-main-content card-grid">
+            <%
+                List<DisciplinasResumoDTO> disciplinasList = (List<DisciplinasResumoDTO>) request.getAttribute("resumoList");
 
-    <div class="grid">
-
-        <% if (disciplinasList != null && !disciplinasList.isEmpty()) {
-            for (DisciplinasResumoDTO d : disciplinasList) { %>
-
-        <div class="card">
-
-            <div class="info">
-
-                <strong><%= d.getNomeFormatado() %></strong>
-
-                <div class="professor">
-                    Professor: <%= d.getNomeProfessor() %>
+                if (disciplinasList != null && !disciplinasList.isEmpty()) {
+                    for (DisciplinasResumoDTO d : disciplinasList) {
+            %>
+            <div class="card-items" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="card-info">
+                    <strong style="display: block; font-size: 1.1rem;"><%= d.getNomeFormatado() %></strong>
+                    <p style="font-size: 0.85rem; color: #666; margin: 4px 0;">
+                        Prof. <%= d.getNomeProfessor() != null ? d.getNomeProfessor() : "Não atribuído" %>
+                    </p>
+                    <p style="font-size: 0.75rem; color: #999;">
+                        Turmas: <%= d.getQuantidadeTurmas() %>
+                    </p>
                 </div>
 
-                <div class="turmas">
-                    Turmas: <%= d.getQuantidadeTurmas() %>
+                <div class="card-actions" style="display: flex; gap: 15px; color: #535353;">
+                    <a href="#" title="Editar" style="color: inherit;"><i class="fa-solid fa-pen"></i></a>
+                    <a href="#" title="Excluir" style="color: #E74C3C;"><i class="fa-solid fa-trash"></i></a>
                 </div>
-
             </div>
-
-            <div class="acoes">
-
-                <i class="fa-solid fa-pen"></i>
-
-                <i class="fa-solid fa-trash"></i>
-
-            </div>
-
+            <%
+                }
+            } else {
+            %>
+            <p class="no-data">Nenhuma disciplina cadastrada.</p>
+            <%
+                }
+            %>
         </div>
-
-        <%  }
-        } else { %>
-
-        <p>Nenhuma disciplina encontrada.</p>
-
-        <% } %>
-
-    </div>
+    </main>
 
 </div>
 

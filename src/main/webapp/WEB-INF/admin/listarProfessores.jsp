@@ -2,161 +2,131 @@
 <%@ page import="org.example.projetodiogo.model.DTO.ProfessorConsultaDTO" %>
 <%@ page import="org.example.projetodiogo.model.Disciplina" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 
 <%
-    ArrayList<ProfessorConsultaDTO> professoresList =
-            (ArrayList<ProfessorConsultaDTO>) request.getAttribute("professoresList");
-
-    ArrayList<Disciplina> disciplinas =
-            (ArrayList<Disciplina>) request.getAttribute("disciplinas");
-
-    String busca = request.getAttribute("busca") != null
-            ? request.getAttribute("busca").toString()
-            : "";
+    List<ProfessorConsultaDTO> professoresList = (List<ProfessorConsultaDTO>) request.getAttribute("professoresList");
+    List<Disciplina> disciplinas = (List<Disciplina>) request.getAttribute("disciplinas");
+    String busca = request.getAttribute("busca") != null ? request.getAttribute("busca").toString() : "";
 %>
 
-<!DOCTYPE html>
 <html>
 <head>
-
-    <title>Professores</title>
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/assets/css/tabelaSistema.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <title>Colégio Valença - Professores</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <%-- Reutilizando o CSS de modal se existir ou as classes globais --%>
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
-
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp"/>
+<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+    <jsp:param name="activePage" value="professores" />
+</jsp:include>
 
-<div class="topo">
-    <h1>Professores</h1>
-    <button class="btn" onclick="abrirModal()">+ Cadastrar</button>
+<div class="page-content">
+    <header class="page-grid-header">
+        <div class="page-grid-header-state">
+            <b>Professores</b>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="page-grid-header-title">Professores</h1>
+            <button class="btn-primary" style="width: 150px" onclick="abrirModal()">+ Cadastrar</button>
+        </div>
+    </header>
+
+    <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px;">
+        <div class="top-box-page-grid-main">
+            <form action="${pageContext.request.contextPath}/admin/verProfessores" method="get" class="form-busca">
+                <div class="form-control">
+                    <h5>Buscar professor</h5>
+                    <div class="form-control-action input-primary">
+                        <input type="text" name="busca" placeholder="Nome ou CPF" value="<%= busca %>">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="bottom-box-page-grid-main">
+            <div class="page-grid-main-content">
+                <div class="table-list-row">
+                    <div class="header-table-list-row" style="display: flex">
+                        <h4 style="flex: 2;">Nome</h4>
+                        <h4 style="flex: 2;">Email</h4>
+                        <h4 style="flex: 1.5;">CPF</h4>
+                        <h4 style="flex: 1.5;">Disciplina</h4>
+                    </div>
+
+                    <div class="body-table-list-row">
+                        <%
+                            if (professoresList != null && !professoresList.isEmpty()) {
+                                for (ProfessorConsultaDTO p : professoresList) {
+                        %>
+                        <div class="itens-per-table">
+                            <div style="flex: 2;"><%= p.getNome() %></div>
+                            <div style="flex: 2;"><%= p.getEmail() %></div>
+                            <div style="flex: 1.5;"><%= p.getCpf() %></div>
+                            <div style="flex: 1.5;"><%= p.getDisciplina() %></div>
+                        </div>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <div style="text-align:center; padding: 40px; color: #999;">
+                            Nenhum professor encontrado.
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
-<form method="get"
-      action="${pageContext.request.contextPath}/admin/verProfessores"
-      class="busca">
+<div id="modalCadastro" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Cadastrar Professor</h2>
+        </div>
+        <form method="post" action="${pageContext.request.contextPath}/admin/cadastrarProfessor">
+            <div class="form-control">
+                <input type="text" name="nome" placeholder="Nome Completo" required>
+                <input type="email" name="email" placeholder="E-mail Acadêmico" required>
+                <input type="text" name="cpf" placeholder="CPF" required>
 
-    <input type="text"
-           name="busca"
-           placeholder="Buscar professor"
-           value="<%= busca %>">
+                <select name="idDisciplina" class="input-primary" style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                    <option value="">Selecione a disciplina</option>
+                    <% if(disciplinas != null) {
+                        for(Disciplina d : disciplinas) { %>
+                    <option value="<%= d.getId() %>"><%= d.getNome() %></option>
+                    <% } } %>
+                </select>
+            </div>
 
-    <button class="btn">Buscar</button>
-
-</form>
-
-<div class="tabela">
-
-    <div class="table-header">
-        <span>Nome</span>
-        <span>Email</span>
-        <span>CPF</span>
-        <span>Disciplina</span>
-    </div>
-
-    <%
-        if (professoresList != null && !professoresList.isEmpty()) {
-
-            for (ProfessorConsultaDTO p : professoresList) {
-    %>
-
-    <div class="table-row">
-
-        <span><%= p.getNome() %></span>
-
-        <span><%= p.getEmail() %></span>
-
-        <span><%= p.getCpf() %></span>
-
-        <span>
-    <%= p.getDisciplina() %>
-</span>
-
-    </div>
-
-    <%
-        }
-    } else {
-    %>
-
-    <div class="empty">Nenhum professor encontrado.</div>
-
-    <%
-        }
-    %>
-
-</div>
-
-
-<div id="modalCadastro" class="modal">
-
-    <div class="modal-conteudo">
-
-        <h2>Cadastrar Professor</h2>
-
-        <form method="post"
-              action="${pageContext.request.contextPath}/admin/cadastrarProfessor">
-
-            <input type="text"
-                   name="nome"
-                   placeholder="Nome">
-
-            <input type="email"
-                   name="email"
-                   placeholder="Email">
-
-            <input type="text"
-                   name="cpf"
-                   placeholder="CPF">
-
-            <select name="idDisciplina">
-
-                <option value="">Selecione a disciplina</option>
-
-                <%
-                    if(disciplinas != null){
-                        for(Disciplina d : disciplinas){
-                %>
-
-                <option value="<%= d.getId() %>">
-                    <%= d.getNome() %>
-                </option>
-
-                <%
-                        }
-                    }
-                %>
-
-            </select>
-
-            <button type="submit" class="btn">
-                Cadastrar
-            </button>
-
+            <div class="modal-footer" style="margin-top: 20px; display: flex; gap: 10px;">
+                <button type="submit" class="btn-primary" style="flex: 1;">Salvar</button>
+                <button type="button" class="btn-secondary" onclick="fecharModal()" style="flex: 1;">Cancelar</button>
+            </div>
         </form>
-
-        <button class="fechar" onclick="fecharModal()">×</button>
-
     </div>
-
 </div>
 
 <script>
-
-    function abrirModal(){
-        document.getElementById("modalCadastro").style.display="flex";
+    function abrirModal() {
+        document.getElementById("modalCadastro").style.display = "flex";
     }
-
-    function fecharModal(){
-        document.getElementById("modalCadastro").style.display="none";
+    function fecharModal() {
+        document.getElementById("modalCadastro").style.display = "none";
     }
-
+    // Fechar modal ao clicar fora dele
+    window.onclick = function(event) {
+        let modal = document.getElementById("modalCadastro");
+        if (event.target == modal) {
+            fecharModal();
+        }
+    }
 </script>
 
 </body>
