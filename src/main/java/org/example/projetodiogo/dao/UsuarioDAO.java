@@ -151,9 +151,17 @@ public class UsuarioDAO {
         try {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
-            
-            pstmt.setString(1, matriculaOuNomeUsuario);
-            pstmt.setString(2, matriculaOuNomeUsuario);
+
+            String login = matriculaOuNomeUsuario;
+
+            pstmt.setString(1, login);
+
+            if (login.matches("\\d+")) {
+                pstmt.setLong(2, Long.parseLong(login));
+            } else {
+                pstmt.setNull(2, Types.BIGINT);
+            }
+
 
             rs = pstmt.executeQuery();
 
@@ -208,7 +216,7 @@ public class UsuarioDAO {
 
 
             pstmt.setString(1, cpfOuMatricula);
-            pstmt.setString(2, cpfOuMatricula);
+            pstmt.setLong(2, Long.parseLong(cpfOuMatricula));
 
             rs = pstmt.executeQuery();
 
@@ -475,7 +483,7 @@ public class UsuarioDAO {
             conn = ConnectionFactory.conectar();
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, cpfOuMatricula);
+            pstmt.setLong(1, Long.parseLong(cpfOuMatricula));
             pstmt.setString(2, cpfOuMatricula);
 
             rs = pstmt.executeQuery();
