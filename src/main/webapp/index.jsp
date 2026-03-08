@@ -76,7 +76,7 @@
                             </button>
                             <div class="login-first-access">
                                 <p>Primeiro acesso?</p>
-                                <a href="${pageContext.request.contextPath}/validarPreCadastro" class="login-first-access-link">
+                                <a href="primeiroAcesso" class="login-first-access-link">
                                     Clique aqui
                                 </a>
                             </div>

@@ -68,7 +68,7 @@
 
                         <div class="login-first-access">
                             <p>Já possui uma conta?</p>
-                            <a href="${pageContext.request.contextPath}/login.jsp"
+                            <a href="index.jsp"
                                class="login-first-access-link">
                                 Voltar para login
                             </a>

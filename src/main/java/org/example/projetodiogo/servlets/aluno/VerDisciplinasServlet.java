@@ -28,7 +28,7 @@ public class VerDisciplinasServlet extends HttpServlet {
 
             req.setAttribute("activePage", "disciplinas");
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/aluno/cardsDisciplina.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/aluno/disciplinas.jsp");
             dispatcher.forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
