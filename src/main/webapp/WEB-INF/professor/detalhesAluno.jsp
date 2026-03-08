@@ -117,6 +117,7 @@
                 <div class="row-table-list-row" style="border-bottom: 1px solid #eee;">
                     <p style="flex: 1;"><%= obs.getDataEnvio() != null ? obs.getDataEnvio() : "--" %></p>
                     <p style="flex: 3; color: #535353;"><%= obs.getDescricao() != null ? obs.getDescricao() : "--" %></p>
+                    <img src="${pageContext.request.contextPath}/assets/img/icon-delete.svg" height="40">
                 </div>
                 <%
                     }
