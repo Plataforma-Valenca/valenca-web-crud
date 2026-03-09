@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="links">
-                                <a href="${pageContext.request.contextPath}/">
+                                <a href="${pageContext.request.contextPath}/recuperarSenha">
                                     Esqueci a senha
                                 </a>
                             </div>
