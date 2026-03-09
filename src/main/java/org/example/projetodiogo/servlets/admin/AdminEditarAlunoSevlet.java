@@ -1,4 +1,4 @@
-package org.example.projetodiogo.servlets.aluno;
+package org.example.projetodiogo.servlets.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,11 +12,11 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/aluno/EditarAluno")
-public class EditarAlunoServlet {
+@WebServlet("/admin/EditarAluno")
+public class AdminEditarAlunoSevlet {
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        String matricula = req.getParameter("matricula");
         String nome = req.getParameter("nome");
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
@@ -25,19 +25,19 @@ public class EditarAlunoServlet {
 
         if (!senha.equals(confirmarSenha)) {
             req.setAttribute("erroLogin", "As senhas não coincidem.");
-            req.getRequestDispatcher("/WEB-INF/aluno/editarAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/editarAluno.jsp")
                     .forward(req, resp);
         } else {
-            Optional<Usuario> usuarioOpt = usuarioDAO.buscarPorCpfOuMatricula(usuario.getCpf());
+            Optional<Usuario> usuarioOpt = usuarioDAO.buscarPorCpfOuMatricula(matricula);
             if (usuarioOpt.isPresent()) {
-                usuario = new Usuario(usuarioOpt.get().getId(), nome, email, senha, true);
+                Usuario usuario = new Usuario(usuarioOpt.get().getId(), nome, email, senha, true);
                 if (usuarioDAO.atualizar(usuario)) {
                     req.setAttribute("mensagemSucesso", "Dados atualizados com sucesso.");
-                    req.getRequestDispatcher("/WEB-INF/aluno/homeAluno.jsp")
-                        .forward(req, resp);
+                    req.getRequestDispatcher("/WEB-INF/admin/listarDisciplinas.jsp")
+                    .forward(req, resp);
                 }
             }
         }
     }
-    
 }
+    
