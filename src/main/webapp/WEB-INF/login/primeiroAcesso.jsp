@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="links">
-                            <a href="${pageContext.request.contextPath}/">
+                            <a href="${pageContext.request.contextPath}/WEB-INF/login/recuperarSenha.jsp">
                                 Esqueci a senha
                             </a>
                         </div>
