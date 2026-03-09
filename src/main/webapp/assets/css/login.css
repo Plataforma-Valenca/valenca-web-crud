@@ -105,3 +105,17 @@
     font-size: 14px;
     font-weight: 600;
 }
+
+.mensagem {
+    font-size: 0.9em;
+    margin: 5px;
+    text-align: center;
+}
+
+#erroLogin {
+    color: #dc3545;
+}
+
+#mensagemSucesso {
+    color: #28a745;
+}
