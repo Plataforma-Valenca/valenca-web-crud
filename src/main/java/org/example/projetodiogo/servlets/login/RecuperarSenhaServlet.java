@@ -18,6 +18,10 @@ import java.util.UUID;
 @WebServlet("/recuperarSenha")
 public class RecuperarSenhaServlet extends HttpServlet {
 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/login/recuperarSenha.jsp").forward(req, resp);
+    }
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
