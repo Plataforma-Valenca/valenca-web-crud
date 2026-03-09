@@ -24,6 +24,8 @@ public class AuthFilter implements Filter {
                 uri.endsWith("index.jsp") ||
                         uri.endsWith("validarPreCadastro") ||
                         uri.endsWith("FinalizarCadastroAluno") ||
+                        uri.endsWith("recuperarSenha") ||
+                        uri.endsWith("novaSenha") ||
                         uri.endsWith("login") ||
                         uri.endsWith("logout") ||
                         uri.contains("/assets/");

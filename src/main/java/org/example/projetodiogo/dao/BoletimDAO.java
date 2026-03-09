@@ -28,6 +28,7 @@ public class BoletimDAO {
                 END AS situacao
         FROM (
                  SELECT
+                     d.id_disciplina,
                      d.nome,
         
                      ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) AS media1,
@@ -47,9 +48,9 @@ public class BoletimDAO {
         
                  WHERE n.id_aluno = ?
         
-                 GROUP BY d.nome
+                 GROUP BY d.nome, d.id_disciplina
              ) sub
-        ORDER BY sub.nome;
+        ORDER BY sub.id_disciplina;
     """;
 
         Connection conn = null;
