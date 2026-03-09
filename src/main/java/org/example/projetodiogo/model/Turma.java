@@ -8,9 +8,10 @@ public class Turma {
     // Método Construtor
     public Turma() {}
 
-    public Turma(int id, String nome) {
+    public Turma(int id, String nome, int ano) {
         this.id = id;
         this.nome = nome;
+        this.ano=ano;
     }
 
     public Turma(String nome) {
@@ -25,6 +26,8 @@ public class Turma {
     public String getNome() {
         return nome;
     }
+
+    public int getAno(){return ano;}
 
     // Métodos setters
     public void setId(int id) {

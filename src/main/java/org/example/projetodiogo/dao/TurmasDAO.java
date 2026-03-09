@@ -43,7 +43,7 @@ public class TurmasDAO {
 
     public Turma buscarPorIdAluno(int idAluno) throws DataAccessException {
         String query = """
-                SELECT t.id_turma,t.nome FROM aluno_turma at
+                SELECT t.id_turma,t.nome,t.ano FROM aluno_turma at
                 JOIN turma t ON at.turma_id = t.id
                 WHERE id_aluno = ?
                 """;
@@ -62,7 +62,9 @@ public class TurmasDAO {
             if (rs.next()) {
                 Turma turma = new Turma(
                         rs.getInt("id_turma"),
-                        rs.getString("nome")
+                        rs.getString("nome"),
+                        rs.getInt("ano")
+
                 );
 
                 return turma;
@@ -105,7 +107,8 @@ public class TurmasDAO {
             while (rs.next()) {
                 Turma turma = new Turma(
                         rs.getInt("id_turma"),
-                        rs.getString("nome")
+                        rs.getString("nome"),
+                        rs.getInt("ano")
                 );
                 turmas.add(turma);
             }
@@ -122,6 +125,55 @@ public class TurmasDAO {
             } catch (SQLException e) {
                 throw new DataAccessException("Erro ao fechar recursos do banco de dados", e);
             }
+        }
+    }
+    public void inserirTurma(String nome, int ano) {
+        String sql = "INSERT INTO turmas (nome, ano) VALUES (?, ?)";
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            stmt.setInt(2, ano);
+
+            stmt.executeUpdate();
+
+            System.out.println("Turma inserida com sucesso!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void editarTurma(int id,String nome,int ano){
+
+        String sql = "UPDATE turmas SET nome=?, ano=? WHERE id_turma=?";
+
+        try(Connection conn = ConnectionFactory.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1,nome);
+            stmt.setInt(2,ano);
+            stmt.setInt(3,id);
+
+            stmt.executeUpdate();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }public void deletarTurma(int id){
+
+        String sql = "DELETE FROM turmas WHERE id_turma = ?";
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

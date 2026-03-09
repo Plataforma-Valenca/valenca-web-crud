@@ -1,4 +1,4 @@
-package org.example.projetodiogo.servlets.professor;
+package org.example.projetodiogo.servlets.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,12 +30,8 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             return;
         }
 
-        int idUsuario = usuario.getId();
-
         AlunoDAO alunoDAO = new AlunoDAO();
         BoletimDAO boletimDAO = new BoletimDAO();
-        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
-        ProfessorDAO professorDAO = new ProfessorDAO();
         TurmasDAO turmasDAO = new TurmasDAO();
         ObservacaoDAO observacaoDAO = new ObservacaoDAO();
         AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
@@ -47,17 +43,6 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
         String nomeTurmaParam = req.getParameter("nomeTurma");
 
         try {
-
-            Optional<Professor> professorOpt = professorDAO.buscarProfessorPorIdUsuario(idUsuario);
-            if (professorOpt.isEmpty()) {
-                resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-                return;
-            }
-
-            int idProfessor = professorOpt.get().getId();
-
-            Disciplina disciplina = disciplinaDAO.buscarPorId(idProfessor);
-            int idDisciplina = disciplina.getId();
 
             Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdAluno(idAlunoParam);
             if (alunoOpt.isEmpty()) {
@@ -71,7 +56,7 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
                     alunoConsultaDAO.buscarPorMatricula(aluno.getMatricula());
 
             ArrayList<Boletim> boletimList =
-                    boletimDAO.visualizarNotasPorDisciplina(idAlunoParam, idDisciplina);
+                    boletimDAO.visualizarBoletim(idAlunoParam);
 
             List<Observacao> obsList =
                     observacaoDAO.buscarPorIdAluno(idAlunoParam);
@@ -86,7 +71,7 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             req.setAttribute("idTurma", idTurmaParam);
             req.setAttribute("nomeTurma", nomeTurmaParam);
 
-            req.getRequestDispatcher("/WEB-INF/professor/perfilAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/perfilAluno.jsp")
                     .forward(req, resp);
 
         } catch (DataAccessException e) {

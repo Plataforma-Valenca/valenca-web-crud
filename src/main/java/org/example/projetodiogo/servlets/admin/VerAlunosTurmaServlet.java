@@ -27,7 +27,7 @@ public class VerAlunosTurmaServlet extends HttpServlet {
 
         request.setAttribute("alunos", alunos);
 
-        request.getRequestDispatcher("/WEB-INF/admin/listarAlunosTurmas.jsp")
+        request.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
                 .forward(request, response);
     }
 }

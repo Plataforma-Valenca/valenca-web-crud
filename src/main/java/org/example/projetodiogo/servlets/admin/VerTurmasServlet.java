@@ -26,7 +26,7 @@ public class VerTurmasServlet extends HttpServlet {
 
             request.setAttribute("turmas", turmas);
 
-            request.getRequestDispatcher("/WEB-INF/admin/turmasAdmin.jsp")
+            request.getRequestDispatcher("/WEB-INF/admin/listarTurmas.jsp")
                     .forward(request, response);
 
         } catch (Exception e) {

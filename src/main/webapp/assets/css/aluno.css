@@ -1,39 +1,79 @@
-.details-infos-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.aluno-details-infos{
+    width:100%;
+    display:flex;
+    gap:40px;
 }
-.aluno-details-infos {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    gap: 30%;
+
+.details-infos-box{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    background:white;
+    border-radius:10px;
+    padding:18px 24px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+    min-width:160px;
 }
-.aluno-details-notas {
-    width: 100%;
+
+.details-infos-box h4{
+    font-size:14px;
+    color:#6b6b6b;
+    margin-bottom:6px;
 }
-.aluno-details-notas-table {
-    padding: 20px;
-    background-color: #FAFAFA;
-    border-radius: 10px;
-    box-shadow: 0px 0px 0.05px rgba(0, 0, 0, 0.40);
+
+.details-infos-box p{
+    font-size:16px;
+    font-weight:600;
 }
+
+.aluno-details-notas{
+    width:100%;
+    background:white;
+    border-radius:12px;
+    padding:22px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+.aluno-details-notas-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.aluno-details-notas-table{
+    padding:20px;
+    background:#FAFAFA;
+    border-radius:10px;
+}
+
 .header-table-list-row{
-    display: flex;
-    padding: 10px;
-    border-bottom: 1px solid #d8d8d8
+    display:flex;
+    padding:10px;
+    font-size:13px;
+    font-weight:600;
+    color:#777;
+    border-bottom:1px solid #ddd;
 }
-.header-table-list-row h5{
-    font-weight: 600;
-    color:#535353;
+
+.row-table-list-row{
+    display:flex;
+    align-items:center;
+    padding:12px 0;
 }
-.row-table-list-row {
-    display: flex;
-    padding: 10px;
+
+.row-table-list-row p{
+    font-size:14px;
 }
-.aluno-details-notas-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+
+.btn-primary{
+    background:#1e88e5;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.btn-primary:hover{
+    background:#166ec2;
 }

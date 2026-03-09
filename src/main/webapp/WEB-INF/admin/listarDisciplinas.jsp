@@ -27,9 +27,6 @@
         <div>
             <h1 class="page-grid-header-title">Disciplinas</h1>
         </div>
-        <button class="btn-primary" style="width: 150px; margin-bottom: 5px;" onclick="abrirModal()">
-            + Cadastrar
-        </button>
     </header>
 
     <main class="page-grid-main">
@@ -48,18 +45,7 @@
                     </p>
                 </div>
 
-                <div class="card-actions">
-                    <a href="${pageContext.request.contextPath}/admin/editarDisciplina?id=<%= d.getIdDisciplina() %>"
-                       title="Editar" style="color: #535353; font-size: 1.1rem;">
-                        <i class="fa-solid fa-pen"></i>
-                    </a>
-                    <a href="${pageContext.request.contextPath}/admin/excluirDisciplina?id=<%= d.getIdDisciplina() %>"
-                       onclick="return confirm('Tem certeza que deseja excluir esta disciplina?')"
-                       title="Excluir" style="color: #E74C3C; font-size: 1.1rem;">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
-                </div>
-            </div>
+
             <%
                 }
             } else {
@@ -75,47 +61,7 @@
 
 </div>
 
-<div id="modalCadastro" class="modal">
-    <div class="modal-content">
-        <h2 style="margin-bottom: 20px; color: var(--blue-primary);">Nova Disciplina</h2>
 
-        <form action="${pageContext.request.contextPath}/admin/cadastrarDisciplina" method="post">
-            <div class="form-control">
-                <label>Nome da Disciplina</label>
-                <input type="text" name="nome" placeholder="Ex: Matemática, História..." required
-                       style="padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-bottom: 15px;">
-            </div>
 
-            <div class="modal-footer" style="display: flex; gap: 10px; margin-top: 10px;">
-                <button type="submit" class="btn-primary" style="flex: 1;">Salvar</button>
-                <button type="button" class="btn-secondary" onclick="fecharModal()"
-                        style="flex: 1; background: #eee; border: none; border-radius: 10px; cursor: pointer;">
-                    Cancelar
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-    function abrirModal() {
-        const modal = document.getElementById("modalCadastro");
-        modal.style.display = "flex";
-        document.body.style.overflow = "hidden";
-    }
-
-    function fecharModal() {
-        const modal = document.getElementById("modalCadastro");
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-
-    window.onclick = function(event) {
-        const modal = document.getElementById("modalCadastro");
-        if (event.target === modal) {
-            fecharModal();
-        }
-    }
-</script>
 </body>
 </html>
