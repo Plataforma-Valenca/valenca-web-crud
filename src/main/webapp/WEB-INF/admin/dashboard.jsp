@@ -7,19 +7,19 @@
     String nomeUsuario = (usuario != null) ? usuario.getNome() : "Admin";
 
     // Dados vindos do Servlet
-    int totalAlunos      = (Integer) request.getAttribute("totalAlunos");
-    int totalTurmas      = (Integer) request.getAttribute("totalTurmas");
+    int totalAlunos = (Integer) request.getAttribute("totalAlunos");
+    int totalTurmas = (Integer) request.getAttribute("totalTurmas");
     int totalProfessores = (Integer) request.getAttribute("totalProfessores");
-    int filtroTurma      = (Integer) request.getAttribute("filtroTurma");
-    int filtroSemestre   = (Integer) request.getAttribute("filtroSemestre");
+    int filtroTurma = (Integer) request.getAttribute("filtroTurma");
+    int filtroSemestre = (Integer) request.getAttribute("filtroSemestre");
 
-    List<Map<String,Object>> listaTurmas        = (List<Map<String,Object>>) request.getAttribute("listaTurmas");
-    List<Map<String,Object>> alunosPorTurma     = (List<Map<String,Object>>) request.getAttribute("alunosPorTurma");
-    List<Map<String,Object>> mediaPorTurma      = (List<Map<String,Object>>) request.getAttribute("mediaPorTurma");
+    List<Map<String,Object>> listaTurmas = (List<Map<String,Object>>) request.getAttribute("listaTurmas");
+    List<Map<String,Object>> alunosPorTurma = (List<Map<String,Object>>) request.getAttribute("alunosPorTurma");
+    List<Map<String,Object>> mediaPorTurma = (List<Map<String,Object>>) request.getAttribute("mediaPorTurma");
     List<Map<String,Object>> mediaPorDisciplina = (List<Map<String,Object>>) request.getAttribute("mediaPorDisciplina");
-    List<Map<String,Object>> aprovados          = (List<Map<String,Object>>) request.getAttribute("aprovadosPorTurma");
-    List<Map<String,Object>> reprovados         = (List<Map<String,Object>>) request.getAttribute("reprovadosPorTurma");
-    List<Map<String,Object>> criticos           = (List<Map<String,Object>>) request.getAttribute("listaCriticos");
+    List<Map<String,Object>> aprovados = (List<Map<String,Object>>) request.getAttribute("aprovadosPorTurma");
+    List<Map<String,Object>> reprovados = (List<Map<String,Object>>) request.getAttribute("reprovadosPorTurma");
+    List<Map<String,Object>> criticos = (List<Map<String,Object>>) request.getAttribute("listaCriticos");
 
     // Monta JSON para os gráficos
     java.util.function.Function<List<Map<String,Object>>, String> toLabels = list -> {

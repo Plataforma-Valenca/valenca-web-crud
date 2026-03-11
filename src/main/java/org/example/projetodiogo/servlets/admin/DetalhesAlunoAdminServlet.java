@@ -35,6 +35,7 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
         TurmasDAO turmasDAO = new TurmasDAO();
         ObservacaoDAO observacaoDAO = new ObservacaoDAO();
         AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
+        DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
 
         int idAlunoParam = Integer.parseInt(req.getParameter("idAluno").trim());
         String matriculaParam = req.getParameter("matricula");
@@ -43,6 +44,9 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
         String nomeTurmaParam = req.getParameter("nomeTurma");
 
         try {
+            ArrayList<Disciplina> disciplinasList = disciplinaDAO.visualizarDisciplinas();
+
+            ArrayList<Boletim> boletimList = boletimDAO.visualizarBoletim(idAlunoParam);
 
             Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdAluno(idAlunoParam);
             if (alunoOpt.isEmpty()) {
@@ -55,8 +59,6 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             AlunoConsultaDTO alunoConsultaDTO =
                     alunoConsultaDAO.buscarPorMatricula(aluno.getMatricula());
 
-            ArrayList<Boletim> boletimList =
-                    boletimDAO.visualizarBoletim(idAlunoParam);
 
             List<Observacao> obsList =
                     observacaoDAO.buscarPorIdAluno(idAlunoParam);
@@ -70,6 +72,8 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             req.setAttribute("matricula", matriculaParam);
             req.setAttribute("idTurma", idTurmaParam);
             req.setAttribute("nomeTurma", nomeTurmaParam);
+            req.setAttribute("disciplinasList", disciplinasList);
+            req.setAttribute("boletimList", boletimList);
 
             req.getRequestDispatcher("/WEB-INF/admin/perfilAluno.jsp")
                     .forward(req, resp);

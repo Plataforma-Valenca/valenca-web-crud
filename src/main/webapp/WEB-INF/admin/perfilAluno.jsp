@@ -70,7 +70,7 @@
 
             <div class="details-infos-box">
                 <h4>Turma</h4>
-                <p><%= nomeTurma != null ? nomeTurma : "--" %></p>
+                <p><%= aluno.getTurma() %></p>
             </div>
 
         </div>
