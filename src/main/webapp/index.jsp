@@ -56,8 +56,8 @@
                                 </a>
                             </div>
 
+                            <div class="message-container">
                                 <% if (request.getAttribute("erroLogin") != null) { %>
-                            <div class="error">
                                 <div class="mensagem" id="erroLogin">
                                     <%= request.getAttribute("erroLogin") %>
                                 </div>
@@ -68,6 +68,8 @@
                                     <%= request.getAttribute("mensagemSucesso") %>
                                 </div>
                                 <%} %>
+                            </div>
+
                         </div>
 
                         <div class="form-group-enter">

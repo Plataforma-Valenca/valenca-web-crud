@@ -41,7 +41,7 @@
             </li>
 
 
-            <li class="<%= "listarProfessor".equals(activePage) ? "active" : "" %> menu-items-tab">
+            <li class="<%= "professores".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/admin/verProfessores">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-professor.svg">
 
