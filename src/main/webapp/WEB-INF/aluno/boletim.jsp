@@ -58,12 +58,6 @@
                     <h5 style="flex:2">Disciplina</h5>
                     <h5 style="flex:0.8">N1</h5>
                     <h5 style="flex:0.8">N2</h5>
-                    <h5 style="flex:1.2">Média 1º SEM</h5>
-
-                    <h5 style="flex:0.8">N1</h5>
-                    <h5 style="flex:0.8">N2</h5>
-                    <h5 style="flex:1.2">Média 2º SEM</h5>
-
                     <h5 style="flex:1.2">Média Final</h5>
                     <h5 style="flex:1.5">Situação</h5>
 
