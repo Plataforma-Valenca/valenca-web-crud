@@ -91,14 +91,6 @@ Padrão de projeto para isolamento de acesso aos dados:
 - PostgreSQL configurado
 - IDE (Eclipse, IntelliJ ou VS Code com extensões)
 
-### Passo a Passo
-
-1. **Clone o repositório**
-   ```bash
-   git clone https://github.com/Plataforma-Valenca/valenca-web-crud.git
-   cd valenca-web-crud
-   ```
-
 ## 👨‍💻 Desenvolvedores
 
 Projeto desenvolvido por alunos do 2ºF Tech 2026.
