@@ -40,7 +40,7 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
         int idAlunoParam = Integer.parseInt(req.getParameter("idAluno").trim());
         String matriculaParam = req.getParameter("matricula");
         String turmaParam = req.getParameter("turma");
-        String idTurmaParam = req.getParameter("idTurma");
+        int idTurmaParam = Integer.parseInt(req.getParameter("idTurma"));
         String nomeTurmaParam = req.getParameter("nomeTurma");
 
         try {
@@ -57,7 +57,7 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             Aluno aluno = alunoOpt.get();
 
             AlunoConsultaDTO alunoConsultaDTO =
-                    alunoConsultaDAO.buscarPorMatricula(aluno.getMatricula());
+                    alunoConsultaDAO.buscarPorMatricula(aluno.getMatricula(), idTurmaParam);
 
 
             List<Observacao> obsList =

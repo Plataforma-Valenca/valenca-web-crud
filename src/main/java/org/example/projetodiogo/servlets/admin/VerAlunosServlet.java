@@ -31,7 +31,7 @@ public class VerAlunosServlet extends HttpServlet {
 
                 Long matricula = Long.parseLong(busca);
 
-                aluno = alunoConsultaDao.buscarPorMatricula(matricula);
+                aluno = alunoConsultaDao.buscarPorMatricula(matricula, 1);
 
                 if (aluno != null) {
                     alunosList.add(aluno);

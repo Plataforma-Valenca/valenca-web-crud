@@ -14,16 +14,13 @@ import java.util.List;
 @WebServlet("/admin/verAlunosTurma")
 public class VerAlunosTurmaServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idTurma = Integer.parseInt(request.getParameter("idTurma"));
-        System.out.println("Id da turma: "+idTurma);
+        String busca = request.getParameter("busca");
 
         AlunoConsultaDtoDAO dao = new AlunoConsultaDtoDAO();
 
         List<AlunoConsultaDTO> alunos = dao.buscarAlunosPorTurma(idTurma);
-    System.out.println("Listar alunos"+ alunos);
 
         request.setAttribute("alunos", alunos);
 
