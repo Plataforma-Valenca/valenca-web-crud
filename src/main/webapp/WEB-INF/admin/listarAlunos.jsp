@@ -25,13 +25,16 @@
             <b>Alunos</b>
         </div>
 
-        <h1 class="page-grid-header-title">
-            <%= request.getParameter("nomeTurma") != null ? request.getParameter("nomeTurma") : "--" %>
-        </h1>
+        <div class="page-grid-header-title-plus-btn">
+            <h1 class="page-grid-header-title">
+                <%= request.getParameter("nomeTurma") != null ? request.getParameter("nomeTurma") : "--" %>
+            </h1>
 
-        <button class="btn-primary" onclick="abrirModalCadastroAluno()">
-            Cadastrar aluno
-        </button>
+            <button class="btn-primary" onclick="abrirModalCadastroAluno()">
+                Cadastrar aluno
+            </button>
+        </div>
+
 
     </header>
 
