@@ -44,7 +44,7 @@ public class DetalhesAlunoServlet extends HttpServlet {
 
             Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdAluno(idAlunoParam);
 
-            AlunoConsultaDTO alunoConsultaDTO = alunoConsultaDAO.buscarPorMatricula(alunoOpt.get().getMatricula(), idTurmaParam);
+            AlunoConsultaDTO alunoConsultaDTO = alunoConsultaDAO.buscarPorMatricula(alunoOpt.get().getMatricula());
 
             boletimList = boletimDAO.visualizarNotasPorDisciplina(idAlunoParam, idDisciplina);
 

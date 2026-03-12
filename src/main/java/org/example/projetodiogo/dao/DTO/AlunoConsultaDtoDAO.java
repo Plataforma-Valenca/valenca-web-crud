@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoConsultaDtoDAO {
-    public AlunoConsultaDTO buscarPorMatricula(Long matricula, int idTurma) {
+    public AlunoConsultaDTO buscarPorMatricula(Long matricula) {
 
         String sql = """
                 SELECT
@@ -29,7 +29,7 @@ public class AlunoConsultaDtoDAO {
                 LEFT JOIN aluno_turma at ON at.id_aluno = a.id_aluno
                 LEFT JOIN turmas t ON t.id_turma = at.id_turma
                 
-                WHERE a.matricula = ? AND t.id_turma = ?;
+                WHERE a.matricula = ?;
                 """;
 
         Connection conn = null;

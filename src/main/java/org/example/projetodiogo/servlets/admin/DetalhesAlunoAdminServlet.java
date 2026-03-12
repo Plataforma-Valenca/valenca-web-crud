@@ -57,7 +57,7 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             Aluno aluno = alunoOpt.get();
 
             AlunoConsultaDTO alunoConsultaDTO =
-                    alunoConsultaDAO.buscarPorMatricula(aluno.getMatricula(), idTurmaParam);
+                    alunoConsultaDAO.buscarPorMatricula(aluno.getMatricula());
 
 
             List<Observacao> obsList =

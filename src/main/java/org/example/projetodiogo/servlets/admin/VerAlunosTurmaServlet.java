@@ -9,6 +9,7 @@ import org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO;
 import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admin/verAlunosTurma")
@@ -18,11 +19,18 @@ public class VerAlunosTurmaServlet extends HttpServlet {
         int idTurma = Integer.parseInt(request.getParameter("idTurma"));
         String busca = request.getParameter("busca");
 
+        List<AlunoConsultaDTO> alunos = new ArrayList<AlunoConsultaDTO>();
+
         AlunoConsultaDtoDAO dao = new AlunoConsultaDtoDAO();
 
-        List<AlunoConsultaDTO> alunos = dao.buscarAlunosPorTurma(idTurma);
+        if (busca == null || busca.isEmpty()) {
+            alunos = dao.buscarAlunosPorTurma(idTurma);
+        } else {
+            alunos.add(dao.buscarPorMatricula(Long.parseLong(busca)));
+        }
 
         request.setAttribute("alunos", alunos);
+        request.setAttribute("busca", busca);
 
         request.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
                 .forward(request, response);
