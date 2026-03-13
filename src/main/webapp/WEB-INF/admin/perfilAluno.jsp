@@ -10,7 +10,7 @@
     ArrayList<Boletim> boletimList = (ArrayList<Boletim>) request.getAttribute("boletimList");
     List<Observacao> obsList = (List<Observacao>) request.getAttribute("obsList");
     String nomeTurma = (String) request.getAttribute("nomeTurma");
-    String idTurma = (String) request.getAttribute("idTurma");
+    int idTurma = (Integer) request.getAttribute("idTurma");
 %>
 
 <html>
