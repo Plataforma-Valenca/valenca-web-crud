@@ -26,6 +26,7 @@
 <body>
 
 <div class="login-page">
+
     <div class="login-left-box">
 
         <div class="login-left-box-content">
@@ -34,7 +35,6 @@
                 <img src="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
                 <h1>Colégio Valença</h1>
             </div>
-
             <div class="login-left-box-content-form">
 
                 <div class="login-left-box-content-title">
@@ -60,7 +60,6 @@
 
                         </div>
 
-                        <!-- mensagem -->
                         <% if (request.getAttribute("mensagem") != null) { %>
                         <div class="mensagem">
                             <%= request.getAttribute("mensagem") %>
