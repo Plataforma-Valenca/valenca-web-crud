@@ -38,7 +38,7 @@
     <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px;">
 
         <div class="top-box-page-grid-main">
-            <form action="${pageContext.request.contextPath}/admin/verAlunos" method="get" class="form-busca">
+            <form action="${pageContext.request.contextPath}/admin/verAlunosTurma" method="get" class="form-busca">
 
                 <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
                 <input type="hidden" name="nomeTurma" value="<%= request.getParameter("nomeTurma") %>">
@@ -46,7 +46,7 @@
                 <div class="form-control">
                     <h5>Buscar por matrícula</h5>
                     <div class="form-control-action input-primary">
-                        <input type="text" name="busca" placeholder="0000000">
+                        <input type="text" name="busca" placeholder="0000000" value="<%= request.getParameter("busca") != null ? request.getParameter("busca") : "" %>">
                         <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>
                 </div>
