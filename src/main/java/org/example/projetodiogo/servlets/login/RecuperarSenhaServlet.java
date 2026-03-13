@@ -42,6 +42,8 @@ public class RecuperarSenhaServlet extends HttpServlet {
                     .replace("recuperarSenha", "novaSenha")
                     + "?token=" + token;
 
+            System.out.println("LINK DE RECUPERAÇÃO: " + link);
+
             try {
                 EmailUtil.enviarEmail(email,"Recuperação de Senha","Clique no link para redefinir sua senha:\n"
                         + link);
@@ -50,6 +52,7 @@ public class RecuperarSenhaServlet extends HttpServlet {
             }
         }
 
-        resp.sendRedirect("login.jsp");
+        req.getRequestDispatcher("/WEB-INF/login/tokenRecuperarSenha.jsp")
+                .forward(req, resp);
     }
 }
