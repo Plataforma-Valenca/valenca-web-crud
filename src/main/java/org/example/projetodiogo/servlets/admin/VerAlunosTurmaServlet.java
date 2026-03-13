@@ -17,6 +17,7 @@ public class VerAlunosTurmaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idTurma = Integer.parseInt(request.getParameter("idTurma"));
+        String nomeTurma = request.getParameter("nomeTurma");
         String busca = request.getParameter("busca");
 
         List<AlunoConsultaDTO> alunos = new ArrayList<AlunoConsultaDTO>();
@@ -31,6 +32,7 @@ public class VerAlunosTurmaServlet extends HttpServlet {
 
         request.setAttribute("alunos", alunos);
         request.setAttribute("busca", busca);
+        request.setAttribute("nomeTurma", nomeTurma);
 
         request.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
                 .forward(request, response);
