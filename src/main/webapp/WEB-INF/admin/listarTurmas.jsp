@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 
 <body>
@@ -132,8 +133,8 @@
         <p>Esta ação não poderá ser desfeita.</p>
 
         <div class="modal-footer">
-            <a id="btnConfirmarExcluir" class="btn-danger">Excluir</a>
-            <button type="button" onclick="fecharModalExcluir()" class="btn-secondary">Cancelar</button>
+            <a id="btnConfirmarExcluir" class="btn-fourth">Excluir</a>
+            <button type="button" onclick="fecharModalExcluir()" class="btn-terciary">Cancelar</button>
         </div>
 
     </div>
