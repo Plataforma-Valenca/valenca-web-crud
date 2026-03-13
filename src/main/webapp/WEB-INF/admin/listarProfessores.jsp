@@ -176,6 +176,7 @@
             <input type="email" name="email" id="editarEmail" required>
             <input type="text" name="cpf" id="editarCpf" required>
 
+            <select name="disciplina" id="editarDisciplina" required>
 
                 <% if(disciplinas != null){
                     for(Disciplina d : disciplinas){ %>

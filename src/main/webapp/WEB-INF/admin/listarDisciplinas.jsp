@@ -27,7 +27,7 @@
     justify-content: space-between;
     margin-bottom: 20px;
     flex-direction: row">
-        <h2 class="page-grid-header-title" style="font-size: 2.5rem; color: #0f2c3d;">Disciplinas</h2>
+        <h2 class="page-grid-header-title" style="font-size: 2rem; color: #0f2c3d;">Disciplinas</h2>
         <button class="btn-cadastrar">
             <i class="fa-solid fa-plus" style="color: white"></i> Cadastrar
         </button>

@@ -39,15 +39,16 @@
 
             <a class="card-items"
                href="${pageContext.request.contextPath}/admin/verAlunosTurma?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
-<span class="card-title">
- <%= t.getNome() %>
-</span>
+
+                <span class="card-title">
+                    <%= t.getNome() %>
+                </span>
 
                 <div class="card-actions">
 
                     <i class="fa-solid fa-pen"
                        onclick="event.stopPropagation();event.preventDefault();
-                               abrirModalEditar('<%=t.getId()%>','<%=t.getAno()%>','<%=t.getNome()%>')">
+                               abrirModalEditar('<%=t.getId()%>','<%=t.getAno()%>','<%=t.getNome().replace("'", "\\'")%>')">
                     </i>
 
                     <i class="fa-solid fa-trash"
@@ -57,11 +58,12 @@
                     </i>
 
                 </div>
+
             </a>
 
             <%
                 }
-            }else{
+            } else {
             %>
 
             <p class="no-data">Nenhuma turma cadastrada no sistema.</p>
@@ -84,6 +86,7 @@
         </div>
 
         <form action="${pageContext.request.contextPath}/admin/inserirTurma" method="post">
+
             <input type="text" name="ano" placeholder="Ex: 2025" required>
             <input type="text" name="nome" placeholder="Ex: 6° Ano A" required>
 
@@ -92,6 +95,7 @@
             </div>
 
         </form>
+
     </div>
 </div>
 
@@ -116,6 +120,7 @@
             </div>
 
         </form>
+
     </div>
 </div>
 
@@ -128,7 +133,7 @@
 
         <div class="modal-footer">
             <a id="btnConfirmarExcluir" class="btn-danger">Excluir</a>
-            <button onclick="fecharModalExcluir()" class="btn-secondary">Cancelar</button>
+            <button type="button" onclick="fecharModalExcluir()" class="btn-secondary">Cancelar</button>
         </div>
 
     </div>
@@ -162,7 +167,7 @@
 
         document.getElementById("modalExcluir").style.display="flex";
 
-        document.getElementById("btnConfirmarExcluir").href=
+        document.getElementById("btnConfirmarExcluir").href =
             "${pageContext.request.contextPath}/admin/deletarTurma?id="+id;
 
     }
@@ -171,9 +176,9 @@
         document.getElementById("modalExcluir").style.display="none";
     }
 
-    window.onclick=function(event){
+    window.onclick = function(event){
 
-        if(event.target.className==='modal'){
+        if(event.target.classList.contains("modal")){
             event.target.style.display="none";
         }
 

@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 
     <link rel="stylesheet"
@@ -42,7 +43,7 @@
             </h1>
 
             <button class="btn-primary" onclick="abrirModalCadastroAluno()">
-                Cadastrar aluno
+                + Cadastrar
             </button>
         </div>
 
