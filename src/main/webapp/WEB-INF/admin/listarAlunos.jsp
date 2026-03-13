@@ -1,6 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
+
+<%
+    String nomeTurma = (String) request.getAttribute("nomeTurma");
+%>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -33,7 +38,7 @@
 
         <div class="page-grid-header-title-plus-btn">
             <h1 class="page-grid-header-title">
-                <%= request.getParameter("nomeTurma") != null ? request.getParameter("nomeTurma") : "--" %>
+                <%= nomeTurma != null ? request.getAttribute("nomeTurma") : "--" %>
             </h1>
 
             <button class="btn-primary" onclick="abrirModalCadastroAluno()">
@@ -84,7 +89,7 @@
 
                         <a class="itens-per-table"
                            style="display:flex; align-items:center; text-decoration:none; color:inherit;"
-                           href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= java.net.URLEncoder.encode(aluno.getNome(), "UTF-8") %>&matricula=<%= aluno.getMatricula() %>&turma=<%= java.net.URLEncoder.encode(aluno.getTurma(), "UTF-8") %>">
+                           href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= java.net.URLEncoder.encode(aluno.getNome(), "UTF-8") %>&matricula=<%= aluno.getMatricula() %>&turma=<%= java.net.URLEncoder.encode(aluno.getTurma(), "UTF-8") %>&nomeTurma=<%= nomeTurma %>">
 
                             <div style="flex:1;">
                                 <%= aluno.getNome() %>
