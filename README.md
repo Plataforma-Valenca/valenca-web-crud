@@ -126,6 +126,7 @@ O administrador possui controle total sobre o sistema.
    npm install
    ```
 4. Configure o banco de dados no arquivo `.env`.
+
 5. Inicie o servidor:
    ```bash
    npm start
