@@ -73,7 +73,7 @@
                         </div>
 
                         <div class="form-group-enter">
-                            <button type="submit" class="login-button btn-primary">
+                            <button type="submit" class="login-button btn-primary" style="width: 100%">
                                 Entrar
                             </button>
                             <div class="login-first-access">

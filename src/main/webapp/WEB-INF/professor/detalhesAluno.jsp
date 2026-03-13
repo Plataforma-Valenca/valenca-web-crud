@@ -76,10 +76,6 @@
                     <p style="flex: 1; color: <%= b.getMedia2() != null ? corN2 : "inherit" %>;">
                         <%= b.getMedia2() != null ? b.getMedia2() : "--" %>
                     </p>
-                    <p style="flex: 1;">--</p>
-                    <p style="flex: 1;">--</p>
-                    <p style="flex: 1;">--</p>
-                    <p style="flex: 1;">--</p>
                     <p style="flex: 1; color: <%= b.getMediaFinal() != null ? corFinal : "inherit" %>;">
                         <%= b.getMediaFinal() != null ? b.getMediaFinal() : "--" %>
                     </p>

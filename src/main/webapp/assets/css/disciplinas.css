@@ -1,0 +1,74 @@
+/* Grid de cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* Estilo do Card individual */
+.card-items {
+    background-color: #F8F9FA; /* Cinza bem claro como na foto */
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 0 30px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-items:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Textos dentro do card */
+.card-items-infos h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #0f2c3d;
+    font-weight: 700;
+}
+
+.card-items-infos p {
+    margin: 4px 0 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Ícones de Ação */
+.card-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.action-icon {
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #0f2c3d; /* Cor escura original */
+    transition: color 0.2s;
+}
+
+.action-icon.edit:hover { color: #1F8AA6; }
+.action-icon.delete:hover { color: #F04770; }
+
+/* Botão Cadastrar (Topo Direito) */
+.btn-cadastrar {
+    background-color: #1F8AA6; /* Azul do Colégio */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.btn-cadastrar:hover {
+    background-color: #166d83;
+}

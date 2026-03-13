@@ -35,7 +35,7 @@ public class DetalhesAlunoServlet extends HttpServlet {
         String nomeAlunoParam = req.getParameter("nomeAluno");
         String turmaParam = req.getParameter("turma");
         String matriculaParam = req.getParameter("matricula");
-        String idTurmaParam = req.getParameter("idTurma");
+        int idTurmaParam = Integer.parseInt(req.getParameter("idTurma"));
         String nomeTurmaParam = req.getParameter("nomeTurma");
 
         try {

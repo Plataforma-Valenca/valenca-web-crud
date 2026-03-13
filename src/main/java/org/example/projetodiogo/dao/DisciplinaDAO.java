@@ -7,78 +7,15 @@ import org.example.projetodiogo.model.Boletim;
 import org.example.projetodiogo.model.Disciplina;
 import org.example.projetodiogo.util.ConnectionFactory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class DisciplinaDAO {
-
-    public Integer inserirDisciplina(Disciplina disciplina) {
-
-        String sql = "INSERT INTO disciplinas (nome, id_professor) VALUES (?, ?)";
-
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-            pstmt.setString(1, disciplina.getNome());
-            pstmt.setInt(2, disciplina.getIdProfessor());
-
-            int linhas = pstmt.executeUpdate();
-
-            if (linhas > 0) {
-                try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        int idGerado = rs.getInt(1);
-                        disciplina.setId(idGerado);
-                        return idGerado;
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            System.out.println("[DAO] Erro ao inserir disciplina: " + e.getMessage());
-        }
-
-        return null;
-    }
-    public boolean updateDisciplinaProfessor(Disciplina disciplina) {
-
-        String sql = "UPDATE disciplinas SET nome = ? WHERE id_professor = ?";
-
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, disciplina.getNome());
-            pstmt.setInt(2, disciplina.getIdProfessor());
-
-            int linhas = pstmt.executeUpdate();
-
-            return linhas > 0;
-
-        } catch (SQLException e) {
-            System.out.println("[DAO] Erro ao atualizar disciplina: " + e.getMessage());
-        }
-
-        return false;
-    }
-    public void deleteDisciplinaByProfessor(int idProfessor) {
-
-        String sql = "DELETE FROM disciplinas WHERE id_professor = ?";
-
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idProfessor);
-
-            int linhasAfetadas = stmt.executeUpdate();
-
-            System.out.println("Disciplinas deletadas: " + linhasAfetadas);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public Disciplina buscarPorId(int idDisciplina) {
 

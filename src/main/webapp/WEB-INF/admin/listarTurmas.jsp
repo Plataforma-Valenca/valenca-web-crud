@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
-<link rel="icon" type="image/x-icon"
-      href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
+
 <body>
 
 <jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
@@ -40,15 +40,16 @@
 
             <a class="card-items"
                href="${pageContext.request.contextPath}/admin/verAlunosTurma?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
-<span class="card-title">
- <%= t.getNome() %>
-</span>
+
+                <span class="card-title">
+                    <%= t.getNome() %>
+                </span>
 
                 <div class="card-actions">
 
                     <i class="fa-solid fa-pen"
                        onclick="event.stopPropagation();event.preventDefault();
-                               abrirModalEditar('<%=t.getId()%>','<%=t.getAno()%>','<%=t.getNome()%>')">
+                               abrirModalEditar('<%=t.getId()%>','<%=t.getAno()%>','<%=t.getNome().replace("'", "\\'")%>')">
                     </i>
 
                     <i class="fa-solid fa-trash"
@@ -58,11 +59,12 @@
                     </i>
 
                 </div>
+
             </a>
 
             <%
                 }
-            }else{
+            } else {
             %>
 
             <p class="no-data">Nenhuma turma cadastrada no sistema.</p>
@@ -85,6 +87,7 @@
         </div>
 
         <form action="${pageContext.request.contextPath}/admin/inserirTurma" method="post">
+
             <input type="text" name="ano" placeholder="Ex: 2025" required>
             <input type="text" name="nome" placeholder="Ex: 6° Ano A" required>
 
@@ -93,6 +96,7 @@
             </div>
 
         </form>
+
     </div>
 </div>
 
@@ -101,7 +105,7 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <h2>Editar Turma</h2>
+            <h2>Atualizar turma</h2>
             <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
         </div>
 
@@ -113,10 +117,11 @@
             <input type="text" id="editarNome" name="nome" required>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary">Salvar Alterações</button>
+                <button type="submit" class="btn-secondary">Salvar</button>
             </div>
 
         </form>
+
     </div>
 </div>
 
@@ -128,8 +133,8 @@
         <p>Esta ação não poderá ser desfeita.</p>
 
         <div class="modal-footer">
-            <a id="btnConfirmarExcluir" class="btn-danger">Excluir</a>
-            <button onclick="fecharModalExcluir()" class="btn-secondary">Cancelar</button>
+            <a id="btnConfirmarExcluir" class="btn-fourth">Excluir</a>
+            <button type="button" onclick="fecharModalExcluir()" class="btn-terciary">Cancelar</button>
         </div>
 
     </div>
@@ -163,7 +168,7 @@
 
         document.getElementById("modalExcluir").style.display="flex";
 
-        document.getElementById("btnConfirmarExcluir").href=
+        document.getElementById("btnConfirmarExcluir").href =
             "${pageContext.request.contextPath}/admin/deletarTurma?id="+id;
 
     }
@@ -172,9 +177,9 @@
         document.getElementById("modalExcluir").style.display="none";
     }
 
-    window.onclick=function(event){
+    window.onclick = function(event){
 
-        if(event.target.className==='modal'){
+        if(event.target.classList.contains("modal")){
             event.target.style.display="none";
         }
 

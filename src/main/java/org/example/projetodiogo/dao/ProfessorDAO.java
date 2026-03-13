@@ -14,26 +14,19 @@ import java.util.Optional;
 public class ProfessorDAO {
 
     // INSERT
-    public Integer insert(Professor professor) {
+    public boolean insert(Professor professor) {
         String query = """
-            INSERT INTO professores (id_usuario)
-            VALUES (?)
-            """;
+                INSERT INTO professores (id_professor, id_usuario)
+                VALUES (?, ?)
+                """;
 
         try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement ps = conn.prepareStatement(query)) {
 
-            ps.setInt(1, professor.getIdUsuario());
+            ps.setInt(1, professor.getId());
+            ps.setInt(2, professor.getIdUsuario());
 
-            ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    return rs.getInt(1); // id gerado
-                }
-            }
-
-            return null;
+            return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
             throw new DataAccessException("Erro ao inserir professor", e);
@@ -60,29 +53,12 @@ public class ProfessorDAO {
                     );
                     return Optional.of(professor);
                 } else {
-                    return Optional.empty();
+                    return Optional.empty(); // 🔥 melhor prática
                 }
             }
 
         } catch (SQLException e) {
             throw new DataAccessException("Erro ao buscar professor", e);
-        }
-    }
-    //DELETAR
-    public void deleteProfessor(int idProfessor, int idUsuario) {
-
-        String sql = "DELETE FROM professores WHERE id_professor = ? AND id_usuario = ?";
-
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idProfessor);
-            stmt.setInt(2, idUsuario);
-
-            stmt.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println("Erro ao deletar professor: " + e.getMessage());
         }
     }
 
@@ -115,6 +91,7 @@ public class ProfessorDAO {
         }
     }
 
+    // LISTAR TODOS (🔥 FALTAVA ISSO PRA FAZER O JSP)
     public List<Professor> listarProfessores() {
         String query = "SELECT * FROM professores";
         List<Professor> lista = new ArrayList<>();
@@ -176,6 +153,41 @@ public class ProfessorDAO {
         } catch (SQLException e) {
             throw new DataAccessException("Erro ao deletar professor", e);
         }
+    }
+    public List<Usuario> buscarTodosComUsuario() {
+
+        String sql = """
+        SELECT u.*
+        FROM professores p
+        JOIN usuarios u ON p.id_usuario = u.id_usuario
+    """;
+
+        List<Usuario> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario(
+                        rs.getInt("id_usuario"),
+                        rs.getString("nome"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("tipo"),
+                        rs.getBoolean("cadastro_completo")
+                );
+
+                lista.add(usuario);
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar professores", e);
+        }
+
+        return lista;
     }
     public List<Usuario> buscarPorNomeOuEmail(String busca) {
 

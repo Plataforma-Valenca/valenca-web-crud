@@ -1,44 +1,93 @@
 # valenca-web-crud
 
-## 📋 Descrição
+Sistema web desenvolvido para gerenciamento acadêmico do Colégio Valença, permitindo a administração de alunos, professores, disciplinas e notas através de diferentes perfis de acesso.
 
-Sistema **CRUD** (Create, Read, Update, Delete) desenvolvido como **plataforma de ensino** do **Colégio Valença**. A aplicação gerencia dados educacionais de forma segura e eficiente, permitindo que diferentes usuários (alunos, professores, administradores) acessem suas respectivas áreas.
+## 👥 Tipos de Usuários
 
-## 🎯 Objetivo
+- 👨‍🎓 **Aluno** - Acesso às informações acadêmicas e desempenho
+- 👨‍🏫 **Professor** - Gestão de notas e acompanhamento de turmas
+- 🛠 **Administrador** - Controle total do sistema
 
-Criar uma solução web que integre diferentes módulos de gerenciamento educacional, demonstrando conceitos essenciais de desenvolvimento backend e frontend com padrões de arquitetura profissionais.
+---
 
-## ✨ Funcionalidades
+## 🚀 Funcionalidades
 
-- ✅ **Área de Aluno** - Visualizar notas, frequência, atividades e comunicados
-- ✅ **Área de Professor** - Gerenciar turmas, lançar notas e frequência
-- ✅ **Área de Administrador** - Administrar dados de alunos, professores e disciplinas
+### 👨‍🎓 Área do Aluno
+
+O aluno pode acompanhar suas informações acadêmicas e desempenho escolar.
+
+#### 🏠 Home
+- Visualização das informações gerais
+- **Dados exibidos:**
+  - Nome
+  - Turma
+  - Número de matrícula
+  - Email acadêmico
+
+#### 📚 Disciplinas
+- Lista de disciplinas em que o aluno está matriculado
+- **Informações por disciplina:**
+  - Nome da disciplina
+  - Professor responsável
+  - Acesso aos detalhes
+
+#### 📊 Boletim
+- Acompanhamento do desempenho escolar
+- **Notas e médias:**
+  - Notas N1 e N2
+  - Média do 1º semestre
+  - Notas do 2º semestre
+  - Média final
+  - Situação (Aprovado / Reprovado)
+
+### 👨‍🏫 Área do Professor
+
+O professor possui acesso às disciplinas que leciona e pode gerenciar as notas dos alunos.
+
+**Funcionalidades principais:**
+- Visualizar disciplinas atribuídas
+- Listar alunos por disciplina
+- Lançar e editar notas
+- Acompanhar médias dos alunos
+
+### 🛠 Área do Administrador
+
+O administrador possui controle total sobre o sistema.
+
+**Funcionalidades:**
+- Cadastro de alunos
+- Cadastro de professores
+- Cadastro de disciplinas
+- Gerenciamento de turmas
+- Associação de professores às disciplinas
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
-
+ 
 ### Frontend
 - **HTML5** - Estrutura semântica
 - **CSS3** - Estilização responsiva
 - **JavaScript** - Interatividade e validação cliente
-
+ 
 ### Backend
 - **Java** - Linguagem de programação principal
 - **Servlets** - Controladores HTTP e processamento de requisições
 - **JSP** (JavaServer Pages) - Templates dinâmicos para renderização de views
-
+ 
 ### Persistência de Dados
 - **DAO** (Data Access Object) - Padrão de acesso aos dados
 - **JDBC** - Comunicação com banco de dados
 - **SQL** - Operações no banco de dados relacional
-
+ 
 ### Servidor
 - **Apache Tomcat** - Servidor de aplicação Java
 - **Banco de Dados**: PostgreSQL
-
+ 
 ## 📐 Arquitetura
-
+ 
 ### Padrão MVC (Model-View-Controller)
-
+ 
 ```
 ┌─────────────┐
 │   Cliente   │ (Browser - HTML/CSS/JS)
@@ -60,37 +109,37 @@ Criar uma solução web que integre diferentes módulos de gerenciamento educaci
 └─────────────────────────────┘
 ```
 
-### Componentes Principais
+---
 
-#### **Servlets**
-Controladores HTTP que tratam requisições GET/POST do cliente:
-- Recebem parâmetros da requisição
-- Chamam métodos do DAO
-- Redirecionam para JSPs apropriadas
-- Gerenciam sessões e segurança
+## ⚙️ Instalação
 
-#### **JSP (JavaServer Pages)**
-Templates dinâmicos que renderizam a interface:
-- Exibem dados retornados pelos Servlets
-- Contêm formulários para entrada de dados
-- Integram HTML com lógica Java
-- Geram HTML final enviado ao navegador
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/valenca-web-crud.git
+   ```
+2. Acesse o diretório do projeto:
+   ```bash
+   cd valenca-web-crud
+   ```
+3. Mude para a branch de desenvolvimento:
+   ```bash
+   git checkout develop
+   ```
+4. Instale as dependências:
+   ```bash
+   npm install
+   ```
+5. Configure o banco de dados no arquivo `.env`.
 
-#### **DAO (Data Access Object)**
-Padrão de projeto para isolamento de acesso aos dados:
-- Implementam operações CRUD
-- Executam queries SQL
-- Convertem resultados em objetos Java
-- Abstraem detalhes do banco de dados
+6. Inicie o servidor:
+   ```bash
+   npm start
+   ```
 
-## 🚀 Como Executar
+---
 
-### Pré-requisitos
-- Java JDK 8+ instalado
-- Apache Tomcat 9+
-- PostgreSQL configurado
-- IDE (Eclipse, IntelliJ ou VS Code com extensões)
+## 🔄 Fluxo de Commits e Branches
 
-## 👨‍💻 Desenvolvedores
-
-Projeto desenvolvido por alunos do 2ºF Tech 2026.
+### ⚠️ Importante
+- **Nunca commit na `main`** - A branch `main` é apenas para releases finais
+- **Todo desenvolvimento ocorre na `develop`** - Sempre trabalhe nesta branch
