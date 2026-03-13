@@ -18,7 +18,7 @@
 <body>
 
 <jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
-    <jsp:param name="activePage" value="disciplinas" />
+    <jsp:param name="activePage" value="resumoList" />
 </jsp:include>
 
 <div class="page-content">
@@ -38,12 +38,12 @@
                     for (DisciplinasResumoDTO d : disciplinasList) {
             %>
             <div class="card-items">
-                <div class="card-items-infos">
+                <a class="card-items-infos">
                     <h4><%= d.getNomeFormatado() %></h4>
                     <p style="font-weight: 400; color: #535353">
                         <%= d.getNomeProfessor() != null ? "Prof. " + d.getNomeProfessor() : "Sem professor" %>
                     </p>
-                </div>
+                </a>
 
 
             <%

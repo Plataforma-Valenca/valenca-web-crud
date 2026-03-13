@@ -21,7 +21,7 @@
 <body>
 
 <jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
-    <jsp:param name="activePage" value="professores"/>
+    <jsp:param name="activePage" value="busca"/>
 </jsp:include>
 
 <div class="page-content">

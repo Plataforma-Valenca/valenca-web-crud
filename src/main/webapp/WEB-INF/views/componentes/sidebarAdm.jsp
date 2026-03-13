@@ -41,7 +41,7 @@
             </li>
 
 
-            <li class="<%= "professores".equals(activePage) ? "active" : "" %> menu-items-tab">
+            <li class="<%= "busca".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/admin/verProfessores">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-professor.svg">
 
@@ -49,7 +49,7 @@
                 </a>
             </li>
 
-            <li class="<%= "disciplinas".equals(activePage) ? "active" : "" %> menu-items-tab">
+            <li class="<%= "resumoList".equals(activePage) ? "active" : "" %> menu-items-tab">
                 <a href="${pageContext.request.contextPath}/admin/verDisciplinasResumo">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-disciplinas.svg">
 
