@@ -52,19 +52,42 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    public boolean inserirProfessor(Usuario usuario) {
-        String sql = "INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) VALUES(?, ?, ?, ?, 'professor', ?, true)";
+    public boolean inserirProfessorComDisciplina(Usuario usuario, String disciplina) throws SQLException {
+        String sqlUsuario = """
+            INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) 
+            VALUES(?, ?, ?, ?, 'professor', ?, true)
+            RETURNING id_usuario;
+        """;
 
-        boolean resultado = false;
+        String sqlProfessor = """
+            INSERT INTO professores (id_usuario)
+            VALUES (?)
+            RETURNING id_professor;
+        """;
+
+        String sqlRelacao = """
+            INSERT INTO disciplinas (nome, id_professor)
+            VALUES (?, ?);
+        """;
 
         PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
+        PreparedStatement pstmt3 = null;
         Connection conn = null;
+
+        ResultSet rs = null;
+        ResultSet rs2 = null;
+
+        Boolean resultado = false;
 
         try {
             if (ValidadorDeCampoUsado.ehCampoEmUso("usuarios", "email", usuario.getEmail()))
                 throw new DuplicateEmailException(usuario.getEmail());
             conn = ConnectionFactory.conectar();
-            pstmt = conn.prepareStatement(sql);
+
+            conn.setAutoCommit(false);
+
+            pstmt = conn.prepareStatement(sqlUsuario);
 
             // Método para hashear a senha e guardar no banco após a criptografia
             String senhaHash = HasherSenha.hashSenha(usuario.getSenha());
@@ -75,12 +98,36 @@ public class UsuarioDAO {
             pstmt.setString(4, usuario.getCpf());
             pstmt.setString(5, usuario.getUsername());
 
-            resultado = pstmt.executeUpdate() > 0;
+            rs = pstmt.executeQuery();
+
+            rs.next();
+
+            int idUsuario = rs.getInt("id_usuario");
+
+            pstmt2 = conn.prepareStatement(sqlProfessor);
+
+            pstmt2.setInt(1, idUsuario);
+
+            rs2 = pstmt2.executeQuery();
+            rs2.next();
+
+            int idProfessor = rs2.getInt("id_professor");
+
+            pstmt3 = conn.prepareStatement(sqlRelacao);
+
+            pstmt3.setString(1, disciplina);
+            pstmt3.setInt(2, idProfessor);
+
+            pstmt3.executeUpdate();
+
+            conn.commit();
+
         } catch (SQLException e) {
+            conn.rollback();
             System.out.println("[DAO] Erro ao inserir usuario: " + e.getMessage());
         } finally {
             try {
-                if (pstmt != null) pstmt.close();
+                if (pstmt != null || pstmt2 != null || pstmt3 != null) pstmt.close();
                 if (conn != null) ConnectionFactory.desconectar(conn);
             } catch (SQLException e) {
                 System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
