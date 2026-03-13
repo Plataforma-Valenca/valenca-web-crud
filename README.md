@@ -121,19 +121,25 @@ O administrador possui controle total sobre o sistema.
    ```bash
    cd valenca-web-crud
    ```
-3. Instale as dependências:
+3. Mude para a branch de desenvolvimento:
+   ```bash
+   git checkout develop
+   ```
+4. Instale as dependências:
    ```bash
    npm install
    ```
-4. Configure o banco de dados no arquivo `.env`.
+5. Configure o banco de dados no arquivo `.env`.
 
-5. Inicie o servidor:
+6. Inicie o servidor:
    ```bash
    npm start
    ```
 
 ---
 
-## 👨‍💻 Desenvolvedores
- 
-Projeto desenvolvido por alunos do 2ºF Tech 2026.
+## 🔄 Fluxo de Commits e Branches
+
+### ⚠️ Importante
+- **Nunca commit na `main`** - A branch `main` é apenas para releases finais
+- **Todo desenvolvimento ocorre na `develop`** - Sempre trabalhe nesta branch
