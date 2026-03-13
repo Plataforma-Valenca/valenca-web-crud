@@ -20,7 +20,13 @@
 
 <div class="page-content">
 
-    <header class="page-grid-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <header class="page-grid-header" style="display: flex;
+    gap: 3vh;
+    align-items: flex-end;
+    height: 20vh;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-direction: row">
         <h2 class="page-grid-header-title" style="font-size: 2.5rem; color: #0f2c3d;">Disciplinas</h2>
         <button class="btn-cadastrar">
             <i class="fa-solid fa-plus" style="color: white"></i> Cadastrar
