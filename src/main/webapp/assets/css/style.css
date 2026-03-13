@@ -57,7 +57,7 @@ small {
     background-color: var(--blue-primary);
     color: var(--white-primary);
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -66,7 +66,7 @@ small {
     background-color: #C4F1FF;
     color: #108AB1;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
 }
 
@@ -74,7 +74,7 @@ small {
     width: 100%;
     padding: 12px 16px;
     border: 1px solid var(--grey-primary);
-    border-radius: 12px;
+    border-radius: 10px;
     background-color: #FFFFFF;
     font-size: 14px;
     color: #1F2D33;

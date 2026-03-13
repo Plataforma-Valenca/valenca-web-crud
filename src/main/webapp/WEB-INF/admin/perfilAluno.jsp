@@ -17,17 +17,14 @@
 <head>
     <title>Colégio Valença - Perfil do Aluno</title>
 
-    ```
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/aluno.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/perfilAluno.css">
 
     <link rel="icon" type="image/x-icon"
           href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
-    ```
-
 </head>
 
 <body>
@@ -38,7 +35,6 @@
 
 <div class="page-content">
 
-    ```
     <header class="page-grid-header">
 
         <div class="page-grid-header-state">
@@ -77,25 +73,20 @@
 
         </div>
 
-        <!-- BOLETIM -->
-
         <div class="aluno-details-notas">
 
             <div class="aluno-details-notas-header">
-
                 <h4>Notas</h4>
-
             </div>
 
             <div class="aluno-details-notas-table" style="margin-top:2vh">
 
-
                 <div class="header-table-list-row table-list-row">
 
                     <h5 style="flex:2">Disciplina</h5>
-                    <h5 style="flex:0.8">N1</h5>
-                    <h5 style="flex:0.8">N2</h5>
-                    <h5 style="flex:1.2">Média Final</h5>
+                    <h5 style="flex:1">N1</h5>
+                    <h5 style="flex:1">N2</h5>
+                    <h5 style="flex:1">Média</h5>
                     <h5 style="flex:1.5">Situação</h5>
 
                 </div>
@@ -123,40 +114,30 @@
                             String corSituacao = "#E74C3C";
 
                             if ("APROVADO".equals(b.getSituacao())) {
-                                corSituacao = "#green";
+                                corSituacao = "green";
                             } else if ("RECUPERAÇÃO".equals(b.getSituacao())) {
                                 corSituacao = "orange";
-                            }else if ("RECUPERAÇÃO".equals(b.getSituacao())) {
+                            } else if ("REPROVADO".equals(b.getSituacao())) {
                                 corSituacao = "red";
                             }
                 %>
 
-
-                <div class="row-table-list-row table-list-row"
-                     style="border-bottom:1px solid #eee; padding:12px 0;">
+                <div class="row-table-list-row table-list-row">
 
                     <p style="flex:2; font-weight:500;">
                         <%= nomeDisciplina %>
                     </p>
 
-                    <p style="flex:0.8; color:<%= corN1 %>;">
+                    <p style="flex:1; color:<%= corN1 %>;">
                         <%= (n1 != null ? n1 : "--") %>
                     </p>
 
-                    <p style="flex:0.8; color:<%= corN2 %>;">
+                    <p style="flex:1; color:<%= corN2 %>;">
                         <%= (n2 != null ? n2 : "--") %>
                     </p>
 
-                    <p style="flex:1.2;">
+                    <p style="flex:1; color:<%= corFinal %>;">
                         <%= (n1 != null && n2 != null ? ((n1 + n2) / 2) : "--") %>
-                    </p>
-
-                    <p style="flex:0.8;">--</p>
-
-                    <p style="flex:0.8;">--</p>
-                    <p style="flex:1.2;">--</p>
-                    <p style="flex:1.2; color:<%= corFinal %>;">
-                        <%= mediaFinal %>
                     </p>
 
                     <p style="flex:1.5; font-weight:500; color:<%= corSituacao %>;">
@@ -182,15 +163,10 @@
 
         </div>
 
-        <!-- OBSERVAÇÕES -->
-
         <div class="aluno-details-notas">
 
             <div class="aluno-details-notas-header">
-
                 <h4>Observações</h4>
-
-
             </div>
 
             <div class="aluno-details-notas-table">
@@ -239,13 +215,10 @@
         </div>
 
     </main>
-    ```
 
 </div>
 
-
 <script>
-
 
     function abrirModalObs() {
         document.getElementById("modalObs").style.display = "flex";
