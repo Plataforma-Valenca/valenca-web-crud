@@ -17,9 +17,10 @@
 
 .page-grid-header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 3vh;
-    align-items: flex-end;
+    align-items: start;
     height: 20vh;
 }
 

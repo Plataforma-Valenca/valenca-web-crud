@@ -7,7 +7,6 @@
     <title>Colégio Valença</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/list-card.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/disciplinas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
