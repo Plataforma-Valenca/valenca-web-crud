@@ -64,16 +64,3 @@
 .row-table-list-row p{
     font-size:14px;
 }
-
-.btn-primary{
-    background:#1e88e5;
-    color:white;
-    border:none;
-    padding:8px 14px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.btn-primary:hover{
-    background:#166ec2;
-}

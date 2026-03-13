@@ -100,7 +100,7 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <h2>Editar Turma</h2>
+            <h2>Atualizar turma</h2>
             <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
         </div>
 
@@ -112,7 +112,7 @@
             <input type="text" id="editarNome" name="nome" required>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary">Salvar Alterações</button>
+                <button type="submit" class="btn-secondary">Salvar</button>
             </div>
 
         </form>
