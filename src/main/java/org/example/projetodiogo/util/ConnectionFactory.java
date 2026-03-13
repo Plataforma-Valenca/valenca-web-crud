@@ -16,37 +16,36 @@ public class ConnectionFactory {
      * Host do banco
      *
      * @return Connection - Retorna a conexão estabelecida
-//     * @throws DatabaseConnectionException se falhar ao conectar
+     * @throws DatabaseConnectionException se falhar ao conectar
      * @throws ConfigurationException se variáveis de ambiente não estiverem configuradas
      * @author enzomota-ieg
      */
 
     public static Connection conectar() {
         try {
+
             final String URL = System.getenv("DB_URL");
             final String USER = System.getenv("DB_USER");
             final String PASSWORD = System.getenv("DB_PASSWORD");
 
-
-
             if (URL == null || URL.isEmpty()) {
                 throw new ConfigurationException(
-                        "A variável de ambiente URL não está configurada." +
-                                "No arquivo .env, configure as credenciais do banco corretamente."
+                        "A variável de ambiente DB_URL não está configurada." +
+                                "Configure as credenciais do banco corretamente."
                 );
             }
 
             if (USER == null || USER.isEmpty()) {
                 throw new ConfigurationException(
-                        "A variável de ambiente USER não está configurada." +
-                                "No arquivo .env, configure as credenciais do banco corretamente."
+                        "A variável de ambiente DB_USER não está configurada." +
+                                "Configure as credenciais do banco corretamente."
                 );
             }
 
             if (PASSWORD == null) {
                 throw new ConfigurationException(
-                        "A variável de ambiente PASSWORD não está configurada." +
-                                "No arquivo .env, configure as credenciais do banco corretamente."
+                        "A variável de ambiente DB_PASSWORD não está configurada." +
+                                "Configure as credenciais do banco corretamente."
                 );
             }
 
@@ -69,9 +68,11 @@ public class ConnectionFactory {
             }
 
             return conn;
+
         } catch (SQLException | ConfigurationException sqle) {
             System.err.println("[ERROR DB] Falha ao concetar com o banco de dados: " + sqle);
         }
+
         return null;
     }
 

@@ -43,14 +43,14 @@ public class InserirAlunoServlet extends HttpServlet {
             usuario.setSenha(senha);
             usuario.setCpf(cpf);
 
-            int idUsuarioCriado = usuarioDAO.inserirNovoAluno(usuario);
+            int idUsuarioCriado = usuarioDAO.inserirNovoAluno(senha,cpf);
             alunoDAO.inserir(idUsuarioCriado);
             int idAluno = alunoDAO.buscarPorIdUsuario(idUsuarioCriado).get().getId();
             int idTurma = Integer.parseInt(req.getParameter("idTurma"));
             alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
 
             req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
-            resp.sendRedirect(req.getContextPath() + "/admin/verAlunos");
+            resp.sendRedirect(req.getContextPath() + "/admin/verTurmas");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

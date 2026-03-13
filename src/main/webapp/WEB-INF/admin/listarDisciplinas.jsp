@@ -44,6 +44,7 @@
                         <%= d.getNomeProfessor() != null ? "Prof. " + d.getNomeProfessor() : "Sem professor" %>
                     </p>
                 </div>
+            </div>
 
 
             <%

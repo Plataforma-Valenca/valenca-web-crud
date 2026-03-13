@@ -52,22 +52,24 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    public boolean inserirProfessor(Usuario usuario) {
-        String sql = "INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) VALUES(?, ?, ?, ?, 'professor', ?, true)";
+    public Integer inserirProfessor(Usuario usuario) {
 
-        boolean resultado = false;
+        String sql = "INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) VALUES(?, ?, ?, ?, 'professor', ?, true)";
 
         PreparedStatement pstmt = null;
         Connection conn = null;
 
         try {
+
             if (ValidadorDeCampoUsado.ehCampoEmUso("usuarios", "email", usuario.getEmail()))
                 throw new DuplicateEmailException(usuario.getEmail());
-            conn = ConnectionFactory.conectar();
-            pstmt = conn.prepareStatement(sql);
 
-            // Método para hashear a senha e guardar no banco após a criptografia
+
+            // hash da senha
             String senhaHash = HasherSenha.hashSenha(usuario.getSenha());
+
+            conn = ConnectionFactory.conectar();
+            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, usuario.getNome());
             pstmt.setString(2, usuario.getEmail());
@@ -75,7 +77,17 @@ public class UsuarioDAO {
             pstmt.setString(4, usuario.getCpf());
             pstmt.setString(5, usuario.getUsername());
 
-            resultado = pstmt.executeUpdate() > 0;
+            int linhas = pstmt.executeUpdate();
+
+            if (linhas > 0) {
+                ResultSet rs = pstmt.getGeneratedKeys();
+                if (rs.next()) {
+                    int idGerado = rs.getInt(1);
+                    rs.close();
+                    return idGerado;
+                }
+            }
+
         } catch (SQLException e) {
             System.out.println("[DAO] Erro ao inserir usuario: " + e.getMessage());
         } finally {
@@ -83,13 +95,14 @@ public class UsuarioDAO {
                 if (pstmt != null) pstmt.close();
                 if (conn != null) ConnectionFactory.desconectar(conn);
             } catch (SQLException e) {
-                System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
+                System.err.println("Erro ao fechar conexões: " + e.getMessage());
             }
         }
-        return resultado;
+
+        return null;
     }
 
-    public int inserirNovoAluno(Usuario usuario) {
+    public int inserirNovoAluno(String senha, String cpf) {
         String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, 'aluno', false)";
         int idGeradoUsuario = 0;
 
@@ -102,10 +115,10 @@ public class UsuarioDAO {
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             // Método para hashear a senha e guardar no banco após a criptografia
-            String senhaHash = HasherSenha.hashSenha(usuario.getSenha());
+            String senhaHash = HasherSenha.hashSenha(senha);
 
             pstmt.setString(1, senhaHash);
-            pstmt.setString(2, usuario.getCpf());
+            pstmt.setString(2, cpf);
 
             pstmt.executeUpdate();
 
@@ -127,6 +140,29 @@ public class UsuarioDAO {
         }
 
         return idGeradoUsuario;
+    }
+    public boolean updateProfessor(Usuario usuario) {
+
+        String sql = "UPDATE usuarios SET nome = ?, email = ?, cpf = ?, username = ? WHERE id_usuario = ?";
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, usuario.getNome());
+            pstmt.setString(2, usuario.getEmail());
+            pstmt.setString(3, usuario.getCpf());
+            pstmt.setString(4, usuario.getUsername());
+            pstmt.setInt(5, usuario.getId());
+
+            int linhas = pstmt.executeUpdate();
+
+            return linhas > 0;
+
+        } catch (SQLException e) {
+            System.out.println("[DAO] Erro ao atualizar professor: " + e.getMessage());
+        }
+
+        return false;
     }
 
     // READ
