@@ -132,12 +132,12 @@ public class AlunoConsultaDtoDAO {
             u.nome,
             u.cpf,
             a.matricula,
-            t.nome AS turma
+            COALESCE(t.nome, 'Sem turma') AS turma
         FROM usuarios u
         JOIN alunos a ON a.id_usuario = u.id_usuario
-        JOIN aluno_turma at ON at.id_aluno = a.id_aluno
-        JOIN turmas t ON t.id_turma = at.id_turma
-        WHERE t.id_turma = ?;
+        LEFT JOIN aluno_turma at ON at.id_aluno = a.id_aluno
+        LEFT JOIN turmas t ON t.id_turma = at.id_turma
+        WHERE at.id_turma = ?;
     """;
 
         Connection conn = null;

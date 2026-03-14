@@ -7,6 +7,7 @@
 %>
 
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -39,7 +40,7 @@
 
         <div class="page-grid-header-title-plus-btn">
             <h1 class="page-grid-header-title">
-                <%= nomeTurma != null ? request.getAttribute("nomeTurma") : "--" %>
+                <%= nomeTurma != null ? nomeTurma : "--" %>
             </h1>
 
             <button class="btn-primary" onclick="abrirModalCadastroAluno()">
@@ -49,7 +50,7 @@
 
     </header>
 
-    <main class="page-grid-main" style="gap: 5vh; padding-bottom: 80px;">
+    <main class="page-grid-main" style="gap:5vh; padding-bottom:80px;">
 
         <div class="top-box-page-grid-main">
             <form action="${pageContext.request.contextPath}/admin/verAlunosTurma" method="get" class="form-busca">
@@ -60,8 +61,16 @@
                 <div class="form-control">
                     <h5>Buscar por matrícula</h5>
                     <div class="form-control-action input-primary">
-                        <input type="text" name="busca" placeholder="0000000" value="<%= request.getParameter("busca") != null ? request.getParameter("busca") : "" %>">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
+
+                        <input type="text"
+                               name="busca"
+                               placeholder="0000000"
+                               value="<%= request.getParameter("busca") != null ? request.getParameter("busca") : "" %>">
+
+                        <button type="submit" class="btn btn-primary">
+                            Buscar
+                        </button>
+
                     </div>
                 </div>
 
@@ -73,25 +82,27 @@
 
                 <div class="table-list-row">
 
-                    <div class="header-table-list-row" style="display: flex">
-                        <h4 style="flex: 1;">Nome do aluno</h4>
-                        <h4 style="flex: 1;">Matrícula</h4>
+                    <div class="header-table-list-row" style="display:flex">
+                        <h4 style="flex:1;">Nome do aluno</h4>
+                        <h4 style="flex:1;">Matrícula</h4>
                         <h4 style="flex:1;">Turma</h4>
-                        <h4 style="flex: .3;"></h4>
+                        <h4 style="flex:.3;"></h4>
                     </div>
 
                     <div class="body-table-list-row">
 
                         <%
-                            List<AlunoConsultaDTO> alunosList = (List<AlunoConsultaDTO>) request.getAttribute("alunos");
+                            List<AlunoConsultaDTO> alunosList =
+                                    (List<AlunoConsultaDTO>) request.getAttribute("alunos");
+
                             if (alunosList != null && !alunosList.isEmpty()) {
+
                                 for (AlunoConsultaDTO aluno : alunosList) {
                         %>
 
                         <a class="itens-per-table"
                            style="display:flex; align-items:center; text-decoration:none; color:inherit;"
-                           href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= java.net.URLEncoder.encode(aluno.getNome(), "UTF-8") %>&matricula=<%= aluno.getMatricula() %>&turma=<%= java.net.URLEncoder.encode(aluno.getTurma(), "UTF-8") %>&nomeTurma=<%= nomeTurma %>">
-
+                           href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= aluno.getNome()!=null?java.net.URLEncoder.encode(aluno.getNome(),"UTF-8"):"" %>&matricula=<%= aluno.getMatricula() %>&turma=<%= aluno.getTurma()!=null?java.net.URLEncoder.encode(aluno.getTurma(),"UTF-8"):"" %>&nomeTurma=<%= nomeTurma %>">
                             <div style="flex:1;">
                                 <%= aluno.getNome() %>
                             </div>
@@ -107,12 +118,15 @@
                             <div style="display:flex; gap:10px;">
 
                                 <i class="fa-solid fa-pen"
-                                   style="cursor:pointer;">
-                                </i>
+                                   style="cursor:pointer;"
+                                   onclick="event.preventDefault(); event.stopPropagation(); abrirModalEditarAluno(
+                                           '<%= aluno.getIdAluno() %>',
+                                           '<%= aluno.getNome() %>',
+                                           '<%= aluno.getMatricula() %>'
+                                           )"> </i>
 
                                 <i class="fa-solid fa-trash"
-                                   style="color: var(--color-error); cursor:pointer;">
-                                </i>
+                                   style="color:var(--color-error); cursor:pointer;"> </i>
 
                             </div>
 
@@ -123,11 +137,13 @@
                         } else {
                         %>
 
-                        <div style="text-align:center; padding: 20px; color: #999;">
+                        <div style="text-align:center; padding:20px; color:#999;">
                             Nenhum aluno encontrado.
                         </div>
 
-                        <% } %>
+                        <%
+                            }
+                        %>
 
                     </div>
                 </div>
@@ -149,8 +165,10 @@
         <form action="${pageContext.request.contextPath}/admin/inserirAluno" method="post">
 
             <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
-            <input type="text" name="cpf" placeholder="CPF" required>
-            <input type="text" name="senhaProvisoria" placeholder="Senha" required>
+
+            <input type="text" name="cpf" placeholder="Cpf" required>
+
+            <input type="text" name="senhaProvisoria" placeholder="Senha provisória" required>
 
             <div class="modal-footer">
                 <button type="submit" class="btn-primary">Salvar</button>
@@ -159,21 +177,65 @@
         </form>
 
     </div>
+
+</div>
+
+<!-- MODAL EDITAR -->
+
+<div id="modalEditarAluno" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>Editar Aluno</h2>
+            <span class="close-modal" onclick="fecharModalEditarAluno()">&times;</span>
+        </div>
+
+        <form action="${pageContext.request.contextPath}/admin/editarAluno" method="post">
+
+            <input type="hidden" name="idAluno" id="editIdAluno">
+
+            <input type="text" name="nome" id="editNome" placeholder="Nome" required>
+
+            <input type="text" name="matricula" id="editMatricula" placeholder="Matrícula" required>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-primary">Salvar</button>
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
 
 <script>
 
-    function abrirModalCadastroAluno() {
-        document.getElementById("modalCadastroAluno").style.display = "flex";
+    function abrirModalCadastroAluno(){
+        document.getElementById("modalCadastroAluno").style.display="flex";
     }
 
-    function fecharModalCadastroAluno() {
-        document.getElementById("modalCadastroAluno").style.display = "none";
+    function fecharModalCadastroAluno(){
+        document.getElementById("modalCadastroAluno").style.display="none";
     }
 
-    window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = "none";
+    function abrirModalEditarAluno(id,nome,matricula){
+
+        document.getElementById("editIdAluno").value=id;
+        document.getElementById("editNome").value=nome;
+        document.getElementById("editMatricula").value=matricula;
+
+        document.getElementById("modalEditarAluno").style.display="flex";
+
+    }
+
+    function fecharModalEditarAluno(){
+        document.getElementById("modalEditarAluno").style.display="none";
+    }
+
+    window.onclick=function(event){
+        if(event.target.classList.contains('modal')){
+            event.target.style.display="none";
         }
     }
 

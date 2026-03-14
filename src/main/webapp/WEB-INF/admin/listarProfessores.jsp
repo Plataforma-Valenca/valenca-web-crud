@@ -7,6 +7,7 @@
     List<ProfessorConsultaDTO> professoresList = (List<ProfessorConsultaDTO>) request.getAttribute("professoresList");
     List<Disciplina> disciplinas = (List<Disciplina>) request.getAttribute("disciplinas");
     String busca = request.getAttribute("busca") != null ? request.getAttribute("busca").toString() : "";
+    String mensagemSucesso = (String) request.getAttribute("mensagemSucesso");
 %>
 
 <html>
@@ -144,6 +145,7 @@
             <input type="email" name="email" placeholder="E-mail Acadêmico" required>
             <input type="text" name="cpf" placeholder="CPF" required>
             <input type="text" name="senha" placeholder="Senha" required>
+            <input type="text" name="username" placeholder="Nome de Usuário" required>
             <input type="text" name="disciplina" placeholder="Disciplina" required>
 
 
@@ -218,6 +220,21 @@
 
 
 
+<!-- MODAL MENSAGEM DE SUCESSO -->
+
+<%
+if (mensagemSucesso == null) {
+%>
+<div id="popupSucesso" class="modal" style="display: flex">
+    <div class="modal-content">
+        <h3>Professor cadastrado com sucesso!</h3>
+        <p>Confira o cadastro na lista de professores.</p>
+    </div>
+</div>
+<%
+    }
+%>
+
 <script>
 
     function abrirModalCadastro() {
@@ -264,6 +281,24 @@
     function fecharModalExcluir() {
         document.getElementById("modalExcluir").style.display = "none";
     }
+
+    window.onload = function(){
+
+        const popup = document.getElementById("popupSucesso");
+
+        if(popup){
+            setTimeout(function(){
+                popup.style.opacity = "0";
+
+                setTimeout(function(){
+                    popup.style.display = "none";
+                }, 500);
+
+            }, 4000);
+        }
+
+    }
+
 
     window.onclick = function(event) {
         if (event.target.className === 'modal') {

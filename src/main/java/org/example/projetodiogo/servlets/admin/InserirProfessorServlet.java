@@ -23,25 +23,26 @@ public class InserirProfessorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Usuario usuario = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        TurmasDAO turmasDAO = new TurmasDAO();
-        AlunoDAO alunoDAO = new AlunoDAO();
-
 
         String nomeCompleto = req.getParameter("nome");
         String email = req.getParameter("email");
         String senha = req.getParameter("senha");
+        String username = req.getParameter("username");
         String cpf = req.getParameter("cpf");
-        int idTurma = Integer.parseInt(req.getParameter("idTurma"));
+        String disciplina = req.getParameter("disciplina");
 
         try {
+            usuario.setNome(nomeCompleto);
+            usuario.setEmail(email);
             usuario.setSenha(senha);
             usuario.setCpf(cpf);
+            usuario.setUsername(username);
 
-            int idAluno = usuarioDAO.inserirNovoAluno(usuario);
-            alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
+            usuarioDAO.inserirProfessorComDisciplina(usuario, disciplina);
 
-            req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
-            resp.sendRedirect(req.getContextPath() + "/admin/verAlunos");
+
+            req.getSession().setAttribute("mensagemSucesso", "Professor cadastrado com sucesso!");
+            resp.sendRedirect(req.getContextPath() + "/admin/verProfessores");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
