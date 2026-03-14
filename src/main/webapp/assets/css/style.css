@@ -59,15 +59,22 @@ small {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    text-decoration:none;
+    font-size: 14px;
 }
 
 .btn-secondary {
     padding: 0.6rem 1.4rem;
-    background-color: #C4F1FF;
+    background-color: #c9f3ff;
     color: #108AB1;
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    background:#f3c1c1;
+    color:#b00000;
+    padding:10px 24px;
+    border-radius:12px;
+    text-decoration:none;
 }
 
 .input-primary input{

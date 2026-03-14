@@ -131,84 +131,8 @@
 
 </div>
 
+<jsp:include page="/WEB-INF/views/modais/adminProfessorModal.jsp"/>
 
-
-<div id="modalCadastro" class="modal">
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h2>Novo Professor</h2>
-            <span class="close-modal" onclick="fecharModalCadastro()">&times;</span>
-        </div>
-
-        <form action="${pageContext.request.contextPath}/admin/inserirProfessor" method="post">
-
-            <input type="text" name="nome" placeholder="Nome Completo" required>
-            <input type="email" name="email" placeholder="E-mail Acadêmico" required>
-            <input type="text" name="cpf" placeholder="CPF" required>
-            <input type="text" name="senha" placeholder="Senha" required>
-            <input type="text" name="username" placeholder="Nome de Usuário" required>
-            <input type="text" name="disciplina" placeholder="Disciplina" required>
-
-
-
-
-            <div class="modal-footer">
-                <button type="submit" class="btn-primary">Salvar</button>
-            </div>
-
-        </form>
-
-    </div>
-</div>
-
-
-
-<div id="modalEditar" class="modal">
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h2>Editar Professor</h2>
-            <span class="close-modal" onclick="fecharModalEditar()">&times;</span>
-        </div>
-
-        <form action="${pageContext.request.contextPath}/admin/editarProfessor" method="post">
-
-            <input type="hidden" name="idProfessor" id="editarIdProfessor">
-            <input type="hidden" name="idUsuario" id="editarIdUsuario">
-            <input type="hidden" name="idDisciplina" id="editarIdDisciplina">
-
-            <input type="text" name="nome" id="editarNome" required>
-            <input type="email" name="email" id="editarEmail" required>
-            <input type="text" name="cpf" id="editarCpf" required>
-
-            <input type="text" name="disciplina" id="editarDisciplina" required>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn-primary">Salvar</button>
-            </div>
-
-        </form>
-
-    </div>
-</div>
-
-
-<!-- MODAL EXCLUIR -->
-
-<div id="modalExcluir" class="modal">
-    <div class="modal-content">
-
-        <h3>Deseja excluir este professor?</h3>
-        <p>Esta ação não poderá ser desfeita.</p>
-
-        <div class="modal-footer">
-            <a id="btnConfirmarExcluir" class="btn-danger">Excluir</a>
-            <button onclick="fecharModalExcluir()" class="btn-secondary">Cancelar</button>
-        </div>
-
-    </div>
-</div>
 <script>
 
     function abrirModalCadastro() {
