@@ -2,19 +2,35 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.*" %>
 <%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
+<%@ page import="org.example.projetodiogo.model.DTO.ProfessorConsultaDTO" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%
+
     AlunoConsultaDTO aluno = (AlunoConsultaDTO) request.getAttribute("alunoConsulta");
-    ArrayList<Disciplina> disciplinasList = (ArrayList<Disciplina>) request.getAttribute("disciplinasList");
-    ArrayList<Boletim> boletimList = (ArrayList<Boletim>) request.getAttribute("boletimList");
-    List<Observacao> obsList = (List<Observacao>) request.getAttribute("obsList");
+
+    ArrayList<Disciplina> disciplinasList =
+            (ArrayList<Disciplina>) request.getAttribute("disciplinasList");
+
+    ArrayList<Boletim> boletimList =
+            (ArrayList<Boletim>) request.getAttribute("boletimList");
+
+    List<Observacao> obsList =
+            (List<Observacao>) request.getAttribute("obsList");
+
+    List<ProfessorConsultaDTO> professores =
+            (List<ProfessorConsultaDTO>) request.getAttribute("professores");
+
     String nomeTurma = (String) request.getAttribute("nomeTurma");
+
     int idTurma = (Integer) request.getAttribute("idTurma");
+
 %>
 
 <html>
+
 <head>
+
     <title>Colégio Valença - Perfil do Aluno</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
@@ -23,8 +39,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/perfilAluno.css">
 
-    <link rel="icon" type="image/x-icon"
-          href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 
 <body>
@@ -40,6 +54,7 @@
         <div class="page-grid-header-state">
 
             <a href="${pageContext.request.contextPath}/admin/verTurmas">Turmas</a>
+
             <p>></p>
 
             <a href="${pageContext.request.contextPath}/admin/verAlunosTurma?idTurma=<%= idTurma %>&nomeTurma=<%= nomeTurma %>">
@@ -47,12 +62,15 @@
             </a>
 
             <p>></p>
+
             <b>Detalhes</b>
 
         </div>
 
         <h1 class="page-grid-header-title">
+
             <%= aluno != null ? aluno.getNome() : "Aluno" %>
+
         </h1>
 
     </header>
@@ -62,21 +80,36 @@
         <div class="aluno-details-infos">
 
             <div class="details-infos-box">
+
                 <h4>Matrícula</h4>
+
                 <p><%= aluno != null ? aluno.getMatricula() : "--" %></p>
+
             </div>
 
             <div class="details-infos-box">
+
                 <h4>Turma</h4>
+
                 <p><%= aluno != null ? aluno.getTurma() : "--" %></p>
+
             </div>
 
         </div>
 
+        <!-- NOTAS -->
+
         <div class="aluno-details-notas">
 
-            <div class="aluno-details-notas-header">
+            <div class="aluno-details-notas-header"
+                 style="display:flex; justify-content:space-between; align-items:center;">
+
                 <h4>Notas</h4>
+
+                <button onclick="alert('Aqui você pode abrir o modal de atualizar notas')" class="btn-acao">
+                    Atualizar Notas
+                </button>
+
             </div>
 
             <div class="aluno-details-notas-table" style="margin-top:2vh">
@@ -92,6 +125,7 @@
                 </div>
 
                 <%
+
                     if (boletimList != null && disciplinasList != null && !boletimList.isEmpty()) {
 
                         for (int i = 0; i < boletimList.size(); i++) {
@@ -120,6 +154,7 @@
                             } else if ("REPROVADO".equals(b.getSituacao())) {
                                 corSituacao = "red";
                             }
+
                 %>
 
                 <div class="row-table-list-row table-list-row">
@@ -147,8 +182,11 @@
                 </div>
 
                 <%
+
                     }
+
                 } else {
+
                 %>
 
                 <div style="text-align:center; padding:40px; color:#999;">
@@ -156,17 +194,28 @@
                 </div>
 
                 <%
+
                     }
+
                 %>
 
             </div>
 
         </div>
 
+        <!-- OBSERVAÇÕES -->
+
         <div class="aluno-details-notas">
 
-            <div class="aluno-details-notas-header">
+            <div class="aluno-details-notas-header"
+                 style="display:flex; justify-content:space-between; align-items:center;">
+
                 <h4>Observações</h4>
+
+                <button onclick="abrirModalObs()" class="btn-acao">
+                    + Nova Observação
+                </button>
+
             </div>
 
             <div class="aluno-details-notas-table">
@@ -183,6 +232,7 @@
                     if(obsList != null && !obsList.isEmpty()){
 
                         for(Observacao obs : obsList){
+
                 %>
 
                 <div class="row-table-list-row">
@@ -198,8 +248,11 @@
                 </div>
 
                 <%
+
                     }
+
                 } else {
+
                 %>
 
                 <div style="text-align:center; padding:20px; color:#999;">
@@ -207,7 +260,9 @@
                 </div>
 
                 <%
+
                     }
+
                 %>
 
             </div>
@@ -218,17 +273,103 @@
 
 </div>
 
+<!-- MODAL OBSERVAÇÃO -->
+
+<div id="modalObs" class="modal">
+
+    <div class="modal-content">
+
+        <h3>Adicionar Observação</h3>
+
+        <form action="${pageContext.request.contextPath}/admin/adicionarObservacao" method="post">
+
+            <input type="hidden" name="idAluno" value="<%= aluno.getIdAluno() %>">
+
+            <label>Professor</label>
+
+            <select name="idProfessor" style="width:100%; padding:8px;" required>
+
+                <option value="">Selecione um professor</option>
+
+                <%
+
+                    if(professores != null){
+
+                        for(ProfessorConsultaDTO prof : professores){
+
+                %>
+
+                <option value="<%= prof.getIdProfessor() %>">
+                    <%= prof.getNome() %>
+                </option>
+
+                <%
+
+                        }
+
+                    }
+
+                %>
+
+            </select>
+
+            <br><br>
+
+            <label>Observação</label>
+
+            <textarea name="descricao"
+                      placeholder="Digite a observação..."
+                      style="width:100%; height:120px; padding:10px;"
+                      required></textarea>
+
+            <br><br>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px">
+
+                <button type="submit" class="btn-acao">
+                    Salvar
+                </button>
+
+                <button type="button" onclick="fecharModalObs()">
+                    Cancelar
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 <script>
 
-    function abrirModalObs() {
-        document.getElementById("modalObs").style.display = "flex";
+    function abrirModalObs(){
+
+        document.getElementById("modalObs").style.display="flex";
+
     }
 
-    function fecharModalCadastroAluno() {
-        document.getElementById("modalObs").style.display = "none";
+    function fecharModalObs(){
+
+        document.getElementById("modalObs").style.display="none";
+
+    }
+
+    window.onclick = function(event){
+
+        let modal = document.getElementById("modalObs");
+
+        if(event.target === modal){
+
+            modal.style.display="none";
+
+        }
+
     }
 
 </script>
 
 </body>
+
 </html>
