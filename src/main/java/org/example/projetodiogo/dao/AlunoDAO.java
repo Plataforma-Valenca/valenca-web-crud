@@ -261,18 +261,17 @@ public class AlunoDAO {
 
         String query = """
                 UPDATE alunos
-                SET id_aluno = ?, id_usuario = ?,  matricula = ?,  dt_matricula = ?
+                SET   matricula = ?,  dt_matricula = ?
                 WHERE  id_aluno = ?
                 """;
 
         try (Connection conn = ConnectionFactory.conectar();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
-            ps.setInt(1, aluno.getId());
-            ps.setInt(2, aluno.getIdUsuario());
-            ps.setLong(3, aluno.getMatricula());
-            ps.setTimestamp(4, aluno.getDtMatricula());
-            ps.setInt(5, aluno.getId());
+            ps.setInt(1, aluno.getIdUsuario());
+            ps.setLong(2, aluno.getMatricula());
+            ps.setTimestamp(3, aluno.getDtMatricula());
+            ps.setInt(4, aluno.getId());
 
             return ps.executeUpdate() > 0;
 

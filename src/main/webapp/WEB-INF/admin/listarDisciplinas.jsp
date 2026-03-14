@@ -28,9 +28,6 @@
     margin-bottom: 20px;
     flex-direction: row">
         <h2 class="page-grid-header-title" style="font-size: 2rem; color: #0f2c3d;">Disciplinas</h2>
-        <button class="btn-cadastrar">
-            <i class="fa-solid fa-plus" style="color: white"></i> Cadastrar
-        </button>
     </header>
 
     <main class="page-grid-main">
@@ -46,10 +43,6 @@
                     <p><%= d.getNomeProfessor() != null ? "Prof. " + d.getNomeProfessor() : "Sem professor" %></p>
                 </div>
 
-                <div class="card-actions">
-                    <i class="fa-solid fa-pen action-icon edit"></i>
-                    <i class="fa-solid fa-trash action-icon delete"></i>
-                </div>
             </div>
             <%
                 }

@@ -510,6 +510,31 @@ public class UsuarioDAO {
             return false;
         }
     }
+    public boolean atualizarNomePorAluno(int idAluno, String nome) {
+
+        String sql = """
+        UPDATE usuarios
+        SET nome = ?
+        WHERE id_usuario = (
+            SELECT id_usuario
+            FROM alunos
+            WHERE id_aluno = ?
+        )
+    """;
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, nome);
+            ps.setInt(2, idAluno);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar nome: " + e.getMessage());
+            return false;
+        }
+    }
 
     // VALIDAR PRIMEIRO ACESSO
     public Usuario validarPrimeiroAcesso(String cpfOuMatricula) {
