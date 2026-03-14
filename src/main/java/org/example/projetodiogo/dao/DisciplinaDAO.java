@@ -98,6 +98,22 @@ public class DisciplinaDAO {
             }
         }
     }
+    public void atualizarNomeDisciplina(int idDisciplina, String nome) {
+
+        String sql = "UPDATE disciplinas SET nome = ? WHERE id_disciplina = ?";
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            stmt.setInt(2, idDisciplina);
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public ArrayList<Disciplina> visualizarDisciplinas() {
 
