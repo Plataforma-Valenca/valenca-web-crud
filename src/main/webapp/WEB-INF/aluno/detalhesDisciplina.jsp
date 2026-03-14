@@ -44,10 +44,6 @@
                 <div class="header-table-list-row">
                     <h5 style="flex: 1;">N1</h5>
                     <h5 style="flex: 1;">N2</h5>
-                    <h5 style="flex: 1.5;">Média 1° SEM</h5>
-                    <h5 style="flex: 1;">N1</h5>
-                    <h5 style="flex: 1;">N2</h5>
-                    <h5 style="flex: 1.5;">Média 1° SEM</h5>
                     <h5 style="flex: 1.5;">Média Final</h5>
                 </div>
 
@@ -62,10 +58,7 @@
                     <p style="flex: 1; color: <%= corN1 %>;"><%= b.getMedia1() != null ? b.getMedia1() : "--" %></p>
                     <p style="flex: 1; color: <%= corN2 %>;"><%= b.getMedia2() != null ? b.getMedia2() : "--" %></p>
                     <p style="flex: 1.5; color: <%= corN2 %>;"><%= b.getMedia1() != null ? b.getMedia2() : "--" %></p>
-                    <p style="flex: 1;">--</p>
-                    <p style="flex: 1;">--</p>
-                    <p style="flex: 1.5;">--</p>
-                    <p style="flex: 1.5;">--</p>
+
                 </div>
                 <%
                     }

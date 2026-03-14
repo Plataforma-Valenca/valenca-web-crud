@@ -110,14 +110,6 @@
                         <%= (n2 != null ? n2 : "--") %>
                     </p>
 
-                    <p style="flex:1.2;">
-                        <%= (n1 != null && n2 != null ? ((n1 + n2) / 2) : "--") %>
-                    </p>
-
-                    <p style="flex:0.8;">--</p>
-
-                    <p style="flex:0.8;">--</p>
-                    <p style="flex:1.2;">--</p>
                     <p style="flex:1.2; color:<%= corFinal %>;">
                         <%= mediaFinal %>
                     </p>
