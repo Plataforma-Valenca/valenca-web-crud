@@ -1,14 +1,12 @@
-
-    function abrirModalCadastro() {
+function abrirModalCadastro() {
     document.getElementById("modalCadastro").style.display = "flex";
-    }
+}
 
-    function fecharModalCadastro() {
+function fecharModalCadastro() {
     document.getElementById("modalCadastro").style.display = "none";
-    }
+}
 
-
-    function abrirModalEditar(idProfessor,idUsuario,idDisciplina,nome,email,cpf,disciplina){
+function abrirModalEditar(idProfessor,idUsuario,idDisciplina,nome,email,cpf,disciplina){
 
     document.getElementById("modalEditar").style.display="flex";
 
@@ -20,41 +18,43 @@
     document.getElementById("editarCpf").value=cpf;
     document.getElementById("editarDisciplina").value=disciplina;
 
-    }
-    function fecharModalEditar(){
+}
+
+function fecharModalEditar(){
     document.getElementById("modalEditar").style.display="none";
-    }
+}
 
 
-    function abrirModalExcluir(id) {
+function abrirModalExcluir(id) {
+    console.log("ID para excluir:", id);
+
     document.getElementById("modalExcluir").style.display = "flex";
     document.getElementById("excluirProfessorId").value = id;
-    }
+}
 
-    function fecharModalExcluir() {
+function fecharModalExcluir() {
     document.getElementById("modalExcluir").style.display = "none";
-    }
+}
 
-    window.onload = function(){
+window.onload = function(){
 
     const popup = document.getElementById("popupSucesso");
 
     if(popup){
-    setTimeout(function(){
-    popup.style.opacity = "0";
+        setTimeout(function(){
+            popup.style.opacity = "0";
 
-    setTimeout(function(){
-    popup.style.display = "none";
-    }, 500);
+            setTimeout(function(){
+            popup.style.display = "none";
+            }, 500);
 
-    }, 4000);
+        }, 4000);
     }
 
-    }
+}
 
-
-    window.onclick = function(event) {
-        if (event.target.className === 'modal') {
-            event.target.style.display = "none";
-        }
+window.onclick = function(event) {
+    if (event.target.className === 'modal') {
+        event.target.style.display = "none";
     }
+}

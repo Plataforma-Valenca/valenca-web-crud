@@ -87,7 +87,7 @@
 
         <form id="formExcluir" action="${pageContext.request.contextPath}/admin/DeletarProfessor" method="post">
 
-            <input type="hidden" name="professorId" id="excluirProfessorId">
+            <input type="hidden" name="idProfessor" id="excluirProfessorId">
 
             <div class="modal-footer">
                 <button type="submit" class="btn-primary delete">Excluir</button>

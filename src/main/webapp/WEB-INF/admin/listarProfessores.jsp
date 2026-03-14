@@ -103,7 +103,7 @@
 
                                 <i class="fa-solid fa-trash"
                                    style="color: var(--color-error); cursor:pointer;"
-                                   onclick="abrirModalExcluir('<%= p.getIdUsuario() %>')">
+                                   onclick="abrirModalExcluir('<%= p.getIdProfessor() %>')">
                                 </i>
 
                             </div>
