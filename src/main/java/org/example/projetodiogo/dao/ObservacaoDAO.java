@@ -55,7 +55,7 @@ public class ObservacaoDAO {
                 Observacao obs = new Observacao(
                         rs.getInt("id_observacao"),
                         rs.getString("descricao"),
-                        rs.getTimestamp("data_envio"),
+                        rs.getTimestamp("dt_envio"),
                         rs.getInt("id_aluno"),
                         rs.getInt("id_professor")
                 );
@@ -92,7 +92,7 @@ public class ObservacaoDAO {
                 Observacao obs = new Observacao(
                         rs.getInt("id_observacao"),
                         rs.getString("descricao"),
-                        rs.getTimestamp("data_envio"),
+                        rs.getTimestamp("dt_envio"),
                         rs.getInt("id_aluno"),
                         rs.getInt("id_professor")
                 );
