@@ -149,8 +149,8 @@
         <form action="${pageContext.request.contextPath}/admin/inserirAluno" method="post">
 
             <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
-            <input type="text" name="cpf" placeholder="Cpf" required>
-            <input type="text" name="senhaProvisoria" placeholder="senhaProvisoria" required>
+            <input type="text" name="cpf" placeholder="CPF" required>
+            <input type="text" name="senhaProvisoria" placeholder="Senha" required>
 
             <div class="modal-footer">
                 <button type="submit" class="btn-primary">Salvar</button>
