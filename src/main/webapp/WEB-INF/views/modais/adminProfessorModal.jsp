@@ -25,7 +25,14 @@
                 <input type="text" name="cpf" placeholder="CPF" required>
                 <input type="text" name="senha" placeholder="Senha" required>
                 <input type="text" name="username" placeholder="Nome de Usuário" required>
-                <input type="text" name="disciplina" placeholder="Disciplina" required>
+                <select name="disciplina" id="editarDisciplina" required>
+                    <option value="" disabled selected>Disciplina</option>
+
+                    <% if(disciplinas != null) {
+                        for(Disciplina d : disciplinas) { %>
+                    <option value="<%= d.getId() %>"><%= d.getNome() %></option>
+                    <% }} %>
+                </select>
             </div>
 
             <div class="modal-footer">
@@ -51,7 +58,7 @@
 
             <input type="hidden" name="id" id="editarId">
 
-            <input type="text" name="nome" id="editarNome" required>
+            <input type="text" name="nome" id="editarNome" required placeholder="">
             <input type="email" name="email" id="editarEmail" required>
             <input type="text" name="cpf" id="editarCpf" required>
 

@@ -3,9 +3,7 @@
     top: 1.25rem;
     left: 50%;
     transform: translateX(-50%);
-
     z-index: 1;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,17 +12,12 @@
 .flash-message .modal-content {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-
     background: rgba(255, 255, 255, 0.15);
-
     padding: 16px 24px;
     border-radius: 10px;
-
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-
     min-width: 300px;
     text-align: center;
-
     animation: slideDown 0.4s ease;
 }
 
@@ -41,6 +34,7 @@
 
 .modal-content.success h4{
     color:#2ecc71;
+    font-size: 14px;
 }
 
 .modal-content.error{

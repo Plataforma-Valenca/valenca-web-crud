@@ -86,27 +86,10 @@
                             <div style="flex:1.5;"><%= p.getCpf() %></div>
                             <div style="flex:1.5;"><%= p.getDisciplina() %></div>
 
-                            <div style="display:flex; gap:10px;">
-
-                                <i class="fa-solid fa-pen"
-                                   style="cursor:pointer;"
-                                   onclick="abrirModalEditar(
-                                           '<%= p.getIdProfessor() %>',
-                                           '<%= p.getIdUsuario() %>',
-                                           '<%= p.getIdDisciplina() %>',
-                                           '<%= p.getNome() %>',
-                                           '<%= p.getEmail() %>',
-                                           '<%= p.getCpf() %>',
-                                           '<%= p.getDisciplina() %>'
-                                           )">
-                                </i>
-
-                                <i class="fa-solid fa-trash"
-                                   style="color: var(--color-error); cursor:pointer;"
-                                   onclick="abrirModalExcluir('<%= p.getIdProfessor() %>')">
-                                </i>
-
-                            </div>
+                            <i class="fa-solid fa-trash"
+                               style="color: var(--color-error); cursor:pointer;"
+                               onclick="abrirModalExcluir('<%= p.getIdProfessor() %>')">
+                            </i>
 
                         </div>
 
