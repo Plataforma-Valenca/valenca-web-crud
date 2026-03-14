@@ -71,8 +71,9 @@ public class AlunoDAO {
             System.out.println("[DAO] Erro ao vincular aluno com as disciplinas: " + e.getMessage());
         } finally {
             try {
+                if (pstmt1 != null) pstmt1.close();
+                if (pstmt2 != null) pstmt2.close();
                 if (conn != null) ConnectionFactory.desconectar(conn);
-                if (pstmt1 != null && pstmt2 != null) pstmt1.close(); pstmt2.close();
             } catch (SQLException e) {
                 System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
             }
