@@ -16,12 +16,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
-
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
@@ -55,7 +53,6 @@
     <main class="page-grid-main" style="gap:5vh; padding-bottom:80px;">
 
         <div class="top-box-page-grid-main">
-
             <form action="${pageContext.request.contextPath}/admin/verAlunosTurma" method="get" class="form-busca">
 
                 <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
@@ -63,7 +60,6 @@
 
                 <div class="form-control">
                     <h5>Buscar por matrícula</h5>
-
                     <div class="form-control-action input-primary">
 
                         <input type="text"
@@ -79,11 +75,9 @@
                 </div>
 
             </form>
-
         </div>
 
         <div class="bottom-box-page-grid-main">
-
             <div class="page-grid-main-content">
 
                 <div class="table-list-row">
@@ -153,17 +147,14 @@
 
                     </div>
                 </div>
+
             </div>
         </div>
 
     </main>
-
 </div>
 
-<!-- MODAL CADASTRO -->
-
 <div id="modalCadastroAluno" class="modal">
-
     <div class="modal-content">
 
         <div class="modal-header">

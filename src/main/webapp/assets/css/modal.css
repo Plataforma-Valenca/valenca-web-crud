@@ -46,3 +46,27 @@
     margin-top:10px;
     padding:10px;
 }
+.btn-terciary {
+    padding: 0.6rem 1.4rem;
+    background-color: #c5c5c5;
+    color: #424242;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn-terciary a {
+    text-decoration: none;
+    font-size: 12px;
+}
+.btn-fourth {
+    padding: 0.6rem 1.4rem;
+    background-color: #ffc4c4;
+    color: #b11010;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn-fourth a {
+    text-decoration: none;
+    font-size: 12px;
+}

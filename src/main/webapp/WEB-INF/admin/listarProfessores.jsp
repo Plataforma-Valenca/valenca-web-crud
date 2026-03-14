@@ -7,7 +7,6 @@
     List<ProfessorConsultaDTO> professoresList = (List<ProfessorConsultaDTO>) request.getAttribute("professoresList");
     List<Disciplina> disciplinas = (List<Disciplina>) request.getAttribute("disciplinas");
     String busca = request.getAttribute("busca") != null ? request.getAttribute("busca").toString() : "";
-    String mensagemSucesso = (String) request.getAttribute("mensagemSucesso");
 %>
 
 <html>
@@ -20,6 +19,7 @@
 </head>
 
 <body>
+<jsp:include page="/WEB-INF/views/componentes/flashMessage.jsp"/>
 
 <jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
     <jsp:param name="activePage" value="busca"/>
@@ -50,7 +50,7 @@
                     <h5>Buscar professor</h5>
 
                     <div class="form-control-action input-primary">
-                        <input type="text" name="busca" placeholder="Nome ou CPF" value="<%= busca %>">
+                        <input type="text" name="busca" placeholder="Nome" value="<%= busca %>">
                         <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>
 
@@ -209,24 +209,6 @@
 
     </div>
 </div>
-
-
-
-<!-- MODAL MENSAGEM DE SUCESSO -->
-
-<%
-if (mensagemSucesso == null) {
-%>
-<div id="popupSucesso" class="modal" style="display: flex">
-    <div class="modal-content">
-        <h3>Professor cadastrado com sucesso!</h3>
-        <p>Confira o cadastro na lista de professores.</p>
-    </div>
-</div>
-<%
-    }
-%>
-
 <script>
 
     function abrirModalCadastro() {
