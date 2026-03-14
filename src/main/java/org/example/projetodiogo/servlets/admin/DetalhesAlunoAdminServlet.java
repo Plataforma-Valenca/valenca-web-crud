@@ -8,9 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.example.projetodiogo.dao.*;
 import org.example.projetodiogo.dao.DTO.AlunoConsultaDtoDAO;
+import org.example.projetodiogo.dao.DTO.BuscarProfessoresDtoDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.*;
 import org.example.projetodiogo.model.DTO.AlunoConsultaDTO;
+import org.example.projetodiogo.model.DTO.ProfessorConsultaDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
         ObservacaoDAO observacaoDAO = new ObservacaoDAO();
         AlunoConsultaDtoDAO alunoConsultaDAO = new AlunoConsultaDtoDAO();
         DisciplinaDAO disciplinaDAO = new DisciplinaDAO();
+        BuscarProfessoresDtoDAO professorDAO = new BuscarProfessoresDtoDAO();
+
 
         int idAlunoParam = Integer.parseInt(req.getParameter("idAluno").trim());
         String matriculaParam = req.getParameter("matricula");
@@ -44,9 +48,14 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
         String nomeTurmaParam = req.getParameter("nomeTurma");
 
         try {
-            ArrayList<Disciplina> disciplinasList = disciplinaDAO.visualizarDisciplinas();
+            ArrayList<Disciplina> disciplinasList =
+                    disciplinaDAO.buscarDisciplinasPorAluno(idAlunoParam);
+
 
             ArrayList<Boletim> boletimList = boletimDAO.visualizarBoletim(idAlunoParam);
+
+            List<ProfessorConsultaDTO> professores = professorDAO.buscarProfessores();
+
 
             Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdAluno(idAlunoParam);
             if (alunoOpt.isEmpty()) {
@@ -74,6 +83,8 @@ public class DetalhesAlunoAdminServlet extends HttpServlet {
             req.setAttribute("nomeTurma", nomeTurmaParam);
             req.setAttribute("disciplinasList", disciplinasList);
             req.setAttribute("boletimList", boletimList);
+            req.setAttribute("professores", professores);
+
 
             req.getRequestDispatcher("/WEB-INF/admin/perfilAluno.jsp")
                     .forward(req, resp);

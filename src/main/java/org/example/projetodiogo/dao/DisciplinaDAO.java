@@ -152,6 +152,42 @@ public class DisciplinaDAO {
         }
         return null;
     }
+    public ArrayList<Disciplina> buscarDisciplinasPorAluno(int idAluno) {
+
+        String sql = """
+        SELECT d.*
+        FROM disciplinas d
+        JOIN notas n ON n.id_disciplina = d.id_disciplina
+        WHERE n.id_aluno = ?
+    """;
+
+        ArrayList<Disciplina> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idAluno);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Disciplina d = new Disciplina();
+
+                d.setId(rs.getInt("id_disciplina"));
+                d.setNome(rs.getString("nome"));
+                d.setIdProfessor(rs.getInt("id_professor"));
+
+                lista.add(d);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
     public List<Boletim> visualizarPorDisciplina(int idAluno, int idDisciplina) {
         String sql = """
         SELECT * FROM boletim
