@@ -93,10 +93,11 @@
                                    onclick="abrirModalEditar(
                                            '<%= p.getIdProfessor() %>',
                                            '<%= p.getIdUsuario() %>',
+                                           '<%= p.getIdDisciplina() %>',
                                            '<%= p.getNome() %>',
                                            '<%= p.getEmail() %>',
                                            '<%= p.getCpf() %>',
-                                           '<%= p.getIdDisciplina() %>'
+                                           '<%= p.getDisciplina() %>'
                                            )">
                                 </i>
 
@@ -173,7 +174,6 @@
 
         <form action="${pageContext.request.contextPath}/admin/editarProfessor" method="post">
 
-            <!-- IDS NECESSÁRIOS PARA O SERVLET -->
             <input type="hidden" name="idProfessor" id="editarIdProfessor">
             <input type="hidden" name="idUsuario" id="editarIdUsuario">
             <input type="hidden" name="idDisciplina" id="editarIdDisciplina">
@@ -238,13 +238,13 @@ if (mensagemSucesso == null) {
     }
 
 
-    function abrirModalEditar(idProfessor,idUsuario,nome,email,cpf,disciplina){
+    function abrirModalEditar(idProfessor,idUsuario,idDisciplina,nome,email,cpf,disciplina){
 
         document.getElementById("modalEditar").style.display="flex";
 
         document.getElementById("editarIdProfessor").value=idProfessor;
         document.getElementById("editarIdUsuario").value=idUsuario;
-
+        document.getElementById("editarIdDisciplina").value=idDisciplina;
         document.getElementById("editarNome").value=nome;
         document.getElementById("editarEmail").value=email;
         document.getElementById("editarCpf").value=cpf;
