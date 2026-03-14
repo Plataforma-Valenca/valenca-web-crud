@@ -42,10 +42,8 @@ public class InserirAlunoServlet extends HttpServlet {
         try {
             usuario.setSenha(senha);
             usuario.setCpf(cpf);
-
             int idUsuarioCriado = usuarioDAO.inserirNovoAluno(usuario);
-            alunoDAO.inserir(idUsuarioCriado);
-            int idAluno = alunoDAO.buscarPorIdUsuario(idUsuarioCriado).get().getId();
+            int idAluno = alunoDAO.inserir(idUsuarioCriado);
             int idTurma = Integer.parseInt(req.getParameter("idTurma"));
             alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
 
