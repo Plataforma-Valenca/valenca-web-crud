@@ -85,10 +85,16 @@
             <p>Esta ação não poderá ser desfeita.</p>
         </div>
 
-        <div class="modal-footer">
-            <a id="btnConfirmarExcluir" class="btn-primary delete">Excluir</a>
-            <button onclick="fecharModalExcluir()" class="btn-primary cancel">Cancelar</button>
-        </div>
+        <form id="formExcluir" action="${pageContext.request.contextPath}/admin/DeletarProfessor" method="post">
+
+            <input type="hidden" name="professorId" id="excluirProfessorId">
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-primary delete">Excluir</button>
+                <button type="button" onclick="fecharModalExcluir()" class="btn-primary cancel">Cancelar</button>
+            </div>
+
+        </form>
 
     </div>
 </div>
