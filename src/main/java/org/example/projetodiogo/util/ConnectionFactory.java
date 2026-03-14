@@ -16,16 +16,16 @@ public class ConnectionFactory {
      * Host do banco
      *
      * @return Connection - Retorna a conexão estabelecida
-//     * @throws DatabaseConnectionException se falhar ao conectar
+    //     * @throws DatabaseConnectionException se falhar ao conectar
      * @throws ConfigurationException se variáveis de ambiente não estiverem configuradas
      * @author enzomota-ieg
      */
 
     public static Connection conectar() {
         try {
-            final String URL = System.getenv("DB_URL");
-            final String USER = System.getenv("DB_USER");
-            final String PASSWORD = System.getenv("DB_PASSWORD");
+            final String URL="jdbc:postgresql://pg-241f154f-plataformavalenca.b.aivencloud.com:21607/dbplataforma";
+            final String  USER= "avnadmin";
+            final String  PASSWORD="AVNS_gZeoh5ZutErV0KBVkXG";
 
 
 

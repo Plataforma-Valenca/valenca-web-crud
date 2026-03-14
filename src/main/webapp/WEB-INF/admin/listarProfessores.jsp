@@ -91,11 +91,12 @@
                                 <i class="fa-solid fa-pen"
                                    style="cursor:pointer;"
                                    onclick="abrirModalEditar(
+                                           '<%= p.getIdProfessor() %>',
                                            '<%= p.getIdUsuario() %>',
                                            '<%= p.getNome() %>',
                                            '<%= p.getEmail() %>',
                                            '<%= p.getCpf() %>',
-                                           '<%= p.getDisciplina() %>'
+                                           '<%= p.getIdDisciplina() %>'
                                            )">
                                 </i>
 
@@ -172,24 +173,16 @@
 
         <form action="${pageContext.request.contextPath}/admin/editarProfessor" method="post">
 
-            <input type="hidden" name="id" id="editarId">
+            <!-- IDS NECESSÁRIOS PARA O SERVLET -->
+            <input type="hidden" name="idProfessor" id="editarIdProfessor">
+            <input type="hidden" name="idUsuario" id="editarIdUsuario">
+            <input type="hidden" name="idDisciplina" id="editarIdDisciplina">
 
             <input type="text" name="nome" id="editarNome" required>
             <input type="email" name="email" id="editarEmail" required>
             <input type="text" name="cpf" id="editarCpf" required>
 
-            <select name="disciplina" id="editarDisciplina" required>
-
-                <% if(disciplinas != null){
-                    for(Disciplina d : disciplinas){ %>
-
-                <option value="<%= d.getId() %>"><%= d.getNome() %></option>
-
-                <% }
-                }
-                %>
-
-            </select>
+            <input type="text" name="disciplina" id="editarDisciplina" required>
 
             <div class="modal-footer">
                 <button type="submit" class="btn-primary">Salvar</button>
@@ -199,7 +192,6 @@
 
     </div>
 </div>
-
 
 
 <!-- MODAL EXCLUIR -->
@@ -246,26 +238,19 @@ if (mensagemSucesso == null) {
     }
 
 
-    function abrirModalEditar(id,nome,email,cpf,disciplina){
+    function abrirModalEditar(idProfessor,idUsuario,nome,email,cpf,disciplina){
 
         document.getElementById("modalEditar").style.display="flex";
 
-        document.getElementById("editarId").value=id;
+        document.getElementById("editarIdProfessor").value=idProfessor;
+        document.getElementById("editarIdUsuario").value=idUsuario;
+
         document.getElementById("editarNome").value=nome;
         document.getElementById("editarEmail").value=email;
         document.getElementById("editarCpf").value=cpf;
-
-        let select = document.getElementById("editarDisciplina");
-
-        for(let i=0;i<select.options.length;i++){
-            if(select.options[i].text === disciplina){
-                select.selectedIndex = i;
-                break;
-            }
-        }
+        document.getElementById("editarDisciplina").value=disciplina;
 
     }
-
     function fecharModalEditar(){
         document.getElementById("modalEditar").style.display="none";
     }
