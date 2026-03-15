@@ -236,4 +236,42 @@ public class AlunoConsultaDtoDAO {
             throw new DataAccessException("Erro ao buscar usuário por CPF", e);
         }
     }
+    public AlunoConsultaDTO buscarPorIdAluno(int idAluno) {
+
+        String sql = """
+        SELECT
+            a.id_aluno,
+            u.nome,
+            u.cpf,
+            a.matricula,
+            COALESCE(t.nome, 'Sem turma') AS turma
+        FROM usuarios u
+        JOIN alunos a ON a.id_usuario = u.id_usuario
+        LEFT JOIN aluno_turma at ON at.id_aluno = a.id_aluno
+        LEFT JOIN turmas t ON t.id_turma = at.id_turma
+        WHERE a.id_aluno = ?
+    """;
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idAluno);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new AlunoConsultaDTO(
+                        rs.getInt("id_aluno"),
+                        rs.getString("nome"),
+                        rs.getString("matricula"),
+                        rs.getString("cpf"),
+                        rs.getString("turma")
+                );
+            }
+
+        } catch (SQLException e) {
+            throw new DataAccessException("Erro ao buscar aluno por id", e);
+        }
+
+        return null;
+    }
 }

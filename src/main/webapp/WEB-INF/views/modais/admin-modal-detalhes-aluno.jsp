@@ -1,72 +1,85 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
+<%@ page import="org.example.projetodiogo.model.DTO.ProfessorConsultaDTO" %>
+<%@ page import="org.example.projetodiogo.model.Disciplina" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 
-<!-- MODAL OBSERVAÇÃO -->
+<%
+    AlunoConsultaDTO aluno = (AlunoConsultaDTO) request.getAttribute("alunoConsulta");
+    List<ProfessorConsultaDTO> professores = (List<ProfessorConsultaDTO>) request.getAttribute("professores");
+    ArrayList<Disciplina> disciplinasList = (ArrayList<Disciplina>) request.getAttribute("disciplinasList");
+%>
 
-<div id="modalObs" class="modal">
-
+<!-- MODAL ADICIONAR NOTAS -->
+<div id="modalNotas" class="modal">
     <div class="modal-content">
 
-        <h3>Adicionar Observação</h3>
+        <div class="modal-header">
+            <h2>Atualizar Notas</h2>
+            <span class="close-modal" onclick="fecharModalNotas()">&times;</span>
+        </div>
 
-        <form action="${pageContext.request.contextPath}/admin/adicionarObservacao" method="post">
+        <form action="${pageContext.request.contextPath}/admin/atualizarNotas" method="post">
 
-            <input type="hidden" name="idAluno" value="<%= aluno.getIdAluno() %>">
+            <input type="hidden" id="notasIdAluno" name="idAluno" value="<%= aluno != null ? aluno.getIdAluno() : "" %>">
+            <input type="hidden" id="notasIdDisciplina" name="idDisciplina">
 
-            <label>Professor</label>
-
-            <select name="idProfessor" style="width:100%; padding:8px;" required>
-
-                <option value="">Selecione um professor</option>
-
-                <%
-
-                    if(professores != null){
-
-                        for(ProfessorConsultaDTO prof : professores){
-
-                %>
-
-                <option value="<%= prof.getIdProfessor() %>">
-                    <%= prof.getNome() %>
-                </option>
-
-                <%
-
+            <div class="form">
+                <select id="notasDisciplina" onchange="selecionarDisciplina(this)">
+                    <option value="" disabled selected>Selecione a disciplina</option>
+                    <%
+                        if (disciplinasList != null) {
+                            for (Disciplina d : disciplinasList) {
+                    %>
+                    <option value="<%= d.getId() %>"><%= d.getNome() %></option>
+                    <%
+                            }
                         }
+                    %>
+                </select>
 
-                    }
+                <input type="number" name="n1" id="inputN1" placeholder="N1" step="0.1" min="0" max="10" required>
+                <input type="number" name="n2" id="inputN2" placeholder="N2" step="0.1" min="0" max="10" required>
+            </div>
 
-                %>
-
-            </select>
-
-            <br><br>
-
-            <label>Observação</label>
-
-            <textarea name="descricao"
-                      placeholder="Digite a observação..."
-                      style="width:100%; height:120px; padding:10px;"
-                      required></textarea>
-
-            <br><br>
-
-            <div style="display:flex; justify-content:flex-end; gap:10px">
-
-                <button type="submit" class="btn-acao">
-                    Salvar
-                </button>
-
-                <button type="button" onclick="fecharModalObs()">
-                    Cancelar
-                </button>
-
+            <div class="modal-footer">
+                <button type="submit" class="btn-primary save">Salvar</button>
             </div>
 
         </form>
 
     </div>
+</div>
 
+<!-- MODAL ADICIONAR OBSERVAÇÃO -->
+<div id="modalObs" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h2>Nova Observação</h2>
+            <span class="close-modal" onclick="fecharModalObs()">&times;</span>
+        </div>
+
+        <form action="${pageContext.request.contextPath}/admin/inserirObservacao" method="post">
+
+            <input type="hidden" name="idAluno" value="<%= aluno != null ? aluno.getIdAluno() : "" %>">
+
+            <div class="form" style="display: grid; grid-template-columns: 1fr">
+
+                <textarea name="descricao"
+                          placeholder="Digite a observação..."
+                          style="height:120px; padding:10px;"
+                          required></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-primary save">Salvar</button>
+            </div>
+
+        </form>
+
+    </div>
 </div>

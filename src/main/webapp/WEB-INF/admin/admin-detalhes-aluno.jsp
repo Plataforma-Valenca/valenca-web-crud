@@ -23,7 +23,8 @@
 
     String nomeTurma = (String) request.getAttribute("nomeTurma");
 
-    int idTurma = (Integer) request.getAttribute("idTurma");
+    String idTurmaStr = (String) request.getAttribute("idTurma");
+    int idTurma = idTurmaStr != null ? Integer.parseInt(idTurmaStr) : 0;
 
 %>
 
@@ -49,30 +50,28 @@
 
 <div class="page-content">
 
+    <div class="page-grid-header-state" style="display: flex; gap: 10px; align-items: center; margin-top: 3rem">
+
+        <a href="${pageContext.request.contextPath}/admin/verTurmas">Turmas</a>
+
+        <p>></p>
+
+        <a href="${pageContext.request.contextPath}/admin/verAlunos?idTurma=<%= idTurma %>&nomeTurma=<%= java.net.URLEncoder.encode(nomeTurma != null ? nomeTurma : "", "UTF-8") %>">
+            Alunos
+        </a>
+
+        <p>></p>
+
+        <b>Detalhes</b>
+
+    </div>
+
     <header class="page-grid-header">
-
-        <div class="page-grid-header-state">
-
-            <a href="${pageContext.request.contextPath}/admin/verTurmas">Turmas</a>
-
-            <p>></p>
-
-            <a href="${pageContext.request.contextPath}/admin/admin/detalhesAluno?idTurma=<%= idTurma %>&nomeTurma=<%= nomeTurma %>">
-                Alunos
-            </a>
-
-            <p>></p>
-
-            <b>Detalhes</b>
-
-        </div>
-
         <h1 class="page-grid-header-title">
 
             <%= aluno != null ? aluno.getNome() : "Aluno" %>
 
         </h1>
-
     </header>
 
     <main class="page-grid-main" style="gap:5vh; padding-bottom:80px;">
@@ -106,9 +105,7 @@
 
                 <h4>Notas</h4>
 
-                <button onclick="alert('Aqui você pode abrir o modal de atualizar notas')" class="btn-primary">
-                    Atualizar Notas
-                </button>
+                <button onclick="abrirModalNotas()" class="btn-primary">Atualizar Notas</button>
 
             </div>
 

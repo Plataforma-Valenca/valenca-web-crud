@@ -1,23 +1,20 @@
-function abrirModalObs(){
-
-    document.getElementById("modalObs").style.display="flex";
-
+function abrirModalNotas() {
+    document.getElementById("modalNotas").style.display = "flex";
 }
-
-function fecharModalObs(){
-
-    document.getElementById("modalObs").style.display="none";
-
+function fecharModalNotas() {
+    document.getElementById("modalNotas").style.display = "none";
 }
-
-window.onclick = function(event){
-
-    let modal = document.getElementById("modalObs");
-
-    if(event.target === modal){
-
-        modal.style.display="none";
-
+function selecionarDisciplina(select) {
+    document.getElementById("notasIdDisciplina").value = select.value;
+}
+function abrirModalObs() {
+    document.getElementById("modalObs").style.display = "flex";
+}
+function fecharModalObs() {
+    document.getElementById("modalObs").style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target.classList.contains("modal")) {
+        event.target.style.display = "none";
     }
-
 }

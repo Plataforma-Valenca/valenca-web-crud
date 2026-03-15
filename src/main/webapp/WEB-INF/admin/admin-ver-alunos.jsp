@@ -89,7 +89,7 @@
                         <div class="itens-per-table" style="display:flex; align-items:center;">
 
                             <a style="display:contents; text-decoration:none; color:inherit;"
-                               href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno() %>&idTurma=<%= idTurma %>&nomeAluno=<%= nomeEncoded %>&matricula=<%= aluno.getMatricula() %>&turma=<%= turmaEncoded %>&nomeTurma=<%= nomeTurma %>">
+                               href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno() %>&idTurma=<%= idTurma %>&nomeTurma=<%= java.net.URLEncoder.encode(nomeTurma != null ? nomeTurma : "", "UTF-8") %>">
                                 <div style="flex:1;"><%= aluno.getNome() %></div>
                                 <div style="flex:1;"><%= aluno.getMatricula() %></div>
                                 <div style="flex:1;"><%= aluno.getTurma() %></div>

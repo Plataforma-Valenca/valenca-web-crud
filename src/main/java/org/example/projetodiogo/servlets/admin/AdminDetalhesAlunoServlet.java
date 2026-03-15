@@ -15,26 +15,21 @@ import java.util.List;
 @WebServlet("/admin/detalhesAluno")
 public class AdminDetalhesAlunoServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int idTurma = Integer.parseInt(request.getParameter("idTurma"));
-        String nomeTurma = request.getParameter("nomeTurma");
-        String busca = request.getParameter("busca");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-        List<AlunoConsultaDTO> alunos = new ArrayList<AlunoConsultaDTO>();
+        String idAlunoStr = request.getParameter("idAluno");
+        String idTurmaStr = request.getParameter("idTurma");
+        String nomeTurma = request.getParameter("nomeTurma");
 
         AlunoConsultaDtoDAO dao = new AlunoConsultaDtoDAO();
+        AlunoConsultaDTO aluno = dao.buscarPorIdAluno(Integer.parseInt(idAlunoStr));
 
-        if (busca == null || busca.isEmpty()) {
-            alunos = dao.buscarAlunosPorTurma(idTurma);
-        } else {
-            alunos.add(dao.buscarPorMatricula(Long.parseLong(busca)));
-        }
-
-        request.setAttribute("alunos", alunos);
-        request.setAttribute("busca", busca);
+        request.setAttribute("alunoConsulta", aluno);
+        request.setAttribute("idTurma", idTurmaStr);
         request.setAttribute("nomeTurma", nomeTurma);
 
-        request.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
+        request.getRequestDispatcher("/WEB-INF/admin/admin-detalhes-aluno.jsp")
                 .forward(request, response);
     }
 }
