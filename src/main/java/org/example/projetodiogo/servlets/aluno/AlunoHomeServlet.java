@@ -15,7 +15,7 @@ public class AlunoHomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getRequestDispatcher("/WEB-INF/aluno/homeAluno.jsp")
+        request.getRequestDispatcher("/WEB-INF/aluno/aluno-home.jsp")
                 .forward(request, response);
     }
 }

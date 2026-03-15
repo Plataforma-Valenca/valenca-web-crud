@@ -57,7 +57,7 @@ public class AlunoDetalhesDisciplinasServlet extends HttpServlet {
             req.setAttribute("disciplinaList", disciplinaList);
             req.setAttribute("activePage", "disciplinas");
 
-            req.getRequestDispatcher("/WEB-INF/aluno/detalhesDisciplina.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/aluno/aluno-detalhes-aluno-ver-disciplinas.jsp").forward(req, resp);
 
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao carregar detalhes da disciplina", e);

@@ -33,7 +33,7 @@ public class EditarAlunoServlet {
                 usuario = new Usuario(usuarioOpt.get().getId(), nome, email, senha, true);
                 if (usuarioDAO.atualizar(usuario)) {
                     req.setAttribute("mensagemSucesso", "Dados atualizados com sucesso.");
-                    req.getRequestDispatcher("/WEB-INF/aluno/homeAluno.jsp")
+                    req.getRequestDispatcher("/WEB-INF/aluno/aluno-home.jsp")
                         .forward(req, resp);
                 }
             }

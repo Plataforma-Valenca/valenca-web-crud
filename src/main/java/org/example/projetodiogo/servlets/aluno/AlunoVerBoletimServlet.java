@@ -34,7 +34,7 @@ public class AlunoVerBoletimServlet extends HttpServlet {
         req.setAttribute("disciplinasList", disciplinasList);
         req.setAttribute("boletimList", boletimList);
 
-        req.getRequestDispatcher("/WEB-INF/aluno/boletim.jsp")
+        req.getRequestDispatcher("/WEB-INF/aluno/aluno-boletim.jsp")
                 .forward(req, resp);
     }
 }
