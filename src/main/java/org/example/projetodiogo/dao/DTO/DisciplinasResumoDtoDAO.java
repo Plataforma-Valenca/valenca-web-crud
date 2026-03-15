@@ -20,8 +20,8 @@ public class DisciplinasResumoDtoDAO {
                     (SELECT COUNT(*) FROM turmas) AS quantidade_turmas,
                     0 AS media_geral
                 FROM disciplinas d
-                JOIN professores p ON d.id_professor = p.id_professor
-                JOIN usuarios u ON p.id_usuario = u.id_usuario
+                LEFT JOIN professores p ON d.id_professor = p.id_professor
+                LEFT JOIN usuarios u ON p.id_usuario = u.id_usuario
                 ORDER BY d.nome
                 """;
 

@@ -15,7 +15,7 @@
 
             <div class="form">
                 <input type="text" name="nome" placeholder="Nome disciplina" required>
-                <input type="text" name="professor" placeholder="Nome professor" required>
+                <input type="text" name="professor" placeholder="Nome professor">
             </div>
 
             <div class="modal-footer">
