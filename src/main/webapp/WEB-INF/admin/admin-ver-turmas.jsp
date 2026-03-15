@@ -49,14 +49,12 @@
                 <div class="card-actions">
 
                     <i class="fa-solid fa-pen"
-                       onclick="event.stopPropagation();event.preventDefault();
-                               abrirModalEditar('<%=t.getId()%>','<%=t.getAno()%>','<%=t.getNome().replace("'", "\\'")%>')">
+                       onclick="abrirModalEditar('<%=t.getId()%>','<%=t.getAno()%>','<%=t.getNome().replace("'", "\\'")%>')">
                     </i>
 
                     <i class="fa-solid fa-trash"
                        style="color: var(--color-error);"
-                       onclick="event.stopPropagation();event.preventDefault();
-                               abrirModalExcluir('<%=t.getId()%>')">
+                       onclick="abrirModalExcluir('<%=t.getId()%>')">
                     </i>
 
                 </div>

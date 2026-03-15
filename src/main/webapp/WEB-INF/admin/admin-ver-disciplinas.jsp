@@ -22,11 +22,12 @@
 
     <header class="page-grid-header" style="display: flex;
     gap: 3vh;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
     flex-direction: row;
-    height: 0">
-        <h2 class="page-grid-header-title" style="font-size: 2rem; color: #0f2c3d;">Disciplinas</h2>
+    height: 20vh;">
+        <h2 class="page-grid-header-title" style="font-size: 2rem; color: #0f2c3d;">Gerenciar disciplinas</h2>
+        <button class="btn-primary" onclick="abrirModalCadastro()">+ Cadastrar</button>
     </header>
 
     <main class="page-grid-main">
@@ -40,6 +41,20 @@
                 <div class="card-items-infos">
                     <h4><%= d.getNomeFormatado() %></h4>
                     <p><%= d.getNomeProfessor() != null ? "Prof. " + d.getNomeProfessor() : "Sem professor" %></p>
+                </div>
+
+                <div class="card-actions">
+
+                    <i class="fa-solid fa-pen" style="cursor: pointer"
+                       onclick="abrirModalEditar('<%=d.getIdDisciplina()%>')">
+
+                    </i>
+
+                    <i class="fa-solid fa-trash"
+                       style="color: var(--color-error); cursor: pointer"
+                       onclick="abrirModalExcluir('<%=d.getIdDisciplina()%>')">
+                    </i>
+
                 </div>
 
             </div>

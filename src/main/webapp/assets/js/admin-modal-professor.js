@@ -26,8 +26,6 @@ function fecharModalEditar(){
 
 
 function abrirModalExcluir(id) {
-    console.log("ID para excluir:", id);
-
     document.getElementById("modalExcluir").style.display = "flex";
     document.getElementById("excluirProfessorId").value = id;
 }

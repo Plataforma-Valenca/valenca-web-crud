@@ -252,4 +252,20 @@ public class DisciplinaDAO {
 
         return lista;
     }
+
+    public void delete(int id){
+
+        String sql = "DELETE FROM disciplinas WHERE id_disciplina = ?";
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

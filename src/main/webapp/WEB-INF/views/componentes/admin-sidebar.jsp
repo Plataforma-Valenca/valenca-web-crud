@@ -50,7 +50,7 @@
             </li>
 
             <li class="<%= "resumoList".equals(activePage) ? "active" : "" %> menu-items-tab">
-                <a href="${pageContext.request.contextPath}/admin/verDisciplinasResumo">
+                <a href="${pageContext.request.contextPath}/admin/verDisciplinas">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-disciplinas.svg">
 
                     Disciplinas

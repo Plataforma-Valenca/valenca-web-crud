@@ -27,13 +27,15 @@
 
 <div class="page-content">
 
-    <header class="page-grid-header " style="
+    <header class="page-grid-header" style="
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     gap: 3vh;
     align-items: flex-end;
-    height: 20vh;">
+    height: 20vh;
+    margin-top: 5rem;
+    margin-bottom: 2rem">
         <h1 class="page-grid-header-title">Gerenciar Professores</h1>
 
         <button class="btn-primary" onclick="abrirModalCadastro()">
