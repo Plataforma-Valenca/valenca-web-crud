@@ -9,7 +9,7 @@ import org.example.projetodiogo.model.Observacao;
 
 import java.io.IOException;
 
-@WebServlet("/admin/adicionarObservacao")
+@WebServlet("/professor/adicionarObservacao")
 public class InserirObservacaoServlet extends HttpServlet {
 
     @Override
@@ -35,8 +35,10 @@ public class InserirObservacaoServlet extends HttpServlet {
             // volta para a página anterior
             response.sendRedirect(request.getHeader("referer"));
 
-        } catch (Exception e) {
+            request.getSession().setAttribute("mensagemSucesso", "Professor cadastrado com sucesso!");
 
+        } catch (Exception e) {
+            request.getSession().setAttribute("mensagemErro", "Erro ao cadastrar professor.");
             e.printStackTrace();
             response.sendRedirect(request.getHeader("referer"));
 

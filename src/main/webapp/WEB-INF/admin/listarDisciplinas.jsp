@@ -22,11 +22,10 @@
 
     <header class="page-grid-header" style="display: flex;
     gap: 3vh;
-    align-items: flex-end;
-    height: 20vh;
+    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 20px;
-    flex-direction: row">
+    flex-direction: row;
+    height: 0">
         <h2 class="page-grid-header-title" style="font-size: 2rem; color: #0f2c3d;">Disciplinas</h2>
     </header>
 
