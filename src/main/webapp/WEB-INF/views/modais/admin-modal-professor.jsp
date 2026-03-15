@@ -11,34 +11,22 @@
 
 <div id="modalCadastro" class="modal">
     <div class="modal-content">
-
         <div class="modal-header">
             <h2>Novo Professor</h2>
             <span class="close-modal" onclick="fecharModalCadastro()">&times;</span>
         </div>
 
         <form action="${pageContext.request.contextPath}/admin/inserirProfessor" method="post">
-
             <div class="form">
                 <input type="text" name="nome" placeholder="Nome Completo" required>
                 <input type="email" name="email" placeholder="E-mail Acadêmico" required>
                 <input type="text" name="cpf" placeholder="CPF" required>
                 <input type="text" name="senha" placeholder="Senha" required>
                 <input type="text" name="username" placeholder="Nome de Usuário" required>
-                <select name="disciplina" id="editarDisciplina" required>
-                    <option value="" disabled selected>Disciplina</option>
-
-                    <% if(disciplinas != null) {
-                        for(Disciplina d : disciplinas) { %>
-                    <option value="<%= d.getId() %>"><%= d.getNome() %></option>
-                    <% }} %>
-                </select>
             </div>
-
             <div class="modal-footer">
                 <button type="submit" class="btn-primary save">Salvar</button>
             </div>
-
         </form>
 
     </div>

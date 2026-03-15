@@ -15,18 +15,18 @@ public class BuscarProfessoresDtoDAO {
     public ArrayList<ProfessorConsultaDTO> buscarProfessores() {
 
         String sql = """
-                SELECT
-                    p.id_professor,
-                    u.id_usuario,
-                    d.id_disciplina,
-                    u.nome AS nome_professor,
-                    u.email,
-                    u.cpf,
-                    d.nome AS nome_disciplina
-                FROM usuarios u
-                JOIN professores p ON p.id_usuario = u.id_usuario
-                JOIN disciplinas d ON d.id_professor = p.id_professor
-                ORDER BY u.nome;
+            SELECT
+                p.id_professor,
+                u.id_usuario,
+                COALESCE(d.id_disciplina, 0) AS id_disciplina,
+                u.nome AS nome_professor,
+                u.email,
+                u.cpf,
+                COALESCE(d.nome, 'Sem disciplina') AS nome_disciplina
+            FROM usuarios u
+            JOIN professores p ON p.id_usuario = u.id_usuario
+            LEFT JOIN disciplinas d ON d.id_professor = p.id_professor
+            ORDER BY u.nome;
         """;
 
         Connection conn = null;
@@ -77,19 +77,19 @@ public class BuscarProfessoresDtoDAO {
     public ArrayList<ProfessorConsultaDTO> buscarProfessoresFiltro(String busca) {
 
         String sql = """
-                SELECT
-                    p.id_professor,
-                    u.id_usuario,
-                    d.id_disciplina,
-                    u.nome AS nome_professor,
-                    u.email,
-                    u.cpf,
-                    d.nome AS nome_disciplina
-                FROM usuarios u
-                JOIN professores p ON p.id_usuario = u.id_usuario
-                JOIN disciplinas d ON d.id_professor = p.id_professor
-                WHERE u.nome LIKE ? OR u.email LIKE ? OR u.cpf LIKE ? OR d.nome LIKE ?
-                ORDER BY u.nome;
+            SELECT
+                p.id_professor,
+                u.id_usuario,
+                COALESCE(d.id_disciplina, 0) AS id_disciplina,
+                u.nome AS nome_professor,
+                u.email,
+                u.cpf,
+                COALESCE(d.nome, 'Sem disciplina') AS nome_disciplina
+            FROM usuarios u
+            JOIN professores p ON p.id_usuario = u.id_usuario
+            LEFT JOIN disciplinas d ON d.id_professor = p.id_professor
+            WHERE u.nome LIKE ? OR u.email LIKE ? OR u.cpf LIKE ? OR d.nome LIKE ?
+            ORDER BY u.nome;
         """;
 
         Connection conn = null;

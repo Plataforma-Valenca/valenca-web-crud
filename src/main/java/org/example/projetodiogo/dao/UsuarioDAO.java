@@ -52,88 +52,54 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    public boolean inserirProfessorComDisciplina(Usuario usuario, String disciplina) throws SQLException {
+    public boolean inserirProfessor(Usuario usuario) throws SQLException {
         String sqlUsuario = """
-            INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) 
-            VALUES(?, ?, ?, ?, 'professor', ?, true)
-            RETURNING id_usuario;
-        """;
+        INSERT INTO usuarios(nome, email, senha, cpf, tipo, username, cadastro_completo) 
+        VALUES(?, ?, ?, ?, 'professor', ?, true)
+        RETURNING id_usuario;
+    """;
 
         String sqlProfessor = """
-            INSERT INTO professores (id_usuario)
-            VALUES (?)
-            RETURNING id_professor;
-        """;
+        INSERT INTO professores (id_usuario)
+        VALUES (?)
+    """;
 
-        String sqlRelacao = """
-            INSERT INTO disciplinas (nome, id_professor)
-            VALUES (?, ?);
-        """;
-
-        PreparedStatement pstmt = null;
-        PreparedStatement pstmt2 = null;
-        PreparedStatement pstmt3 = null;
         Connection conn = null;
-
-        ResultSet rs = null;
-        ResultSet rs2 = null;
-
-        Boolean resultado = false;
 
         try {
             if (ValidadorDeCampoUsado.ehCampoEmUso("usuarios", "email", usuario.getEmail()))
                 throw new DuplicateEmailException(usuario.getEmail());
-            conn = ConnectionFactory.conectar();
 
+            conn = ConnectionFactory.conectar();
             conn.setAutoCommit(false);
 
-            pstmt = conn.prepareStatement(sqlUsuario);
+            int idUsuario;
+            try (PreparedStatement ps = conn.prepareStatement(sqlUsuario)) {
+                String senhaHash = HasherSenha.hashSenha(usuario.getSenha());
+                ps.setString(1, usuario.getNome());
+                ps.setString(2, usuario.getEmail());
+                ps.setString(3, senhaHash);
+                ps.setString(4, usuario.getCpf());
+                ps.setString(5, usuario.getUsername());
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                idUsuario = rs.getInt("id_usuario");
+            }
 
-            // Método para hashear a senha e guardar no banco após a criptografia
-            String senhaHash = HasherSenha.hashSenha(usuario.getSenha());
-
-            pstmt.setString(1, usuario.getNome());
-            pstmt.setString(2, usuario.getEmail());
-            pstmt.setString(3, senhaHash);
-            pstmt.setString(4, usuario.getCpf());
-            pstmt.setString(5, usuario.getUsername());
-
-            rs = pstmt.executeQuery();
-
-            rs.next();
-
-            int idUsuario = rs.getInt("id_usuario");
-
-            pstmt2 = conn.prepareStatement(sqlProfessor);
-
-            pstmt2.setInt(1, idUsuario);
-
-            rs2 = pstmt2.executeQuery();
-            rs2.next();
-
-            int idProfessor = rs2.getInt("id_professor");
-
-            pstmt3 = conn.prepareStatement(sqlRelacao);
-
-            pstmt3.setString(1, disciplina);
-            pstmt3.setInt(2, idProfessor);
-
-            pstmt3.executeUpdate();
+            try (PreparedStatement ps = conn.prepareStatement(sqlProfessor)) {
+                ps.setInt(1, idUsuario);
+                ps.executeUpdate();
+            }
 
             conn.commit();
+            return true;
 
         } catch (SQLException e) {
-            conn.rollback();
-            System.out.println("[DAO] Erro ao inserir usuario: " + e.getMessage());
+            if (conn != null) conn.rollback();
+            throw e;
         } finally {
-            try {
-                if (pstmt != null || pstmt2 != null || pstmt3 != null) pstmt.close();
-                if (conn != null) ConnectionFactory.desconectar(conn);
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar as conexões do Banco: " + e.getMessage());
-            }
+            if (conn != null) ConnectionFactory.desconectar(conn);
         }
-        return resultado;
     }
 
     public int inserirNovoAluno(Usuario usuario) {

@@ -23,35 +23,27 @@ public class AdminInserirProfessorServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        req.setCharacterEncoding("UTF-8");
 
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = new Usuario();
 
-        String nomeCompleto = req.getParameter("nome");
-        String email = req.getParameter("email");
-        String senha = req.getParameter("senha");
-        String username = req.getParameter("username");
-        String cpf = req.getParameter("cpf");
-        String disciplina = req.getParameter("disciplina");
+        usuario.setNome(req.getParameter("nome"));
+        usuario.setEmail(req.getParameter("email"));
+        usuario.setSenha(req.getParameter("senha"));
+        usuario.setUsername(req.getParameter("username"));
+        usuario.setCpf(req.getParameter("cpf"));
 
         try {
-
-            usuario.setNome(nomeCompleto);
-            usuario.setEmail(email);
-            usuario.setSenha(senha);
-            usuario.setUsername(username);
-            usuario.setCpf(cpf);
-
-            usuarioDAO.inserirProfessorComDisciplina(usuario, disciplina);
-
+            usuarioDAO.inserirProfessor(usuario);
             req.getSession().setAttribute("mensagemSucesso", "Professor cadastrado com sucesso!");
 
         } catch (SQLException e) {
-
             e.printStackTrace();
             req.getSession().setAttribute("mensagemErro", "Erro ao cadastrar professor.");
-
         }
 
         resp.sendRedirect(req.getContextPath() + "/admin/verProfessores");
