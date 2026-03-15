@@ -2,18 +2,16 @@ package org.example.projetodiogo.servlets.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.example.projetodiogo.dao.UsuarioDAO;
 import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/admin/EditarAluno")
-public class AdminEditarAlunoSevlet {
+@WebServlet("/admin/editarAluno")
+public class AdminEditarAlunoServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String matricula = req.getParameter("matricula");

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admin/verAlunos")
-public class VerAlunosServlet extends HttpServlet {
+public class AdminVerAlunosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
         TurmasDAO turmaDAO = new TurmasDAO();

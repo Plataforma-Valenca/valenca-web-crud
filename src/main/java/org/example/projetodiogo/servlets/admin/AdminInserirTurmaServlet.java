@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.TurmasDAO;
 
 @WebServlet("/admin/inserirTurma")
-public class InserirTurmaServlet extends HttpServlet {
+public class AdminInserirTurmaServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

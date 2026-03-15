@@ -9,7 +9,7 @@ import org.example.projetodiogo.dao.TurmasDAO;
 import java.io.IOException;
 
 @WebServlet("/admin/deletarTurma")
-public class DeletarTurmaServlet extends HttpServlet {
+public class AdminDeletarTurmaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet("/admin/verProfessores")
-public class VerProfessoresServlet extends HttpServlet {
+public class AdminVerProfessoresServlet extends HttpServlet {
 
     private BuscarProfessoresDtoDAO professoresDAO = new BuscarProfessoresDtoDAO();
     private DisciplinaDAO disciplinaDAO = new DisciplinaDAO();

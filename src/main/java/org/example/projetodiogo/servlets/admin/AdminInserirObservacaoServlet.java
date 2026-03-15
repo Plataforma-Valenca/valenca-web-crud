@@ -9,8 +9,8 @@ import org.example.projetodiogo.model.Observacao;
 
 import java.io.IOException;
 
-@WebServlet("/professor/adicionarObservacao")
-public class InserirObservacaoServlet extends HttpServlet {
+@WebServlet("/admin/inserirObservacao")
+public class AdminInserirObservacaoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

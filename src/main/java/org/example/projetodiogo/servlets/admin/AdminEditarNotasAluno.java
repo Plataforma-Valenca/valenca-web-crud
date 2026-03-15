@@ -10,8 +10,8 @@ import org.example.projetodiogo.dao.AvaliacaoDAO;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/professor/lancarNotas")
-public class LancarNotasServlet extends HttpServlet {
+@WebServlet("/admin/editarNotasAluno")
+public class AdminEditarNotasAluno extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

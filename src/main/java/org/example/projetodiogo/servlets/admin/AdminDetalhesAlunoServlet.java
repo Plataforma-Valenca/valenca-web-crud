@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/admin/detalhesAluno")
-public class DetalhesAlunoAdminServlet extends HttpServlet {
+public class AdminDetalhesAlunoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

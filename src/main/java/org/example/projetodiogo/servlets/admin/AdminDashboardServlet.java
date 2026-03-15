@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.*;
 
 @WebServlet("/admin/dashboard")
-public class DashboardAdminServlet extends HttpServlet {
+public class AdminDashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

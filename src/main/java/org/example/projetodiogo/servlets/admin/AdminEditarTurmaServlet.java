@@ -10,7 +10,7 @@ import org.example.projetodiogo.dao.TurmasDAO;
 import java.io.IOException;
 
 @WebServlet("/admin/editarTurma")
-public class EditarTurmaServlet extends HttpServlet {
+public class AdminEditarTurmaServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

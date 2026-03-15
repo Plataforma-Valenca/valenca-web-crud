@@ -6,12 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.ProfessorDAO;
-import org.example.projetodiogo.dao.UsuarioDAO;
 
 import java.io.IOException;
 
-@WebServlet("/admin/DeletarProfessor")
-public class DeletarProfessorServlet extends HttpServlet {
+@WebServlet("/admin/deletarProfessor")
+public class AdminDeletarProfessorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response)

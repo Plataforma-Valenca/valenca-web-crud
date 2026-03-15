@@ -8,15 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.projetodiogo.dao.AlunoDAO;
 import org.example.projetodiogo.dao.TurmasDAO;
 import org.example.projetodiogo.dao.UsuarioDAO;
-import org.example.projetodiogo.model.Turma;
 import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet("/admin/inserirAluno")
-public class InserirAlunoServlet extends HttpServlet {
+public class AdminInserirAlunoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

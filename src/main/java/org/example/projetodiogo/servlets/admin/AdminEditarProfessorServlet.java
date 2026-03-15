@@ -15,7 +15,7 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 
 @WebServlet("/admin/editarProfessor")
-public class EditarProfessorServlet extends HttpServlet {
+public class AdminEditarProfessorServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
