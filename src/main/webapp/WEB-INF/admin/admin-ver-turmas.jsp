@@ -38,7 +38,7 @@
             %>
 
             <a class="card-items"
-               href="${pageContext.request.contextPath}/admin/verAlunosTurma?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
+               href="${pageContext.request.contextPath}/admin/detalhesAluno?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
 
                 <span class="card-title">
                     <%= t.getNome() %>
