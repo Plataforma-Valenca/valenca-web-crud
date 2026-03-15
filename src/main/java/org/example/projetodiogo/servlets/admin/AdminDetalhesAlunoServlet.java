@@ -34,7 +34,7 @@ public class AdminDetalhesAlunoServlet extends HttpServlet {
         request.setAttribute("busca", busca);
         request.setAttribute("nomeTurma", nomeTurma);
 
-        request.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
+        request.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
                 .forward(request, response);
     }
 }

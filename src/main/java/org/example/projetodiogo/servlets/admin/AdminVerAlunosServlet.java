@@ -43,9 +43,11 @@ public class AdminVerAlunosServlet extends HttpServlet {
 
             List<Turma> turmas = turmaDAO.buscarTurmas();
 
-            req.setAttribute("alunosList", alunosList);
-            req.setAttribute("turmasList", turmas);
-            req.setAttribute("busca", busca);
+            String idTurma = req.getParameter("idTurma");
+            String nomeTurma = req.getParameter("nomeTurma");
+
+            req.setAttribute("idTurma", idTurma);
+            req.setAttribute("nomeTurma", nomeTurma);
 
             req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
                 .forward(req, resp);

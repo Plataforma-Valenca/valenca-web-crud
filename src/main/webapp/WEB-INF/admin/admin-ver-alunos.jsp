@@ -1,9 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
+<%@ page import="java.util.ArrayList" %>
+
 
 <%
     String nomeTurma = (String) request.getAttribute("nomeTurma");
+    if (nomeTurma == null) {
+        nomeTurma = request.getParameter("nomeTurma");
+    }
+
+    String idTurma = (String) request.getAttribute("idTurma");
+    if (idTurma == null) {
+        idTurma = request.getParameter("idTurma");
+    }
 %>
 
 <!DOCTYPE html>
@@ -30,17 +40,19 @@
 
 <div class="page-content">
 
-    <header class="page-grid-header">
-
-        <div class="page-grid-header-state">
+    <div class="page-grid-header-state">
+        <div class="page-grid-header-state-content">
             <a href="${pageContext.request.contextPath}/admin/verTurmas">Turmas</a>
             <p>></p>
             <b>Alunos</b>
         </div>
+    </div>
+
+    <header class="page-grid-header">
 
         <div class="page-grid-header-title-plus-btn">
             <h1 class="page-grid-header-title">
-                <%= nomeTurma != null ? nomeTurma : "--" %>
+                <%= request.getAttribute("nomeTurma") != null ? request.getAttribute("nomeTurma") : "--" %>
             </h1>
 
             <button class="btn-primary" onclick="abrirModalCadastroAluno()">
@@ -50,13 +62,13 @@
 
     </header>
 
-    <main class="page-grid-main" style="gap:5vh; padding-bottom:80px;">
+    <main class="page-grid-main">
 
         <div class="top-box-page-grid-main">
-            <form action="${pageContext.request.contextPath}/admin/verAlunosTurma" method="get" class="form-busca">
+            <form action="${pageContext.request.contextPath}/admin/detalhesAluno" method="get" class="form-busca">
 
-                <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
-                <input type="hidden" name="nomeTurma" value="<%= request.getParameter("nomeTurma") %>">
+                <input type="hidden" name="idTurma" value="<%= request.getAttribute("idTurma") %>">
+                <input type="hidden" name="nomeTurma" value="<%= request.getAttribute("nomeTurma") %>">
 
                 <div class="form-control">
                     <h5>Buscar por matrícula</h5>
@@ -92,8 +104,8 @@
                     <div class="body-table-list-row">
 
                         <%
-                            List<AlunoConsultaDTO> alunosList =
-                                    (List<AlunoConsultaDTO>) request.getAttribute("alunos");
+                            ArrayList<AlunoConsultaDTO> alunosList =
+                                    (ArrayList<AlunoConsultaDTO>) request.getAttribute("alunos");
 
                             if (alunosList != null && !alunosList.isEmpty()) {
 
@@ -102,8 +114,13 @@
 
                         <a class="itens-per-table"
                            style="display:flex; align-items:center; text-decoration:none; color:inherit;"
-                           href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>&idTurma=<%= request.getParameter("idTurma")%>&nomeAluno=<%= aluno.getNome()!=null?java.net.URLEncoder.encode(aluno.getNome(),"UTF-8"):"" %>&matricula=<%= aluno.getMatricula() %>&turma=<%= aluno.getTurma()!=null?java.net.URLEncoder.encode(aluno.getTurma(),"UTF-8"):"" %>&nomeTurma=<%= nomeTurma %>">
-                            <div style="flex:1;">
+                           href="${pageContext.request.contextPath}/admin/detalhesAluno?idAluno=<%= aluno.getIdAluno()%>
+                           &idTurma=<%= idTurma %>
+                           &nomeAluno=<%= aluno.getNome()!=null?java.net.URLEncoder.encode(aluno.getNome(),"UTF-8"):"" %>
+                           &matricula=<%= aluno.getMatricula() %>
+                           &turma=<%= aluno.getTurma()!=null?java.net.URLEncoder.encode(aluno.getTurma(),"UTF-8"):"" %>
+                           &nomeTurma=<%= nomeTurma %>">
+                        <div style="flex:1;">
                                 <%= aluno.getNome() %>
                             </div>
 
@@ -137,8 +154,9 @@
                         } else {
                         %>
 
-                        <div style="text-align:center; padding:20px; color:#999;">
-                            Nenhum aluno encontrado.
+                        <div style="display: flex; flex-direction: column; align-items: center">
+                            <img src="${pageContext.request.contextPath}/assets/img/search-not-found.svg" height="200">
+                            <p style="color:#999; text-align:center; padding:20px;"> Nenhum aluno encontrado.</p>
                         </div>
 
                         <%

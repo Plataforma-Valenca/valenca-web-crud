@@ -57,7 +57,7 @@
 
             <p>></p>
 
-            <a href="${pageContext.request.contextPath}/admin//admin/detalhesAluno?idTurma=<%= idTurma %>&nomeTurma=<%= nomeTurma %>">
+            <a href="${pageContext.request.contextPath}/admin/admin/detalhesAluno?idTurma=<%= idTurma %>&nomeTurma=<%= nomeTurma %>">
                 Alunos
             </a>
 

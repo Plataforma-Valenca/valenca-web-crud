@@ -22,7 +22,7 @@
 
 <div class="page-content">
 
-    <header class="page-grid-header">
+    <header class="page-grid-header" style="margin-top: 5rem">
         <h1 class="page-grid-header-title">Gerenciar Turmas</h1>
         <button class="btn-primary" onclick="abrirModalCadastro()">+ Cadastrar</button>
     </header>
@@ -38,7 +38,7 @@
             %>
 
             <a class="card-items"
-               href="${pageContext.request.contextPath}/admin/detalhesAluno?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
+               href="${pageContext.request.contextPath}/admin/verAlunos?idTurma=<%= t.getId() %>&nomeTurma=<%= t.getNome() %>">
 
                 <span class="card-title">
                     <%= t.getNome() %>
