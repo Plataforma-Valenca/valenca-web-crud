@@ -17,40 +17,41 @@ public class BoletimDAO {
 
         String sql = """
         SELECT
-            sub.nome,
-            media1,
-            media2,
-            media_final,
-            CASE
-                WHEN media_final >= 7 THEN 'APROVADO'
-                WHEN media_final BETWEEN 5 AND 6.99 THEN 'RECUPERAÇÃO'
-                ELSE 'REPROVADO'
-                END AS situacao
-        FROM (
-                 SELECT
-                     d.id_disciplina,
-                     d.nome,
-        
-                     ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) AS media1,
-        
-                     ROUND(COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0), 2) AS media2,
-        
-                     ROUND(
-                             (
-                                 COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0) +
-                                 COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0)
-                                 ) / 2.0
-                         , 2) AS media_final
-        
-                 FROM disciplinas d
-                          JOIN notas n ON n.id_disciplina = d.id_disciplina
-                          LEFT JOIN avaliacoes av ON av.id_nota = n.id_nota
-        
-                 WHERE n.id_aluno = ?
-        
-                 GROUP BY d.nome, d.id_disciplina
-             ) sub
-        ORDER BY sub.id_disciplina;
+           sub.nome,
+           media1,
+           media2,
+           media_final,
+           CASE
+               WHEN media_final >= 7 THEN 'APROVADO'
+               WHEN media_final BETWEEN 5 AND 6.99 THEN 'RECUPERAÇÃO'
+               WHEN media_final BETWEEN 0 AND 4.99 THEN 'REPROVADO'
+               ELSE '--'
+               END AS situacao
+       FROM (
+                SELECT
+                    d.id_disciplina,
+                    d.nome,
+       
+                    ROUND(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 2) AS media1,
+       
+                    ROUND(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 2) AS media2,
+       
+                    ROUND(
+                            (
+                                AVG(CASE WHEN av.semestre = 1 THEN av.valor END) +
+                                AVG(CASE WHEN av.semestre = 2 THEN av.valor END)
+                                ) / 2.0
+                        , 2) AS media_final
+       
+                FROM disciplinas d
+                         JOIN notas n ON n.id_disciplina = d.id_disciplina
+                         LEFT JOIN avaliacoes av ON av.id_nota = n.id_nota
+       
+                WHERE n.id_aluno = ?
+       
+                GROUP BY d.nome, d.id_disciplina
+            ) sub
+       ORDER BY sub.id_disciplina;
     """;
 
         Connection conn = null;
@@ -96,21 +97,19 @@ public class BoletimDAO {
             d.id_disciplina,
             d.nome,
         
-            ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) AS media1,
-            ROUND(COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0), 2) AS media2,
+            ROUND(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 2) AS media1,
+            ROUND(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 2) AS media2,
         
             ROUND(
-        		COALESCE(
                     ((
-                         ROUND(COALESCE(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 0), 2) +
-                         ROUND(COALESCE(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 0), 2)
-        			 ) / 2), 0
-            )
-        	, 2) AS media_final
+                         ROUND(AVG(CASE WHEN av.semestre = 1 THEN av.valor END), 2) +
+                         ROUND(AVG(CASE WHEN av.semestre = 2 THEN av.valor END), 2)
+                         ) / 2)
+                , 2) AS media_final
         
         FROM disciplinas d
-                 JOIN notas n ON n.id_disciplina = d.id_disciplina
-                 LEFT JOIN avaliacoes av ON av.id_nota = n.id_nota
+            JOIN notas n ON n.id_disciplina = d.id_disciplina
+            LEFT JOIN avaliacoes av ON av.id_nota = n.id_nota
         
         WHERE n.id_aluno = ? AND d.id_disciplina = ?
         
