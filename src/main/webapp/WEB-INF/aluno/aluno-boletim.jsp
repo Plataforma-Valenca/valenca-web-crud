@@ -91,8 +91,10 @@
                                 corSituacao = "#green";
                             } else if ("RECUPERAÇÃO".equals(b.getSituacao())) {
                                 corSituacao = "orange";
-                            }else if ("RECUPERAÇÃO".equals(b.getSituacao())) {
+                            } else if ("REPROVADO".equals(b.getSituacao())) {
                                 corSituacao = "red";
+                            } else if ("--".equals(b.getSituacao())) {
+                                corSituacao = "grey";
                             }
                 %>
 
