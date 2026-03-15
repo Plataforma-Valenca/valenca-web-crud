@@ -17,7 +17,7 @@ import java.util.Optional;
 @WebServlet("/validarPreCadastro")
 public class ValidarPreCadastro extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/login/validarPreCadastro.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/login/login-validar-pre-cadastro.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class ValidarPreCadastro extends HttpServlet {
         if (matriculaOuCpf == null || matriculaOuCpf.trim().isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             req.setAttribute("erroLogin", "Campo obrigatório");
-            req.getRequestDispatcher("/WEB-INF/login/validarPreCadastro.jsp")
+            req.getRequestDispatcher("/WEB-INF/login/login-validar-pre-cadastro.jsp")
                     .forward(req, resp);
         } else {
             usuario = usuarioDAO.validarPrimeiroAcesso(matriculaOuCpf);
@@ -42,7 +42,7 @@ public class ValidarPreCadastro extends HttpServlet {
             } else {
                 HttpSession session = req.getSession();
                 session.setAttribute("cpfOuMatriculaValidacao", matriculaOuCpf);
-                req.getRequestDispatcher("/WEB-INF/login/finalizarCadastroAluno.jsp")
+                req.getRequestDispatcher("/WEB-INF/login/login-finalizar-cadastro-aluno.jsp")
                         .forward(req, resp);
             }
         }

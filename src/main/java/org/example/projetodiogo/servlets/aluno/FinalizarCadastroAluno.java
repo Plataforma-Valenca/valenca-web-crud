@@ -27,7 +27,7 @@ public class FinalizarCadastroAluno extends HttpServlet {
 
         if (!senha.equals(confirmarSenha)) {
             req.setAttribute("erroLogin", "As senhas não coincidem.");
-            req.getRequestDispatcher("/WEB-INF/aluno/finalizarCadastroAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/aluno/login-finalizar-cadastro-aluno.jsp")
                     .forward(req, resp);
         } else {
             Optional<Usuario> usuarioOpt = usuarioDAO.buscarPorCpfOuMatricula(cpfOuMatricula);

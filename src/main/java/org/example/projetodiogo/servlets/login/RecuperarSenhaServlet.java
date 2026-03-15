@@ -19,7 +19,7 @@ import java.util.UUID;
 public class RecuperarSenhaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/login/recuperarSenha.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/login/login-recuperar-senha.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -52,7 +52,7 @@ public class RecuperarSenhaServlet extends HttpServlet {
             }
         }
 
-        req.getRequestDispatcher("/WEB-INF/login/tokenRecuperarSenha.jsp")
+        req.getRequestDispatcher("/WEB-INF/login/login-token-recuperar-senha.jsp")
                 .forward(req, resp);
     }
 }

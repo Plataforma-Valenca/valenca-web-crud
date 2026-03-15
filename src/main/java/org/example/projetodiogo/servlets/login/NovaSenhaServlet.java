@@ -27,7 +27,7 @@ public class NovaSenhaServlet extends HttpServlet {
         }
 
         req.setAttribute("token", token);
-        req.getRequestDispatcher("/WEB-INF/login/novaSenha.jsp")
+        req.getRequestDispatcher("/WEB-INF/login/login-nova-senha.jsp")
                 .forward(req, resp);
     }
 
