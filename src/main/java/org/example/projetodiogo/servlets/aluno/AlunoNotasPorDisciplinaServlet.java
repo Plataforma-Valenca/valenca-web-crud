@@ -1,6 +1,5 @@
 package org.example.projetodiogo.servlets.aluno;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,10 +16,9 @@ import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/aluno/notasPorDisciplina")
-public class NotasPorDisciplinaServlet extends HttpServlet {
+public class AlunoNotasPorDisciplinaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UsuarioDAO usuarioDAO = new UsuarioDAO();

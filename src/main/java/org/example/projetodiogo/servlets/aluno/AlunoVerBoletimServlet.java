@@ -1,6 +1,5 @@
 package org.example.projetodiogo.servlets.aluno;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,17 +10,15 @@ import org.example.projetodiogo.dao.AlunoDAO;
 import org.example.projetodiogo.dao.BoletimDAO;
 import org.example.projetodiogo.dao.DisciplinaDAO;
 import org.example.projetodiogo.dao.UsuarioDAO;
-import org.example.projetodiogo.exceptions.DataAccessException;
 import org.example.projetodiogo.model.Boletim;
 import org.example.projetodiogo.model.Disciplina;
 import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet("/aluno/VerBoletim")
-public class VerBoletimServlet extends HttpServlet {
+public class AlunoVerBoletimServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UsuarioDAO usuarioDAO = new UsuarioDAO();

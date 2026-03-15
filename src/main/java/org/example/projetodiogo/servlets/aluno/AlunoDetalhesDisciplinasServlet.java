@@ -14,11 +14,10 @@ import org.example.projetodiogo.model.DTO.DisciplinasResumoDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/aluno/detalhesDisciplina")
-public class DetalhesDisciplinasServlet extends HttpServlet {
+public class AlunoDetalhesDisciplinasServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

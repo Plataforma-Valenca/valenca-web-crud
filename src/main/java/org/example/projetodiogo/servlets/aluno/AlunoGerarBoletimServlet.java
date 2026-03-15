@@ -18,14 +18,13 @@ import org.example.projetodiogo.model.Boletim;
 import org.example.projetodiogo.model.Disciplina;
 import org.example.projetodiogo.model.Usuario;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/aluno/gerarBoletim")
-public class GerarBoletimServlet extends HttpServlet {
+public class AlunoGerarBoletimServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         HttpSession session = req.getSession();
