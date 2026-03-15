@@ -16,11 +16,10 @@ import org.example.projetodiogo.model.Professor;
 import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.Optional;
 
-@WebServlet("/professor/cadastrarObservacao")
-public class IncluirObservacaoServlet extends HttpServlet {
+@WebServlet("/professor/inserirObservacao")
+public class ProfessorInserirObservacaoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/professor/adicionarObservacao.jsp")
                 .forward(req, resp);

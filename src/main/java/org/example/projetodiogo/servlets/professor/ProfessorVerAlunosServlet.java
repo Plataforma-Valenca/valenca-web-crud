@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/professor/verAlunos")
-public class VerAlunosServlet extends HttpServlet {
+public class ProfessorVerAlunosServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/professor/detalhesAluno")
-public class DetalhesAlunoServlet extends HttpServlet {
+public class ProfessorDetalhesAlunoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");

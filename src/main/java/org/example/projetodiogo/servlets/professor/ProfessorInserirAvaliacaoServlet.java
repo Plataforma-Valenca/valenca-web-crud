@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @WebServlet("/professor/inserirAvaliacao")
-public class InserirAvaliacaoServlet extends HttpServlet {
+public class ProfessorInserirAvaliacaoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {

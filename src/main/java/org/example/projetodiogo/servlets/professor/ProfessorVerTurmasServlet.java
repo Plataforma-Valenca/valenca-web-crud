@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/professor/turmasProfessor")
-public class TurmasServlet extends HttpServlet {
+@WebServlet("/professor/verTurmas")
+public class ProfessorVerTurmasServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

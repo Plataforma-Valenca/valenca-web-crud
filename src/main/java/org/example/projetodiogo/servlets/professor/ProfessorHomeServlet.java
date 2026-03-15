@@ -7,7 +7,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet("/professor/home")
-public class HomeProfessorServlet extends HttpServlet {
+public class ProfessorHomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -14,7 +14,7 @@ import java.sql.*;
 import java.util.*;
 
 @WebServlet("/professor/dashboard")
-public class DashboardProfessorServlet extends HttpServlet {
+public class ProfessorDashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

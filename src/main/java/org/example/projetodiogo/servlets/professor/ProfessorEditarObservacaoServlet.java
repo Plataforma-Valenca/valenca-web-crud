@@ -5,34 +5,31 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import org.example.projetodiogo.dao.*;
+import org.example.projetodiogo.dao.ObservacaoDAO;
 import org.example.projetodiogo.exceptions.DataAccessException;
-import org.example.projetodiogo.model.Avaliacao;
-import org.example.projetodiogo.model.Disciplina;
 import org.example.projetodiogo.model.Observacao;
-import org.example.projetodiogo.model.Usuario;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Optional;
 
-@WebServlet("/professor/EditarAvaliacao")
-public class EditarAvaliacaoServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
-
+@WebServlet("/professor/editarObservacao")
+public class ProfessorEditarObservacaoServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int idAluno = Integer.parseInt(req.getParameter("idAluno"));
+        req.setAttribute("idAluno", idAluno);
+        req.getRequestDispatcher("/WEB-INF/professor/editarObservacao.jsp")
+                .forward(req, resp);
+    }
 
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObservacaoDAO obsDAO = new ObservacaoDAO();
+        Observacao obs = new Observacao();
+        int idAluno = Integer.parseInt(req.getParameter("idAluno"));
+        int idObs = Integer.parseInt(req.getParameter("idObservacao"));
         String descricao = req.getParameter("descricao");
-        Double valor = Double.parseDouble(req.getParameter("valor"));
-        int semestre = Integer.parseInt(req.getParameter("semestre"));
 
         try {
-            Avaliacao avaliacao = new Avaliacao(descricao, valor, semestre);
-
-            avaliacaoDAO.atualizar(avaliacao);
+            obs.setDescricao(descricao);
+            obsDAO.atualizar(obs);
 
             req.getSession().setAttribute("mensagemSucesso", "Observação editada com sucesso!");
             resp.sendRedirect(req.getContextPath() + "/professor/verPerfilAluno?idAluno=" + idAluno);
@@ -41,4 +38,3 @@ public class EditarAvaliacaoServlet extends HttpServlet {
         }
     }
 }
-
