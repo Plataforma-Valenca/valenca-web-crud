@@ -36,6 +36,7 @@ public class AdminInserirAlunoServlet extends HttpServlet {
 
         String senha = req.getParameter("senhaProvisoria");
         String cpf = req.getParameter("cpf");
+        String nomeTurma = req.getParameter("nomeTurma");
 
         int idTurma = Integer.parseInt(req.getParameter("idTurma").trim());
 
@@ -48,11 +49,14 @@ public class AdminInserirAlunoServlet extends HttpServlet {
 
             req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
 
+            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
+                    .forward(req, resp);
 
         } catch (SQLException e) {
             req.getSession().setAttribute("mensagemErro", "Erro ao cadastrar aluno.");
+            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
+                    .forward(req, resp);
             throw new RuntimeException(e);
         }
-        resp.sendRedirect(req.getContextPath() + "/admin/verAlunos?idTurma=" + idTurma);
     }
 }
