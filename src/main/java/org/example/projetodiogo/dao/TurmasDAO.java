@@ -15,6 +15,33 @@ import java.util.List;
 import java.util.Optional;
 
 public class TurmasDAO {
+
+    public String buscarNomePorIdTurma(int idTurma) throws DataAccessException {
+        String query = """
+            SELECT t.nome
+            FROM aluno_turma at
+            JOIN turmas t ON at.id_turma = t.id_turma
+            WHERE t.id_turma = ?
+            """;
+
+        try (Connection conn = ConnectionFactory.conectar();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, idTurma);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("nome");
+            } else {
+                throw new EntityNotFoundException("Turma não encontrada para id: ", idTurma);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Erro ao buscar turma", e);
+        }
+    }
+
     public String buscarNomePorIdAluno(int idAluno) throws DataAccessException {
         String query = """
             SELECT t.nome
