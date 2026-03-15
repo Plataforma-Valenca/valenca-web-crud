@@ -14,6 +14,8 @@
 
 <body>
 
+<jsp:include page="/WEB-INF/views/componentes/flash-message.jsp"/>
+
 <jsp:include page="/WEB-INF/views/componentes/admin-sidebar.jsp">
     <jsp:param name="activePage" value="resumoList" />
 </jsp:include>
@@ -46,8 +48,12 @@
                 <div class="card-actions">
 
                     <i class="fa-solid fa-pen" style="cursor: pointer"
-                       onclick="abrirModalEditar('<%=d.getIdDisciplina()%>')">
-
+                       onclick="abrirModalEditar(
+                               '<%=d.getIdDisciplina()%>',
+                               '<%=d.getNomeFormatado()%>',
+                               '<%=d.getIdProfessor()%>',
+                               '<%=d.getNomeProfessor() != null ? d.getNomeProfessor() : ""%>'
+                               )">
                     </i>
 
                     <i class="fa-solid fa-trash"

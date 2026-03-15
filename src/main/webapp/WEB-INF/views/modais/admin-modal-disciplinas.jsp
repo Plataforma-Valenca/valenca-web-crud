@@ -41,7 +41,8 @@
             <input type="hidden" id="idDisciplina" name="idDisciplina">
 
             <div class="form">
-                <input type="text" id="editarNomeDisciplina" name="nomeDisciplina" required>
+                <input type="text" id="editarNomeDisciplina" name="nomeDisciplina" readonly value="">
+                <input type="hidden" id="editarIdProfessor" name="idProfessor">
                 <input type="text" id="editarNomeProfessor" name="nomeProfessor" required>
             </div>
 

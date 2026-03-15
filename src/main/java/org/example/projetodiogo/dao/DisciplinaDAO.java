@@ -98,22 +98,6 @@ public class DisciplinaDAO {
             }
         }
     }
-    public void atualizarNomeDisciplina(int idDisciplina, String nome) {
-
-        String sql = "UPDATE disciplinas SET nome = ? WHERE id_disciplina = ?";
-
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, nome);
-            stmt.setInt(2, idDisciplina);
-
-            stmt.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public ArrayList<Disciplina> visualizarDisciplinas() {
 
@@ -266,6 +250,55 @@ public class DisciplinaDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void atualizarProfessorPorNome(int idDisciplina, String nomeProfessor) throws SQLException {
+
+        String sqlBuscarProfessor = """
+        SELECT p.id_professor
+        FROM professores p
+        JOIN usuarios u ON u.id_usuario = p.id_usuario
+        WHERE LOWER(TRIM(u.nome)) = LOWER(TRIM(?))
+        LIMIT 1
+    """;
+
+        String sqlVerificarVinculo = """
+        SELECT id_disciplina FROM disciplinas
+        WHERE id_professor = ? AND id_disciplina != ?
+    """;
+
+        String sqlAtualizar = "UPDATE disciplinas SET id_professor = ? WHERE id_disciplina = ?";
+
+        try (Connection conn = ConnectionFactory.conectar()) {
+
+            Integer idProfessor = null;
+            try (PreparedStatement ps = conn.prepareStatement(sqlBuscarProfessor)) {
+                ps.setString(1, nomeProfessor);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    idProfessor = rs.getInt("id_professor");
+                }
+            }
+
+            if (idProfessor == null) {
+                throw new SQLException("Professor não encontrado: " + nomeProfessor);
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlVerificarVinculo)) {
+                ps.setInt(1, idProfessor);
+                ps.setInt(2, idDisciplina);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    throw new SQLException("Professor já vinculado a outra disciplina.");
+                }
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlAtualizar)) {
+                ps.setInt(1, idProfessor);
+                ps.setInt(2, idDisciplina);
+                ps.executeUpdate();
+            }
         }
     }
 }
