@@ -26,7 +26,7 @@
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAluno.jsp">
+<jsp:include page="/WEB-INF/views/componentes/aluno-sidebar.jsp">
     <jsp:param name="activePage" value="boletim"/>
 </jsp:include>
 

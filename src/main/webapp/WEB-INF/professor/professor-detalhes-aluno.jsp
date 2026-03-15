@@ -15,7 +15,7 @@
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+<jsp:include page="/WEB-INF/views/componentes/professor-sidebar.jsp">
     <jsp:param name="activePage" value="turmas" />
 </jsp:include>
 
@@ -24,7 +24,7 @@
         <header class="page-grid-header">
             <div class="page-grid-header-state">
                 <div class="page-grid-header-state">
-                    <a href="${pageContext.request.contextPath}/professor/turmasProfessor">Turmas</a>
+                    <a href="${pageContext.request.contextPath}/professor/verTurmasr">Turmas</a>
                     <p>></p>
                     <a href="${pageContext.request.contextPath}/professor/verAlunos?idTurma=<%= request.getAttribute("idTurma") %>&nomeTurma=<%= request.getAttribute("nomeTurma") %>">Alunos</a>
                     <p>></p>

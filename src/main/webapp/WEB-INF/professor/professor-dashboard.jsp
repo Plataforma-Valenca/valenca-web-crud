@@ -46,7 +46,7 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+<jsp:include page="/WEB-INF/views/componentes/professor-sidebar.jsp">
     <jsp:param name="activePage" value="dashboards" />
 </jsp:include>
 

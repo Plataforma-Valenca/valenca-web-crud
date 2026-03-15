@@ -11,14 +11,14 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+<jsp:include page="/WEB-INF/views/componentes/professor-sidebar.jsp">
     <jsp:param name="activePage" value="turmas" />
 </jsp:include>
 
 <div class="page-content">
     <header class="page-grid-header">
         <div class="page-grid-header-state">
-            <a href="${pageContext.request.contextPath}/professor/turmasProfessor">Turmas</a>
+            <a href="${pageContext.request.contextPath}/professor/verTurmas">Turmas</a>
             <p>></p>
             <b>Alunos</b>
         </div>

@@ -16,7 +16,7 @@
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarProfessor.jsp">
+<jsp:include page="/WEB-INF/views/componentes/professor-sidebar.jsp">
     <jsp:param name="activePage" value="turmas"/>
 </jsp:include>
 
