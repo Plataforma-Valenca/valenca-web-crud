@@ -20,13 +20,9 @@ function fecharModalEditar(){
     document.getElementById("modalEditar").style.display="none";
 }
 
-function abrirModalExcluir(id){
-
-    document.getElementById("modalExcluir").style.display="flex";
-
-    document.getElementById("btnConfirmarExcluir").href =
-        "${pageContext.request.contextPath}/admin/deletarTurma?id="+id;
-
+function abrirModalExcluir(id) {
+    document.getElementById("modalExcluir").style.display = "flex";
+    document.getElementById("excluirTurmaId").value = id;
 }
 
 function fecharModalExcluir(){

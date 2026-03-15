@@ -11,13 +11,25 @@ import java.io.IOException;
 @WebServlet("/admin/deletarTurma")
 public class AdminDeletarTurmaServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
+        String idString = request.getParameter("idTurma");
 
-        TurmasDAO dao = new TurmasDAO();
-        dao.deletarTurma(id);
+        if (idString != null && !idString.isEmpty()) {
+            try {
+                int id = Integer.parseInt(idString);
+                TurmasDAO dao = new TurmasDAO();
+                dao.deletarTurma(id);
+
+                request.getSession().setAttribute("mensagemSucesso", "Turma deletada com sucesso!");
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                request.getSession().setAttribute("mensagemErro", "Erro ao deletar turma.");
+            }
+        }
 
         response.sendRedirect(request.getContextPath() + "/admin/verTurmas");
     }

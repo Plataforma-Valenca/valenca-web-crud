@@ -161,7 +161,9 @@ public class TurmasDAO {
             e.printStackTrace();
         }
 
-    }public void deletarTurma(int id){
+    }
+
+    public void deletarTurma(int id){
 
         String sql = "DELETE FROM turmas WHERE id_turma = ?";
 
