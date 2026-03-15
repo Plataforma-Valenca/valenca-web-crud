@@ -23,5 +23,7 @@ public class AdminInserirTurmaServlet extends HttpServlet {
         turmaDAO.inserirTurma(nome, ano);
 
         response.sendRedirect(request.getContextPath() + "/admin/verTurmas");
+
+        request.getSession().setAttribute("mensagemSucesso", "Turma cadastrada com sucesso!");
     }
 }

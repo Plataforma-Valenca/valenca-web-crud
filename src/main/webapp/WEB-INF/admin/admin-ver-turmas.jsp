@@ -16,6 +16,8 @@
 
 <body>
 
+<jsp:include page="/WEB-INF/views/componentes/flash-message.jsp"/>
+
 <jsp:include page="/WEB-INF/views/componentes/admin-sidebar.jsp">
     <jsp:param name="activePage" value="turmas"/>
 </jsp:include>
