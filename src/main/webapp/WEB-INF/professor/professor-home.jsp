@@ -58,19 +58,7 @@
     </main>
 </div>
 
-<script>
-    function togglePopup() {
-        const popup = document.getElementById("popupMenu");
-        popup.style.display = (popup.style.display === "block") ? "none" : "block";
-    }
+<script src="${pageContext.request.contextPath}/assets/js/profile-logout.js"></script>
 
-    // Fecha ao clicar fora
-    window.onclick = function(event) {
-        if (!event.target.closest('.header-profile')) {
-            const popup = document.getElementById("popupMenu");
-            if(popup) popup.style.display = "none";
-        }
-    }
-</script>
 </body>
 </html>

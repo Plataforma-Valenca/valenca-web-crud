@@ -193,7 +193,7 @@
         </div>
     </main>
 </div>
-
+<script src="${pageContext.request.contextPath}/assets/js/profile-logout.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Dados passados do Servlet via JSP
@@ -236,16 +236,6 @@
         data: { labels: pizzaLabels, datasets: [{ data: pizzaValues, backgroundColor: ["#7b5cff","#a66bff","#7fd8d4","#ffb347","#cfcfcf"] }] },
         options: { responsive: true }
     });
-
-    // Popup de perfil
-    function togglePopup() {
-        const p = document.getElementById("popupMenu");
-        p.style.display = (p.style.display === "block") ? "none" : "block";
-    }
-    window.onclick = e => {
-        if (!e.target.closest(".header-profile"))
-            document.getElementById("popupMenu").style.display = "none";
-    };
 </script>
 
 </body>
