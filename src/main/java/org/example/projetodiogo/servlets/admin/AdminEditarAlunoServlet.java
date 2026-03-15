@@ -31,7 +31,7 @@ public class AdminEditarAlunoServlet {
                 Usuario usuario = new Usuario(usuarioOpt.get().getId(), nome, email, senha, true);
                 if (usuarioDAO.atualizar(usuario)) {
                     req.setAttribute("mensagemSucesso", "Dados atualizados com sucesso.");
-                    req.getRequestDispatcher("/WEB-INF/admin/listarDisciplinas.jsp")
+                    req.getRequestDispatcher("/WEB-INF/admin/admin-ver-disciplinas.jsp")
                     .forward(req, resp);
                 }
             }

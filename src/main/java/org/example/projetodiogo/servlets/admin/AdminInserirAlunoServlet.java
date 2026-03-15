@@ -21,7 +21,7 @@ public class AdminInserirAlunoServlet extends HttpServlet {
 
         try {
             // Redireciona para a página
-            req.getRequestDispatcher("/WEB-INF/admin/listarProfessores.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-professores.jsp")
                     .forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();

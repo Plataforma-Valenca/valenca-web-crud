@@ -54,7 +54,7 @@
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+<jsp:include page="/WEB-INF/views/componentes/admin-sidebar.jsp">
     <jsp:param name="activePage" value="home"/>
 </jsp:include>
 

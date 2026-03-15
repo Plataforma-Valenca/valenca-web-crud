@@ -24,7 +24,7 @@ public class AdminVerDisciplinasServlet extends HttpServlet {
             req.setAttribute("resumoList", resumoList);
             System.out.println(resumoList.size());
 
-            req.getRequestDispatcher("/WEB-INF/admin/listarDisciplinas.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-disciplinas.jsp")
                     .forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);

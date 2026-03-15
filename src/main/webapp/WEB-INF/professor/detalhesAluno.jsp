@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/aluno.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/perfilAluno.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/detalhes-aluno.css">
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
 </head>
 <body>

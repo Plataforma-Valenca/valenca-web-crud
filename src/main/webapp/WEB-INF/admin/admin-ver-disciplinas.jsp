@@ -14,7 +14,7 @@
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+<jsp:include page="/WEB-INF/views/componentes/admin-sidebar.jsp">
     <jsp:param name="activePage" value="resumoList" />
 </jsp:include>
 
@@ -54,5 +54,10 @@
         </div>
     </main>
 </div>
+
+<jsp:include page="/WEB-INF/views/modais/admin-modal-disciplinas.jsp"/>
+
+<script src="${pageContext.request.contextPath}/assets/js/admin-modal-disciplinas.js"></script>
+
 </body>
 </html>

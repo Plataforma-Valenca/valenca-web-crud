@@ -24,7 +24,7 @@
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+<jsp:include page="/WEB-INF/views/componentes/admin-sidebar.jsp">
     <jsp:param name="activePage" value="turmas" />
 </jsp:include>
 
@@ -154,92 +154,9 @@
     </main>
 </div>
 
-<div id="modalCadastroAluno" class="modal">
-    <div class="modal-content">
+<jsp:include page="/WEB-INF/views/modais/admin-modal-ver-alunos.jsp"/>
 
-        <div class="modal-header">
-            <h2>Novo Aluno</h2>
-            <span class="close-modal" onclick="fecharModalCadastroAluno()">&times;</span>
-        </div>
-
-        <form action="${pageContext.request.contextPath}/admin/inserirAluno" method="post">
-
-            <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
-
-            <input type="text" name="cpf" placeholder="Cpf" required>
-
-            <input type="text" name="senhaProvisoria" placeholder="Senha provisória" required>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn-primary">Salvar</button>
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<!-- MODAL EDITAR -->
-
-<div id="modalEditarAluno" class="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-            <h2>Editar Aluno</h2>
-            <span class="close-modal" onclick="fecharModalEditarAluno()">&times;</span>
-        </div>
-
-        <form action="${pageContext.request.contextPath}/admin/editarAluno" method="post">
-
-            <input type="hidden" name="idAluno" id="editIdAluno">
-
-            <input type="text" name="nome" id="editNome" placeholder="Nome" required>
-
-            <input type="text" name="matricula" id="editMatricula" placeholder="Matrícula" required>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn-primary">Salvar</button>
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<script>
-
-    function abrirModalCadastroAluno(){
-        document.getElementById("modalCadastroAluno").style.display="flex";
-    }
-
-    function fecharModalCadastroAluno(){
-        document.getElementById("modalCadastroAluno").style.display="none";
-    }
-
-    function abrirModalEditarAluno(id,nome,matricula){
-
-        document.getElementById("editIdAluno").value=id;
-        document.getElementById("editNome").value=nome;
-        document.getElementById("editMatricula").value=matricula;
-
-        document.getElementById("modalEditarAluno").style.display="flex";
-
-    }
-
-    function fecharModalEditarAluno(){
-        document.getElementById("modalEditarAluno").style.display="none";
-    }
-
-    window.onclick=function(event){
-        if(event.target.classList.contains('modal')){
-            event.target.style.display="none";
-        }
-    }
-
-</script>
+<script src="${pageContext.request.contextPath}/assets/js/admin-modal-ver-alunos.js"></script>
 
 </body>
 </html>

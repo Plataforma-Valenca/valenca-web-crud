@@ -47,7 +47,7 @@ public class AdminVerAlunosServlet extends HttpServlet {
             req.setAttribute("turmasList", turmas);
             req.setAttribute("busca", busca);
 
-            req.getRequestDispatcher("/WEB-INF/admin/listarAlunos.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
                 .forward(req, resp);
         } catch (DataAccessException | SQLException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);

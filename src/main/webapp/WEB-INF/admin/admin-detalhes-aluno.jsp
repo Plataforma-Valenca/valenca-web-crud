@@ -37,13 +37,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/page-grid.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/aluno.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/perfilAluno.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/detalhes-aluno.css">
 
 </head>
 
 <body>
 
-<jsp:include page="/WEB-INF/views/componentes/sidebarAdm.jsp">
+<jsp:include page="/WEB-INF/views/componentes/admin-sidebar.jsp">
     <jsp:param name="activePage" value="turmas"/>
 </jsp:include>
 
@@ -57,7 +57,7 @@
 
             <p>></p>
 
-            <a href="${pageContext.request.contextPath}/admin/verAlunosTurma?idTurma=<%= idTurma %>&nomeTurma=<%= nomeTurma %>">
+            <a href="${pageContext.request.contextPath}/admin//admin/detalhesAluno?idTurma=<%= idTurma %>&nomeTurma=<%= nomeTurma %>">
                 Alunos
             </a>
 
@@ -106,7 +106,7 @@
 
                 <h4>Notas</h4>
 
-                <button onclick="alert('Aqui você pode abrir o modal de atualizar notas')" class="btn-acao">
+                <button onclick="alert('Aqui você pode abrir o modal de atualizar notas')" class="btn-primary">
                     Atualizar Notas
                 </button>
 
@@ -212,7 +212,7 @@
 
                 <h4>Observações</h4>
 
-                <button onclick="abrirModalObs()" class="btn-acao">
+                <button onclick="abrirModalObs()" class="btn-primary">
                     + Nova Observação
                 </button>
 
@@ -273,102 +273,9 @@
 
 </div>
 
-<!-- MODAL OBSERVAÇÃO -->
+<jsp:include page="/WEB-INF/views/modais/admin-modal-detalhes-aluno.jsp"/>
 
-<div id="modalObs" class="modal">
-
-    <div class="modal-content">
-
-        <h3>Adicionar Observação</h3>
-
-        <form action="${pageContext.request.contextPath}/admin/adicionarObservacao" method="post">
-
-            <input type="hidden" name="idAluno" value="<%= aluno.getIdAluno() %>">
-
-            <label>Professor</label>
-
-            <select name="idProfessor" style="width:100%; padding:8px;" required>
-
-                <option value="">Selecione um professor</option>
-
-                <%
-
-                    if(professores != null){
-
-                        for(ProfessorConsultaDTO prof : professores){
-
-                %>
-
-                <option value="<%= prof.getIdProfessor() %>">
-                    <%= prof.getNome() %>
-                </option>
-
-                <%
-
-                        }
-
-                    }
-
-                %>
-
-            </select>
-
-            <br><br>
-
-            <label>Observação</label>
-
-            <textarea name="descricao"
-                      placeholder="Digite a observação..."
-                      style="width:100%; height:120px; padding:10px;"
-                      required></textarea>
-
-            <br><br>
-
-            <div style="display:flex; justify-content:flex-end; gap:10px">
-
-                <button type="submit" class="btn-acao">
-                    Salvar
-                </button>
-
-                <button type="button" onclick="fecharModalObs()">
-                    Cancelar
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<script>
-
-    function abrirModalObs(){
-
-        document.getElementById("modalObs").style.display="flex";
-
-    }
-
-    function fecharModalObs(){
-
-        document.getElementById("modalObs").style.display="none";
-
-    }
-
-    window.onclick = function(event){
-
-        let modal = document.getElementById("modalObs");
-
-        if(event.target === modal){
-
-            modal.style.display="none";
-
-        }
-
-    }
-
-</script>
+<script src="${pageContext.request.contextPath}/assets/js/admin-modal-detalhes-aluno.js"></script>
 
 </body>
 

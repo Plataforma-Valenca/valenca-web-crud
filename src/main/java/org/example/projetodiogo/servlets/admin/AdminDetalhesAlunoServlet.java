@@ -86,7 +86,7 @@ public class AdminDetalhesAlunoServlet extends HttpServlet {
             req.setAttribute("professores", professores);
 
 
-            req.getRequestDispatcher("/WEB-INF/admin/perfilAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/admin-detalhes-aluno.jsp")
                     .forward(req, resp);
 
         } catch (DataAccessException e) {

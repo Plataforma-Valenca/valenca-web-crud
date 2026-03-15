@@ -39,7 +39,7 @@ public class AdminVerProfessoresServlet extends HttpServlet {
         request.setAttribute("disciplinas", disciplinas);
         request.setAttribute("busca", busca);
 
-        request.getRequestDispatcher("/WEB-INF/admin/listarProfessores.jsp")
+        request.getRequestDispatcher("/WEB-INF/admin/admin-ver-professores.jsp")
                 .forward(request, response);
     }
 }
