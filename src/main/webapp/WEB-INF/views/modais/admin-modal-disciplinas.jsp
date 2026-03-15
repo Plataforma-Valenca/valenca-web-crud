@@ -62,7 +62,7 @@
         <p>Esta ação não poderá ser desfeita.</p>
 
         <form id="formExcluir" action="${pageContext.request.contextPath}/admin/deletarDisciplina" method="post">
-            <input type="hidden" name="idDisciplina" id="idDisciplina">
+            <input type="hidden" name="idDisciplina" id="excluirDisciplinaId">
 
             <div class="modal-footer">
                 <button type="submit" class="btn-primary delete">Excluir</button>

@@ -22,7 +22,7 @@ function fecharModalEditar(){
 
 function abrirModalExcluir(id) {
     document.getElementById("modalExcluir").style.display = "flex";
-    document.getElementById("excluirTurmaId").value = id;
+    document.getElementById("excluirDisciplinaId").value = id;
 }
 
 function fecharModalExcluir(){
