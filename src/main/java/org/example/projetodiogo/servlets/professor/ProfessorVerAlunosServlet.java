@@ -51,7 +51,7 @@ public class ProfessorVerAlunosServlet extends HttpServlet {
             req.setAttribute("alunosList", alunosList);
             req.setAttribute("busca", busca);
 
-            req.getRequestDispatcher("/WEB-INF/professor/admin-ver-alunos.jsp")
+            req.getRequestDispatcher("/WEB-INF/professor/professor-ver-alunos.jsp")
                     .forward(req, resp);
 
         } catch (DataAccessException e) {

@@ -35,7 +35,7 @@
             </li>
 
             <li class="<%= "turmas".equals(activePage) ? "active" : "" %> menu-items-tab" >
-                <a href="${pageContext.request.contextPath}/professor/turmasProfessor">
+                <a href="${pageContext.request.contextPath}/professor/verTurmas">
                     <img src="${pageContext.request.contextPath}/assets/img/sidebar-icon-aluno.svg">
                     Turmas
                 </a>

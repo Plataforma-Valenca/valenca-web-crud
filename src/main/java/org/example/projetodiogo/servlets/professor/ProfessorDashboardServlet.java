@@ -42,7 +42,7 @@ public class ProfessorDashboardServlet extends HttpServlet {
 
             if (idProfessor == 0) {
                 request.setAttribute("erro", "Erro ao encontrar professor por id usuário.");
-                request.getRequestDispatcher("/WEB-INF/professor/admin-professor-dashboard.jsp")
+                request.getRequestDispatcher("/WEB-INF/professor/professor-dashboard.jsp")
                         .forward(request, response);
                 return;
             }
