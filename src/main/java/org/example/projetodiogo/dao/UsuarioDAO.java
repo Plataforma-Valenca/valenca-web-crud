@@ -103,7 +103,7 @@ public class UsuarioDAO {
     }
 
     public int inserirNovoAluno(Usuario usuario) {
-        String sql = "INSERT INTO usuarios(senha, cpf, tipo, cadastro_completo) VALUES(?, ?, 'aluno', false)";
+        String sql = "INSERT INTO usuarios(nome, senha, cpf, tipo, cadastro_completo) VALUES('CADASTRO INCOMPLETO', ?, ?, 'aluno', false)";
         int idGeradoUsuario = 0;
 
         PreparedStatement pstmt = null;
