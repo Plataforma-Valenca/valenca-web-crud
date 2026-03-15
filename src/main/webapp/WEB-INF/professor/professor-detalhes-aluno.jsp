@@ -136,9 +136,9 @@
     </main>
 </div>
 
-<jsp:include page="/WEB-INF/views/modais/professorDetalhesAlunoModal.jsp"/>
+<jsp:include page="/WEB-INF/views/modais/professor-modal-detalhes-aluno.jsp"/>
 
-<script src="${pageContext.request.contextPath}/assets/js/professorDetalhesAluno.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/professor-modal-detalhes-aluno.js"></script>
 
 </body>
 </html>

@@ -60,7 +60,7 @@ public class ProfessorDetalhesAlunoServlet extends HttpServlet {
             req.setAttribute("idTurma", idTurmaParam);
             req.setAttribute("nomeTurma", nomeTurmaParam);
 
-            req.getRequestDispatcher("/WEB-INF/professor/detalhesAluno.jsp")
+            req.getRequestDispatcher("/WEB-INF/professor/professor-detalhes-aluno.jsp")
                     .forward(req, resp);
         } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);

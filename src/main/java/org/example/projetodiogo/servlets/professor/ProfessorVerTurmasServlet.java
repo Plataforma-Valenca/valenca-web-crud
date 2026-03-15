@@ -27,7 +27,7 @@ public class ProfessorVerTurmasServlet extends HttpServlet {
 
             req.setAttribute("turmasList", turmasList);
 
-            req.getRequestDispatcher("/WEB-INF/professor/turmasProfessor.jsp")
+            req.getRequestDispatcher("/WEB-INF/professor/professor-ver-turmas.jsp")
                     .forward(req, resp);
 
         } catch (SQLException | DataAccessException e) {

@@ -13,7 +13,7 @@ public class ProfessorHomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        req.getRequestDispatcher("/WEB-INF/professor/homeProfessor.jsp")
+        req.getRequestDispatcher("/WEB-INF/professor/professor-home.jsp")
                 .forward(req, resp);
     }
 }

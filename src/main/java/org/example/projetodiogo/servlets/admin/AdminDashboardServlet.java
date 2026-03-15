@@ -194,7 +194,7 @@ public class AdminDashboardServlet extends HttpServlet {
         }
 
         // Forward único — sempre executado, com ou sem erro
-        request.getRequestDispatcher("/WEB-INF/admin/admin-dashboard.jsp")
+        request.getRequestDispatcher("/WEB-INF/admin/admin-professor-dashboard.jsp")
                 .forward(request, response);
     }
 
