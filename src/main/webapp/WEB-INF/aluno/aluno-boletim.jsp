@@ -50,6 +50,8 @@
 
             <div class="aluno-details-notas-header">
                 <h4>Notas</h4>
+
+                <a class="btn-primary" href="${pageContext.request.contextPath}/aluno/gerarBoletim">Gerar boletim</a>
             </div>
 
             <div class="aluno-details-notas-table" style="margin-top:2vh">
