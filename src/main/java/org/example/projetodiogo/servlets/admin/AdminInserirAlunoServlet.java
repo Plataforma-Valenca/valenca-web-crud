@@ -37,19 +37,22 @@ public class AdminInserirAlunoServlet extends HttpServlet {
         String senha = req.getParameter("senhaProvisoria");
         String cpf = req.getParameter("cpf");
 
+        int idTurma = Integer.parseInt(req.getParameter("idTurma").trim());
+
         try {
             usuario.setSenha(senha);
             usuario.setCpf(cpf);
             int idUsuarioCriado = usuarioDAO.inserirNovoAluno(usuario);
             int idAluno = alunoDAO.inserir(idUsuarioCriado);
-            int idTurma = Integer.parseInt(req.getParameter("idTurma"));
             alunoDAO.vincularAlunoADisciplinasTurma(idAluno, idTurma);
 
             req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
-            resp.sendRedirect(req.getContextPath() + "/admin/verAlunos");
+
+
         } catch (SQLException e) {
+            req.getSession().setAttribute("mensagemErro", "Erro ao cadastrar aluno.");
             throw new RuntimeException(e);
         }
-
+        resp.sendRedirect(req.getContextPath() + "/admin/verAlunos?idTurma=" + idTurma);
     }
 }

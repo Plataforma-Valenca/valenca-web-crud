@@ -22,36 +22,31 @@ public class AdminVerAlunosServlet extends HttpServlet {
         AlunoConsultaDtoDAO alunoConsultaDao = new AlunoConsultaDtoDAO();
         TurmasDAO turmaDAO = new TurmasDAO();
         ArrayList<AlunoConsultaDTO> alunosList = new ArrayList<>();
-        AlunoConsultaDTO aluno;
 
         String busca = req.getParameter("busca");
+        String idTurmaStr = req.getParameter("idTurma");
+        String nomeTurma = req.getParameter("nomeTurma");
+        int idTurma = Integer.parseInt(idTurmaStr);
 
         try {
             if (busca != null && !busca.isEmpty()) {
-
                 Long matricula = Long.parseLong(busca);
-
-                aluno = alunoConsultaDao.buscarPorMatricula(matricula);
-
+                AlunoConsultaDTO aluno = alunoConsultaDao.buscarPorMatricula(matricula);
                 if (aluno != null) {
                     alunosList.add(aluno);
                 }
-
             } else {
-                alunosList = alunoConsultaDao.buscarAlunos();
+                alunosList = (ArrayList<AlunoConsultaDTO>) alunoConsultaDao.buscarAlunosPorTurma(idTurma);
             }
 
-            List<Turma> turmas = turmaDAO.buscarTurmas();
-
-            String idTurma = req.getParameter("idTurma");
-            String nomeTurma = req.getParameter("nomeTurma");
-
-            req.setAttribute("idTurma", idTurma);
+            req.setAttribute("idTurma", idTurmaStr);
             req.setAttribute("nomeTurma", nomeTurma);
+            req.setAttribute("alunos", alunosList);
 
             req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
-                .forward(req, resp);
-        } catch (DataAccessException | SQLException e) {
+                    .forward(req, resp);
+
+        } catch (DataAccessException e) {
             throw new DataAccessException("Erro ao acessar o banco de dados", e);
         }
     }

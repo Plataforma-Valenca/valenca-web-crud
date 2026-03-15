@@ -24,7 +24,7 @@
 
 <div class="page-content">
 
-    <header class="page-grid-header" style="margin-top: 5rem">
+    <header class="page-grid-header" style="margin-top: 3rem; margin-bottom: 0rem">
         <h1 class="page-grid-header-title">Gerenciar Turmas</h1>
         <button class="btn-primary" onclick="abrirModalCadastro()">+ Cadastrar</button>
     </header>

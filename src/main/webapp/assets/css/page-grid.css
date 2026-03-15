@@ -18,8 +18,9 @@
 .page-grid-header {
     display: flex;
     justify-content: space-between;
-    height: 15vh;
+    height: 20vh;
     align-items: center;
+    margin: 2rem 0rem 2rem 0rem;
 }
 .page-grid-main {
     flex: 1;

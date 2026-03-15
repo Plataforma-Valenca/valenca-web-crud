@@ -13,8 +13,7 @@
 
         <form action="${pageContext.request.contextPath}/admin/inserirAluno" method="post">
 
-            <input type="hidden" name="idTurma" value="<%= request.getParameter("idTurma") %>">
-
+            <input type="hidden" name="idTurma" value="<%= request.getAttribute("idTurma") %>">
             <div class="form">
                 <input type="text" name="cpf" placeholder="CPF" required>
                 <input type="text" name="senhaProvisoria" placeholder="Senha provisória" required>
@@ -53,5 +52,25 @@
 
         </form>
 
+    </div>
+</div>
+
+<!-- MODAL EXCLUIR ALUNO -->
+<div id="modalExcluirAluno" class="modal">
+    <div class="modal-content">
+
+        <h3>Deseja excluir este aluno?</h3>
+        <p>Esta ação não poderá ser desfeita.</p>
+
+        <form action="${pageContext.request.contextPath}/admin/deletarAluno" method="post">
+            <input type="hidden" name="idAluno" id="excluirAlunoId">
+            <input type="hidden" name="idTurma" value="<%= request.getAttribute("idTurma") %>">
+            <input type="hidden" name="nomeTurma" value="<%= request.getAttribute("nomeTurma") %>">
+
+            <div class="modal-footer">
+                <button type="submit" class="btn-primary delete">Excluir</button>
+                <button type="button" onclick="fecharModalExcluirAluno()" class="btn-primary cancel">Cancelar</button>
+            </div>
+        </form>
     </div>
 </div>
