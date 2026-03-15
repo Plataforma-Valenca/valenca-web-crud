@@ -23,6 +23,8 @@ public class AdminEditarTurmaServlet extends HttpServlet {
 
         dao.editarTurma(id, nome, ano);
 
+        request.getSession().setAttribute("mensagemSucesso", "Turma atualizada com sucesso!");
+
         response.sendRedirect(request.getContextPath()+"/admin/verTurmas");
     }
 }
