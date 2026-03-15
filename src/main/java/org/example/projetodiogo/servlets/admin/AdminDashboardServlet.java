@@ -193,8 +193,7 @@ public class AdminDashboardServlet extends HttpServlet {
             request.setAttribute("erro", "Erro ao carregar dados: " + e.getMessage());
         }
 
-        // Forward único — sempre executado, com ou sem erro
-        request.getRequestDispatcher("/WEB-INF/admin/admin-professor-dashboard.jsp")
+        request.getRequestDispatcher("/WEB-INF/admin/admin-dashboard.jsp")
                 .forward(request, response);
     }
 
