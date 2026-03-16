@@ -1,0 +1,20 @@
+.login-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 0;
+}
+
+.login-loading .spinner {
+    width: 36px;
+    height: 36px;
+    border: 3.5px solid rgba(0, 0, 0, 0.15);
+    border-top-color: #000000;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

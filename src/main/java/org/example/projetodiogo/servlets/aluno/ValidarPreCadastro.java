@@ -42,7 +42,7 @@ public class ValidarPreCadastro extends HttpServlet {
             } else {
                 HttpSession session = req.getSession();
                 session.setAttribute("cpfOuMatriculaValidacao", matriculaOuCpf);
-                req.getRequestDispatcher("/WEB-INF/login/login-finalizar-cadastro-aluno.jsp")
+                req.getRequestDispatcher("/WEB-INF/login/login-finalizar-cadastro.jsp")
                         .forward(req, resp);
             }
         }
