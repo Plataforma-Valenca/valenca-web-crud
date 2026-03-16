@@ -15,16 +15,16 @@ public class ObservacaoDAO {
 
         String sql = """
                 INSERT INTO observacoes
-                (descricao, id_aluno, id_professor)
+                (id_aluno, id_professor, descricao)
                 VALUES (?, ?, ?)
                 """;
 
         try (Connection conn = ConnectionFactory.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, observacao.getDescricao());
-            stmt.setInt(2, observacao.getIdAluno());
-            stmt.setInt(3, observacao.getIdProfessor());
+            stmt.setInt(1, observacao.getIdAluno());
+            stmt.setInt(2, observacao.getIdProfessor());
+            stmt.setString(3, observacao.getDescricao());
 
             return stmt.executeUpdate() > 0;
 
