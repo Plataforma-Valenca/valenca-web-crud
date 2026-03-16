@@ -73,7 +73,7 @@
             <input type="hidden" name="nomeTurma" value="<%= request.getAttribute("nomeTurma") %>">
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary delete btn-loading">Excluir</button>
+                <button type="submit" class="btn-primary delete btn-loading btn-cancel">Excluir</button>
                 <button type="button" onclick="fecharModalExcluirAluno()" class="btn-primary cancel">Cancelar</button>
             </div>
         </form>

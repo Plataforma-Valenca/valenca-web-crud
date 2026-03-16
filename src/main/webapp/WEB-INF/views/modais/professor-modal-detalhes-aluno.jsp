@@ -108,7 +108,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn-secondary" onclick="fecharModalExcluirObservacao()">Cancelar</button>
-                <button type="submit" class="btn-primary save btn-loading">Excluir</button>
+                <button type="submit" class="btn-primary save btn-loading btn-cancel">Excluir</button>
             </div>
         </form>
 

@@ -67,7 +67,7 @@
             <input type="hidden" name="idTurma" id="excluirTurmaId">
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary delete btn-loading">Excluir</button>
+                <button type="submit" class="btn-primary delete btn-loading btn-cancel">Excluir</button>
                 <button type="button" onclick="fecharModalExcluir()" class="btn-primary cancel">Cancelar</button>
             </div>
         </form>

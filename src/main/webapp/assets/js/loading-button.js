@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
             loading.classList.add("login-loading");
             loading.innerHTML = '<span class="spinner"></span>';
             btn.parentElement.insertBefore(loading, btn);
+
+            if (btn.classList.contains("btn-cancel")) {
+                btn.parentElement.querySelectorAll("button[type='button']").forEach(function (other) {
+                    other.style.display = "none";
+                });
+            }
         });
     });
 });
