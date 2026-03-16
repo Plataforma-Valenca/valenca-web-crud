@@ -27,6 +27,17 @@ function fecharModalObservacao(){
 
 }
 
+function abrirModalEditarNota(idNota, n1, n2) {
+    document.getElementById("modalEditarNota").style.display = "flex";
+    document.getElementById("editarIdNota").value = idNota;
+    document.getElementById("editarN1").value = n1 !== "null" ? n1 : "";
+    document.getElementById("editarN2").value = n2 !== "null" ? n2 : "";
+}
+
+function fecharModalEditarNota() {
+    document.getElementById("modalEditarNota").style.display = "none";
+}
+
 
 window.onclick = function(event){
 
