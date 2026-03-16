@@ -99,7 +99,7 @@
                             }
                         } else {
                         %>
-
+                        <img src="${pageContext.request.contextPath}/assets/img/search-not-found.svg" height="200">
                         <div style="text-align:center; padding:40px; color:#999;">
                             Nenhum professor encontrado.
                         </div>

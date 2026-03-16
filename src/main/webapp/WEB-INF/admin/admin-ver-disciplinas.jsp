@@ -68,6 +68,7 @@
                 }
             } else {
             %>
+            <img src="${pageContext.request.contextPath}/assets/img/search-not-found.svg" height="200">
             <p class="no-data" style="grid-column: span 3; text-align: center; color: #999;">
                 Nenhuma disciplina cadastrada.
             </p>

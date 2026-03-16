@@ -65,7 +65,7 @@
                 }
             } else {
             %>
-
+            <img src="${pageContext.request.contextPath}/assets/img/search-not-found.svg" height="200">
             <p class="no-data">Nenhuma turma cadastrada no sistema.</p>
 
             <%
