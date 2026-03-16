@@ -88,3 +88,60 @@
 .page-grid-header-state p{
     color:#888;
 }
+
+/*RESPONSIVIDADE*/
+@media (max-width: 1024px) {
+    .page-content {
+        width: calc(100vw - 70px);
+        margin-left: 70px;
+    }
+
+    .aluno-details-infos {
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-content {
+        width: 100vw;
+        margin-left: 0;
+        padding-bottom: 64px;
+    }
+
+    .aluno-details-infos {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .page-grid-header-title {
+        font-size: 22px;
+    }
+
+    .aluno-details-notas-table {
+        padding: 14px;
+        overflow-x: auto;
+    }
+
+    .header-table-list-row,
+    .row-table-list-row {
+        min-width: 480px;
+    }
+
+    .aluno-details-notas-table {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-grid-header-title {
+        font-size: 18px;
+    }
+
+    .details-infos-box p {
+        font-size: 14px;
+    }
+
+    .aluno-details-notas-table {
+        padding: 10px;
+    }
+}

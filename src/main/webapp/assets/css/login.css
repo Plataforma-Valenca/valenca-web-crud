@@ -161,3 +161,70 @@
     width: 100%;
     object-fit: cover;
 }
+
+/*RESPONSIVIDADE*/
+@media (max-width: 1024px) {
+    .login-left-box {
+        width: 55%;
+    }
+
+    .login-right-box {
+        width: 45%;
+    }
+
+    .login-left-box-content {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-page {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .login-left-box {
+        width: 100%;
+        padding: 2rem 0;
+    }
+
+    .login-right-box {
+        display: none;
+    }
+
+    .login-left-box-content {
+        width: 85%;
+        height: auto;
+    }
+
+    .login-left-box-content-form {
+        gap: 4vh;
+    }
+
+    .form-group {
+        gap: 4vh;
+    }
+
+    .login-valenca-logo h1 {
+        font-size: 1.4rem;
+    }
+
+    .login-left-box-content-title h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-left-box-content {
+        width: 90%;
+    }
+
+    .login-left-box-content-form {
+        gap: 3vh;
+    }
+
+    .form-group {
+        gap: 3vh;
+    }
+}

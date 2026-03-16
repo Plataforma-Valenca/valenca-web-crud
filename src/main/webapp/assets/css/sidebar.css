@@ -70,3 +70,101 @@
 }
 
 
+/*RESPONSIVIDADE*/
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar-valenca-logo-content h3 {
+        display: none;
+    }
+
+    .sidebar-valenca-logo-content img {
+        margin: 0 auto;
+    }
+
+    .menu-items-tab a {
+        justify-content: center;
+        padding: 10px;
+        gap: 0;
+    }
+
+    .menu-items-tab a span,
+    .menu-items-tab a:not(img) {
+        display: none;
+    }
+
+    .sidebar-tabs-menu a {
+        font-size: 0;
+    }
+
+    .sidebar-tabs-menu a img {
+        font-size: initial;
+    }
+
+    .sidebar-bottom-box img {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+        width: 100vw;
+        height: 64px;
+
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: unset;
+
+        grid-template-rows: unset;
+
+        border-top: 1px solid #e0e0e0;
+        box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.07);
+        z-index: 1000;
+    }
+
+    .sidebar-valenca-logo,
+    .sidebar-bottom-box {
+        display: none;
+    }
+
+    .sidebar-top-box {
+        width: 100%;
+        height: 100%;
+    }
+
+    .sidebar-tabs-menu {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+        gap: 0;
+        padding: 0;
+    }
+
+    .menu-items-tab a {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 6px 16px;
+        font-size: 11px;
+        border-radius: 8px;
+    }
+
+    .menu-items-tab a img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .sidebar-tabs-menu a {
+        font-size: 11px;
+    }
+}

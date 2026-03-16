@@ -26,7 +26,7 @@
     <header class="header-home">
         <div class="header-profile" onclick="togglePopup()" style="position: relative;">
 
-            <img src="${pageContext.request.contextPath}/assets/img/icon-profile.svg" height="300" >
+            <img src="${pageContext.request.contextPath}/assets/img/icon-man-profile.svg" height="300" >
 
             <div class="header-profile-infos">
                 <b><%= nomeUsuario %></b>
@@ -47,13 +47,8 @@
             <h1>Olá, o que você procura?</h1>
         </div>
 
-        <div class="main-home-grade">
-            <div>
-                <h4>Atividades administrativas</h4>
-                <p style="margin-top: 10px; color: #999;">
-                    Utilize o menu lateral para gerenciar alunos, turmas e professores.
-                </p>
-            </div>
+        <div class="main-home-grade" style="margin-bottom: 2rem">
+            <img src="${pageContext.request.contextPath}/assets/img/professor-grade-fake.svg">
         </div>
     </main>
 </div>
