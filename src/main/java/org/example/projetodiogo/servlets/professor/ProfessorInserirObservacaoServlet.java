@@ -31,14 +31,12 @@ public class ProfessorInserirObservacaoServlet extends HttpServlet {
         Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioLogado");
         ProfessorDAO professorDAO = new ProfessorDAO();
         Optional<Professor> professorOpt = professorDAO.buscarProfessorPorIdUsuario(usuario.getId());
-        AlunoDAO alunoDAO = new AlunoDAO();
-        Optional<Aluno> alunoOpt = alunoDAO.buscarPorIdUsuario(usuario.getId());
+        int idAluno = Integer.parseInt(req.getParameter("idAluno"));
         String descricaoObs = req.getParameter("descricao");
 
 
         try {
             if (descricaoObs != null && !descricaoObs.isEmpty()) {
-                int idAluno = alunoOpt.get().getId();
                 int idProfessor = professorOpt.get().getId();
 
                 observacao.setDescricao(descricaoObs);
@@ -48,7 +46,7 @@ public class ProfessorInserirObservacaoServlet extends HttpServlet {
 
             if (observacaoDAO.inserir(observacao)) {
                 req.getSession().setAttribute("mensagemSucesso", "Administrador adicionado com sucesso!");
-                resp.sendRedirect(req.getContextPath() + "/professor/verAlunos");
+                resp.sendRedirect(req.getContextPath() + "/professor/verTurmas");
             }
 
         } catch (RequiredFieldException rfe) {

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
 
 <%
-    Integer idAluno     = (Integer) request.getAttribute("idAluno");
+    Integer idAluno = Integer.parseInt(request.getParameter("idAluno"));
     Integer idProfessor = (Integer) request.getAttribute("idProfessor");
     Integer idTurma     = (Integer) request.getAttribute("idTurma");
     String  nomeTurma   = (String)  request.getAttribute("nomeTurma");
@@ -69,11 +69,11 @@
             <span class="close-modal" onclick="fecharModalObservacao()">&times;</span>
         </div>
 
-        <form action="${pageContext.request.contextPath}/professor/adicionarObservacao" method="post">
-            <input type="hidden" name="idAluno"     value="<%= idAluno %>">
-            <input type="hidden" name="idProfessor" value="<%= idProfessor %>">
-            <input type="hidden" name="idTurma"     value="<%= idTurma %>">
-            <input type="hidden" name="nomeTurma"   value="<%= nomeTurma %>">
+        <form action="${pageContext.request.contextPath}/professor/inserirObservacao" method="post">
+            <input type="hidden" name="idAluno" value="<%= idAluno %>">
+<%--            <input type="hidden" name="idProfessor" value="<%= idProfessor %>">--%>
+<%--            <input type="hidden" name="idTurma" value="<%= idTurma %>">--%>
+<%--            <input type="hidden" name="nomeTurma" value="<%= nomeTurma %>">--%>
 
             <div class="form">
                 <textarea name="descricao" placeholder="Digite a observação..." required></textarea>
