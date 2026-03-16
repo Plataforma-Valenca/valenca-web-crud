@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.projetodiogo.model.Boletim" %>
 <%@ page import="org.example.projetodiogo.model.Observacao" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
 <html>
 <head>
@@ -116,9 +117,12 @@
                     List<Observacao> obsList = (List<Observacao>) request.getAttribute("obsList");
                     if (obsList != null && !obsList.isEmpty()) {
                         for (Observacao obs : obsList) {
+                            String data = obs.getDataEnvio()
+                                    .toLocalDateTime()
+                                    .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 %>
                 <div class="row-table-list-row" style="border-bottom:1px solid #eee;">
-                    <p style="flex:1;"><%= obs.getDataEnvio() != null ? obs.getDataEnvio() : "--" %></p>
+                    <p style="flex:1;"><%= obs.getDataEnvio() != null ? data : "--" %></p>
                     <p style="flex:3; color:#535353;"><%= obs.getDescricao() != null ? obs.getDescricao() : "--" %></p>
                     <img src="${pageContext.request.contextPath}/assets/img/icon-delete.svg"
                          height="40" style="cursor:pointer;"

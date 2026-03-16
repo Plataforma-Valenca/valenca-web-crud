@@ -4,6 +4,7 @@
 <%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
 <%@ page import="org.example.projetodiogo.model.DTO.ProfessorConsultaDTO" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 
 <%
     AlunoConsultaDTO aluno = (AlunoConsultaDTO) request.getAttribute("alunoConsulta");
@@ -135,10 +136,13 @@
                 <%
                     if (obsList != null && !obsList.isEmpty()) {
                         for (Observacao obs : obsList) {
+                            String data = obs.getDataEnvio()
+                                    .toLocalDateTime()
+                                    .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 %>
                 <div class="row-table-list-row">
-                    <p style="flex:1"><%= obs.getDataEnvio() %></p>
-                    <p style="flex:3"><%= obs.getDescricao() %></p>
+                    <p style="flex:1;"><%= obs.getDataEnvio() != null ? data : "--" %></p>
+                    <p style="flex:3; color:#535353;"><%= obs.getDescricao() != null ? obs.getDescricao() : "--" %></p>
                 </div>
                 <%
                     }
