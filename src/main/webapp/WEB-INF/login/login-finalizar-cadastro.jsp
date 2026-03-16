@@ -29,7 +29,7 @@
                         <p>Preencha as suas informações para acessar a plataforma.</p>
                     </div>
 
-                    <form method="post" action="${pageContext.request.contextPath}/FinalizarCadastroAluno" class="form-group">
+                    <form method="post" action="${pageContext.request.contextPath}/aluno/finalizarCadastroAluno" class="form-group">
 
                         <div class="form-group-inputs">
                             <div class="form-group-inputs-box">

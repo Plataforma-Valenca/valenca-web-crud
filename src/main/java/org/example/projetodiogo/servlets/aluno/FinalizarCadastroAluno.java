@@ -12,7 +12,7 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/FinalizarCadastroAluno")
+@WebServlet("/aluno/finalizarCadastroAluno")
 public class FinalizarCadastroAluno extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
