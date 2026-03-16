@@ -10,6 +10,9 @@
           href="${pageContext.request.contextPath}/assets/img/icone-colegio-valenca.svg">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+    <script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
+
 </head>
 
 <body>
@@ -73,12 +76,12 @@
                         </div>
 
                         <div class="form-group-enter">
-                            <button type="submit" class="login-button btn-primary" style="width: 100%">
+                            <button type="submit" class="login-button btn-primary btn-loading" style="width: 100%">
                                 Entrar
                             </button>
                             <div class="login-first-access">
                                 <p>Primeiro acesso?</p>
-                                <a href="${pageContext.request.contextPath}/validarPreCadastro" class="login-first-access-link">
+                                <a href="${pageContext.request.contextPath}/aluno/validarPreCadastro" class="login-first-access-link">
                                     Clique aqui
                                 </a>
                             </div>

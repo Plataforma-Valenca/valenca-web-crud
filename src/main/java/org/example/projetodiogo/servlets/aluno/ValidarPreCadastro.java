@@ -14,7 +14,7 @@ import org.example.projetodiogo.model.Usuario;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/validarPreCadastro")
+@WebServlet("/aluno/validarPreCadastro")
 public class ValidarPreCadastro extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/login/login-validar-pre-cadastro.jsp").forward(req, resp);

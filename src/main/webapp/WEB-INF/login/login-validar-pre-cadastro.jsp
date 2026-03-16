@@ -35,7 +35,7 @@
                 </div>
 
                 <form method="post"
-                      action="${pageContext.request.contextPath}/validarPreCadastro"
+                      action="${pageContext.request.contextPath}/aluno/validarPreCadastro"
                       class="form-group">
 
                     <div class="form-group-inputs">

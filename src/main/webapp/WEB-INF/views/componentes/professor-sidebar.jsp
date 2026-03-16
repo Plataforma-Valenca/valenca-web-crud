@@ -8,6 +8,8 @@
 <%@ page import="org.example.projetodiogo.model.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+<script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
 
 <%
     String activePage = request.getParameter("activePage");

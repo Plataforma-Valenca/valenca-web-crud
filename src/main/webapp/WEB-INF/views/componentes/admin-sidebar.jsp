@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/sidebar.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+<script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
 
 <%
     String activePage = request.getParameter("activePage");

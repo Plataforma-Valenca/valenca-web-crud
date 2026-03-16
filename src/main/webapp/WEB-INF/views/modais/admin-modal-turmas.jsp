@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+<script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -19,7 +21,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
 
         </form>
@@ -46,7 +48,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
 
         </form>
@@ -65,7 +67,7 @@
             <input type="hidden" name="idTurma" id="excluirTurmaId">
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary delete">Excluir</button>
+                <button type="submit" class="btn-primary delete btn-loading btn-cancel">Excluir</button>
                 <button type="button" onclick="fecharModalExcluir()" class="btn-primary cancel">Cancelar</button>
             </div>
         </form>

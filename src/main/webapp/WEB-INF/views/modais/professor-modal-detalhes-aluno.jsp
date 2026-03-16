@@ -3,6 +3,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+<script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
 
 <%
     Integer idAluno = Integer.parseInt(request.getParameter("idAluno"));
@@ -53,7 +55,7 @@
             <% } %>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
         </form>
 
@@ -80,7 +82,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
         </form>
 
@@ -106,7 +108,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn-secondary" onclick="fecharModalExcluirObservacao()">Cancelar</button>
-                <button type="submit" class="btn-primary save">Excluir</button>
+                <button type="submit" class="btn-primary save btn-loading btn-cancel">Excluir</button>
             </div>
         </form>
 
@@ -139,7 +141,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
         </form>
 
