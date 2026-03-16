@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/modal.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+<script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.example.projetodiogo.model.DTO.AlunoConsultaDTO" %>
@@ -46,7 +48,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
 
         </form>
@@ -76,7 +78,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn-primary save">Salvar</button>
+                <button type="submit" class="btn-primary save btn-loading">Salvar</button>
             </div>
 
         </form>
