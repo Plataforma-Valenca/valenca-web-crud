@@ -165,7 +165,7 @@ public class ProfessorDashboardServlet extends HttpServlet {
             request.setAttribute("erro", "Erro ao carregar dados: " + e.getMessage());
         }
 
-        request.getRequestDispatcher("/WEB-INF/professor/admin-professor-dashboard.jsp")
+        request.getRequestDispatcher("/WEB-INF/professor/professor-dashboard.jsp")
                 .forward(request, response);
     }
 
