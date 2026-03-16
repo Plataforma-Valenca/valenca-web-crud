@@ -66,6 +66,10 @@
                                            required>
                                 </div>
 
+                                <button type="submit" class="login-button btn-primary">
+                                    Finalizar
+                                </button>
+
                             </div>
 
                             <div class="message-container">
