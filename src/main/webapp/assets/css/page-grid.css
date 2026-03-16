@@ -90,3 +90,70 @@
     justify-content: space-between;
     width: 100%;
 }
+
+/*RESPONSIVIDADE*/
+@media (max-width: 1024px) {
+    .page-content {
+        width: calc(100vw - 70px);
+        margin-left: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-content {
+        width: 100vw;
+        margin-left: 0;
+        padding-bottom: 64px;
+    }
+
+    .page-grid-header, .page-grid-main, .page-grid-header-state {
+        width: 95%;
+    }
+
+    .page-grid-header {
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+
+    .page-grid-header-title-plus-btn {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .page-grid-header-title-plus-btn button {
+        width: 100%;
+    }
+
+    .header-table-list-row {
+        display: none !important;
+    }
+
+    .itens-per-table {
+        flex-direction: column;
+        gap: 6px;
+        padding: 14px;
+    }
+
+    .itens-per-table a[style] {
+        display: flex !important;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .itens-per-table div[style*="flex:0.3"] {
+        justify-content: flex-end;
+        margin-top: 8px;
+    }
+
+    .form-control-action {
+        flex-direction: column;
+    }
+
+    .form-control-action input,
+    .form-control-action button {
+        width: 100%;
+    }
+}
