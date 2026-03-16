@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/flash-message.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/loading-button.css">
+<script src="${pageContext.request.contextPath}/assets/js/loading-button.js" defer></script>
 
 <%
     String mensagemSucesso = (String) session.getAttribute("mensagemSucesso");
