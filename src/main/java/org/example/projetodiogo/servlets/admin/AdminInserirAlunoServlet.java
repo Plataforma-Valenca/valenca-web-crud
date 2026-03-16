@@ -20,8 +20,7 @@ public class AdminInserirAlunoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            // Redireciona para a página
-            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-professores.jsp")
+            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
                     .forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,13 +30,11 @@ public class AdminInserirAlunoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Usuario usuario = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        TurmasDAO turmasDAO = new TurmasDAO();
         AlunoDAO alunoDAO = new AlunoDAO();
 
         String senha = req.getParameter("senhaProvisoria");
         String cpf = req.getParameter("cpf");
         String nomeTurma = req.getParameter("nomeTurma");
-
         int idTurma = Integer.parseInt(req.getParameter("idTurma").trim());
 
         try {
@@ -49,14 +46,14 @@ public class AdminInserirAlunoServlet extends HttpServlet {
 
             req.getSession().setAttribute("mensagemSucesso", "Aluno pré-cadastrado com sucesso!");
 
-            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
-                    .forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/admin/verAlunos?idTurma=" + idTurma
+                    + "&nomeTurma=" + java.net.URLEncoder.encode(nomeTurma != null ? nomeTurma : "", "UTF-8"));
 
         } catch (SQLException e) {
             req.getSession().setAttribute("mensagemErro", "Erro ao cadastrar aluno.");
-            req.getRequestDispatcher("/WEB-INF/admin/admin-ver-alunos.jsp")
-                    .forward(req, resp);
-            throw new RuntimeException(e);
+
+            resp.sendRedirect(req.getContextPath() + "/admin/verAlunos?idTurma=" + idTurma
+                    + "&nomeTurma=" + java.net.URLEncoder.encode(nomeTurma != null ? nomeTurma : "", "UTF-8"));
         }
     }
 }

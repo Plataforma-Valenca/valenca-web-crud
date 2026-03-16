@@ -257,24 +257,44 @@ public class AlunoDAO {
         }
     }
 
-    // UPDATE
-    public boolean update(Aluno aluno) {
-
+    //UPDATE
+    public boolean update(int idAluno, String nome, String matricula) {
         String query = """
-                UPDATE alunos
-                SET   matricula = ?,  dt_matricula = ?
-                WHERE  id_aluno = ?
-                """;
+            UPDATE usuarios u
+            SET nome = ?
+            WHERE u.id_usuario = (
+                SELECT a.id_usuario FROM alunos a WHERE a.id_aluno = ?
+            )
+            """;
 
-        try (Connection conn = ConnectionFactory.conectar();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        String queryMatricula = """
+            UPDATE alunos
+            SET matricula = ?
+            WHERE id_aluno = ?
+            """;
 
-            ps.setInt(1, aluno.getIdUsuario());
-            ps.setLong(2, aluno.getMatricula());
-            ps.setTimestamp(3, aluno.getDtMatricula());
-            ps.setInt(4, aluno.getId());
+        try (Connection conn = ConnectionFactory.conectar()) {
+            conn.setAutoCommit(false);
 
-            return ps.executeUpdate() > 0;
+            try (PreparedStatement ps1 = conn.prepareStatement(query);
+                 PreparedStatement ps2 = conn.prepareStatement(queryMatricula)) {
+
+                ps1.setString(1, nome);
+                ps1.setInt(2, idAluno);
+                ps1.executeUpdate();
+
+                ps2.setLong(1, Long.parseLong(matricula));
+                ps2.setInt(2, idAluno);
+                ps2.executeUpdate();
+
+                conn.commit();
+                return true;
+
+            } catch (SQLException e) {
+                conn.rollback();
+                System.out.println("Erro ao atualizar aluno: " + e.getMessage());
+                return false;
+            }
 
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar aluno: " + e.getMessage());

@@ -14,6 +14,7 @@
         <form action="${pageContext.request.contextPath}/admin/inserirAluno" method="post">
 
             <input type="hidden" name="idTurma" value="<%= request.getAttribute("idTurma") %>">
+            <input type="hidden" name="nomeTurma" value="<%= request.getAttribute("nomeTurma") %>">
             <div class="form">
                 <input type="text" name="cpf" placeholder="CPF" required>
                 <input type="text" name="senhaProvisoria" placeholder="Senha provisória" required>
@@ -40,6 +41,8 @@
         <form action="${pageContext.request.contextPath}/admin/editarAluno" method="post">
 
             <input type="hidden" name="idAluno" id="editIdAluno">
+            <input type="hidden" name="idTurma" value="<%= request.getAttribute("idTurma") %>">
+            <input type="hidden" name="nomeTurma" value="<%= request.getAttribute("nomeTurma") %>">
 
             <div class="form">
                 <input type="text" name="nome" id="editNome" placeholder="Nome" required>
